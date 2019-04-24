@@ -41,7 +41,7 @@ public class Material {
 
     @Override
     public String toString() {
-        return "material{" + "name=" + name + ", length=" + length + ", quantity=" + quantity + ", unit=" + unit + ", description=" + description + '}';
+        return "Material{" + "name = " + name + "| length = " + length + "| quantity = " + quantity + "| unit = " + unit + "| description = " + description + '}';
     }
     
     
