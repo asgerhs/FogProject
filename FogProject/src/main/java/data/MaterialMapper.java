@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -55,6 +56,15 @@ public class MaterialMapper {
         }
         
         return materials;
+        
+    }
+    
+    public static void main(String[] args) throws SQLException {
+        MaterialMapper mm = new MaterialMapper();
+        List<material> mml = mm.getMaterialByID(1);
+        for(material m : mml){
+            System.out.println(m);
+        }
         
     }
 }

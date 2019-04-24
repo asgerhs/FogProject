@@ -38,5 +38,11 @@ public class material {
     public String getDescription() {
         return description;
     }
+
+    @Override
+    public String toString() {
+        return "material{" + "name=" + name + ", length=" + length + ", quantity=" + quantity + ", unit=" + unit + ", description=" + description + '}';
+    }
+    
     
 }
