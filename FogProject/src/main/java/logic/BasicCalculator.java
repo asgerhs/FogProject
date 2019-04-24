@@ -76,6 +76,8 @@ public class BasicCalculator {
     public int calcRoofingSheetsSmall(){
         return (width % 100 == 0) ? width / 100 : width / 100 + 1;
     }
+    
+    
     //Calculating the pieces of carport
     public int calcBracketsRight(){
         return calcRafters();
@@ -94,7 +96,7 @@ public class BasicCalculator {
     }
     
     public int calcBand(){
-        double bandLengt = Math.sqrt(Math.pow(521, 2) + Math.pow(504, 2));
+        double bandLengt = Math.sqrt(Math.pow(521, 2) + Math.pow(504, 2)) * 2;
         return (bandLengt % 1000.0 == 0) ? (int) (bandLengt / 1000.0) : (int) (bandLengt / 1000.0 + 1.0);
     }
     
