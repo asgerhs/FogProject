@@ -93,9 +93,14 @@ public class BasicCalculator {
         return (screws % 250 == 0) ? screws / 250 : (screws / 250) + 1;
     }
     
+    public int calcBand(){
+        double bandLengt = Math.sqrt(Math.pow(521, 2) + Math.pow(504, 2));
+        return (bandLengt % 1000.0 == 0) ? (int) (bandLengt / 1000.0) : (int) (bandLengt / 1000.0 + 1.0);
+    }
+    
     public static void main(String[] args) {
         BasicCalculator bc = new BasicCalculator();
-        System.out.println(bc.calcRoofingSheetsSmall());
+        System.out.println(bc.calcBand());
         
     }
 }
