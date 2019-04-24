@@ -8,17 +8,17 @@ import java.util.ArrayList;
  */
 public class MaterialList {
 
-    private ArrayList<material> stockList;
+    private ArrayList<Material> stockList;
 
     public MaterialList() {
         stockList = new ArrayList();
     }
 
-    public ArrayList<material> getStockList() {
+    public ArrayList<Material> getStockList() {
         return stockList;
     }
 
-    public void addMaterialToStockList(material mat) {
+    public void addMaterialToStockList(Material mat) {
         stockList.add(mat);
     }
 

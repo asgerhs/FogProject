@@ -4,14 +4,14 @@ package data;
  *
  * @author Martin Frederiksen
  */
-public class material {
+public class Material {
     private String name;
     private int length;
     private int quantity;
     private String unit;
     private String description;
 
-    public material(String name, int length, int quantity, String unit, String description) {
+    public Material(String name, int length, int quantity, String unit, String description) {
         this.name = name;
         this.length = length;
         this.quantity = quantity;

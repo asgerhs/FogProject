@@ -16,16 +16,16 @@ public class MaterialMapper {
 
     DBConnector connector = new DBConnector();
 
-    public List<material> getMaterials() throws SQLException {
+    public List<Material> getMaterials() throws SQLException {
 
         Connection con = connector.getConnection();
-        List<material> materials = new ArrayList();
+        List<Material> materials = new ArrayList();
         String qry = "SELECT * FROM stock";
         PreparedStatement ps = con.prepareStatement(qry);
         ResultSet rs = ps.executeQuery();
 
         while (rs.next()) {
-            materials.add(new material(rs.getString("name"),
+            materials.add(new Material(rs.getString("name"),
                     rs.getInt("length"),
                     rs.getInt("qty"),
                     rs.getString("unit"),
@@ -37,9 +37,9 @@ public class MaterialMapper {
     }
     
     
-    public List<material> getMaterialByID(int id) throws SQLException{
+    public List<Material> getMaterialByID(int id) throws SQLException{
         Connection con = connector.getConnection();
-        List<material> materials = new ArrayList();
+        List<Material> materials = new ArrayList();
         String qry = "SELECT * FROM stock WHERE id = ?";
         PreparedStatement ps = con.prepareStatement(qry);
                 
@@ -48,7 +48,7 @@ public class MaterialMapper {
         ResultSet rs = ps.executeQuery();
         
         while(rs.next()){
-            materials.add(new material(rs.getString("name"),
+            materials.add(new Material(rs.getString("name"),
                     rs.getInt("length"),
                     rs.getInt("qty"),
                     rs.getString("unit"),
@@ -61,8 +61,8 @@ public class MaterialMapper {
     
     public static void main(String[] args) throws SQLException {
         MaterialMapper mm = new MaterialMapper();
-        List<material> mml = mm.getMaterialByID(1);
-        for(material m : mml){
+        List<Material> mml = mm.getMaterialByID(1);
+        for(Material m : mml){
             System.out.println(m);
         }
         
