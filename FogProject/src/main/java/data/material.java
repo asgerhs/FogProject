@@ -8,12 +8,14 @@ public class material {
     private String name;
     private int length;
     private int quantity;
+    private String unit;
     private String description;
 
-    public material(String name, int length, int quantity, String description) {
+    public material(String name, int length, int quantity, String unit, String description) {
         this.name = name;
         this.length = length;
         this.quantity = quantity;
+        this.unit = unit;
         this.description = description;
     }
 
@@ -29,6 +31,10 @@ public class material {
         return quantity;
     }
 
+    public String getUnit(){
+        return unit;
+    }
+    
     public String getDescription() {
         return description;
     }

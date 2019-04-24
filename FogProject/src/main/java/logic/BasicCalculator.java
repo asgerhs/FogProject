@@ -13,21 +13,38 @@ public class BasicCalculator {
         this.width = 6.00;
     }
     
-    
-    private int calcPosts(){
-        return 7;
+    //Calculating the square of carport
+    public int calcPosts(){
+        return 4 + (int) (length / 5) * 2 + 1;
     }
     
-    private int calcRafters(){
-        return 15;
+    
+    //Calculating the roof of carport
+    public int calcRafters(){
+        return (int) (length / .5);
     }
     
-    private int calcBrackets(){
-        return 30;
+    
+    //Calculating the pieces of carport
+    public int calcBracketsRight(){
+        return calcRafters();
     }
     
-    private int calcScrewPackages(){
-        return 1;
+    public int calcBracketsLeft(){
+        return calcRafters();
     }
     
+    public int calcScrewPackages(){
+        int screws = 0;
+        screws += calcBracketsRight()*6;
+        screws += calcBracketsLeft()*6;
+        
+        return (screws % 250 == 0) ? screws / 250 : (screws / 250) + 1;
+    }
+    
+    public static void main(String[] args) {
+        BasicCalculator bc = new BasicCalculator();
+        System.out.println(bc.calcScrewPackages());
+        
+    }
 }
