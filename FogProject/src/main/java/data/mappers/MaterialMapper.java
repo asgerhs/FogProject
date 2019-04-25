@@ -1,5 +1,7 @@
-package data;
+package data.mappers;
 
+import data.DBConnector;
+import data.models.Material;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

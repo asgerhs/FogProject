@@ -1,3 +1,7 @@
+CREATE SCHEMA IF NOT EXISTS `fogproject`;
+DROP TABLE IF EXISTS `fogproject`.`users`;
+DROP TABLE IF EXISTS `fogproject`.`stock`;
+
 CREATE TABLE `fogproject`.`stock` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NOT NULL,
