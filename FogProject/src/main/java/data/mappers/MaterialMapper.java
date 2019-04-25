@@ -69,9 +69,6 @@ public class MaterialMapper {
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
-//            Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-//            Instant instant = timestamp.toInstant();
-
             Date date = new Date();
             Instant instant = date.toInstant();
             String s = instant.toString();
