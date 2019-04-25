@@ -37,10 +37,9 @@ public class MaterialMapper {
 
             while (rs.next()) {
                 materials.add(new Material(rs.getString("name"),
-                        rs.getInt("length"),
-                        rs.getInt("qty"),
-                        rs.getString("unit"),
-                        rs.getString("description")));
+                    rs.getInt("length"),
+                    rs.getString("unit"),
+                    rs.getString("description")));
             }
             return materials;
         }
@@ -64,10 +63,9 @@ public class MaterialMapper {
 
             while (rs.next()) {
                 materials.add(new Material(rs.getString("name"),
-                        rs.getInt("length"),
-                        rs.getInt("qty"),
-                        rs.getString("unit"),
-                        rs.getString("description")));
+                    rs.getInt("length"),
+                    rs.getString("unit"),
+                    rs.getString("description")));
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
