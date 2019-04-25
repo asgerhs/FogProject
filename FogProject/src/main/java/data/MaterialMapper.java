@@ -71,7 +71,7 @@ public class MaterialMapper {
 
     public static void main(String[] args) throws SQLException {
         MaterialMapper mm = new MaterialMapper();
-        List<Material> mml = mm.getMaterialByID(29);
+        List<Material> mml = mm.getMaterials();
         for (Material m : mml) {
             System.out.println(m);
         }
