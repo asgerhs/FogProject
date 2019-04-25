@@ -15,7 +15,12 @@ import java.util.List;
 public class MaterialMapper {
 
     private DBConnector connector = new DBConnector();
-
+    
+    /**
+     * Returns all materials in database
+     * @return all materials
+     * @throws SQLException 
+     */
     public List<Material> getMaterials() throws SQLException {
         List<Material> materials = new ArrayList();
             Connection con = connector.getConnection();
@@ -35,6 +40,12 @@ public class MaterialMapper {
 
     }
 
+    /**
+     * Returns specific material based on id
+     * @param id, specific material with said id
+     * @return material matching id in param
+     * @throws SQLException 
+     */
     public List<Material> getMaterialByID(int id) throws SQLException {
         Connection con = connector.getConnection();
         List<Material> materials = new ArrayList();
