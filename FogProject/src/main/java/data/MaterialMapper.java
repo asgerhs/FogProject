@@ -36,6 +36,7 @@ public class MaterialMapper {
     }
 
     public List<Material> getMaterialByID(int id) throws SQLException {
+        
         Connection con = connector.getConnection();
         List<Material> materials = new ArrayList();
         String qry = "SELECT * FROM stock WHERE id = ?";
@@ -54,12 +55,12 @@ public class MaterialMapper {
         }
         con.close();
         return materials;
-
+        
     }
 
     public static void main(String[] args) throws SQLException {
         MaterialMapper mm = new MaterialMapper();
-        List<Material> mml = mm.getMaterials();
+        List<Material> mml = mm.getMaterialByID(29);
         for (Material m : mml) {
             System.out.println(m);
         }

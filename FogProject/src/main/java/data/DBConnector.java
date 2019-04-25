@@ -23,7 +23,7 @@ public class DBConnector {
     public static final String PASSWORD = "123";
     public static Connection  connection = null;
     
-    public static Connection getConnection(){
+    public static synchronized Connection getConnection(){
        if(connection == null){
            try{
                Class.forName(DRIVER);
