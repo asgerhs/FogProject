@@ -1,8 +1,8 @@
 package logic;
 
-import data.Material;
-import data.Part;
-import data.PartList;
+import data.models.Material;
+import data.models.Part;
+import data.models.PartList;
 
 /**
  *
