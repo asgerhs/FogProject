@@ -6,7 +6,6 @@ CREATE TABLE `fogproject`.`stock` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NOT NULL,
   `length` INT NULL,
-  `qty` INT NOT NULL,
   `unit` VARCHAR(45) NOT NULL,
   `description` VARCHAR(150) NOT NULL,
   PRIMARY KEY (`id`));
