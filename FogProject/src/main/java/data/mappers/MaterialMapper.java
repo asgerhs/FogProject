@@ -2,6 +2,7 @@ package data.mappers;
 
 import data.DBConnector;
 import data.exceptions.MapperExceptions;
+import data.interfaces.MapperInterface;
 import data.models.Material;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -15,16 +16,17 @@ import java.util.List;
  *
  * @author Asger Hermind Sørensen
  */
-public class MaterialMapper {
-
+public class MaterialMapper implements MapperInterface<Material> {
     private DBConnector connector = new DBConnector();
 
     /**
      * Returns all materials in database
      *
      * @return all materials
-     * @throws SQLException
+     * @throws data.exceptions.MapperExceptions
      */
+    
+    @Override
     public List<Material> getMaterials() throws MapperExceptions {
         try (Connection con = connector.getConnection()) {
             List<Material> materials = new ArrayList();
@@ -45,14 +47,13 @@ public class MaterialMapper {
             throw new MapperExceptions("Error occoured while getting data from database");
         }
     }
-
     /**
      * Returns specific material based on id
      *
      * @param id, specific material with said id
      * @return material matching id in param
-     * @throws SQLException
      */
+    @Override
     public Material getMaterialById(int id) throws MapperExceptions {
         try (Connection con = connector.getConnection()) {
             String qry = "SELECT * FROM stock WHERE id = ?";
@@ -74,11 +75,10 @@ public class MaterialMapper {
             throw new MapperExceptions("Error occoured while getting data from database");
         }
     }
-
+    
     public static void main(String[] args) throws MapperExceptions {
         MaterialMapper mm = new MaterialMapper();
         List<Material> mml = mm.getMaterials();
-        //List<Material> mml = mm.getMaterialById(30);
         for (Material m : mml) {
             System.out.println(m);
         }
