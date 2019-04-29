@@ -3,12 +3,12 @@ DROP TABLE IF EXISTS `fogproject`.`users`;
 DROP TABLE IF EXISTS `fogproject`.`stock`;
 
 CREATE TABLE `fogproject`.`stock` (
-  `id` INT NOT NULL AUTO_INCREMENT,
+  `ref` VARCHAR(100) NOT NULL,
   `name` VARCHAR(45) NOT NULL,
-  `length` INT NULL,
+  `length` INT NOT NULL,
+  `amount` INT NOT NULL,
   `unit` VARCHAR(45) NOT NULL,
-  `description` VARCHAR(150) NOT NULL,
-  PRIMARY KEY (`id`));
+  PRIMARY KEY (`ref`, `length`));
 
 CREATE TABLE `fogproject`.`users` (
   `username` VARCHAR(45) NOT NULL,
