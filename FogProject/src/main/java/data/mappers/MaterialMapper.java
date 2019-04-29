@@ -33,10 +33,11 @@ public class MaterialMapper {
             ResultSet rs = stmt.executeQuery(qry);
 
             while (rs.next()) {
-                materials.add(new Material(rs.getString("name"),
+                materials.add(new Material(rs.getString("ref"),
+                    rs.getString("name"),
                     rs.getInt("length"),
-                    rs.getString("unit"),
-                    rs.getString("description")));
+                    rs.getInt("amount"),
+                    rs.getString("unit")));
             }
             return materials;
         } catch (SQLException ex) {
@@ -61,10 +62,11 @@ public class MaterialMapper {
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-                return new Material(rs.getString("name"),
+                return new Material(rs.getString("ref"),
+                    rs.getString("name"),
                     rs.getInt("length"),
-                    rs.getString("unit"),
-                    rs.getString("description"));
+                    rs.getInt("amount"),
+                    rs.getString("unit"));
             }
             return null;
         } catch (SQLException ex) {
