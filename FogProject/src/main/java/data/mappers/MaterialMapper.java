@@ -77,7 +77,6 @@ public class MaterialMapper implements MapperInterface<Material> {
     public static void main(String[] args) throws MapperExceptions {
         MaterialMapper mm = new MaterialMapper();
         List<Material> mml = mm.getMaterials();
-        //Material mat = mm.getMaterialById(30);
         for (Material m : mml) {
             System.out.println(m);
         }
