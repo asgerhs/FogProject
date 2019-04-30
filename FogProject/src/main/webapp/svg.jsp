@@ -41,13 +41,13 @@ Sets the frame for the carport
 <rect x="100" y="100" height="<%= height%>" width="<%= width%>" />
 
 <!--
-The top and bottom raft respectively 
+The top and bottom Carport raft respectively 
 -->
 <rect x="100" y="<%= 100 + outhang%>" height="10" width="<%= width%>" />
 <rect x="100" y="<%= 100 + height - outhang - 10%>" height="10" width="<%= width%>" />
 
 <!--
-For loop to create the necessary amount of rafts across the width
+For loop to create the necessary amount of rafts across the width of the Carport
 -->
 <% for (int i = 0; i < rafterCount; i++) {%>
 <rect x="<%= 100 + rafterSpace * i%>" y="100" height="<%= height%>" width="10" />
@@ -55,26 +55,26 @@ For loop to create the necessary amount of rafts across the width
 
 
 
-<!-- Top left post -->
+<!-- Carport top left post -->
 <rect class="post" x="200" y="<%= 100 + outhang%>" height="10" width="10" />
 
-<!-- Top middle post -->
+<!-- Carport top middle post -->
 <rect class="post" x="<%= 100 + outhang + distant%>" y="<%= 100 + outhang%>" height="10" width="10" />
 
-<!-- Top right post -->
+<!-- Carport top right post -->
 <rect class="post" x="<%= 100 + width - 30%>" y="<%= 100 + outhang%>" height="10" width="10" />
 
 
 
 
 
-<!-- Bottom left post -->
+<!-- Carport bottom left post -->
 <rect class="post" x="200" y="<%= 100 + height - outhang - 10%>" height="10" width="10" />
 
-<!-- Bottom middle post -->
+<!-- Carport bottom middle post -->
 <rect class="post" x="<%= 100 + outhang + distant%>" y="<%= 100 + height - outhang - 10%>" height="10" width="10" />
 
-<!-- Bottom right post -->
+<!-- Carport bottom right post -->
 <rect class="post" x="<%= 100 + width - 30%>" y="<%= 100 + height - outhang - 10%>" height="10" width="10" />
 
 
