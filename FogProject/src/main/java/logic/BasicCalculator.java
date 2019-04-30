@@ -3,7 +3,6 @@ package logic;
 import data.models.Material;
 import data.models.Part;
 import data.models.PartList;
-import static java.util.Collections.list;
 
 /**
  *
@@ -120,27 +119,27 @@ public class BasicCalculator {
     public PartList getParts(){
         PartList pl = new PartList();
         
-        pl.addPart(new Part(new Material("25x200 mm. trykimp. Brædt", 360, "stk", "understernbrædder til for & bag ende"), calcBottomFasciasFB()));
-        pl.addPart(new Part(new Material("25x200 mm. trykimp. Brædt", 540, "stk", "understernbrædder til siderne"), calcBottomFasciasSide()));
-        pl.addPart(new Part(new Material("25x125 mm. trykimp. Brædt", 360, "stk", "oversternbrædder til forenden"), calcTopFasciasFront()));
-        pl.addPart(new Part(new Material("25x125 mm. trykimp. Brædt", 540, "stk", "oversternbrædder til siderne"), calcBottomFasciasSide()));
-        pl.addPart(new Part(new Material("45x195 mm. spærtræ ubh.", 480, "stk", "Remme i sider, sadles ned i stolper"), calcRem()));
-        pl.addPart(new Part(new Material("45x195 mm. spærtræ ubh.", 600, "stk", "Spær, monteres på rem"), calcRafters()));
-        pl.addPart(new Part(new Material("97x97 mm. trykimp. Stolpe", 300, "stk", "Stolper nedgraves 90 cm. i jord"), calcPosts()));       
-        pl.addPart(new Part(new Material("19x100 mm. trykimp. Brædt", 540, "stk", "vandbrædt på stern i sider"), calcWaterBoardSide()));
-        pl.addPart(new Part(new Material("19x100 mm. trykimp. Brædt", 360, "stk", "vandbrædt på stern i forende"), calcWaterBoardFront()));
-        pl.addPart(new Part(new Material("Plastmo Ecolite blåtonet", 600, "stk", "tagplader monteres på spær"), calcRoofingSheetsBig()));
-        pl.addPart(new Part(new Material("Plastmo Ecolite blåtonet", 360, "stk", "tagplader monteres på spær"), calcPosts()));
-        
-        
-        pl.addPart(new Part(new Material("plastmo bundskruer 200 stk.", 0, "pakke", "Skruer til tagplader"), calcRoofScrews()));
-        pl.addPart(new Part(new Material("hulbånd 1x20 mm. 10 mtr.", 0, "Rulle", "Til vindkryds på spær"), calcBand()));
-        pl.addPart(new Part(new Material("universal 190 mm højre", 0, "stk", "Til montering af spær på rem"), calcBracketsRight()));
-        pl.addPart(new Part(new Material("universal 190 mm venstre", 0, "stk", "Til montering af spær på rem"), calcBracketsLeft()));
-        pl.addPart(new Part(new Material("4,5 x 60 mm. skruer 200 stk.", 0, "pakke", "Til montering af stern&vandbrædt"), 1));
-        pl.addPart(new Part(new Material("4,0 x 50 mm. beslagskruer 250 stk.", 0, "pakke", "Til montering af universalbeslag + hulbånd"), calcScrewPackages()));
-        pl.addPart(new Part(new Material("bræddebolt 10 x 120 mm.", 0, "stk", "Til montering af rem på stolper"), calcBolts()));
-        pl.addPart(new Part(new Material("firkantskiver 40x40x11mm", 0, "stk", "Til montering af rem på stolper"), 1));
+//        pl.addPart(new Part(new Material("25x200 mm. trykimp. Brædt", 360, "stk", "understernbrædder til for & bag ende"), calcBottomFasciasFB()));
+//        pl.addPart(new Part(new Material("25x200 mm. trykimp. Brædt", 540, "stk", "understernbrædder til siderne"), calcBottomFasciasSide()));
+//        pl.addPart(new Part(new Material("25x125 mm. trykimp. Brædt", 360, "stk", "oversternbrædder til forenden"), calcTopFasciasFront()));
+//        pl.addPart(new Part(new Material("25x125 mm. trykimp. Brædt", 540, "stk", "oversternbrædder til siderne"), calcBottomFasciasSide()));
+//        pl.addPart(new Part(new Material("45x195 mm. spærtræ ubh.", 480, "stk", "Remme i sider, sadles ned i stolper"), calcRem()));
+//        pl.addPart(new Part(new Material("45x195 mm. spærtræ ubh.", 600, "stk", "Spær, monteres på rem"), calcRafters()));
+//        pl.addPart(new Part(new Material("97x97 mm. trykimp. Stolpe", 300, "stk", "Stolper nedgraves 90 cm. i jord"), calcPosts()));       
+//        pl.addPart(new Part(new Material("19x100 mm. trykimp. Brædt", 540, "stk", "vandbrædt på stern i sider"), calcWaterBoardSide()));
+//        pl.addPart(new Part(new Material("19x100 mm. trykimp. Brædt", 360, "stk", "vandbrædt på stern i forende"), calcWaterBoardFront()));
+//        pl.addPart(new Part(new Material("Plastmo Ecolite blåtonet", 600, "stk", "tagplader monteres på spær"), calcRoofingSheetsBig()));
+//        pl.addPart(new Part(new Material("Plastmo Ecolite blåtonet", 360, "stk", "tagplader monteres på spær"), calcPosts()));
+//        
+//        
+//        pl.addPart(new Part(new Material("plastmo bundskruer 200 stk.", 0, "pakke", "Skruer til tagplader"), calcRoofScrews()));
+//        pl.addPart(new Part(new Material("hulbånd 1x20 mm. 10 mtr.", 0, "Rulle", "Til vindkryds på spær"), calcBand()));
+//        pl.addPart(new Part(new Material("universal 190 mm højre", 0, "stk", "Til montering af spær på rem"), calcBracketsRight()));
+//        pl.addPart(new Part(new Material("universal 190 mm venstre", 0, "stk", "Til montering af spær på rem"), calcBracketsLeft()));
+//        pl.addPart(new Part(new Material("4,5 x 60 mm. skruer 200 stk.", 0, "pakke", "Til montering af stern&vandbrædt"), 1));
+//        pl.addPart(new Part(new Material("4,0 x 50 mm. beslagskruer 250 stk.", 0, "pakke", "Til montering af universalbeslag + hulbånd"), calcScrewPackages()));
+//        pl.addPart(new Part(new Material("bræddebolt 10 x 120 mm.", 0, "stk", "Til montering af rem på stolper"), calcBolts()));
+//        pl.addPart(new Part(new Material("firkantskiver 40x40x11mm", 0, "stk", "Til montering af rem på stolper"), 1));
         
         return pl;
     }
@@ -150,27 +149,27 @@ public class BasicCalculator {
         BasicCalculator bc = new BasicCalculator();
         PartList pl = new PartList();
         
-        pl.addPart(new Part(new Material("25x200 mm. trykimp. Brædt", 360, "stk", "understernbrædder til for & bag ende"), bc.calcBottomFasciasFB()));
-        pl.addPart(new Part(new Material("25x200 mm. trykimp. Brædt", 540, "stk", "understernbrædder til siderne"), bc.calcBottomFasciasSide()));
-        pl.addPart(new Part(new Material("25x125 mm. trykimp. Brædt", 360, "stk", "oversternbrædder til forenden"), bc.calcTopFasciasFront()));
-        pl.addPart(new Part(new Material("25x125 mm. trykimp. Brædt", 540, "stk", "oversternbrædder til siderne"), bc.calcBottomFasciasSide()));
-        pl.addPart(new Part(new Material("45x195 mm. spærtræ ubh.", 480, "stk", "Remme i sider, sadles ned i stolper"), bc.calcRem()));
-        pl.addPart(new Part(new Material("45x195 mm. spærtræ ubh.", 600, "stk", "Spær, monteres på rem"), bc.calcRafters()));
-        pl.addPart(new Part(new Material("97x97 mm. trykimp. Stolpe", 300, "stk", "Stolper nedgraves 90 cm. i jord"), bc.calcPosts()));       
-        pl.addPart(new Part(new Material("19x100 mm. trykimp. Brædt", 540, "stk", "vandbrædt på stern i sider"), bc.calcWaterBoardSide()));
-        pl.addPart(new Part(new Material("19x100 mm. trykimp. Brædt", 360, "stk", "vandbrædt på stern i forende"), bc.calcWaterBoardFront()));
-        pl.addPart(new Part(new Material("Plastmo Ecolite blåtonet", 600, "stk", "tagplader monteres på spær"), bc.calcRoofingSheetsBig()));
-        pl.addPart(new Part(new Material("Plastmo Ecolite blåtonet", 360, "stk", "tagplader monteres på spær"), bc.calcPosts()));
-        
-        
-        pl.addPart(new Part(new Material("plastmo bundskruer 200 stk.", 0, "pakke", "Skruer til tagplader"), bc.calcRoofScrews()));
-        pl.addPart(new Part(new Material("hulbånd 1x20 mm. 10 mtr.", 0, "Rulle", "Til vindkryds på spær"), bc.calcBand()));
-        pl.addPart(new Part(new Material("universal 190 mm højre", 0, "stk", "Til montering af spær på rem"), bc.calcBracketsRight()));
-        pl.addPart(new Part(new Material("universal 190 mm venstre", 0, "stk", "Til montering af spær på rem"), bc.calcBracketsLeft()));
-        pl.addPart(new Part(new Material("4,5 x 60 mm. skruer 200 stk.", 0, "pakke", "Til montering af stern&vandbrædt"), 1));
-        pl.addPart(new Part(new Material("4,0 x 50 mm. beslagskruer 250 stk.", 0, "pakke", "Til montering af universalbeslag + hulbånd"), bc.calcScrewPackages()));
-        pl.addPart(new Part(new Material("bræddebolt 10 x 120 mm.", 0, "stk", "Til montering af rem på stolper"), bc.calcBolts()));
-        pl.addPart(new Part(new Material("firkantskiver 40x40x11mm", 0, "stk", "Til montering af rem på stolper"), 1));
+//        pl.addPart(new Part(new Material("25x200 mm. trykimp. Brædt", 360, "stk", "understernbrædder til for & bag ende"), bc.calcBottomFasciasFB()));
+//        pl.addPart(new Part(new Material("25x200 mm. trykimp. Brædt", 540, "stk", "understernbrædder til siderne"), bc.calcBottomFasciasSide()));
+//        pl.addPart(new Part(new Material("25x125 mm. trykimp. Brædt", 360, "stk", "oversternbrædder til forenden"), bc.calcTopFasciasFront()));
+//        pl.addPart(new Part(new Material("25x125 mm. trykimp. Brædt", 540, "stk", "oversternbrædder til siderne"), bc.calcBottomFasciasSide()));
+//        pl.addPart(new Part(new Material("45x195 mm. spærtræ ubh.", 480, "stk", "Remme i sider, sadles ned i stolper"), bc.calcRem()));
+//        pl.addPart(new Part(new Material("45x195 mm. spærtræ ubh.", 600, "stk", "Spær, monteres på rem"), bc.calcRafters()));
+//        pl.addPart(new Part(new Material("97x97 mm. trykimp. Stolpe", 300, "stk", "Stolper nedgraves 90 cm. i jord"), bc.calcPosts()));       
+//        pl.addPart(new Part(new Material("19x100 mm. trykimp. Brædt", 540, "stk", "vandbrædt på stern i sider"), bc.calcWaterBoardSide()));
+//        pl.addPart(new Part(new Material("19x100 mm. trykimp. Brædt", 360, "stk", "vandbrædt på stern i forende"), bc.calcWaterBoardFront()));
+//        pl.addPart(new Part(new Material("Plastmo Ecolite blåtonet", 600, "stk", "tagplader monteres på spær"), bc.calcRoofingSheetsBig()));
+//        pl.addPart(new Part(new Material("Plastmo Ecolite blåtonet", 360, "stk", "tagplader monteres på spær"), bc.calcPosts()));
+//        
+//        
+//        pl.addPart(new Part(new Material("plastmo bundskruer 200 stk.", 0, "pakke", "Skruer til tagplader"), bc.calcRoofScrews()));
+//        pl.addPart(new Part(new Material("hulbånd 1x20 mm. 10 mtr.", 0, "Rulle", "Til vindkryds på spær"), bc.calcBand()));
+//        pl.addPart(new Part(new Material("universal 190 mm højre", 0, "stk", "Til montering af spær på rem"), bc.calcBracketsRight()));
+//        pl.addPart(new Part(new Material("universal 190 mm venstre", 0, "stk", "Til montering af spær på rem"), bc.calcBracketsLeft()));
+//        pl.addPart(new Part(new Material("4,5 x 60 mm. skruer 200 stk.", 0, "pakke", "Til montering af stern&vandbrædt"), 1));
+//        pl.addPart(new Part(new Material("4,0 x 50 mm. beslagskruer 250 stk.", 0, "pakke", "Til montering af universalbeslag + hulbånd"), bc.calcScrewPackages()));
+//        pl.addPart(new Part(new Material("bræddebolt 10 x 120 mm.", 0, "stk", "Til montering af rem på stolper"), bc.calcBolts()));
+//        pl.addPart(new Part(new Material("firkantskiver 40x40x11mm", 0, "stk", "Til montering af rem på stolper"), 1));
         
         
         

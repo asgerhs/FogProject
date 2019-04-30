@@ -1,20 +1,19 @@
 -- Træ og tagplader
-INSERT INTO stock(ref, name, length, unit, amount  ) VALUES (0, '25x200 mm. trykimp. Brædt', 	360,   'Stk', 1);
-INSERT INTO stock(ref, name, length, unit, amount  ) VALUES (1, '25x200 mm. trykimp. Brædt', 	540,   'Stk', 1);
-INSERT INTO stock(ref, name, length, unit, amount  ) VALUES (2, '25x125mm. trykimp. Brædt', 	360,   'Stk', 1);
-INSERT INTO stock(ref, name, length, unit, amount  ) VALUES (3, '25x125mm. trykimp. Brædt', 	540,   'Stk', 1);
-INSERT INTO stock(ref, name, length, unit, amount  ) VALUES (4, '38x73 mm. Lægte ubh.', 		420,   'Stk', 1);
-INSERT INTO stock(ref, name, length, unit, amount  ) VALUES (5, '45x95 mm. Reglar	ub.', 		270,   'Stk', 1);
-INSERT INTO stock(ref, name, length, unit, amount  ) VALUES (6, '45x95 mm. Reglar	ub.', 		240,   'Stk', 1);
-INSERT INTO stock(ref, name, length, unit, amount  ) VALUES (7, '45x195 mm. spærtræ ubh.', 	    600,   'Stk', 1);
-INSERT INTO stock(ref, name, length, unit, amount  ) VALUES (8, '45x195 mm. spærtræ ubh.', 	    480,   'Stk', 1);
-INSERT INTO stock(ref, name, length, unit, amount  ) VALUES (9, '45x195 mm. spærtræ ubh.', 	    600,   'Stk', 1);	
-INSERT INTO stock(ref, name, length, unit, amount  ) VALUES (10, '97x97 mm. trykimp. Stolpe', 	300,   'Stk', 1);
-INSERT INTO stock(ref, name, length, unit, amount  ) VALUES (11, '19x100 mm. trykimp. Brædt', 	210,   'Stk', 1);
-INSERT INTO stock(ref, name, length, unit, amount  ) VALUES (12, '19x100 mm. trykimp. Brædt', 	540,   'Stk', 1);
-INSERT INTO stock(ref, name, length, unit, amount  ) VALUES (13, '19x100 mm. trykimp. Brædt', 	360,   'Stk', 1);
-INSERT INTO stock(ref, name, length, unit, amount  ) VALUES (14, 'Plastmo Ecolite blåtonet', 	600,   'Stk', 1);
-INSERT INTO stock(ref, name, length, unit, amount  ) VALUES (15, 'Plastmo Ecolite blåtonet', 	360,   'Stk', 1);
+INSERT INTO stock VALUES ('1000', '25x200 mm. trykimp. Brædt', 360, 1, 'stk');
+INSERT INTO stock VALUES ('1000', '25x200 mm. trykimp. Brædt', 540, 1, 'stk');
+INSERT INTO stock VALUES ('1001', '25x125mm. trykimp. Brædt', 360, 1, 'stk');
+INSERT INTO stock VALUES ('1001', '25x125mm. trykimp. Brædt', 540, 1, 'stk');
+INSERT INTO stock VALUES ('1002', '38x73 mm. Lægte ubh.', 420, 1, 'stk');
+INSERT INTO stock VALUES ('1003', '45x95 mm. Reglar ub.', 240, 1, 'stk');
+INSERT INTO stock VALUES ('1003', '45x95 mm. Reglar ub.', 270, 1, 'stk');
+INSERT INTO stock VALUES ('1003', '45x195 mm. spærtræ ubh.', 480, 1, 'stk');
+INSERT INTO stock VALUES ('1003', '45x195 mm. spærtræ ubh.', 600, 1, 'stk');
+INSERT INTO stock VALUES ('1004', '97x97 mm. trykimp. Stolpe', 300, 1, 'stk');
+INSERT INTO stock VALUES ('1005', '19x100 mm. trykimp. Brædt', 210, 1, 'stk');
+INSERT INTO stock VALUES ('1005', '19x100 mm. trykimp. Brædt', 360, 1, 'stk');
+INSERT INTO stock VALUES ('1005', '19x100 mm. trykimp. Brædt', 540, 1, 'stk');
+INSERT INTO stock VALUES ('1006', 'Plastmo Ecolite blåtonet', 360, 1, 'stk');
+INSERT INTO stock VALUES ('1006', 'Plastmo Ecolite blåtonet', 600, 1, 'stk');
 
 -- Beslag og s
 INSERT INTO stock(ref, name, length, unit, amount ) VALUES (16, 'plastmo bundskruer 200 stk.', 		    1, 'pakke',    200);
