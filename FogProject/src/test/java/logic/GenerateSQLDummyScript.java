@@ -17,8 +17,8 @@ import static org.junit.Assert.*;
  */
 public class GenerateSQLDummyScript {
     
-    @Test
-    public void generateMaterialScript() throws IOException {
+    
+    private void generateMaterialScript() throws IOException {
         FileWriter fw = new FileWriter("GeneratedDummyData.sql", false);
         Formatter f = new Formatter(fw);
         f.format("-- Woods\n");
@@ -70,8 +70,8 @@ public class GenerateSQLDummyScript {
         assertTrue(true);
     }
     
-    @Test
-    public void generateCategoriesScript() throws IOException {
+    
+    private void generateMatCategoriesScript() throws IOException {
         FileWriter fw = new FileWriter("GeneratedDummyData.sql", true);
         Formatter f = new Formatter(fw);
         f.format("\n\n-- Categories\n");
@@ -111,8 +111,8 @@ public class GenerateSQLDummyScript {
         
     }
     
-    @Test
-    public void generateUserScript() throws IOException {
+    
+    private void generateUserScript() throws IOException {
         FileWriter fw = new FileWriter("GeneratedDummyData.sql", true);
         Formatter f = new Formatter(fw);
         f.format("\n\n-- Users\n");
@@ -137,5 +137,13 @@ public class GenerateSQLDummyScript {
         f.close();
         
         assertTrue(true);
+    }
+    
+    @Test
+    public void runTests() throws IOException {
+        GenerateSQLDummyScript gen = new GenerateSQLDummyScript();
+        gen.generateMaterialScript();
+        gen.generateMatCategoriesScript();
+        gen.generateUserScript();
     }
 }
