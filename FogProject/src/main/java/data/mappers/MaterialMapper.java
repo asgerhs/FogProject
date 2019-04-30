@@ -11,12 +11,15 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 /**
  *
  * @author Asger Hermind Sørensen
  */
 public class MaterialMapper implements MapperInterface<Material> {
+
     private DBConnector connector = new DBConnector();
 
     /**
@@ -25,7 +28,6 @@ public class MaterialMapper implements MapperInterface<Material> {
      * @return all materials
      * @throws data.exceptions.MapperExceptions
      */
-    
     @Override
     public List<Material> getMaterials() throws MapperExceptions {
         try (Connection con = connector.getConnection()) {
@@ -36,10 +38,10 @@ public class MaterialMapper implements MapperInterface<Material> {
 
             while (rs.next()) {
                 materials.add(new Material(rs.getString("ref"),
-                    rs.getString("name"),
-                    rs.getInt("length"),
-                    rs.getInt("amount"),
-                    rs.getString("unit")));
+                        rs.getString("name"),
+                        rs.getInt("length"),
+                        rs.getInt("amount"),
+                        rs.getString("unit")));
             }
             return materials;
         } catch (SQLException ex) {
@@ -47,6 +49,7 @@ public class MaterialMapper implements MapperInterface<Material> {
             throw new MapperExceptions("Error occoured while getting data from database");
         }
     }
+
     /**
      * Returns specific material based on id
      *
@@ -64,10 +67,10 @@ public class MaterialMapper implements MapperInterface<Material> {
 
             while (rs.next()) {
                 return new Material(rs.getString("ref"),
-                    rs.getString("name"),
-                    rs.getInt("length"),
-                    rs.getInt("amount"),
-                    rs.getString("unit"));
+                        rs.getString("name"),
+                        rs.getInt("length"),
+                        rs.getInt("amount"),
+                        rs.getString("unit"));
             }
             return null;
         } catch (SQLException ex) {
@@ -75,12 +78,36 @@ public class MaterialMapper implements MapperInterface<Material> {
             throw new MapperExceptions("Error occoured while getting data from database");
         }
     }
-    
+
+    @Override
+    public TreeMap<Integer, Material> getAllByCategory(int id) throws MapperExceptions {
+        try (Connection con = connector.getConnection()) {
+            TreeMap<Integer, Material> materials = new TreeMap();
+            String qry = "SELECT * FROM stock JOIN stockToCategory ON ref = stockRef WHERE categoryId = ?";
+            
+            PreparedStatement ps = con.prepareStatement(qry);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            
+            while(rs.next()){
+                materials.put(rs.getInt("length"), (new Material(rs.getString("ref"),
+                        rs.getString("name"),
+                        rs.getInt("length"),
+                        rs.getInt("amount"),
+                        rs.getString("unit"))));
+            }
+            
+            return materials;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            throw new MapperExceptions("Error occoured while getting data from database");
+        }
+    }
+
     public static void main(String[] args) throws MapperExceptions {
         MaterialMapper mm = new MaterialMapper();
-        List<Material> mml = mm.getMaterials();
-        for (Material m : mml) {
-            System.out.println(m);
-        }
+        TreeMap<Integer, Material> mml = mm.getAllByCategory(1);
+        
+        System.out.println(mml);
     }
 }

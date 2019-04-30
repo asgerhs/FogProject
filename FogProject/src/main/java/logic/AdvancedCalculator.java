@@ -1,8 +1,14 @@
 package logic;
 
+import data.exceptions.MapperExceptions;
 import data.models.Material;
 import data.models.Part;
 import data.models.PartList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
+import logic.facades.MaterialFacade;
 
 /**
  *
@@ -12,10 +18,21 @@ public class AdvancedCalculator {
 
     private int length;
     private int width;
+    private boolean sheet;
+    private boolean roof;
+    private PartList pl;
+    private Map<Integer, Material> materials;
+    private MaterialFacade mf;
 
-    public AdvancedCalculator(int length, int width) {
+    public AdvancedCalculator(int length, int width, boolean sheet, boolean roof) throws MapperExceptions {
         this.length = length;
         this.width = width;
+        this.sheet = sheet;
+        this.roof = roof;
+        pl = new PartList();
+        mf = new MaterialFacade();
+        //catch exception here?
+
     }
 
     //Calculating the square of carport
@@ -26,7 +43,7 @@ public class AdvancedCalculator {
         return p;
     }
 
-    public int calcRem() {
+    public int calcRem() throws MapperExceptions {
         // length > 600 use if statement when we use arbitrary value
 
         //If length is between 480 and 600 use 1 on each side
@@ -46,8 +63,25 @@ public class AdvancedCalculator {
     }
 
     //need a good way to present this
-    public int calcTopFasciasFront() {
-        return (width % 360 == 0) ? width / 360 : (width / 360) + 1;
+    public int calcTopFasciasFront() throws MapperExceptions {
+        materials = mf.getAllByCategory(1);
+        TreeMap<Integer, Material> mats = new TreeMap(Collections.reverseOrder());
+        mats.putAll(materials);
+        int rest;
+        int antal = 0;
+        
+        for (Map.Entry<Integer, Material> entry : mats.entrySet()) {
+            antal = (width % entry.getKey() == 0) ? width / entry.getKey() : (width / entry.getKey()) + 1;
+            pl.addPart(new Part(entry.getValue(), antal));
+            for(Part p : pl.getPartList()){
+                System.out.println(p);
+            }
+            //int key = entry.getKey();
+            //Material value = entry.getValue();
+
+        }
+        //pl.addPart(part);
+        return antal;
     }
 
     public int calcTopFasciasSide() {
@@ -120,7 +154,7 @@ public class AdvancedCalculator {
 
     public int calcBand() {
         double spaceBetweenRafters = (length - 4.5) / (calcRafters() - 1);
-        double fullSpace = length - (spaceBetweenRafters*2)-4.5;
+        double fullSpace = length - (spaceBetweenRafters * 2) - 4.5;
         double bandLength = Math.sqrt(Math.pow(fullSpace, 2) + Math.pow(width, 2)) * 2;
         return (bandLength % 1000.0 == 0) ? (int) (bandLength / 1000.0) : (int) (bandLength / 1000.0 + 1.0);
 
@@ -132,8 +166,8 @@ public class AdvancedCalculator {
         return (calcPosts() - 1 == 4) ? 4 * 2 : ((calcPosts() - 1) % 4) * 4 + (4 * 2);
     }
 
-    public static void main(String[] args) {
-        AdvancedCalculator ac = new AdvancedCalculator(780, 600);
+    public static void main(String[] args) throws MapperExceptions {
+        AdvancedCalculator ac = new AdvancedCalculator(780, 600, false, false);
         PartList pl = new PartList();
         /*
         pl.addPart(new Part(new Material("25x200 mm. trykimp. Brædt", 360, "stk", "understernbrædder til for & bag ende"), ac.calcBottomFasciasFB()));
@@ -158,9 +192,9 @@ public class AdvancedCalculator {
         pl.addPart(new Part(new Material("firkantskiver 40x40x11mm", 0, "stk", "Til montering af rem på stolper"), 1));
         
         BasicPartListPrinter.print(pl);
-        */
-        
-        System.out.println(ac.calcBand());
+         */
+
+        System.out.println(ac.calcTopFasciasFront());
     }
 
 }
