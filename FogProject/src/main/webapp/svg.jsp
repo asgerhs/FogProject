@@ -11,6 +11,15 @@
     .post {
         stroke-width: 4px;
     }
+    
+    .shed{
+        stroke-width: 3px;
+        
+    }
+    line{
+        stroke: red;
+        stroke-width: 2px;
+    }
 </style>
 
 <%
@@ -20,26 +29,46 @@
     int rafterCount = 15;
     int rafterSpace = 55;
     int postCount = 3;
-    int distant = (width - 10) / (postCount - 2 +1);
+    int shedLength = 210;
+    int distant = (width - 10) / (postCount - 2 + 1);
 %>
 
 <svg width="1000" height="1000">
-    <rect x="100" y="100" height="<%= height %>" width="<%= width %>" />
+<rect x="100" y="100" height="<%= height%>" width="<%= width%>" />
 
-    <rect x="100" y="<%= 100 + outhang %>" height="10" width="<%= width %>" />
-    <rect x="100" y="<%= 100 + height - outhang - 10 %>" height="10" width="<%= width %>" />
-    
-    <% for(int i = 0; i < rafterCount; i++) { %>
-        <rect x="<%= 100 + rafterSpace * i %>" y="100" height="<%= height %>" width="10" />
-    <% } %>
-    
-    <rect class="post" x="200" y="<%= 100 + outhang %>" height="10" width="10" />
-    <rect class="post" x="<%= 100 + outhang + distant  %>" y="<%= 100 + outhang %>" height="10" width="10" />
-    <rect class="post" x="<%= 100 + width - 30 %>" y="<%= 100 + outhang %>" height="10" width="10" />
-    
-    <rect class="post" x="200" y="<%= 100 + height - outhang - 10 %>" height="10" width="10" />
-    <rect class="post" x="<%= 100 + outhang + distant  %>" y="<%= 100 + height - outhang - 10 %>" height="10" width="10" />
-    <rect class="post" x="<%= 100 + width - 30 %>" y="<%= 100 + height - outhang - 10 %>" height="10" width="10" />
+<rect x="100" y="<%= 100 + outhang%>" height="10" width="<%= width%>" />
+<rect x="100" y="<%= 100 + height - outhang - 10%>" height="10" width="<%= width%>" />
+
+<% for (int i = 0; i < rafterCount; i++) {%>
+<rect x="<%= 100 + rafterSpace * i%>" y="100" height="<%= height%>" width="10" />
+<% }%>
+
+<rect class="post" x="200" y="<%= 100 + outhang%>" height="10" width="10" />
+<rect class="post" x="<%= 100 + outhang + distant%>" y="<%= 100 + outhang%>" height="10" width="10" />
+<rect class="post" x="<%= 100 + width - 30%>" y="<%= 100 + outhang%>" height="10" width="10" />
+
+<rect class="post" x="200" y="<%= 100 + height - outhang - 10%>" height="10" width="10" />
+<rect class="post" x="<%= 100 + outhang + distant%>" y="<%= 100 + height - outhang - 10%>" height="10" width="10" />
+<rect class="post" x="<%= 100 + width - 30%>" y="<%= 100 + height - outhang - 10%>" height="10" width="10" />
+
+
+<rect class="post" x="<%= 100 + width - 30%>" y="<%=100 + (height / 2) - 10%>" height="10 " width="10"/>
+<rect class="shed"  x="<%= 100 + width - 30%>" y="<%= 100 + outhang%>" height="<%=height + (-outhang * 2)%>" width="10"/>
+
+<rect class="post" x="<%=100 + width - shedLength - 30%>" y="<%= 100 + outhang%>" height="10" width="10"/>
+<rect class="post" x="<%=100 + width - shedLength - 30%>" y="<%= 100 + (height / 2) - 10%>" height="10" width="10"/>
+<rect class="post" x="<%=100 + width - shedLength - 30%>" y="<%= 100 + height - outhang - 10%>" height="10" width="10"/>
+<rect class="shed" x="<%= 100 + width - shedLength - 30%>" y="<%= 100 + outhang%>" height="<%=height + (-outhang * 2)%>" width="10"/>
+
+<rect class="shed" x="<%= 100 + width - shedLength - 30%>" y="<%= 100 + outhang%>" height="10" width="<%= shedLength%>"/>
+<rect class="shed" x="<%= 100 + width - shedLength - 30%>" y="<%= 100 +height - outhang - 10%>" height="10" width="<%=shedLength%>"/>
+
+<line x1="<%= 100 + rafterSpace %>" y1="<%= 100 + outhang + 10%>" x2="<%=height + outhang + 10%>" y2="<%= 100 + height - outhang -10%>" stroke-dasharray="5,5" d="M5 20 l215 0"/>
+<line x1="<%= 100 + rafterSpace %>" y1="<%= 100 + height - outhang - 10%>" x2="<%=height + outhang + 10%>" y2="<%= 100 + outhang + 10%>" stroke-dasharray="5,5" d="M5 20 l215 0"/>
+
+
+
+
 </svg>
 
-<%= distant %>
+<%= (-outhang * 2)%>

@@ -7,7 +7,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Formatter;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -16,11 +18,9 @@ import static org.junit.Assert.*;
  * @author Andreas Vikke
  */
 public class GenerateSQLDummyScript {
+    private Formatter f;
     
-    @Test
-    public void generateMaterialScript() throws IOException {
-        FileWriter fw = new FileWriter("GeneratedDummyData.sql", false);
-        Formatter f = new Formatter(fw);
+    private void generateMaterialScript() throws IOException {
         f.format("-- Woods\n");
         List<Material> mats = new ArrayList();
         
@@ -65,15 +65,12 @@ public class GenerateSQLDummyScript {
         }
         
         f.format(sql);
-        f.close();
         
         assertTrue(true);
     }
     
-    @Test
-    public void generateCategoriesScript() throws IOException {
-        FileWriter fw = new FileWriter("GeneratedDummyData.sql", true);
-        Formatter f = new Formatter(fw);
+    
+    private void generateMatCategoriesScript() throws IOException {
         f.format("\n\n-- Categories\n");
         List<Category> cats = new ArrayList();
         
@@ -105,16 +102,66 @@ public class GenerateSQLDummyScript {
         }
         
         f.format(sql);
-        f.close();
         
         assertTrue(true);
         
     }
     
-    @Test
-    public void generateUserScript() throws IOException {
-        FileWriter fw = new FileWriter("GeneratedDummyData.sql", true);
-        Formatter f = new Formatter(fw);
+    private void generateMatCategoriesLinkScript() throws IOException {
+        f.format("\n\n-- Categories - Stock link\n");
+        HashMap<String, Integer> link = new HashMap();
+        
+        //all categories in database
+        link.put("1000", 1);
+        link.put("1001", 1);
+        link.put("1002", 2);
+        link.put("1003", 2);
+        link.put("1004", 3);
+        link.put("1005", 4);
+        link.put("1006", 4);
+        link.put("1007", 5);
+        link.put("1008", 5);
+        link.put("1007", 6);
+        link.put("1008", 6);
+        link.put("1009", 7);
+        link.put("1010", 8);
+        link.put("1011", 8);
+        link.put("1012", 8);
+        link.put("1010", 9);
+        link.put("1011", 9);
+        link.put("1012", 9);
+        link.put("1013", 10);
+        link.put("1014", 10);
+        
+        link.put("1030", 11);
+        link.put("1034", 11);
+        link.put("1035", 11);
+        link.put("1038", 11);
+        link.put("1039", 11);
+        link.put("1031", 12);
+        link.put("1032", 13);
+        link.put("1033", 13);
+        link.put("1042", 13);
+        link.put("1036", 14);
+        link.put("1037", 15);
+        link.put("1040", 16);
+        link.put("1041", 16);
+        
+        String sql = "";
+        String sqlStart = "INSERT INTO stockToCategory VALUES (";
+        String sqlEnd = ");\n";
+        
+        for(Map.Entry<String, Integer> entry : link.entrySet()) {
+            sql += sqlStart + "'" + entry.getKey() + "'," + entry.getValue() + sqlEnd;
+        }
+        
+        f.format(sql);
+        
+        assertTrue(true);
+        
+    }    
+    
+    private void generateUserScript() throws IOException {
         f.format("\n\n-- Users\n");
         
         String sql = "";
@@ -134,8 +181,20 @@ public class GenerateSQLDummyScript {
         }
         
         f.format(sql);
-        f.close();
         
         assertTrue(true);
+    }
+    
+    @Test
+    public void runTests() throws IOException {
+        FileWriter fw = new FileWriter("GeneratedDummyData.sql", false);
+        f = new Formatter(fw);
+        
+        generateMaterialScript();
+        generateMatCategoriesScript();
+        generateMatCategoriesLinkScript();
+        generateUserScript();
+        
+        f.close();
     }
 }
