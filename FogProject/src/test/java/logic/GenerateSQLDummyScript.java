@@ -1,6 +1,7 @@
 package logic;
 
 import com.github.javafaker.Faker;
+import data.models.Category;
 import data.models.Material;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -67,6 +68,47 @@ public class GenerateSQLDummyScript {
         f.close();
         
         assertTrue(true);
+    }
+    
+    @Test
+    public void generateCategoriesScript() throws IOException {
+        FileWriter fw = new FileWriter("GeneratedDummyData.sql", true);
+        Formatter f = new Formatter(fw);
+        f.format("\n\n-- Categories\n");
+        List<Category> cats = new ArrayList();
+        
+        //all categories in database
+        cats.add(new Category("Understernbrædder"));
+        cats.add(new Category("Oversternbrædder"));
+        cats.add(new Category("Lægter"));
+        cats.add(new Category("Reglar"));
+        cats.add(new Category("Spærtræ"));
+        cats.add(new Category("Rem"));
+        cats.add(new Category("Stolpe"));
+        cats.add(new Category("Brædt"));
+        cats.add(new Category("Vandbræt"));
+        cats.add(new Category("Tagplader"));
+        cats.add(new Category("Skruer"));
+        cats.add(new Category("Hulbånd"));
+        cats.add(new Category("Beslag"));
+        cats.add(new Category("Bolt"));
+        cats.add(new Category("Skiver"));
+        cats.add(new Category("Diverse"));
+        
+        
+        String sql = "";
+        String sqlStart = "INSERT INTO categories(name) VALUES (";
+        String sqlEnd = ");\n";
+        
+        for(Category c : cats) {
+            sql += sqlStart + "'" + c.getName() + "'" + sqlEnd;
+        }
+        
+        f.format(sql);
+        f.close();
+        
+        assertTrue(true);
+        
     }
     
     @Test
