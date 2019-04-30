@@ -1,6 +1,7 @@
 package logic;
 
 import com.github.javafaker.Faker;
+import data.models.Category;
 import data.models.Material;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -16,8 +17,8 @@ import static org.junit.Assert.*;
  */
 public class GenerateSQLDummyScript {
     
-    @Test
-    public void generateMaterialScript() throws IOException {
+    
+    private void generateMaterialScript() throws IOException {
         FileWriter fw = new FileWriter("GeneratedDummyData.sql", false);
         Formatter f = new Formatter(fw);
         f.format("-- Woods\n");
@@ -25,35 +26,35 @@ public class GenerateSQLDummyScript {
         
         // Woods
         mats.add(new Material("1000", "25x200 mm. trykimp. Brædt", 360, 1, "stk"));
-        mats.add(new Material("1000", "25x200 mm. trykimp. Brædt", 540, 1, "stk"));
-        mats.add(new Material("1001", "25x125mm. trykimp. Brædt", 360, 1, "stk"));
-        mats.add(new Material("1001", "25x125mm. trykimp. Brædt", 540, 1, "stk"));
-        mats.add(new Material("1002", "38x73 mm. Lægte ubh.", 420, 1, "stk"));
-        mats.add(new Material("1003", "45x95 mm. Reglar ub.", 240, 1, "stk"));
-        mats.add(new Material("1003", "45x95 mm. Reglar ub.", 270, 1, "stk"));
-        mats.add(new Material("1003", "45x195 mm. spærtræ ubh.", 480, 1, "stk"));
-        mats.add(new Material("1003", "45x195 mm. spærtræ ubh.", 600, 1, "stk"));
-        mats.add(new Material("1004", "97x97 mm. trykimp. Stolpe", 300, 1, "stk"));
-        mats.add(new Material("1005", "19x100 mm. trykimp. Brædt", 210, 1, "stk"));
-        mats.add(new Material("1005", "19x100 mm. trykimp. Brædt", 360, 1, "stk"));
-        mats.add(new Material("1005", "19x100 mm. trykimp. Brædt", 540, 1, "stk"));
-        mats.add(new Material("1006", "Plastmo Ecolite blåtonet", 360, 1, "stk"));
-        mats.add(new Material("1006", "Plastmo Ecolite blåtonet", 600, 1, "stk"));
+        mats.add(new Material("1001", "25x200 mm. trykimp. Brædt", 540, 1, "stk"));
+        mats.add(new Material("1002", "25x125mm. trykimp. Brædt", 360, 1, "stk"));
+        mats.add(new Material("1003", "25x125mm. trykimp. Brædt", 540, 1, "stk"));
+        mats.add(new Material("1004", "38x73 mm. Lægte ubh.", 420, 1, "stk"));
+        mats.add(new Material("1005", "45x95 mm. Reglar ub.", 240, 1, "stk"));
+        mats.add(new Material("1006", "45x95 mm. Reglar ub.", 270, 1, "stk"));
+        mats.add(new Material("1007", "45x195 mm. spærtræ ubh.", 480, 1, "stk"));
+        mats.add(new Material("1008", "45x195 mm. spærtræ ubh.", 600, 1, "stk"));
+        mats.add(new Material("1009", "97x97 mm. trykimp. Stolpe", 300, 1, "stk"));
+        mats.add(new Material("1010", "19x100 mm. trykimp. Brædt", 210, 1, "stk"));
+        mats.add(new Material("1011", "19x100 mm. trykimp. Brædt", 360, 1, "stk"));
+        mats.add(new Material("1012", "19x100 mm. trykimp. Brædt", 540, 1, "stk"));
+        mats.add(new Material("1013", "Plastmo Ecolite blåtonet", 360, 1, "stk"));
+        mats.add(new Material("1014", "Plastmo Ecolite blåtonet", 600, 1, "stk"));
         
         // Misc
-        mats.add(new Material("1020", "Plastmo bundskruer 200 stk.", 1, 200, "pakke"));
-        mats.add(new Material("1021", "Hulbånd 1x20 mm. 10 mtr.", 1000, 1, "rulle"));
-        mats.add(new Material("1022", "Universal 190 mm højre", 190, 1, "stk"));
-        mats.add(new Material("1023", "Universal 190 mm venstre", 190, 1, "stk"));
-        mats.add(new Material("1024", "4,5x60 mm. skruer 200 stk.", 60, 200, "pakke"));
-        mats.add(new Material("1024", "4,0x50 mm. skruer 250 stk.", 50, 250, "pakke"));
-        mats.add(new Material("1025", "Bræddebolt 10x120 mm.", 120, 1, "stk"));
-        mats.add(new Material("1026", "Firkantskiver 40x40x11mm", 11, 1, "stk"));
-        mats.add(new Material("1027", "4,5x70 mm. Skruer 400 stk.", 70, 400, "pakke"));
-        mats.add(new Material("1027", "4,5x50 mm. Skruer 300 stk.", 50, 300, "pakke"));
-        mats.add(new Material("1028", "Stalddørsgreb 50x75", 75, 1, "sæt"));
-        mats.add(new Material("1029", "T hængsel 390 mm", 390, 1, "stk"));
-        mats.add(new Material("1030", "Vinkelbeslag 35", 35, 1, "stk"));
+        mats.add(new Material("1030", "Plastmo bundskruer 200 stk.", 1, 200, "pakke"));
+        mats.add(new Material("1031", "Hulbånd 1x20 mm. 10 mtr.", 1000, 1, "rulle"));
+        mats.add(new Material("1032", "Universal 190 mm højre", 190, 1, "stk"));
+        mats.add(new Material("1033", "Universal 190 mm venstre", 190, 1, "stk"));
+        mats.add(new Material("1034", "4,5x60 mm. skruer 200 stk.", 60, 200, "pakke"));
+        mats.add(new Material("1035", "4,0x50 mm. skruer 250 stk.", 50, 250, "pakke"));
+        mats.add(new Material("1036", "Bræddebolt 10x120 mm.", 120, 1, "stk"));
+        mats.add(new Material("1037", "Firkantskiver 40x40x11mm", 11, 1, "stk"));
+        mats.add(new Material("1038", "4,5x70 mm. Skruer 400 stk.", 70, 400, "pakke"));
+        mats.add(new Material("1039", "4,5x50 mm. Skruer 300 stk.", 50, 300, "pakke"));
+        mats.add(new Material("1040", "Stalddørsgreb 50x75", 75, 1, "sæt"));
+        mats.add(new Material("1041", "T hængsel 390 mm", 390, 1, "stk"));
+        mats.add(new Material("1042", "Vinkelbeslag 35", 35, 1, "stk"));
         
         String sql = "";
         String sqlStart = "INSERT INTO stock VALUES (";
@@ -69,8 +70,49 @@ public class GenerateSQLDummyScript {
         assertTrue(true);
     }
     
-    @Test
-    public void generateUserScript() throws IOException {
+    
+    private void generateMatCategoriesScript() throws IOException {
+        FileWriter fw = new FileWriter("GeneratedDummyData.sql", true);
+        Formatter f = new Formatter(fw);
+        f.format("\n\n-- Categories\n");
+        List<Category> cats = new ArrayList();
+        
+        //all categories in database
+        cats.add(new Category("Understernbrædder"));
+        cats.add(new Category("Oversternbrædder"));
+        cats.add(new Category("Lægter"));
+        cats.add(new Category("Reglar"));
+        cats.add(new Category("Spærtræ"));
+        cats.add(new Category("Rem"));
+        cats.add(new Category("Stolpe"));
+        cats.add(new Category("Brædt"));
+        cats.add(new Category("Vandbræt"));
+        cats.add(new Category("Tagplader"));
+        cats.add(new Category("Skruer"));
+        cats.add(new Category("Hulbånd"));
+        cats.add(new Category("Beslag"));
+        cats.add(new Category("Bolt"));
+        cats.add(new Category("Skiver"));
+        cats.add(new Category("Diverse"));
+        
+        
+        String sql = "";
+        String sqlStart = "INSERT INTO categories(name) VALUES (";
+        String sqlEnd = ");\n";
+        
+        for(Category c : cats) {
+            sql += sqlStart + "'" + c.getName() + "'" + sqlEnd;
+        }
+        
+        f.format(sql);
+        f.close();
+        
+        assertTrue(true);
+        
+    }
+    
+    
+    private void generateUserScript() throws IOException {
         FileWriter fw = new FileWriter("GeneratedDummyData.sql", true);
         Formatter f = new Formatter(fw);
         f.format("\n\n-- Users\n");
@@ -95,5 +137,13 @@ public class GenerateSQLDummyScript {
         f.close();
         
         assertTrue(true);
+    }
+    
+    @Test
+    public void runTests() throws IOException {
+        GenerateSQLDummyScript gen = new GenerateSQLDummyScript();
+        gen.generateMaterialScript();
+        gen.generateMatCategoriesScript();
+        gen.generateUserScript();
     }
 }
