@@ -63,12 +63,16 @@
 <rect class="shed" x="<%= 100 + width - shedLength - 30%>" y="<%= 100 + outhang%>" height="10" width="<%= shedLength%>"/>
 <rect class="shed" x="<%= 100 + width - shedLength - 30%>" y="<%= 100 +height - outhang - 10%>" height="10" width="<%=shedLength%>"/>
 
-<line x1="<%= 100 + rafterSpace %>" y1="<%= 100 + outhang + 10%>" x2="<%=height + outhang + 10%>" y2="<%= 100 + height - outhang -10%>" stroke-dasharray="5,5" d="M5 20 l215 0"/>
-<line x1="<%= 100 + rafterSpace %>" y1="<%= 100 + height - outhang - 10%>" x2="<%=height + outhang + 10%>" y2="<%= 100 + outhang + 10%>" stroke-dasharray="5,5" d="M5 20 l215 0"/>
+<line x1="<%= 100 + rafterSpace %>" y1="<%= 100 + outhang + 10%>" x2="<%=height + outhang + 10 - rafterSpace%>" y2="<%= 100 + width - shedLength - 10%>" stroke-dasharray="5,5" d="M5 20 l215 0"/>
+<line x1="<%= 100 + rafterSpace %>" y1="<%= 100 + height - outhang - 10%>" x2="<%=height + outhang + 10 - rafterSpace%>" y2="<%= 100 + outhang + 10%>" stroke-dasharray="5,5" d="M5 20 l215 0"/>
 
 
 
 
 </svg>
-
-<%= (-outhang * 2)%>
+<% int a = 100 + width - shedLength - rafterSpace -10; %>
+<%= a %>
+<svg width="1000" height="1000">
+<line x1="100" y1="100" x2="<%= 100 + 780%>" y2="<%=100  +   10%>"/>
+<line x1="100" y1="100" x2="<%= 100%>" y2="<%=100  +   30%>"/>
+</svg>
