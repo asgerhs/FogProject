@@ -16,14 +16,12 @@ public class DBConnector {
     public static Connection  connection = null;
     
     public static synchronized Connection getConnection(){
-       if(connection == null){
            try{
                Class.forName(DRIVER);
                connection = DriverManager.getConnection(URL, USER, PASSWORD);
            }catch(SQLException | ClassNotFoundException ex){
                ex.printStackTrace();
            }
-       }
        return connection;
     }
     

@@ -12,7 +12,9 @@
     TreeMap<Integer, Material> mats = (TreeMap<Integer, Material>)session.getAttribute("mats");
 %>
 
-<form>
+<form method="POST">
+    <h2>Carport Information</h2>
+    <hr />
     <div class="form-group">
         <label>Carport Width</label>
         <input type="number" class="form-control" name="width" min="240" max="750" placeholder="Min. 240 - Max. 750">
@@ -23,10 +25,16 @@
     </div>
     <div class="form-group">
         <label>Roof Type</label>
-        <input type="number" class="form-control" name="roof" placeholder="Min. 240 - Max. 750">
-        
+        <select class="custom-select" name="roof">
+            <% for(Map.Entry<Integer, Material> entry : mats.entrySet()) { %>
+                <option value="<%=entry.getValue().getRef() %>"><%=entry.getValue().getName() %></option>
+            <% } %>
+          </select>
     </div>
     
+    <br /><br />
+    <h2>Shed Information</h2>
+    <hr />
     <div class="form-group">
         <label>Shed Width</label>
         <input type="number" class="form-control" name="shedWidth" min="240" max="750" placeholder="Min. 240 - Max. 750">
@@ -35,7 +43,10 @@
         <label>Shed Length</label>
         <input type="number" class="form-control" name="shedLength" min="240" max="780" placeholder="Min. 240 - Max. 780">
     </div>
-    
+     
+    <br /><br />
+    <h2>Customer Information</h2>
+    <hr />
     <div class="form-group">
         <label>Name</label>
         <input type="text" class="form-control" name="name">
@@ -60,6 +71,8 @@
         <label>Note</label>
         <input type="text" class="form-control" name="note">
     </div>
+    
+    <button type="submit" class="btn btn-primary" formaction="FrontController?command=request&submit=true">Send request</button>
 </form>
 
 <%@include file="footer.jsp" %>
