@@ -70,4 +70,16 @@
 
 </svg>
 
+<svg width="1000" height="1000">
+
+<line x1="100" y1="100" x2="<%=100 + width%>" y2="<%=100 + 10%>" style="stroke:rgb(0, 0, 0);stroke-width:1"/>
+<line x1="100" y1="<%=100 + 40%>" x2="<%=100 + width%>" y2="<%=100 + 10 + 40%>" style="stroke:rgb(0, 0, 0); stroke-width:1"/>
+<line x1="100" y1="100" x2="<%=100%>" y2="<%=100 + 40%>" style="stroke:rgb(0, 0, 0); stroke-width:1"/>
+<line x1="<%=100 + width%>" y1="<%=100 + 10%>" x2="<%=100 + width%>" y2="<%=100 + 10 + 40%>" style="stroke:rgb(0, 0, 0); stroke-width:1"/>
+
+<rect class="post" x="<%=100 + 40 + outhang%>" y="<%=100 + 40%>" width="10" height="250" style="stroke:rgb(0, 0, 0);stroke-width:1"/>
+<rect class="post" x="<%=100 + 40 + outhang + distant%>" y="<%=100 + 45%>" width="10" height="245" style="stroke:rgb(0, 0, 0);stroke-width:1"/>
+
+</svg>
+
 <%= (-outhang * 2)%>
