@@ -121,7 +121,10 @@ For loop to create the necessary amount of rafts across the width of the Carport
 
 
 
-<!-- top left top bottom right striped line
+<!-- 
+Commented out because what the hell is d?
+
+top left top bottom right striped line 
 <line x1="<%= 100 + rafterSpace %>" y1="<%= 100 + outhang + 10%>" x2="<%=(calcShedLine * rafterSpace) + 100 - 55 + 10%>" y2="<%= 100 + height - outhang - 10 %>" stroke-dasharray="5,5" d="M5 20 l215 0" />
 
 <!-- bottom left to top right striped line 
