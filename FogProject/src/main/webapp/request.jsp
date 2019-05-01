@@ -4,7 +4,13 @@
     Author     : Andreas Vikke
 --%>
 
+<%@page import="java.util.Map"%>
+<%@page import="java.util.TreeMap"%>
+<%@page import="data.models.Material"%>
 <%@include file="header.jsp" %>
+<%
+    TreeMap<Integer, Material> mats = (TreeMap<Integer, Material>)session.getAttribute("mats");
+%>
 
 <form>
     <div class="form-group">
@@ -18,6 +24,7 @@
     <div class="form-group">
         <label>Roof Type</label>
         <input type="number" class="form-control" name="roof" placeholder="Min. 240 - Max. 750">
+        
     </div>
     
     <div class="form-group">

@@ -30,6 +30,8 @@ public class RequestCommand implements Command {
 
             TreeMap<Integer, Material> mats;
             mats = mf.getAllByCategory(10);
+            System.out.println("Test");
+            System.out.println(mats);
 
             session.setAttribute("mats", mats);
 
