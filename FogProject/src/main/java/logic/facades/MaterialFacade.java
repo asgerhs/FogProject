@@ -33,6 +33,7 @@ public class MaterialFacade implements FacadeInterface<Material>{
         MaterialFacade mf = new MaterialFacade();
         TreeMap<Integer, Material> mats = new TreeMap();
         mats = mf.getAllByCategory(1);
+        mats = mf.getAllByCategory(2);
         System.out.println(mats);
     }
 }
