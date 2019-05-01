@@ -30,7 +30,7 @@
     int rafterSpace = 55;
     int postCount = 3;
     int shedLength = 210;
-    int distant = (width - 10) / (postCount - 2 + 1);
+    int distant = (width - 130 - 10) / (postCount - 2 + 1);
 %>
 
 <svg width="1000" height="1000">
@@ -59,7 +59,7 @@ For loop to create the necessary amount of rafts across the width of the Carport
 <rect class="post" x="200" y="<%= 100 + outhang%>" height="10" width="10" />
 
 <!-- Carport top middle post -->
-<rect class="post" x="<%= 100 + outhang + distant%>" y="<%= 100 + outhang%>" height="10" width="10" />
+<rect class="post" x="<%= 200 + distant%>" y="<%= 100 + outhang%>" height="10" width="10" />
 
 <!-- Carport top right post -->
 <rect class="post" x="<%= 100 + width - 30%>" y="<%= 100 + outhang%>" height="10" width="10" />
@@ -72,7 +72,7 @@ For loop to create the necessary amount of rafts across the width of the Carport
 <rect class="post" x="200" y="<%= 100 + height - outhang - 10%>" height="10" width="10" />
 
 <!-- Carport bottom middle post -->
-<rect class="post" x="<%= 100 + outhang + distant%>" y="<%= 100 + height - outhang - 10%>" height="10" width="10" />
+<rect class="post" x="<%= 200 + distant%>" y="<%= 100 + height - outhang - 10%>" height="10" width="10" />
 
 <!-- Carport bottom right post -->
 <rect class="post" x="<%= 100 + width - 30%>" y="<%= 100 + height - outhang - 10%>" height="10" width="10" />

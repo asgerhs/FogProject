@@ -26,7 +26,8 @@
     <div class="form-group">
         <label>Roof Type</label>
         <select class="custom-select" name="roof">
-            <% for(Map.Entry<Integer, Material> entry : mats.entrySet()) { %>
+            <% if(mats != null)
+                for(Map.Entry<Integer, Material> entry : mats.entrySet()) { %>
                 <option value="<%=entry.getValue().getRef() %>"><%=entry.getValue().getName() %></option>
             <% } %>
           </select>
