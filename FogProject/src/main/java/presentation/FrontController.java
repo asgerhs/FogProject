@@ -17,9 +17,6 @@ import presentation.commands.CommandList;
  */
 @WebServlet(name = "FrontController", urlPatterns = {"/FrontController"})
 public class FrontController extends HttpServlet {
-
-    private MaterialFacade mf = new MaterialFacade();
-
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -36,7 +33,7 @@ public class FrontController extends HttpServlet {
         Command command = CommandList.commandForm(commandKey);
 
         try {
-            String target = command.execute(request, mf);
+            String target = command.execute(request);
             RequestDispatcher dispatcher = request.getRequestDispatcher(target);
             dispatcher.forward(request, response);
             //should be command exception

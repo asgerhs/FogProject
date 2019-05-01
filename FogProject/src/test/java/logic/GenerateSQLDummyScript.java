@@ -65,8 +65,6 @@ public class GenerateSQLDummyScript {
         }
         
         f.format(sql);
-        
-        assertTrue(true);
     }
     
     
@@ -102,9 +100,6 @@ public class GenerateSQLDummyScript {
         }
         
         f.format(sql);
-        
-        assertTrue(true);
-        
     }
     
     private void generateMatCategoriesLinkScript() throws IOException {
@@ -156,9 +151,6 @@ public class GenerateSQLDummyScript {
         }
         
         f.format(sql);
-        
-        assertTrue(true);
-        
     }    
     
     private void generateUserScript() throws IOException {
@@ -181,8 +173,6 @@ public class GenerateSQLDummyScript {
         }
         
         f.format(sql);
-        
-        assertTrue(true);
     }
     
     @Test
@@ -196,5 +186,6 @@ public class GenerateSQLDummyScript {
         generateUserScript();
         
         f.close();
+        assertTrue(true);
     }
 }
