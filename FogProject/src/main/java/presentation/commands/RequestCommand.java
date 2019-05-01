@@ -3,6 +3,10 @@ package presentation.commands;
 import data.exceptions.CommandExceptions;
 import data.exceptions.MapperExceptions;
 import data.models.Material;
+import java.util.ArrayList;
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.TreeMap;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -25,8 +29,14 @@ public class RequestCommand implements Command {
 
     @Override
     public String execute(HttpServletRequest request) throws CommandExceptions {
-        String submit = request.getParameter("submit");
-        if(submit.equals("true")) {
+        Enumeration<String> paramNames = request.getParameterNames();
+        HashMap<String, String> params = new HashMap();
+        while(paramNames.hasMoreElements()) {
+            String pName = paramNames.nextElement();
+            params.put(pName, request.getParameter(pName));
+        }
+        
+        if(params.get("submit") != null) {
             
             
             return target;
