@@ -65,8 +65,6 @@ public class GenerateSQLDummyScript {
         }
         
         f.format(sql);
-        
-        assertTrue(true);
     }
     
     
@@ -102,63 +100,57 @@ public class GenerateSQLDummyScript {
         }
         
         f.format(sql);
-        
-        assertTrue(true);
-        
     }
     
     private void generateMatCategoriesLinkScript() throws IOException {
         f.format("\n\n-- Categories - Stock link\n");
-        HashMap<String, Integer> link = new HashMap();
+        ArrayList<MatCatLink> link = new ArrayList();
         
         //all categories in database
-        link.put("1000", 1);
-        link.put("1001", 1);
-        link.put("1002", 2);
-        link.put("1003", 2);
-        link.put("1004", 3);
-        link.put("1005", 4);
-        link.put("1006", 4);
-        link.put("1007", 5);
-        link.put("1008", 5);
-        link.put("1007", 6);
-        link.put("1008", 6);
-        link.put("1009", 7);
-        link.put("1010", 8);
-        link.put("1011", 8);
-        link.put("1012", 8);
-        link.put("1010", 9);
-        link.put("1011", 9);
-        link.put("1012", 9);
-        link.put("1013", 10);
-        link.put("1014", 10);
+        link.add(new MatCatLink("1000", 1));
+        link.add(new MatCatLink("1001", 1));
+        link.add(new MatCatLink("1002", 2));
+        link.add(new MatCatLink("1003", 2));
+        link.add(new MatCatLink("1004", 3));
+        link.add(new MatCatLink("1005", 4));
+        link.add(new MatCatLink("1006", 4));
+        link.add(new MatCatLink("1007", 5));
+        link.add(new MatCatLink("1008", 5));
+        link.add(new MatCatLink("1007", 6));
+        link.add(new MatCatLink("1008", 6));
+        link.add(new MatCatLink("1009", 7));
+        link.add(new MatCatLink("1010", 8));
+        link.add(new MatCatLink("1011", 8));
+        link.add(new MatCatLink("1012", 8));
+        link.add(new MatCatLink("1010", 9));
+        link.add(new MatCatLink("1011", 9));
+        link.add(new MatCatLink("1012", 9));
+        link.add(new MatCatLink("1013", 10));
+        link.add(new MatCatLink("1014", 10));
         
-        link.put("1030", 11);
-        link.put("1034", 11);
-        link.put("1035", 11);
-        link.put("1038", 11);
-        link.put("1039", 11);
-        link.put("1031", 12);
-        link.put("1032", 13);
-        link.put("1033", 13);
-        link.put("1042", 13);
-        link.put("1036", 14);
-        link.put("1037", 15);
-        link.put("1040", 16);
-        link.put("1041", 16);
+        link.add(new MatCatLink("1030", 11));
+        link.add(new MatCatLink("1034", 11));
+        link.add(new MatCatLink("1035", 11));
+        link.add(new MatCatLink("1038", 11));
+        link.add(new MatCatLink("1039", 11));
+        link.add(new MatCatLink("1031", 12));
+        link.add(new MatCatLink("1032", 13));
+        link.add(new MatCatLink("1033", 13));
+        link.add(new MatCatLink("1042", 13));
+        link.add(new MatCatLink("1036", 14));
+        link.add(new MatCatLink("1037", 15));
+        link.add(new MatCatLink("1040", 16));
+        link.add(new MatCatLink("1041", 16));
         
         String sql = "";
         String sqlStart = "INSERT INTO stockToCategory VALUES (";
         String sqlEnd = ");\n";
         
-        for(Map.Entry<String, Integer> entry : link.entrySet()) {
-            sql += sqlStart + "'" + entry.getKey() + "'," + entry.getValue() + sqlEnd;
+        for(MatCatLink mcl : link) {
+            sql += sqlStart + "'" + mcl.ref + "'," + mcl.id + sqlEnd;
         }
         
         f.format(sql);
-        
-        assertTrue(true);
-        
     }    
     
     private void generateUserScript() throws IOException {
@@ -181,8 +173,6 @@ public class GenerateSQLDummyScript {
         }
         
         f.format(sql);
-        
-        assertTrue(true);
     }
     
     @Test
@@ -196,5 +186,16 @@ public class GenerateSQLDummyScript {
         generateUserScript();
         
         f.close();
+        assertTrue(true);
+    }
+    
+    private class MatCatLink {
+        public String ref;
+        public int id;
+        
+        public MatCatLink(String ref, int id) {
+            this.ref = ref;
+            this.id = id;
+        }
     }
 }
