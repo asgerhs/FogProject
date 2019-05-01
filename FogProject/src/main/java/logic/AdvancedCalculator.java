@@ -72,7 +72,7 @@ public class AdvancedCalculator {
         
         for (Map.Entry<Integer, Material> entry : mats.entrySet()) {
             antal = (width % entry.getKey() == 0) ? width / entry.getKey() : (width / entry.getKey()) + 1;
-            pl.addPart(new Part(entry.getValue(), antal));
+            //pl.addPart(new Part(entry.getValue(), antal));
             for(Part p : pl.getPartList()){
                 System.out.println(p);
             }

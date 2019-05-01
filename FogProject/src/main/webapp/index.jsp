@@ -6,9 +6,7 @@
 
 <%@include file="header.jsp" %>
 
-<form id="showPartsForm" name="showParts" method="POST">
-    <div class="form-group">
-        <button type="submit" class="btn btn-primary" formaction="FrontController?command=showParts">Generate partslist</button>
-    </div>
-</form>
+<a class="btn btn-primary" href="FrontController?command=showParts">Generate partslist</a>
+<a class="btn btn-primary" href="FrontController?command=request">Request Carport</a>
+
 <%@include file = "footer.jsp" %>
