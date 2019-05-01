@@ -37,6 +37,8 @@ public class AdvancedCalculator {
         calcTopFasciasSide();
         calcBottomFasciasFB();
         calcBottomFasciasSide();
+        calcRem();
+        calcRafters();
         calcWaterBoardFront();
         calcWaterBoardSide();
         calcRoofingSheets();
@@ -59,8 +61,8 @@ public class AdvancedCalculator {
         return p;
     }
 
-    public int calcRem() throws MapperExceptions {
-        // length > 600 use if statement when we use arbitrary value
+    private void calcRem() throws MapperExceptions {
+        /*// length > 600 use if statement when we use arbitrary value
 
         //If length is between 480 and 600 use 1 on each side
         if (length > 480 && length < 600) {
@@ -70,46 +72,49 @@ public class AdvancedCalculator {
             return 2;
         } else {
             return (length % 480 == 0) ? (length / 480) * 2 : ((length / 480) + 1) * 2;
-        }
+        }*/
+        addParts(length, 6, 2, "Remme i sider, sadles ned i stolper");
     }
 
     //Calculating the roof of carport
-    public int calcRafters() {
-        return length / 50;
+    private void calcRafters() throws MapperExceptions {
+        addParts(width, 5, length/50, "Spær, monteres på rem");
     }
 
     //need a good way to present this
     private void calcTopFasciasFront() throws MapperExceptions {
-        addParts(width, 1, 1);
+        addParts(width, 2, 1, "oversternbrædder til forenden");
     }
 
     private void calcTopFasciasSide() throws MapperExceptions {
-        addParts(length, 1, 2);
+        addParts(length, 2, 2, "oversternbrædder til siderne");
     }
 
     private void calcBottomFasciasFB() throws MapperExceptions {
-        addParts(width, 1, 2);
+        addParts(width, 1, 2, "understernbrædder til for & bag ende");
     }
 
     private void calcBottomFasciasSide() throws MapperExceptions {
-        addParts(length, 1, 2);
+        addParts(length, 1, 2, "understernbrædder til siderne");
     }
 
     private void calcWaterBoardFront() throws MapperExceptions {
-        addParts(width, 1, 1);
+        addParts(width, 9, 1, "vandbrædt på stern i forende");
     }
 
     private void calcWaterBoardSide() throws MapperExceptions {
-        addParts(length, 1, 2);
+        addParts(length, 9, 2, "vandbrædt på stern i sider");
     }
 
     private void calcRoofingSheets() throws MapperExceptions {
-        addParts(length, 1, 1);
+        addParts(length, 10, 1, "tagplader monteres på spær");
     }
 
     //Calculating the pieces of carport
-    public int calcBracketsRight() {
-        return calcRafters();
+    /*private void calcBracketsRight() {
+        for(Part p : pl.getPartList()){
+            p.getMaterial().getRef()
+        }
     }
 
     public int calcBracketsLeft() {
@@ -136,7 +141,7 @@ public class AdvancedCalculator {
         double bandLength = Math.sqrt(Math.pow(fullSpace, 2) + Math.pow(width, 2)) * 2;
         return (bandLength % 1000.0 == 0) ? (int) (bandLength / 1000.0) : (int) (bandLength / 1000.0 + 1.0);
 
-    }
+    }*/
 
     public int calcBolts() {
         //value should not be less then 4
@@ -144,7 +149,7 @@ public class AdvancedCalculator {
         return (calcPosts() - 1 == 4) ? 4 * 2 : ((calcPosts() - 1) % 4) * 4 + (4 * 2);
     }
 
-    public void addParts(int lengthWidth, int categoryId, int multiplier) throws MapperExceptions {
+    public void addParts(int lengthWidth, int categoryId, int multiplier, String description) throws MapperExceptions {
         materials = mf.getAllByCategory(categoryId);
         TreeMap<Integer, Material> mats = new TreeMap(Collections.reverseOrder());
         mats.putAll(materials);
@@ -155,11 +160,11 @@ public class AdvancedCalculator {
             if (rest >= entry.getKey()) {
                 antal += rest / entry.getKey();
                 rest -= entry.getKey();
-                pl.addPart(new Part(entry.getValue(), antal * multiplier));
+                pl.addPart(new Part(entry.getValue(), antal * multiplier, description));
+            } else if(rest != 0) {
+                pl.addPart(new Part(entry.getValue(), 1 * multiplier, description));
+                return;
             }
-        }
-        if (rest > 0) {
-            pl.addPart(new Part(mats.lastEntry().getValue(), 1 * multiplier));
         }
     }
 
