@@ -25,20 +25,25 @@ public class RequestCommand implements Command {
 
     @Override
     public String execute(HttpServletRequest request) throws CommandExceptions {
-        try {
-            HttpSession session = request.getSession();
-
-            TreeMap<Integer, Material> mats;
-            mats = mf.getAllByCategory(10);
-            System.out.println("Test");
-            System.out.println(mats);
-
-            session.setAttribute("mats", mats);
-
+        String submit = request.getParameter("submit");
+        if(submit.equals("true")) {
+            
+            
             return target;
-        } catch (MapperExceptions ex) {
-            ex.printStackTrace();
-            throw new CommandExceptions("Test");
+        } else {
+            try {
+                HttpSession session = request.getSession();
+
+                TreeMap<Integer, Material> mats;
+                mats = mf.getAllByCategory(10);
+
+                session.setAttribute("mats", mats);
+
+                return target;
+            } catch (MapperExceptions ex) {
+                ex.printStackTrace();
+                throw new CommandExceptions("Test");
+            }
         }
     }
 }
