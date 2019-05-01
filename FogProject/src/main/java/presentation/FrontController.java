@@ -1,6 +1,7 @@
 package presentation;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import logic.facades.MaterialFacade;
 import presentation.commands.Command;
 import presentation.commands.CommandList;
+import sun.tools.jar.CommandLine;
 
 /**
  *
@@ -17,6 +19,9 @@ import presentation.commands.CommandList;
  */
 @WebServlet(name = "FrontController", urlPatterns = {"/FrontController"})
 public class FrontController extends HttpServlet {
+
+    private MaterialFacade mf = new MaterialFacade();
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -33,7 +38,7 @@ public class FrontController extends HttpServlet {
         Command command = CommandList.commandForm(commandKey);
 
         try {
-            String target = command.execute(request);
+            String target = command.execute(request, mf);
             RequestDispatcher dispatcher = request.getRequestDispatcher(target);
             dispatcher.forward(request, response);
             //should be command exception

@@ -82,8 +82,30 @@ public class AdvancedCalculator {
     }
 
     //need a good way to present this
+<<<<<<< HEAD
     private void calcTopFasciasFront() throws MapperExceptions {
         addParts(width, 2, 1, "oversternbrædder til forenden");
+=======
+    public int calcTopFasciasFront() throws MapperExceptions {
+        materials = mf.getAllByCategory(1);
+        TreeMap<Integer, Material> mats = new TreeMap(Collections.reverseOrder());
+        mats.putAll(materials);
+        int rest;
+        int antal = 0;
+        
+        for (Map.Entry<Integer, Material> entry : mats.entrySet()) {
+            antal = (width % entry.getKey() == 0) ? width / entry.getKey() : (width / entry.getKey()) + 1;
+            pl.addPart(new Part(entry.getValue(), antal));
+            for(Part p : pl.getPartList()){
+                System.out.println(p);
+            }
+            //int key = entry.getKey();
+            //Material value = entry.getValue();
+
+        }
+        //pl.addPart(part);
+        return antal;
+>>>>>>> parent of 1fe0ffc... Merge branch 'developer' of https://github.com/asgerhs/FogProject into developer
     }
 
     private void calcTopFasciasSide() throws MapperExceptions {

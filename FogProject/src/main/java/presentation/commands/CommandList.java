@@ -12,8 +12,7 @@ public class CommandList {
     private final Map<String, Command> commands = new HashMap();
     
     private CommandList(){
-        commands.put("showParts", new ShowPartsCommand("showParts.jsp"));
-        commands.put("request", new RequestCommand("request.jsp"));
+        commands.put("showParts", new showParts("showParts.jsp"));
     }
     
     public static synchronized Command commandForm(String key){

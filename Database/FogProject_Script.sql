@@ -1,6 +1,5 @@
 CREATE SCHEMA IF NOT EXISTS `fogproject`;
 DROP TABLE IF EXISTS `fogproject`.`users`;
-DROP TABLE IF EXISTS `fogproject`.`requests`;
 DROP TABLE IF EXISTS `fogproject`.`stockToCategory`;
 DROP TABLE IF EXISTS `fogproject`.`categories`;
 DROP TABLE IF EXISTS `fogproject`.`stock`;
@@ -35,23 +34,6 @@ CREATE TABLE `fogproject`.`stockToCategory` (
     REFERENCES `fogproject`.`categories` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION
-);
-
-CREATE TABLE `fogproject`.`requests` (
-	`id` INT NOT NULL AUTO_INCREMENT,
-    `width` INT NOT NULL,
-    `length` INT NOT NULL,
-    `shedWidth` INT NOT NULL,
-    `shedLength` INT NOT NULL,
-    `roof` VARCHAR(100) NOT NULL,
-    `angle` INT NOT NULL,
-    `name` VARCHAR(100) NOT NULL,
-    `address` VARCHAR(100) NOT NULL,
-    `zipCity` VARCHAR(200) NOT NULL,
-    `phone` VARCHAR(30) NOT NULL, 
-    `email` VARCHAR(200) NOT NULL,  
-    `note` VARCHAR(500) NOT NULL, 
-    PRIMARY KEY(`id`)
 );
 
 CREATE TABLE `fogproject`.`users` (
