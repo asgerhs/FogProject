@@ -5,13 +5,13 @@
  */
 package presentation.commands;
 
+import data.exceptions.CommandExceptions;
 import javax.servlet.http.HttpServletRequest;
-import logic.facades.MaterialFacade;
 
 /**
  *
  * @author Martin Frederiksen
  */
 public interface Command {
-    String execute(HttpServletRequest request, MaterialFacade mf);
+    String execute(HttpServletRequest request) throws CommandExceptions;
 }
