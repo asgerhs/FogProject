@@ -1,10 +1,13 @@
 package data.models;
 
+import java.util.Objects;
+
 /**
  *
  * @author Andreas Vikke
  */
 public class Part {
+
     private Material material;
     private int qty;
     private String description;
