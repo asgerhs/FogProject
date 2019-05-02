@@ -175,19 +175,19 @@ For loop to create the necessary amount of rafts across the width of the Carport
 <% }%>
 
 <!-- Line for whole length(width) of carport -->
-<line x1="100" y1="<%=425%>" x2="<%= 100 + width%>" y2="<%=425%>" style ="stroke: red"/>
+<line x1="100" y1="<%=425%>" x2="<%= 100 + width%>" y2="<%=425%>" style ="stroke: black"/>
 <!--<text x="<%=100 + (width/2)%>" y="<%=440%>" fill="red"><%=width%></text>-->
 
 <!-- Length of frontOuthang displayed -->
 <text x="<%=100 + (frontOuthang/2)%>" y="<%=440%>" fill="red"><%=frontOuthang%></text>
 
 <!-- Length of backOuthang displayed -->
-<line x1="<%=100 + width - backOuthang - 10%>" y1="430" x2="<%=100 + width - backOuthang - 10%>" y2="400" style="stroke: red"/>
+<line x1="<%=100 + width - backOuthang - 10%>" y1="430" x2="<%=100 + width - backOuthang - 10%>" y2="400" style="stroke: black"/>
 <text x="<%=100 + width - backOuthang/2 - 10%>" y="440" fill="red"><%=backOuthang + 10%></text>
 
 <!--  -->
 <%for (int i = 0; i < postCount-1; i++) {%>
-<line x1="<%=100 + frontOuthang + distance * i%>" y1="430" x2="<%=100 + frontOuthang + distance * i%>" y2="400" style="stroke: red"/>
+<line x1="<%=100 + frontOuthang + distance * i%>" y1="430" x2="<%=100 + frontOuthang + distance * i%>" y2="400" style="stroke: black"/>
 <text x="<%=100 + frontOuthang +(distance/2)+ distance * i%>" y="440" fill="red"><%=distance%></text>
 <% }%>
 </svg>
