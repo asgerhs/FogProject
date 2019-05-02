@@ -69,31 +69,12 @@ For loop to create the necessary amount of rafts across the width of the Carport
 <rect class="post" x="<%=100 + frontOuthang + distance * i%>" y="<%=100 + outhang%>" width="10" height="10"/>
 <% }%>
 
-<!-- Carport top left post 
-<rect class="post" x="200" y="<%= 100 + outhang%>" height="10" width="10" />
 
-<!-- Carport top middle post
-<rect class="post" x="<%= 100 + outhang + distance%>" y="<%= 100 + outhang%>" height="10" width="10" />
-
-<!-- Carport top right post 
-<rect class="post" x="<%= 100 + width - 30%>" y="<%= 100 + outhang%>" height="10" width="10" />
-
--->
 
 <% for (int i = 0; i < postCount; i++) {%>
 <rect class="post" x="<%=100 + frontOuthang + distance * i%>" y="<%=100 + height - outhang - 10%>" width="10" height="10" />
 <% }%>
 
-<!-- Carport bottom left post 
-<rect class="post" x="200" y="<%= 100 + height - outhang - 10%>" height="10" width="10" />
-
-<!-- Carport bottom middle post 
-<rect class="post" x="<%= 100 + outhang + distance%>" y="<%= 100 + height - outhang - 10%>" height="10" width="10" />
-
-<!-- Carport bottom right post 
-<rect class="post" x="<%= 100 + width - 30%>" y="<%= 100 + height - outhang - 10%>" height="10" width="10" />
-
--->
 
 
 
@@ -127,10 +108,10 @@ For loop to create the necessary amount of rafts across the width of the Carport
 
 
 <!-- top left top bottom right striped line -->
-<line x1="<%= 100 + rafterSpace %>" y1="<%= 100 + outhang + 10%>" x2="<%=(calcShedLine * rafterSpace) + 100 - 55 + 10%>" y2="<%= 100 + height - outhang - 10 %>" stroke-dasharray="5,5"      />
+<line x1="<%= 100 + rafterSpace %>" y1="<%= 100 + outhang + 10%>" x2="<%=(calcShedLine * rafterSpace) + 100 - 55 + 10%>" y2="<%= 100 + height - outhang - 10 %>" stroke-dasharray="5,5"/>
 
 <!-- bottom left to top right striped line -->
-<line x1="<%= 100 + rafterSpace %>" y1="<%= 100 + height - outhang - 10%>" x2="<%=(calcShedLine * rafterSpace) + 100 - 55 + 10%>" y2="<%= 100 + outhang + 10%>" stroke-dasharray="5,5" />
+<line x1="<%= 100 + rafterSpace %>" y1="<%= 100 + height - outhang - 10%>" x2="<%=(calcShedLine * rafterSpace) + 100 - 55 + 10%>" y2="<%= 100 + outhang + 10%>" stroke-dasharray="5,5"/>
 
 
 
