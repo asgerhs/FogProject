@@ -177,6 +177,7 @@ public class AdvancedCalculator {
         for (Part p : ac.getParts().getPartList()) {
             System.out.println(p);
         }
+        System.out.println(ac.calcPosts());
     }
 
 }

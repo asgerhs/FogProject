@@ -23,7 +23,7 @@
 </style>
 
 <%
-      int width = 780;
+    int width = 780;
     int height = 600;
     int outhang = 35;
     int frontOuthang = 100;
@@ -32,7 +32,7 @@
     int rafterSpace = 55;
     int postCount = 3;
     int shedLength = 210;
-    int distant = (width - 130 - 10) / (postCount - 2 + 1);
+   //int distant = (width - 130 - 10) / (postCount - 2 + 1);
     int calcLine =  0;
     int distance = (width - frontOuthang - backOuthang) / (postCount - 2 + 1);
     
@@ -65,30 +65,35 @@ For loop to create the necessary amount of rafts across the width of the Carport
 <% }%>
 
 
+<% for (int i = 0; i < postCount; i++) {%>
+<rect class="post" x="<%=100 + frontOuthang + distance * i%>" y="<%=100 + outhang%>" width="10" height="10"/>
+<% }%>
 
-<!-- Carport top left post -->
+<!-- Carport top left post 
 <rect class="post" x="200" y="<%= 100 + outhang%>" height="10" width="10" />
 
-<!-- Carport top middle post -->
-<rect class="post" x="<%= 200 + distant%>" y="<%= 100 + outhang%>" height="10" width="10" />
+<!-- Carport top middle post
+<rect class="post" x="<%= 100 + outhang + distance%>" y="<%= 100 + outhang%>" height="10" width="10" />
 
-<!-- Carport top right post -->
+<!-- Carport top right post 
 <rect class="post" x="<%= 100 + width - 30%>" y="<%= 100 + outhang%>" height="10" width="10" />
 
+-->
 
+<% for (int i = 0; i < postCount; i++) {%>
+<rect class="post" x="<%=100 + frontOuthang + distance * i%>" y="<%=100 + height - outhang - 10%>" width="10" height="10" />
+<% }%>
 
-
-
-<!-- Carport bottom left post -->
+<!-- Carport bottom left post 
 <rect class="post" x="200" y="<%= 100 + height - outhang - 10%>" height="10" width="10" />
 
-<!-- Carport bottom middle post -->
-<rect class="post" x="<%= 200 + distant%>" y="<%= 100 + height - outhang - 10%>" height="10" width="10" />
+<!-- Carport bottom middle post 
+<rect class="post" x="<%= 100 + outhang + distance%>" y="<%= 100 + height - outhang - 10%>" height="10" width="10" />
 
-<!-- Carport bottom right post -->
+<!-- Carport bottom right post 
 <rect class="post" x="<%= 100 + width - 30%>" y="<%= 100 + height - outhang - 10%>" height="10" width="10" />
 
-
+-->
 
 
 
@@ -121,16 +126,12 @@ For loop to create the necessary amount of rafts across the width of the Carport
 
 
 
-<!-- 
-Commented out because what the hell is d?
+<!-- top left top bottom right striped line -->
+<line x1="<%= 100 + rafterSpace %>" y1="<%= 100 + outhang + 10%>" x2="<%=(calcShedLine * rafterSpace) + 100 - 55 + 10%>" y2="<%= 100 + height - outhang - 10 %>" stroke-dasharray="5,5"      />
 
-top left top bottom right striped line 
-<!-- top left top bottom right striped line 
-<line x1="<%= 100 + rafterSpace %>" y1="<%= 100 + outhang + 10%>" x2="<%=(calcShedLine * rafterSpace) + 100 - 55 + 10%>" y2="<%= 100 + height - outhang - 10 %>" stroke-dasharray="5,5" d="M5 20 l215 0" />
+<!-- bottom left to top right striped line -->
+<line x1="<%= 100 + rafterSpace %>" y1="<%= 100 + height - outhang - 10%>" x2="<%=(calcShedLine * rafterSpace) + 100 - 55 + 10%>" y2="<%= 100 + outhang + 10%>" stroke-dasharray="5,5" />
 
-<!-- bottom left to top right striped line 
-<line x1="<%= 100 + rafterSpace %>" y1="<%= 100 + height - outhang - 10%>" x2="<%=(calcShedLine * rafterSpace) + 100 - 55 + 10%>" y2="<%= 100 + outhang + 10%>" stroke-dasharray="5,5" d="M5 20 l215 0"/>
--->
 
 
 </svg>
@@ -141,8 +142,7 @@ top left top bottom right striped line
 <%= b
 %>
 
-<%= calcShedLine %>
-<%= calcLine %>
+<%= distance %>
 
 <!-- Drawing of carport from 2nd perspective (sideview) -->
 
@@ -173,5 +173,3 @@ top left top bottom right striped line
 <rect x="<%=100 + width - backOuthang - i%>" y="<%=100 + 40%>" height="250" width="5" />
 <% }%>
 </svg>
-
-
