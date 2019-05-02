@@ -145,8 +145,13 @@ For loop to create the necessary amount of rafts across the width of the Carport
 
 <% for (int i = 0; i < rafterCount; i++) {%>
 <line x1="<%= 100 + rafterSpace * i%>" y1="50" x2="<%= 100 + rafterSpace * i%>" fill="red"  />
+
+<% }%>
+<% for (int i = 0; i < rafterCount - 1; i++) {%>
 <text x="<%= (100 + rafterSpace * i)+ (rafterSpace/2-10)%>" y="30" fill="red"><%=rafterSpace%></text>
 <% }%>
+
+
 
 </svg>
 

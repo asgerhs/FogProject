@@ -11,14 +11,20 @@
     .post {
         stroke-width: 4px;
     }
-    
+
     .shed{
         stroke-width: 3px;
-        
+
     }
     line{
         stroke: red;
         stroke-width: 2px;
+    }
+    
+    .measure{
+        stroke:#000000; 
+        marker-start: url(#beginArrow); 
+        marker-end: url(#endArrow);
     }
 </style>
 
@@ -32,14 +38,14 @@
     int rafterSpace = 55;
     int postCount = 3;
     int shedLength = 210;
-   //int distant = (width - 130 - 10) / (postCount - 2 + 1);
-    int calcLine =  0;
+    //int distant = (width - 130 - 10) / (postCount - 2 + 1);
+    int calcLine = 0;
     int distance = (width - frontOuthang - backOuthang) / (postCount - 2 + 1);
-    
-    if(shedLength%rafterSpace == 0){
-        calcLine = shedLength/rafterSpace; 
-    }else{
-                calcLine = shedLength/rafterSpace + 1;
+
+    if (shedLength % rafterSpace == 0) {
+        calcLine = shedLength / rafterSpace;
+    } else {
+        calcLine = shedLength / rafterSpace + 1;
     }
     int calcShedLine = (rafterCount - calcLine) - 1;
 %>
@@ -89,7 +95,7 @@ For loop to create the necessary amount of rafts across the width of the Carport
 <rect class="shed" x="<%= 100 + width - shedLength - 30%>" y="<%= 100 + outhang%>" height="10" width="<%= shedLength%>"/>
 
 <!-- Shed bottom Raft -->
-<rect class="shed" x="<%= 100 + width - shedLength - 30%>" y="<%= 100 +height - outhang - 10%>" height="10" width="<%=shedLength%>"/>
+<rect class="shed" x="<%= 100 + width - shedLength - 30%>" y="<%= 100 + height - outhang - 10%>" height="10" width="<%=shedLength%>"/>
 
 <!-- Shed top left post -->
 <rect class="post" x="<%=100 + width - shedLength - 30%>" y="<%= 100 + outhang%>" height="10" width="10"/>
@@ -108,38 +114,58 @@ For loop to create the necessary amount of rafts across the width of the Carport
 
 
 <!-- top left top bottom right striped line -->
-<line x1="<%= 100 + rafterSpace %>" y1="<%= 100 + outhang + 10%>" x2="<%=(calcShedLine * rafterSpace) + 100 - 55 + 10%>" y2="<%= 100 + height - outhang - 10 %>" stroke-dasharray="5,5"/>
+<line x1="<%= 100 + rafterSpace%>" y1="<%= 100 + outhang + 10%>" x2="<%=(calcShedLine * rafterSpace) + 100 - 55 + 10%>" y2="<%= 100 + height - outhang - 10%>" stroke-dasharray="5,5"/>
 
 <!-- bottom left to top right striped line -->
-<line x1="<%= 100 + rafterSpace %>" y1="<%= 100 + height - outhang - 10%>" x2="<%=(calcShedLine * rafterSpace) + 100 - 55 + 10%>" y2="<%= 100 + outhang + 10%>" stroke-dasharray="5,5"/>
+<line x1="<%= 100 + rafterSpace%>" y1="<%= 100 + height - outhang - 10%>" x2="<%=(calcShedLine * rafterSpace) + 100 - 55 + 10%>" y2="<%= 100 + outhang + 10%>" stroke-dasharray="5,5"/>
+
+<defs>
+<marker id="beginArrow" 
+        markerWidth="9" markerHeight="9" 
+        refX="0" refY="4" 
+        orient="auto">
+    <path d="M0,4 L8,0 L8,8 L0,4" style="fill: #000000;" />
+</marker>
+<marker id="endArrow" 
+        markerWidth="9" markerHeight="9" 
+        refX="8" refY="4" 
+        orient="auto">
+    <path d="M0,0 L8,4 L0,8 L0,0" style="fill: #000000;" />
+</marker>
+</defs>
+
 
 <!-- width length text and line -->
-<line x1="100" y1="<%=100 + height + 30%>" x2="<%= 100 + width%>" y2="<%=100 + height + 30%>" style ="stroke: red"/>
-<text x="<%=100 + (width/2)%>" y="<%=100 + height + 50%>" fill="red"><%=width%></text>
+<line class="measure" x1="100" y1="<%=100 + height + 30%>" x2="<%= 100 + width%>" y2="<%=100 + height + 30%>" />
+<text x="<%=100 + (width / 2)%>" y="<%=100 + height + 50%>" fill="black"><%=width%></text>
 
 <!-- enitre height length line and text -->
-<line x1="<%= 30 %>" y1="100" x2="<%= 30 %>" y2="<%= 100 + height%>"/>
-<text x="<%= 0%>" y ="<%= 100 + (height/2)%>" fill="red"><%=height%></text>
+<line class="measure" x1="<%= 30%>" y1="100" x2="<%= 30%>" y2="<%= 100 + height%>"/>
+<text x="<%= 0%>" y ="<%= 100 + (height / 2)%>" fill="black"><%=height%></text>
 
 <!-- height length excluding outhang line and text -->
-<line x1="70" y1="<%=100 + outhang %>" x2="70" y2="<%= 100 + height - outhang%>" fill="red"/>
-<text x="40" y="<%= 100 + (height/2)%>" fill="red"><%=height - (outhang * 2)%></text> 
+<line class="measure" x1="70" y1="<%=100 + outhang%>" x2="70" y2="<%= 100 + height - outhang%>" fill="black"/>
+<text x="40" y="<%= 100 + (height / 2)%>" fill="black"><%=height - (outhang * 2)%></text> 
 
 <!-- loop for all rafter spaces -->
 <% for (int i = 0; i < rafterCount; i++) {%>
-<line x1="<%= 100 + rafterSpace * i%>" y1="50" x2="<%= 100 + rafterSpace * i%>" fill="red"  />
-<text x="<%= (100 + rafterSpace * i)+ (rafterSpace/2-10)%>" y="30" fill="red"><%=rafterSpace%></text>
+<line x1="<%= 100 + rafterSpace * i%>" y1="80" x2="<%= 100 + rafterSpace * i%>" style="stroke:black"/>
+
+<% }%>
+
+<!-- loop for all text between rafter spaces -->
+<% for (int i = 0; i < rafterCount - 1; i++) {%>
+<text x="<%= (100 + rafterSpace * i)+ (rafterSpace/2-10)%>" y="50" fill="black"><%=rafterSpace%></text>
 <% }%>
 
 </svg>
 
-<%  int a = ((calcShedLine * rafterSpace) + 100) - 55 + 10; 
-        int b = rafterCount - calcLine;
+<%  int a = ((calcShedLine * rafterSpace) + 100) - 55 + 10;
+    int b = rafterCount - calcLine;
 %>
-<%= b
-%>
+<%= b%>
 
-<%= distance %>
+<%= distance%>
 
 <!-- Drawing of carport from 2nd perspective (sideview) -->
 
@@ -158,15 +184,15 @@ For loop to create the necessary amount of rafts across the width of the Carport
 
 
 <!-- Posts -->
-<% for (int i = 0; i < postCount-1; i++) {%>
-<rect class="post" x="<%=100 + frontOuthang + distance * i%>" y="<%=100 + 40 + (3*i)%>" width="10" height="<%=250-(3*i)%>" style="stroke:rgb(0, 0, 0);stroke-width:1"/>
+<% for (int i = 0; i < postCount - 1; i++) {%>
+<rect class="post" x="<%=100 + frontOuthang + distance * i%>" y="<%=100 + 40 + (3 * i)%>" width="10" height="<%=250 - (3 * i)%>" style="stroke:rgb(0, 0, 0);stroke-width:1"/>
 <% }%>
 
 <!-- Last post -->
 <rect class="post" x="<%=100 + width - backOuthang - 10%>" y="<%=100 + 50%>" width="10" height="240" style="stroke:rgb(0, 0, 0);stroke-width:2"/>
 
 <!-- Shed -->
-<% for (int i = shedLength; i > 0; i-=5) {%>
+<% for (int i = shedLength; i > 0; i -= 5) {%>
 <rect x="<%=100 + width - backOuthang - i%>" y="<%=100 + 40%>" height="250" width="5" />
 <% }%>
 </svg>
