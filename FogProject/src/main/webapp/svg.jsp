@@ -121,16 +121,16 @@ For loop to create the necessary amount of rafts across the width of the Carport
 
 <defs>
 <marker id="beginArrow" 
-        markerWidth="9" markerHeight="9" 
-        refX="0" refY="4" 
+        markerWidth="9" markerHeight="4" 
+        refX="2" refY="2" 
         orient="auto">
-    <path d="M0,4 L8,0 L8,8 L0,4" style="fill: #000000;" />
+    <path d="M0,2 L8,4 L8,0 L0,2" style="fill: #000000;" />
 </marker>
 <marker id="endArrow" 
-        markerWidth="9" markerHeight="9" 
-        refX="8" refY="4" 
+        markerWidth="9" markerHeight="4" 
+        refX="7" refY="2" 
         orient="auto">
-    <path d="M0,0 L8,4 L0,8 L0,0" style="fill: #000000;" />
+    <path d="M0,0 L0,4 L8,2 L0,0" style="fill: #000000;" />
 </marker>
 </defs>
 
@@ -149,13 +149,18 @@ For loop to create the necessary amount of rafts across the width of the Carport
 
 <!-- loop for all rafter spaces -->
 <% for (int i = 0; i < rafterCount; i++) {%>
-<line x1="<%= 100 + rafterSpace * i%>" y1="80" x2="<%= 100 + rafterSpace * i%>" style="stroke:black"/>
+<line x1="<%= 100 + rafterSpace * i%>" y1="50" x2="<%= 100 + rafterSpace * i%>" y2="90" style="stroke:black"/>
+
+<% }%>
+
+<% for (int i = 0; i < rafterCount - 1; i++) {%>
+<line class="measure" x1="<%= (100 + rafterSpace * i) + 5%>" y1="50" x2="<%= (100 + rafterSpace * i) + rafterSpace - 5 %>" y2="50" style="stroke:black"  />
 
 <% }%>
 
 <!-- loop for all text between rafter spaces -->
 <% for (int i = 0; i < rafterCount - 1; i++) {%>
-<text x="<%= (100 + rafterSpace * i)+ (rafterSpace/2-10)%>" y="50" fill="black"><%=rafterSpace%></text>
+<text x="<%= (100 + rafterSpace * i)+ (rafterSpace/2-10)%>" y="45" fill="black"><%=rafterSpace%></text>
 <% }%>
 
 </svg>
