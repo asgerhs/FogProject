@@ -16,11 +16,11 @@ import java.util.TreeMap;
 
 /**
  *
- * @author Asger Hermind Sørensen
+ * @author Asger Hermind Sørensen & Martin Frederiksen
  */
 public class MaterialMapper implements MapperInterface<Material> {
 
-    private DBConnector connector = new DBConnector();
+    private DBConnector connnector = new DBConnector();
 
     /**
      * Returns all materials in database
@@ -30,7 +30,7 @@ public class MaterialMapper implements MapperInterface<Material> {
      */
     @Override
     public List<Material> getMaterials() throws MapperExceptions {
-        try (Connection con = connector.getConnection()) {
+        try (Connection con = new DBConnector().getConnection()) {
             List<Material> materials = new ArrayList();
             String qry = "SELECT * FROM stock";
             Statement stmt = con.createStatement();
@@ -58,7 +58,8 @@ public class MaterialMapper implements MapperInterface<Material> {
      */
     @Override
     public Material getMaterialById(int id) throws MapperExceptions {
-        try (Connection con = connector.getConnection()) {
+        try (Connection con = new DBConnector().getConnection()) {
+            
             String qry = "SELECT * FROM stock WHERE id = ?";
 
             PreparedStatement ps = con.prepareStatement(qry);
@@ -81,7 +82,7 @@ public class MaterialMapper implements MapperInterface<Material> {
 
     @Override
     public TreeMap<Integer, Material> getAllByCategory(int id) throws MapperExceptions {
-        try (Connection con = connector.getConnection()) {
+        try (Connection con = new DBConnector().getConnection()) {
             TreeMap<Integer, Material> materials = new TreeMap();
             String qry = "SELECT * FROM stock JOIN stockToCategory ON ref = stockRef WHERE categoryId = ?";
             
@@ -107,6 +108,7 @@ public class MaterialMapper implements MapperInterface<Material> {
     public static void main(String[] args) throws MapperExceptions {
         MaterialMapper mm = new MaterialMapper();
         TreeMap<Integer, Material> mml = mm.getAllByCategory(1);
+        mml = mm.getAllByCategory(2);
         
         System.out.println(mml);
     }
