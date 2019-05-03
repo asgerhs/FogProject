@@ -33,7 +33,7 @@ public class AdvancedCalculator {
         //catch exception here?
         
         calcPosts();
-        /*calcTopFasciasFront();
+        calcTopFasciasFront();
         calcTopFasciasSide();
         calcBottomFasciasFB();
         calcBottomFasciasSide();
@@ -41,7 +41,7 @@ public class AdvancedCalculator {
         calcRafters();
         calcWaterBoardFront();
         calcWaterBoardSide();
-        calcRoofingSheets();*/
+        calcRoofingSheets();
 
         
         if (roof) {
