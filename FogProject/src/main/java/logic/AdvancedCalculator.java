@@ -168,12 +168,7 @@ public class AdvancedCalculator {
 
     public void addParts(int lengthWidth, int categoryId, int multiplier, String description) throws MapperExceptions {
         materials = mf.getAllByCategory(categoryId);
-        materials.sort(new Comparator<Material>() {
-            @Override
-            public int compare(Material o1, Material o2) {
-                return o1.getLength() - o2.getLength();
-            }
-        });
+        materials.sort(new MatSortComparator());
          
         int rest = lengthWidth;
         int antal = 0;
@@ -206,4 +201,10 @@ public class AdvancedCalculator {
         System.out.println(f);
     }
 
+    private class MatSortComparator implements Comparator<Material> {
+        @Override
+        public int compare(Material o1, Material o2) {
+            return o1.getLength() - o2.getLength();
+        }
+    }
 }
