@@ -4,12 +4,11 @@
     Author     : Andreas Vikke
 --%>
 
-<%@page import="java.util.Map"%>
-<%@page import="java.util.TreeMap"%>
+<%@page import="java.util.ArrayList"%>
 <%@page import="data.models.Material"%>
 <%@include file="header.jsp" %>
 <%
-    TreeMap<Integer, Material> mats = (TreeMap<Integer, Material>)session.getAttribute("mats");
+    ArrayList<Material> mats = (ArrayList<Material>)session.getAttribute("mats");
 %>
 
 <form method="POST">
@@ -27,8 +26,8 @@
         <label>Roof Type</label>
         <select class="custom-select" required="" name="roof">
             <% if(mats != null)
-                for(Map.Entry<Integer, Material> entry : mats.entrySet()) { %>
-                <option value="<%=entry.getValue().getRef() %>"><%=entry.getValue().getName() %></option>
+                for(Material m : mats) { %>
+                <option value="<%=m.getRef() %>"><%=m.getName() %></option>
             <% } %>
           </select>
     </div>
