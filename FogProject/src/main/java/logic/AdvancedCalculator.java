@@ -112,23 +112,22 @@ public class AdvancedCalculator {
     }
 
     //Calculating the pieces of carport
-    /*private void calcBracketsRight() {
-        for(Part p : pl.getPartList()){
-            p.getMaterial().getRef()
-        }
+    private void calcBracketsRight() throws MapperExceptions {
+        mf.getAllByCategory(13);
+        System.out.println(mf);
     }
 
-    public int calcBracketsLeft() {
-        return calcRafters();
+    private void calcBracketsLeft() {
+        
     }
 
-    public int calcScrewPackages() {
+    /*public int calcScrewPackages() {
         int screws = 0;
         screws += calcBracketsRight() * 9;
         screws += calcBracketsLeft() * 9;
 
         return (screws % 250 == 0) ? screws / 250 : (screws / 250) + 1;
-    }
+    }*/
 
     public int calcRoofScrews() {
         int screws = (width * length * 12) / 10000;
@@ -136,7 +135,7 @@ public class AdvancedCalculator {
         return (screws % 200 == 0) ? screws / 200 : (screws / 200) + 1;
     }
 
-    public int calcBand() {
+    /*public int calcBand() {
         double spaceBetweenRafters = (length - 4.5) / (calcRafters() - 1);
         double fullSpace = length - (spaceBetweenRafters * 2) - 4.5;
         double bandLength = Math.sqrt(Math.pow(fullSpace, 2) + Math.pow(width, 2)) * 2;
