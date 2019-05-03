@@ -1,10 +1,11 @@
 package presentation.commands;
 
+import data.exceptions.MapperExceptions;
 import data.models.Part;
 import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import logic.BasicCalculator;
+import logic.AdvancedCalculator;
 
 /**
  *
@@ -13,12 +14,12 @@ import logic.BasicCalculator;
 public class ShowPartsCommand implements Command {
 
     private String target;
-    private BasicCalculator calc;
+    private AdvancedCalculator calc;
 
-    public ShowPartsCommand(String target) {
+    public ShowPartsCommand(String target) throws MapperExceptions {
         this.target = target;
         
-        calc = new BasicCalculator();
+        calc = new AdvancedCalculator(780, 600, false, false);
     }
 
     @Override
