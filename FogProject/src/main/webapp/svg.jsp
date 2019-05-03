@@ -40,7 +40,7 @@
     int shedLength = 210;
     //int distant = (width - 130 - 10) / (postCount - 2 + 1);
     int calcLine = 0;
-    int distance = (width - frontOuthang - backOuthang) / (postCount - 2 + 1);
+    int distance = (width - frontOuthang - backOuthang - 10) / (postCount - 2 + 1);
 
     if (shedLength % rafterSpace == 0) {
         calcLine = shedLength / rafterSpace;
@@ -200,4 +200,38 @@ For loop to create the necessary amount of rafts across the width of the Carport
 <% for (int i = shedLength; i > 0; i -= 5) {%>
 <rect x="<%=100 + width - backOuthang - i%>" y="<%=100 + 40%>" height="250" width="5" />
 <% }%>
+
+
+<!-- Measure for frontOuthang -->
+<line class="measure" x1="100" y1="425" x2="<%=100 + frontOuthang%>" y2="425"/>
+<line x1="<%=100 + frontOuthang%>" y1="430" x2="<%=100 + frontOuthang%>" y2="400"/>
+<text x="<%=100 + (frontOuthang/2)%>" y="<%=440%>" fill="black"><%=frontOuthang%></text>
+
+<!-- Measure for posts minus last for shed 
+<%for (int i = 0; i < postCount-2; i++) {%>
+<line class="measure" x1="<%=100 + frontOuthang + distance * i%>" y1="425" x2="<%=(100 + frontOuthang + distance * i) + distance%>" y2="425"/>
+<line x1="<%=100 + frontOuthang + distance * i + distance%>" y1="430" x2="<%=100 + frontOuthang + distance * i +distance%>" y2="400" style="stroke: black"/>
+<text x="<%=100 + frontOuthang +(distance/2)+ distance * i%>" y="440" fill="black"><%=distance%></text>
+<% }%>
+-->
+<!-- Measure for posts with last -->
+<%for (int i = 0; i < postCount-1; i++) {%>
+<line class="measure" x1="<%=100 + frontOuthang + distance * i%>" y1="425" x2="<%=(100 + frontOuthang + distance * i) + distance%>" y2="425"/>
+<line x1="<%=100 + frontOuthang + distance * i + distance%>" y1="430" x2="<%=100 + frontOuthang + distance * i +distance%>" y2="400" style="stroke: black"/>
+<text x="<%=100 + frontOuthang +(distance/2)+ distance * i%>" y="440" fill="black"><%=distance%></text>
+<% }%>
+
+<!-- Measure for backOuthang (with last post) -->
+<line class="measure" x1="<%=100 + width - backOuthang - 10%>" y1="425" x2="<%=100 + width%>" y2="425" style="stroke: black"/>
+<line x1="<%=100 + width%>" y1="430" x2="<%=100 + width%>" y2="400" style="stroke: black"/>
+<text x="<%=100 + width - backOuthang/2 - 10%>" y="440" fill="black"><%=backOuthang + 10%></text>
+
+<!-- Front height measurement -->
+<line class="measure" x1="75" y1="105" x2="75" y2="390"/>
+<text x="40" y="240">230</text>
+
+<!-- Back height measurement -->
+<line class="measure" x1="<%=100 + width + 25%>" y1="115" x2="<%=100 + width + 25%>" y2="390"/>
+<text x="<%=100 + width + 40%>" y="250">210</text>
+
 </svg>

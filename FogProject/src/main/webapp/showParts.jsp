@@ -40,7 +40,7 @@
       <td><%=m.getLength()%></td>
       <td><%=p.getQty()%></td>
       <td><%=m.getUnit()%></td>
-      <td><%=m.getName()%></td>
+      <td><%=p.getDescription()%></td>
   </tbody>
   <%}%>
 </table>
