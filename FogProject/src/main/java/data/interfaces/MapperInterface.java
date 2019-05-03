@@ -9,7 +9,6 @@ import java.util.TreeMap;
  * @author Martin Frederiksen
  */
 public interface MapperInterface <T> {
-    List<T> getMaterials() throws MapperExceptions;
-    T getMaterialById(int id) throws MapperExceptions;
-    TreeMap<Integer, T> getAllByCategory(int id) throws MapperExceptions;
+    List<T> getAll() throws Exception;
+    T getById(int id) throws Exception;
 }

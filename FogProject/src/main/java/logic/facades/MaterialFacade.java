@@ -15,16 +15,15 @@ public class MaterialFacade implements FacadeInterface<Material>{
     MaterialMapper mm = new MaterialMapper();
     
     @Override
-    public List<Material> getMaterials() throws MapperExceptions {
-        return mm.getMaterials();
+    public List<Material> getAll() throws MapperExceptions {
+        return mm.getAll();
     }
 
     @Override
-    public Material getMaterialById(int id) throws MapperExceptions {
-        return mm.getMaterialById(id);
+    public Material getById(int id) throws MapperExceptions {
+        return mm.getById(id);
     }
 
-    @Override
     public TreeMap<Integer, Material> getAllByCategory(int id) throws MapperExceptions {
         return mm.getAllByCategory(id);
     }

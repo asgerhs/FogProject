@@ -1,7 +1,5 @@
 package data.models;
 
-import java.util.Objects;
-
 /**
  *
  * @author Andreas Vikke

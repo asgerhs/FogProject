@@ -11,7 +11,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.TreeMap;
 
 /**
@@ -20,8 +19,6 @@ import java.util.TreeMap;
  */
 public class MaterialMapper implements MapperInterface<Material> {
 
-    private DBConnector connnector = new DBConnector();
-
     /**
      * Returns all materials in database
      *
@@ -29,7 +26,7 @@ public class MaterialMapper implements MapperInterface<Material> {
      * @throws data.exceptions.MapperExceptions
      */
     @Override
-    public List<Material> getMaterials() throws MapperExceptions {
+    public List<Material> getAll() throws MapperExceptions {
         try (Connection con = new DBConnector().getConnection()) {
             List<Material> materials = new ArrayList();
             String qry = "SELECT * FROM stock";
@@ -57,7 +54,7 @@ public class MaterialMapper implements MapperInterface<Material> {
      * @return material matching id in param
      */
     @Override
-    public Material getMaterialById(int id) throws MapperExceptions {
+    public Material getById(int id) throws MapperExceptions {
         try (Connection con = new DBConnector().getConnection()) {
             
             String qry = "SELECT * FROM stock WHERE id = ?";
@@ -79,8 +76,7 @@ public class MaterialMapper implements MapperInterface<Material> {
             throw new MapperExceptions("Error occoured while getting data from database");
         }
     }
-
-    @Override
+    
     public TreeMap<Integer, Material> getAllByCategory(int id) throws MapperExceptions {
         try (Connection con = new DBConnector().getConnection()) {
             TreeMap<Integer, Material> materials = new TreeMap();
