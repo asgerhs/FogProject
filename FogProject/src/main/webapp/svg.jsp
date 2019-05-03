@@ -1,7 +1,7 @@
 <%-- 
     Document   : svg
     Created on : Apr 30, 2019, 10:41:33 AM
-    Author     : Asger Hermind Sørensen & Andreas Vikke
+    Author     : Asger Hermind Sørensen & Andreas Vikke & William Huusfeldt
 --%>
 
 <style>
