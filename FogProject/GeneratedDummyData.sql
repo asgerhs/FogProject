@@ -8,7 +8,7 @@ INSERT INTO stock VALUES ('1005', '45x95 mm. Reglar ub.', 240, 1, 'stk');
 INSERT INTO stock VALUES ('1006', '45x95 mm. Reglar ub.', 270, 1, 'stk');
 INSERT INTO stock VALUES ('1007', '45x195 mm. spærtræ ubh.', 480, 1, 'stk');
 INSERT INTO stock VALUES ('1008', '45x195 mm. spærtræ ubh.', 600, 1, 'stk');
-INSERT INTO stock VALUES ('1009', '97x97 mm. trykimp. Stolpe', 300, 1, 'stk');
+INSERT INTO stock VALUES ('1009', '100x3000 mm. trykimp. Stolpe', 10, 1, 'stk');
 INSERT INTO stock VALUES ('1010', '19x100 mm. trykimp. Brædt', 210, 1, 'stk');
 INSERT INTO stock VALUES ('1011', '19x100 mm. trykimp. Brædt', 360, 1, 'stk');
 INSERT INTO stock VALUES ('1012', '19x100 mm. trykimp. Brædt', 540, 1, 'stk');

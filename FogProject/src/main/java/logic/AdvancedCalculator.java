@@ -5,7 +5,6 @@ import data.models.Material;
 import data.models.Part;
 import data.models.PartList;
 import java.util.Collections;
-import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 import logic.facades.MaterialFacade;
@@ -32,8 +31,9 @@ public class AdvancedCalculator {
         pl = new PartList();
         mf = new MaterialFacade();
         //catch exception here?
-
-        calcTopFasciasFront();
+        
+        calcPosts();
+        /*calcTopFasciasFront();
         calcTopFasciasSide();
         calcBottomFasciasFB();
         calcBottomFasciasSide();
@@ -41,7 +41,7 @@ public class AdvancedCalculator {
         calcRafters();
         calcWaterBoardFront();
         calcWaterBoardSide();
-        calcRoofingSheets();
+        calcRoofingSheets();*/
 
         
         if (roof) {
@@ -53,12 +53,13 @@ public class AdvancedCalculator {
     }
 
     //Calculating the square of carport
-    public int calcPosts() {
-        int p = 5;
+    private void calcPosts() throws MapperExceptions {
+        /*int p = 5;
         p += (length % 500 == 0) ? ((length / 500) - 1) * 2 : ((length / 500) - 1 + 1) * 2;
         //p += (width % 500 == 0) ? (width / 500) - 1 : (width / 500) - 1 + 1;
         //pl.addPart(new Part(material, p));
-        return p;
+        return p;*/
+        addParts(length, 7, 2, "Stolper nedgraves 90 cm. i jord");
     }
 
     private void calcRem() throws MapperExceptions {
@@ -143,11 +144,11 @@ public class AdvancedCalculator {
 
     }*/
 
-    public int calcBolts() {
+    /*public int calcBolts() {
         //value should not be less then 4
         //with arbitrary values we should see if rem is in more than one piece before calculating this
         return (calcPosts() - 1 == 4) ? 4 * 2 : ((calcPosts() - 1) % 4) * 4 + (4 * 2);
-    }
+    }*/
 
     public void addParts(int lengthWidth, int categoryId, int multiplier, String description) throws MapperExceptions {
         materials = mf.getAllByCategory(categoryId);
@@ -177,7 +178,6 @@ public class AdvancedCalculator {
         for (Part p : ac.getParts().getPartList()) {
             System.out.println(p);
         }
-        System.out.println(ac.calcPosts());
     }
 
 }
