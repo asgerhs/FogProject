@@ -5,6 +5,7 @@ import data.models.Material;
 import data.models.Part;
 import data.models.PartList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 import logic.facades.MaterialFacade;
@@ -17,6 +18,7 @@ public class AdvancedCalculator {
 
     private int length;
     private int width;
+    private int rafters;
     private boolean sheet;
     private boolean roof;
     private PartList pl;
@@ -42,6 +44,8 @@ public class AdvancedCalculator {
         calcWaterBoardFront();
         calcWaterBoardSide();
         calcRoofingSheets();
+        //calcBracketsRight();
+        calcBracketsLeft();
 
         
         if (roof) {
@@ -79,6 +83,7 @@ public class AdvancedCalculator {
 
     //Calculating the roof of carport
     private void calcRafters() throws MapperExceptions {
+        rafters = length/50;
         addParts(width, 5, length/50, "Spær, monteres på rem");
     }
 
@@ -113,12 +118,23 @@ public class AdvancedCalculator {
 
     //Calculating the pieces of carport
     private void calcBracketsRight() throws MapperExceptions {
-        mf.getAllByCategory(13);
-        System.out.println(mf);
+        TreeMap<Integer, Material> mats = mf.getAllByCategory(13);
+        for (Map.Entry<Integer, Material> entry : mats.entrySet()) {
+                if(entry.getValue().getRef().charAt(entry.getValue().getRef().length()-1)=='r'){
+                    pl.addPart(new Part(entry.getValue(), rafters, "Til montering af spær på rem"));                   
+                }
+            }
     }
 
-    private void calcBracketsLeft() {
-        
+    private void calcBracketsLeft() throws MapperExceptions {
+        TreeMap<Integer, Material> mats = mf.getAllByCategory(13);
+        for (Map.Entry<Integer, Material> entry : mats.entrySet()) {
+            System.out.println(entry.getValue().getRef());
+                if(entry.getValue().getRef().charAt(entry.getValue().getRef().length()-1)=='l'){
+                    System.out.println(entry.getValue().getRef());
+                    pl.addPart(new Part(entry.getValue(), rafters, "Til montering af spær på rem"));                   
+                }
+            }
     }
 
     /*public int calcScrewPackages() {
@@ -174,8 +190,9 @@ public class AdvancedCalculator {
 
     public static void main(String[] args) throws MapperExceptions {
         AdvancedCalculator ac = new AdvancedCalculator(780, 600, false, false);
+        ac.calcBracketsLeft();
         for (Part p : ac.getParts().getPartList()) {
-            System.out.println(p);
+            //System.out.println(p);
         }
     }
 
