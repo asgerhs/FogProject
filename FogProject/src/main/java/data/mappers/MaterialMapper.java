@@ -77,9 +77,9 @@ public class MaterialMapper implements MapperInterface<Material> {
         }
     }
     
-    public TreeMap<Integer, Material> getAllByCategory(int id) throws MapperExceptions {
+    public ArrayList<Material> getAllByCategory(int id) throws MapperExceptions {
         try (Connection con = new DBConnector().getConnection()) {
-            TreeMap<Integer, Material> materials = new TreeMap();
+            ArrayList<Material> materials = new ArrayList();
             String qry = "SELECT * FROM stock JOIN stockToCategory ON ref = stockRef WHERE categoryId = ?";
             
             PreparedStatement ps = con.prepareStatement(qry);
@@ -87,11 +87,11 @@ public class MaterialMapper implements MapperInterface<Material> {
             ResultSet rs = ps.executeQuery();
             
             while(rs.next()){
-                materials.put(rs.getInt("length"), (new Material(rs.getString("ref"),
+                materials.add(new Material(rs.getString("ref"),
                         rs.getString("name"),
                         rs.getInt("length"),
                         rs.getInt("amount"),
-                        rs.getString("unit"))));
+                        rs.getString("unit")));
             }
             
             return materials;
@@ -103,7 +103,7 @@ public class MaterialMapper implements MapperInterface<Material> {
 
     public static void main(String[] args) throws MapperExceptions {
         MaterialMapper mm = new MaterialMapper();
-        TreeMap<Integer, Material> mml = mm.getAllByCategory(1);
+        ArrayList<Material> mml = mm.getAllByCategory(1);
         mml = mm.getAllByCategory(2);
         
         System.out.println(mml);

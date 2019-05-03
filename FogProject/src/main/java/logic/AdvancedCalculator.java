@@ -4,8 +4,9 @@ import data.exceptions.MapperExceptions;
 import data.models.Material;
 import data.models.Part;
 import data.models.PartList;
+import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
+import java.util.Comparator;
 import java.util.Map;
 import java.util.TreeMap;
 import logic.facades.MaterialFacade;
@@ -22,7 +23,7 @@ public class AdvancedCalculator {
     private boolean sheet;
     private boolean roof;
     private PartList pl;
-    private Map<Integer, Material> materials;
+    private ArrayList<Material> materials;
     private MaterialFacade mf;
 
     public AdvancedCalculator(int length, int width, boolean sheet, boolean roof) throws MapperExceptions {
@@ -167,18 +168,23 @@ public class AdvancedCalculator {
 
     public void addParts(int lengthWidth, int categoryId, int multiplier, String description) throws MapperExceptions {
         materials = mf.getAllByCategory(categoryId);
-        TreeMap<Integer, Material> mats = new TreeMap(Collections.reverseOrder());
-        mats.putAll(materials);
+        materials.sort(new Comparator<Material>() {
+            @Override
+            public int compare(Material o1, Material o2) {
+                return o1.getLength() - o2.getLength();
+            }
+        });
+         
         int rest = lengthWidth;
         int antal = 0;
-        for (Map.Entry<Integer, Material> entry : mats.entrySet()) {
+        for (Material m : materials) {
 
-            if (rest >= entry.getKey()) {
-                antal += rest / entry.getKey();
-                rest -= entry.getKey();
-                pl.addPart(new Part(entry.getValue(), antal * multiplier, description));
+            if (rest >= m.getLength()) {
+                antal += rest / m.getLength();
+                rest -= m.getLength();
+                pl.addPart(new Part(m, antal * multiplier, description));
             } else if(rest != 0) {
-                pl.addPart(new Part(entry.getValue(), 1 * multiplier, description));
+                pl.addPart(new Part(m, 1 * multiplier, description));
                 return;
             }
         }
@@ -194,6 +200,10 @@ public class AdvancedCalculator {
         for (Part p : ac.getParts().getPartList()) {
             //System.out.println(p);
         }
+        
+       MaterialFacade mf = new MaterialFacade();
+       ArrayList<Material> f = mf.getAllByCategory(13);
+        System.out.println(f);
     }
 
 }
