@@ -72,7 +72,7 @@ public class AdvancedCalculator {
         p += (length % 5000 == 0) ? ((length / 500) - 1) * 2 : ((length / 5000) - 1 + 1) * 2;
         posts = p;
         materials = mf.getAllByCategory(7);
-        pl.addPart(new Part(materials.get(0), p, "Stolper nedgraves 90 cm. i jord"));
+        pl.addWoodPart(new Part(materials.get(0), p, "Stolper nedgraves 90 cm. i jord"));
 
     }
 
@@ -169,7 +169,7 @@ public class AdvancedCalculator {
         materials = mf.getAllByCategory(11);   
         int screws = (width * length * 12) / 1000000;
         int packages = (screws % 200 == 0) ? screws / 200 : (screws / 200) + 1;
-        pl.addPart(new Part(materials.get(0), packages, "Skruer til tagplader"));
+        pl.addWoodPart(new Part(materials.get(0), packages, "Skruer til tagplader"));
     }
     
     //10% more ?
@@ -179,7 +179,7 @@ public class AdvancedCalculator {
         double fullSpace = length - (spaceBetweenRafters * 2) - 4.5;
         double bandLength = Math.sqrt(Math.pow(fullSpace, 2) + Math.pow(width, 2)) * 2;
         int bandCount = (bandLength % 10000.0 == 0) ? (int) (bandLength / 10000.0) : (int) (bandLength / 10000.0 + 1.0);
-        pl.addPart(new Part(materials.get(0), bandCount, "Til vindkryds på spær"));
+        pl.addMiscPart(new Part(materials.get(0), bandCount, "Til vindkryds på spær"));
     }
     
     private void calcFasciasScrews() throws MapperExceptions {
@@ -202,8 +202,8 @@ public class AdvancedCalculator {
         ArrayList<Material> boltType = mf.getAllByCategory(14);
         ArrayList<Material> squares = mf.getAllByCategory(15);
         int bolts = (posts - 1 == 4) ? 4 * 2 : ((posts - 1) % 4) * 4 + (4 * 2);
-        pl.addPart(new Part(boltType.get(0), bolts, "Til montering af rem på stolper"));
-        pl.addPart(new Part(squares.get(0), bolts, "Til montering af rem på stolper"));
+        pl.addMiscPart(new Part(boltType.get(0), bolts, "Til montering af rem på stolper"));
+        pl.addMiscPart(new Part(squares.get(0), bolts, "Til montering af rem på stolper"));
     }
 
     public void addParts(int lengthWidth, int categoryId, int multiplier, String description) throws MapperExceptions {
@@ -216,9 +216,9 @@ public class AdvancedCalculator {
             if (rest >= m.getLength()) {
                 antal += rest / m.getLength();
                 rest -= m.getLength();
-                pl.addPart(new Part(m, antal * multiplier, description));
+                pl.addWoodPart(new Part(m, antal * multiplier, description));
             } else if (rest != 0) {
-                pl.addPart(new Part(m, 1 * multiplier, description));
+                pl.addWoodPart(new Part(m, 1 * multiplier, description));
                 return;
             }
         }
