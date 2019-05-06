@@ -5,10 +5,7 @@ import data.models.Material;
 import data.models.Part;
 import data.models.PartList;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
-import java.util.Map;
-import java.util.TreeMap;
 import logic.facades.MaterialFacade;
 
 /**
@@ -25,7 +22,7 @@ public class AdvancedCalculator {
     private ArrayList<Material> materials;
     private MaterialFacade mf;
 
-    public AdvancedCalculator(int length, int width, boolean sheet, boolean roof) throws MapperExceptions {
+    public AdvancedCalculator(int length, int width, boolean sheet, boolean roof) {
         this.length = length;
         this.width = width;
         this.sheet = sheet;
@@ -34,16 +31,20 @@ public class AdvancedCalculator {
         mf = new MaterialFacade();
         //catch exception here?
         
-        calcPosts();
-        calcTopFasciasFront();
-        calcTopFasciasSide();
-        calcBottomFasciasFB();
-        calcBottomFasciasSide();
-        calcRem();
-        calcRafters();
-        calcWaterBoardFront();
-        calcWaterBoardSide();
-        calcRoofingSheets();
+        try {
+            calcPosts();
+            calcTopFasciasFront();
+            calcTopFasciasSide();
+            calcBottomFasciasFB();
+            calcBottomFasciasSide();
+            calcRem();
+            calcRafters();
+            calcWaterBoardFront();
+            calcWaterBoardSide();
+            calcRoofingSheets();
+        } catch (MapperExceptions ex) {
+            // TODO: Exception
+        }
 
         
         if (roof) {
