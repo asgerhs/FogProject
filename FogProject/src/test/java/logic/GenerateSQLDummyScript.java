@@ -42,8 +42,8 @@ public class GenerateSQLDummyScript {
         // Misc
         mats.add(new Material("1030", "Plastmo bundskruer 200 stk.", 0, 200, "pakke"));
         mats.add(new Material("1031", "Hulbånd 1x20 mm. 10 mtr.", 1000, 1, "rulle"));
-        mats.add(new Material("1032-h", "Universal 190 mm højre", 190, 1, "stk"));
-        mats.add(new Material("1032-v", "Universal 190 mm venstre", 190, 1, "stk"));
+        mats.add(new Material("1032-r", "Universal 190 mm højre", 190, 1, "stk"));
+        mats.add(new Material("1032-l", "Universal 190 mm venstre", 190, 1, "stk"));
         mats.add(new Material("1034", "4,5x60 mm. skruer 200 stk.", 60, 200, "pakke"));
         mats.add(new Material("1035", "4,0x50 mm. skruer 250 stk.", 50, 250, "pakke"));
         mats.add(new Material("1036", "Bræddebolt 10x120 mm.", 120, 1, "stk"));
@@ -132,8 +132,8 @@ public class GenerateSQLDummyScript {
         link.add(new MatCatLink("1038", 11));
         link.add(new MatCatLink("1039", 11));
         link.add(new MatCatLink("1031", 12));
-        link.add(new MatCatLink("1032-h", 13));
-        link.add(new MatCatLink("1032-v", 13));
+        link.add(new MatCatLink("1032-r", 13));
+        link.add(new MatCatLink("1032-l", 13));
         link.add(new MatCatLink("1042", 13));
         link.add(new MatCatLink("1036", 14));
         link.add(new MatCatLink("1037", 15));

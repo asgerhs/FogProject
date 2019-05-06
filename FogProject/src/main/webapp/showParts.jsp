@@ -37,7 +37,7 @@
     %>
     <tr>
       <th><%=m.getName()%></th>
-      <td><%=m.getLength()%></td>
+      <td><%=m.getLength()/10%></td>
       <td><%=p.getQty()%></td>
       <td><%=m.getUnit()%></td>
       <td><%=p.getDescription()%></td>
