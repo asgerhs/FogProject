@@ -5,10 +5,7 @@ import data.models.Material;
 import data.models.Part;
 import data.models.PartList;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
-import java.util.Map;
-import java.util.TreeMap;
 import logic.facades.MaterialFacade;
 
 /**
@@ -19,6 +16,7 @@ public class AdvancedCalculator {
 
     private int length;
     private int width;
+    private int posts;
     private int rafters;
     private boolean sheet;
     private boolean roof;
@@ -34,21 +32,23 @@ public class AdvancedCalculator {
         pl = new PartList();
         mf = new MaterialFacade();
         //catch exception here?
-        
-        calcPosts();
+
         calcTopFasciasFront();
         calcTopFasciasSide();
         calcBottomFasciasFB();
         calcBottomFasciasSide();
         calcRem();
         calcRafters();
+        calcPosts(sheet);
         calcWaterBoardFront();
         calcWaterBoardSide();
         calcRoofingSheets();
-        //calcBracketsRight();
+        calcBracketsRight();
         calcBracketsLeft();
 
-        
+        calcScrewPackages(sheet);
+        calcBoltsAndSquares();
+
         if (roof) {
 
         }
@@ -58,15 +58,16 @@ public class AdvancedCalculator {
     }
 
     //Calculating the square of carport
-    private void calcPosts() throws MapperExceptions {
-        /*int p = 5;
+    private void calcPosts(boolean sheet) throws MapperExceptions {
+        int p = 4;
         p += (length % 500 == 0) ? ((length / 500) - 1) * 2 : ((length / 500) - 1 + 1) * 2;
-        //p += (width % 500 == 0) ? (width / 500) - 1 : (width / 500) - 1 + 1;
-        //pl.addPart(new Part(material, p));
-        return p;*/
-        addParts(length, 7, 2, "Stolper nedgraves 90 cm. i jord");
+        posts = p;
+        materials = mf.getAllByCategory(7);
+        pl.addPart(new Part(materials.get(0), p, "Stolper nedgraves 90 cm. i jord"));
+
     }
 
+    //look at space between posts
     private void calcRem() throws MapperExceptions {
         /*// length > 600 use if statement when we use arbitrary value
 
@@ -84,8 +85,8 @@ public class AdvancedCalculator {
 
     //Calculating the roof of carport
     private void calcRafters() throws MapperExceptions {
-        rafters = length/50;
-        addParts(width, 5, length/50, "Spær, monteres på rem");
+        rafters = length / 50;
+        addParts(width, 5, length / 50, "Spær, monteres på rem");
     }
 
     //need a good way to present this
@@ -119,32 +120,39 @@ public class AdvancedCalculator {
 
     //Calculating the pieces of carport
     private void calcBracketsRight() throws MapperExceptions {
-        TreeMap<Integer, Material> mats = mf.getAllByCategory(13);
-        for (Map.Entry<Integer, Material> entry : mats.entrySet()) {
-                if(entry.getValue().getRef().charAt(entry.getValue().getRef().length()-1)=='r'){
-                    pl.addPart(new Part(entry.getValue(), rafters, "Til montering af spær på rem"));                   
-                }
+        materials = mf.getAllByCategory(13);
+        materials.sort(new MatSortComparator());
+        for (Material m : materials) {
+            if (m.getRef().charAt(m.getRef().length() - 1) == 'r') {
+                pl.addPart(new Part(m, rafters, "Til montering af spær på rem"));
             }
+        }
     }
 
     private void calcBracketsLeft() throws MapperExceptions {
-        TreeMap<Integer, Material> mats = mf.getAllByCategory(13);
-        for (Map.Entry<Integer, Material> entry : mats.entrySet()) {
-            System.out.println(entry.getValue().getRef());
-                if(entry.getValue().getRef().charAt(entry.getValue().getRef().length()-1)=='l'){
-                    System.out.println(entry.getValue().getRef());
-                    pl.addPart(new Part(entry.getValue(), rafters, "Til montering af spær på rem"));                   
-                }
+        materials = mf.getAllByCategory(13);
+        materials.sort(new MatSortComparator());
+        for (Material m : materials) {
+            if (m.getRef().charAt(m.getRef().length() - 1) == 'l') {
+                pl.addPart(new Part(m, rafters, "Til montering af spær på rem"));
             }
+        }
     }
 
-    /*public int calcScrewPackages() {
+    public void calcScrewPackages(boolean sheet) throws MapperExceptions {
+        //needs a fix
+        materials = mf.getAllByCategory(11);
         int screws = 0;
-        screws += calcBracketsRight() * 9;
-        screws += calcBracketsLeft() * 9;
-
-        return (screws % 250 == 0) ? screws / 250 : (screws / 250) + 1;
-    }*/
+        int packages;
+        //screws to brackets
+        screws += rafters * 2 * 9;
+        //screws to band
+        screws += (rafters - 2) * 2 * 2;
+        //extra screws
+        screws *= 1.1;
+        packages = (screws % 250 == 0) ? screws / 250 : (screws / 250) + 1;
+        pl.addPart(new Part(materials.get(2), packages, "Til montering af universalbeslag + hulbånd"));
+    }
 
     public int calcRoofScrews() {
         int screws = (width * length * 12) / 10000;
@@ -159,17 +167,19 @@ public class AdvancedCalculator {
         return (bandLength % 1000.0 == 0) ? (int) (bandLength / 1000.0) : (int) (bandLength / 1000.0 + 1.0);
 
     }*/
-
-    /*public int calcBolts() {
-        //value should not be less then 4
+    public void calcBoltsAndSquares() throws MapperExceptions {
         //with arbitrary values we should see if rem is in more than one piece before calculating this
-        return (calcPosts() - 1 == 4) ? 4 * 2 : ((calcPosts() - 1) % 4) * 4 + (4 * 2);
-    }*/
+        ArrayList<Material> boltType = mf.getAllByCategory(14);
+        ArrayList<Material> squares = mf.getAllByCategory(15);
+        int bolts = (posts - 1 == 4) ? 4 * 2 : ((posts - 1) % 4) * 4 + (4 * 2);
+        pl.addPart(new Part(boltType.get(0), bolts, "Til montering af rem på stolper"));
+        pl.addPart(new Part(squares.get(0), bolts, "Til montering af rem på stolper"));
+    }
 
     public void addParts(int lengthWidth, int categoryId, int multiplier, String description) throws MapperExceptions {
         materials = mf.getAllByCategory(categoryId);
         materials.sort(new MatSortComparator());
-         
+
         int rest = lengthWidth;
         int antal = 0;
         for (Material m : materials) {
@@ -178,7 +188,7 @@ public class AdvancedCalculator {
                 antal += rest / m.getLength();
                 rest -= m.getLength();
                 pl.addPart(new Part(m, antal * multiplier, description));
-            } else if(rest != 0) {
+            } else if (rest != 0) {
                 pl.addPart(new Part(m, 1 * multiplier, description));
                 return;
             }
@@ -191,17 +201,13 @@ public class AdvancedCalculator {
 
     public static void main(String[] args) throws MapperExceptions {
         AdvancedCalculator ac = new AdvancedCalculator(780, 600, false, false);
-        ac.calcBracketsLeft();
         for (Part p : ac.getParts().getPartList()) {
-            //System.out.println(p);
+            System.out.println(p);
         }
-        
-       MaterialFacade mf = new MaterialFacade();
-       ArrayList<Material> f = mf.getAllByCategory(13);
-        System.out.println(f);
     }
 
     private class MatSortComparator implements Comparator<Material> {
+
         @Override
         public int compare(Material o1, Material o2) {
             return o1.getLength() - o2.getLength();
