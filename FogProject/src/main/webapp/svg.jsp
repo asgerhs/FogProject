@@ -86,7 +86,7 @@ For loop to create the necessary amount of rafts across the width of the Carport
 
 
 
-
+<!-- if there is a shed, this code will be run and posts and rafts will be added -->
 <%if(shedLength > 0){ %>
 
 <!-- Shed left side raft -->
@@ -169,12 +169,16 @@ For loop to create the necessary amount of rafts across the width of the Carport
 
 </svg>
 
-<%  int a = ((calcShedLine * rafterSpace) + 100) - 55 + 10;
-    int b = rafterCount - calcLine;
-%>
-<%= b%>
 
-<%= distance%>
+
+
+
+
+
+
+
+
+
 
 <!-- Drawing of carport from 2nd perspective (sideview) -->
 
