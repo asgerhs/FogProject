@@ -34,24 +34,25 @@ public class AdvancedCalculator {
         //catch exception here?
 
         try {
-//            calcBottomFasciasFB();
-//            calcBottomFasciasSide();
-//            calcTopFasciasFront();
-//            calcTopFasciasSide();
+            calcBottomFasciasFB();
+            calcBottomFasciasSide();
+            calcTopFasciasFront();
+            calcTopFasciasSide();
+            calcRafters();
             calcPosts(sheet);
             calcRem();
-//            calcRafters();
-//            calcWaterBoardFront();
-//            calcWaterBoardSide();
-//            calcRoofingSheets();
-//            
-//            calcRoofScrews();
-//            calcBand(sheet);
-//            calcBracketsRight();
-//            calcBracketsLeft();
-//
-//            calcScrewPackages(sheet);
-//            calcBoltsAndSquares();
+            calcWaterBoardFront();
+            calcWaterBoardSide();
+            calcRoofingSheets();
+            
+            calcRoofScrews();
+            calcBand(sheet);
+            calcBracketsRight();
+            calcBracketsLeft();
+            calcFasciasScrews();
+
+            calcScrewPackages(sheet);
+            calcBoltsAndSquares();
         } catch (MapperExceptions ex) {
             // TODO: Exception
         }
@@ -196,12 +197,16 @@ public class AdvancedCalculator {
     private void calcFasciasScrews() throws MapperExceptions {
         materials = mf.getAllByCategory(11);
         int screws = 0;
-        //bottomFascias
-        screws += ((length * 2) + (width * 2)) * 2;
-        //topFascias
-        screws += ((length * 2) + width) * 2;
-        System.out.println(screws);
-        int packages = 0;
+        //bottomFascias with 2 screws for each meter
+        screws += (((length * 2) / 1000) + ((width * 2) / 1000)) * 2;
+        //topFascias with 2 screws for each meter
+        screws += (((length * 2) / 1000) + (width / 1000)) * 2;
+        //waterBoards with 2 screws for each meter
+        screws += (((length * 2) / 1000) + (width / 1000)) * 2;
+        //10%
+        screws *= 1.1;
+        int packages = (screws % 200 == 0) ? screws / 200 : (screws / 200) + 1;
+        pl.addPart(new Part(materials.get(1), packages, "Til montering af stern&vandbrædt"));
     }
     
     private void calcBoltsAndSquares() throws MapperExceptions {
