@@ -1,14 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package presentation.Facades;
+/*package presentation.interfaces;
+
+import java.util.List;
 
 /**
  *
  * @author Martin Frederiksen
  */
-public interface FacadeInterface {
-    
-}
+/*public interface FacadeInterface <T>{
+    List<T> getAll() throws Exception;
+    T getById(int id) throws Exception;
+}*/
