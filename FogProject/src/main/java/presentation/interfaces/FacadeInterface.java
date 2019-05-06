@@ -1,4 +1,4 @@
-/*package presentation.interfaces;
+package presentation.interfaces;
 
 import java.util.List;
 
@@ -6,7 +6,7 @@ import java.util.List;
  *
  * @author Martin Frederiksen
  */
-/*public interface FacadeInterface <T>{
+public interface FacadeInterface <T>{
     List<T> getAll() throws Exception;
     T getById(int id) throws Exception;
-}*/
+}
