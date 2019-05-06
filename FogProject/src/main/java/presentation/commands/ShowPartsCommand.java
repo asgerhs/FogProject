@@ -19,7 +19,7 @@ public class ShowPartsCommand implements Command {
     public ShowPartsCommand(String target) {
         this.target = target;
         
-        calc = new AdvancedCalculator(780, 600, false, false);
+        calc = new AdvancedCalculator(7800, 6000, false, false);
     }
 
     @Override

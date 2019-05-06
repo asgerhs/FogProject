@@ -34,18 +34,21 @@ public class AdvancedCalculator {
         //catch exception here?
 
         try {
-//            calcTopFasciasFront();
-//            calcTopFasciasSide();
-//            calcBottomFasciasFB();
-//            calcBottomFasciasSide();
-            calcPosts(sheet);
+            calcBottomFasciasFB();
+            calcBottomFasciasSide();
+            calcTopFasciasFront();
+            calcTopFasciasSide();
             calcRem();
-//            calcRafters();
-//            calcWaterBoardFront();
-//            calcWaterBoardSide();
-//            calcRoofingSheets();
-//            calcBracketsRight();
-//            calcBracketsLeft();
+            calcRafters();
+            calcPosts(sheet);
+            calcWaterBoardFront();
+            calcWaterBoardSide();
+            calcRoofingSheets();
+            
+            calcRoofScrews();
+            calcBand(sheet);
+            calcBracketsRight();
+            calcBracketsLeft();
 
             calcScrewPackages(sheet);
             calcBoltsAndSquares();
@@ -64,7 +67,7 @@ public class AdvancedCalculator {
     //Calculating the square of carport
     private void calcPosts(boolean sheet) throws MapperExceptions {
         int p = 4;
-        p += (length % 500 == 0) ? ((length / 500) - 1) * 2 : ((length / 500) - 1 + 1) * 2;
+        p += (length % 5000 == 0) ? ((length / 500) - 1) * 2 : ((length / 5000) - 1 + 1) * 2;
         posts = p;
         materials = mf.getAllByCategory(7);
         pl.addPart(new Part(materials.get(0), p, "Stolper nedgraves 90 cm. i jord"));
@@ -102,8 +105,8 @@ public class AdvancedCalculator {
 
     //Calculating the roof of carport
     private void calcRafters() throws MapperExceptions {
-        rafters = length / 50;
-        addParts(width, 5, length / 50, "Spær, monteres på rem");
+        rafters = length / 500;
+        addParts(width, 5, length / 500, "Spær, monteres på rem");
     }
 
     //need a good way to present this
@@ -132,7 +135,8 @@ public class AdvancedCalculator {
     }
 
     private void calcRoofingSheets() throws MapperExceptions {
-        addParts(length, 10, 1, "tagplader monteres på spær");
+        int multiplier = (width % 1000 == 0) ? width / 1000 : (width / 1000) + 1;
+        addParts(length, 10, multiplier, "tagplader monteres på spær");
     }
 
     //Calculating the pieces of carport
@@ -156,7 +160,7 @@ public class AdvancedCalculator {
         }
     }
 
-    public void calcScrewPackages(boolean sheet) throws MapperExceptions {
+    private void calcScrewPackages(boolean sheet) throws MapperExceptions {
         //needs a fix
         materials = mf.getAllByCategory(11);
         int screws = 0;
@@ -171,20 +175,36 @@ public class AdvancedCalculator {
         pl.addPart(new Part(materials.get(2), packages, "Til montering af universalbeslag + hulbånd"));
     }
 
-    public int calcRoofScrews() {
-        int screws = (width * length * 12) / 10000;
-
-        return (screws % 200 == 0) ? screws / 200 : (screws / 200) + 1;
+    //10% more?
+    private void calcRoofScrews() throws MapperExceptions {
+        materials = mf.getAllByCategory(11);   
+        int screws = (width * length * 12) / 1000000;
+        int packages = (screws % 200 == 0) ? screws / 200 : (screws / 200) + 1;
+        pl.addPart(new Part(materials.get(0), packages, "Skruer til tagplader"));
     }
-
-    /*public int calcBand() {
-        double spaceBetweenRafters = (length - 4.5) / (calcRafters() - 1);
+    
+    //10% more ?
+    private void calcBand(boolean sheet) throws MapperExceptions {
+        materials = mf.getAllByCategory(12);
+        double spaceBetweenRafters = (length - 4.5) / (rafters - 1);
         double fullSpace = length - (spaceBetweenRafters * 2) - 4.5;
         double bandLength = Math.sqrt(Math.pow(fullSpace, 2) + Math.pow(width, 2)) * 2;
-        return (bandLength % 1000.0 == 0) ? (int) (bandLength / 1000.0) : (int) (bandLength / 1000.0 + 1.0);
-
-    }*/
-    public void calcBoltsAndSquares() throws MapperExceptions {
+        int bandCount = (bandLength % 10000.0 == 0) ? (int) (bandLength / 10000.0) : (int) (bandLength / 10000.0 + 1.0);
+        pl.addPart(new Part(materials.get(0), bandCount, "Til vindkryds på spær"));
+    }
+    
+    private void calcFasciasScrews() throws MapperExceptions {
+        materials = mf.getAllByCategory(11);
+        int screws = 0;
+        //bottomFascias
+        screws += ((length * 2) + (width * 2)) * 2;
+        //topFascias
+        screws += ((length * 2) + width) * 2;
+        System.out.println(screws);
+        int packages = 0;
+    }
+    
+    private void calcBoltsAndSquares() throws MapperExceptions {
         //with arbitrary values we should see if rem is in more than one piece before calculating this
         ArrayList<Material> boltType = mf.getAllByCategory(14);
         ArrayList<Material> squares = mf.getAllByCategory(15);
@@ -196,7 +216,6 @@ public class AdvancedCalculator {
     public void addParts(int lengthWidth, int categoryId, int multiplier, String description) throws MapperExceptions {
         materials = mf.getAllByCategory(categoryId);
         materials.sort(new MatSortComparator());
-
         int rest = lengthWidth;
         int antal = 0;
         for (Material m : materials) {
@@ -217,17 +236,18 @@ public class AdvancedCalculator {
     }
 
     public static void main(String[] args) throws MapperExceptions {
-        AdvancedCalculator ac = new AdvancedCalculator(780, 600, false, false);
-        for (Part p : ac.getParts().getPartList()) {
+        AdvancedCalculator ac = new AdvancedCalculator(7800, 6000, false, false);
+        ac.calcFasciasScrews();
+        /*for (Part p : ac.getParts().getPartList()) {
             System.out.println(p);
-        }
+        }*/
     }
 
     private class MatSortComparator implements Comparator<Material> {
 
         @Override
         public int compare(Material o1, Material o2) {
-            return o1.getLength() - o2.getLength();
+            return o2.getLength() - o1.getLength();
         }
     }
 }
