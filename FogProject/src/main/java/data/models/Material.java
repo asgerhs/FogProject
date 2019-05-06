@@ -1,24 +1,30 @@
 package data.models;
 
+import java.util.Map;
+import java.util.Objects;
+import java.util.TreeMap;
+
 /**
  *
  * @author Martin Frederiksen
  */
 public class Material {
+    private String ref;
     private String name;
     private int length;
+    private int amount;
     private String unit;
-    private String description;
 
-    public Material(String name, int length, String unit, String description) {
+    public Material(String ref, String name, int length, int amount, String unit) {
+        this.ref = ref;
         this.name = name;
         this.length = length;
+        this.amount = amount;
         this.unit = unit;
-        this.description = description;
     }
 
-    public String getUnit() {
-        return unit;
+    public String getRef() {
+        return ref;
     }
 
     public String getName() {
@@ -28,13 +34,17 @@ public class Material {
     public int getLength() {
         return length;
     }
-    
-    public String getDescription() {
-        return description;
+
+    public int getAmount() {
+        return amount;
+    }
+
+    public String getUnit() {
+        return unit;
     }
 
     @Override
     public String toString() {
-        return "Material{" + "name=" + name + ", length=" + length + ", unit=" + unit + ", description=" + description + '}';
+        return "Material{" + "ref=" + ref + ", name=" + name + ", length=" + length + ", amount=" + amount + ", unit=" + unit + '}';
     }
 }
