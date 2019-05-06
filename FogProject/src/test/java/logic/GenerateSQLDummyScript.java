@@ -3,6 +3,7 @@ package logic;
 import com.github.javafaker.Faker;
 import data.models.Category;
 import data.models.Material;
+import data.models.Request;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -16,12 +17,13 @@ import static org.junit.Assert.*;
  * @author Andreas Vikke
  */
 public class GenerateSQLDummyScript {
+
     private Formatter f;
-    
+
     private void generateMaterialScript() throws IOException {
         f.format("-- Woods\n");
         List<Material> mats = new ArrayList();
-        
+
         // Woods
         mats.add(new Material("1000", "25x200 mm. trykimp. Brædt", 3600, 1, "stk"));
         mats.add(new Material("1001", "25x200 mm. trykimp. Brædt", 5400, 1, "stk"));
@@ -38,7 +40,7 @@ public class GenerateSQLDummyScript {
         mats.add(new Material("1012", "19x100 mm. trykimp. Brædt", 5400, 1, "stk"));
         mats.add(new Material("1013", "Plastmo Ecolite blåtonet", 3600, 1, "stk"));
         mats.add(new Material("1014", "Plastmo Ecolite blåtonet", 6000, 1, "stk"));
-        
+
         // Misc
         mats.add(new Material("1030", "Plastmo bundskruer 200 stk.", 0, 200, "pakke"));
         mats.add(new Material("1031", "Hulbånd 1x20 mm. 10 mtr.", 1000, 1, "rulle"));
@@ -53,23 +55,22 @@ public class GenerateSQLDummyScript {
         mats.add(new Material("1040", "Stalddørsgreb 50x75 mm", 75, 1, "sæt"));
         mats.add(new Material("1041", "T hængsel 390 mm", 390, 1, "stk"));
         mats.add(new Material("1042", "Vinkelbeslag 35 mm", 35, 1, "stk"));
-        
+
         String sql = "";
         String sqlStart = "INSERT INTO stock VALUES (";
         String sqlEnd = ");\n";
-        
-        for(Material m : mats) {
-            sql += sqlStart + "'" + m.getRef() + "', '" + m.getName()+ "', " + m.getLength()+ ", " + m.getAmount()+ ", '" + m.getUnit()+ "'" + sqlEnd;
+
+        for (Material m : mats) {
+            sql += sqlStart + "'" + m.getRef() + "', '" + m.getName() + "', " + m.getLength() + ", " + m.getAmount() + ", '" + m.getUnit() + "'" + sqlEnd;
         }
-        
+
         f.format(sql);
     }
-    
-    
+
     private void generateMatCategoriesScript() throws IOException {
         f.format("\n\n-- Categories\n");
         List<Category> cats = new ArrayList();
-        
+
         //all categories in database
         cats.add(new Category("Understernbrædder"));
         cats.add(new Category("Oversternbrædder"));
@@ -87,23 +88,22 @@ public class GenerateSQLDummyScript {
         cats.add(new Category("Bolt"));
         cats.add(new Category("Skiver"));
         cats.add(new Category("Diverse"));
-        
-        
+
         String sql = "";
         String sqlStart = "INSERT INTO categories(name) VALUES (";
         String sqlEnd = ");\n";
-        
-        for(Category c : cats) {
+
+        for (Category c : cats) {
             sql += sqlStart + "'" + c.getName() + "'" + sqlEnd;
         }
-        
+
         f.format(sql);
     }
-    
+
     private void generateMatCategoriesLinkScript() throws IOException {
         f.format("\n\n-- Categories - Stock link\n");
         ArrayList<MatCatLink> link = new ArrayList();
-        
+
         //all categories in database
         link.add(new MatCatLink("1000", 1));
         link.add(new MatCatLink("1001", 1));
@@ -125,7 +125,7 @@ public class GenerateSQLDummyScript {
         link.add(new MatCatLink("1012", 9));
         link.add(new MatCatLink("1013", 10));
         link.add(new MatCatLink("1014", 10));
-        
+
         link.add(new MatCatLink("1030", 11));
         link.add(new MatCatLink("1034", 11));
         link.add(new MatCatLink("1035", 11));
@@ -139,58 +139,84 @@ public class GenerateSQLDummyScript {
         link.add(new MatCatLink("1037", 15));
         link.add(new MatCatLink("1040", 16));
         link.add(new MatCatLink("1041", 16));
-        
+
         String sql = "";
         String sqlStart = "INSERT INTO stockToCategory VALUES (";
         String sqlEnd = ");\n";
-        
-        for(MatCatLink mcl : link) {
+
+        for (MatCatLink mcl : link) {
             sql += sqlStart + "'" + mcl.ref + "'," + mcl.id + sqlEnd;
         }
-        
+
         f.format(sql);
-    }    
-    
+    }
+
     private void generateUserScript() throws IOException {
         f.format("\n\n-- Users\n");
-        
+
         String sql = "";
         String sqlStart = "INSERT INTO users VALUES (";
         String sqlEnd = ");\n";
-        
-        ArrayList<String> names = new ArrayList(); 
-        
-        for(int i = 0; i < 100; i++) {
+
+        ArrayList<String> names = new ArrayList();
+
+        for (int i = 0; i < 100; i++) {
             Faker faker = new Faker();
             String name = faker.name().firstName();
-            while(names.contains(name)) {
+            while (names.contains(name)) {
                 name = faker.name().firstName();
             }
             names.add(name);
             sql += sqlStart + "'" + name + "', '" + name + "@somewhere.dk', " + "'1234', 'SALESMAN'" + sqlEnd;
         }
-        
+
         f.format(sql);
     }
-    
+
+    private void generateRequestScript() throws IOException {
+        f.format("\n\n-- Requests\n");
+
+        String sql = "";
+        String sqlStart = "INSERT INTO requests"
+                + "(width, length, shedWidth, shedLength, roof, angle, name, address, zipCity, phone, email, note) VALUES (";
+        String sqlEnd = ");\n";
+
+        for (int i = 0; i < 25; i++) {
+            Faker faker = new Faker();
+            int num = faker.number().numberBetween(500, 780);
+            int shed = faker.number().numberBetween(100, 210);
+            String phone = faker.phoneNumber().cellPhone();
+            String address = faker.address().streetAddress();
+            String name = faker.name().firstName();
+
+            sql += sqlStart + num + ", " + num + ", " + shed + ", " + shed + ", " + "'not flat'" + ", " + 30 + ", '"
+                    + name + "', '" + address + "', '" + name + "s Zip" + "', '" + phone
+                    + "', '" + name + "@somewhere.com" + "', '" + "This is a test for " + name + "'" + sqlEnd;
+
+        }
+        f.format(sql);
+    }
+
     @Test
     public void runTests() throws IOException {
         FileWriter fw = new FileWriter("GeneratedDummyData.sql", false);
         f = new Formatter(fw);
-        
+
         generateMaterialScript();
         generateMatCategoriesScript();
         generateMatCategoriesLinkScript();
         generateUserScript();
-        
+        generateRequestScript();
+
         f.close();
         assertTrue(true);
     }
-    
+
     private class MatCatLink {
+
         public String ref;
         public int id;
-        
+
         public MatCatLink(String ref, int id) {
             this.ref = ref;
             this.id = id;
