@@ -72,13 +72,13 @@ For loop to create the necessary amount of rafts across the width of the Carport
 <rect x="<%= 100 + rafterSpace * i%>" y="100" height="<%= height%>" width="10" />
 <% }%>
 
-
+<!-- for loop for top posts -->
 <% for (int i = 0; i < postCount; i++) {%>
 <rect class="post" x="<%=100 + frontOuthang + distance * i%>" y="<%=100 + outhang%>" width="10" height="10"/>
 <% }%>
 
 
-
+<!-- for loop for bottom posts -->
 <% for (int i = 0; i < postCount; i++) {%>
 <rect class="post" x="<%=100 + frontOuthang + distance * i%>" y="<%=100 + height - outhang - 10%>" width="10" height="10" />
 <% }%>

@@ -57,6 +57,7 @@ public class RequestMapper implements MapperInterface<Request> {
             PreparedStatement ps = con.prepareStatement(qry);
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
+            
 
             while (rs.next()) {
                 return new Request(
@@ -79,7 +80,30 @@ public class RequestMapper implements MapperInterface<Request> {
             throw new RequestExceptions("Error occoured while getting data from database");
         }
     }
-
+    
+    public void updateRequest(Request rqst) throws SQLException, RequestExceptions{
+        try(Connection con = new DBConnector().getConnection()){
+            
+            String qry = "UPDATE request SET width = ?, length = ?, shedWidth = ?, shedLength = ?,"
+                    + " roof = ?, angle = ?";
+            
+            PreparedStatement ps = con.prepareStatement(qry);
+            ps.setInt(1, rqst.getLength());
+            ps.setInt(2, rqst.getWidth());
+            ps.setInt(3, rqst.getShedWidth());
+            ps.setInt(4, rqst.getShedLength());
+            ps.setString(5, rqst.getRoof());
+            ps.setInt(6, rqst.getAngle());
+            
+            ps.executeUpdate();
+            
+        }catch(SQLException ex){
+            ex.printStackTrace();
+            throw new RequestExceptions("Error occoured while updating data in database");
+        }
+    }
+    
+    
     public void add(Request request) throws RequestExceptions {
         try (Connection con = new DBConnector().getConnection()) {
 
