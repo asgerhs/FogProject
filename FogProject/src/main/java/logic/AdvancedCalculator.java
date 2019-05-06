@@ -18,16 +18,16 @@ public class AdvancedCalculator {
     private int width;
     private int posts;
     private int rafters;
-    private boolean sheet;
+    private boolean shed;
     private boolean roof;
     private PartList pl;
     private ArrayList<Material> materials;
     private MaterialFacade mf;
 
-    public AdvancedCalculator(int length, int width, boolean sheet, boolean roof) {
+    public AdvancedCalculator(int length, int width, boolean shed, boolean roof) {
         this.length = length;
         this.width = width;
-        this.sheet = sheet;
+        this.shed = shed;
         this.roof = roof;
         pl = new PartList();
         mf = new MaterialFacade();
@@ -40,19 +40,19 @@ public class AdvancedCalculator {
             calcTopFasciasSide();
             calcRem();
             calcRafters();
-            calcPosts(sheet);
+            calcPosts(shed);
             calcRem();
             calcWaterBoardFront();
             calcWaterBoardSide();
             calcRoofingSheets();
             
             calcRoofScrews();
-            calcBand(sheet);
+            calcBand(shed);
             calcBracketsRight();
             calcBracketsLeft();
             calcFasciasScrews();
 
-            calcScrewPackages(sheet);
+            calcScrewPackages(shed);
             calcBoltsAndSquares();
         } catch (MapperExceptions ex) {
             // TODO: Exception
@@ -61,19 +61,19 @@ public class AdvancedCalculator {
         if (roof) {
 
         }
-        if (sheet) {
+        if (shed) {
 
         }
     }
 
     //Calculating the square of carport
-    private void calcPosts(boolean sheet) throws MapperExceptions {
+    private void calcPosts(boolean shed) throws MapperExceptions {
         int p = 4;
         p += (length % 5000 == 0) ? ((length / 500) - 1) * 2 : ((length / 5000) - 1 + 1) * 2;
         posts = p;
         materials = mf.getAllByCategory(7);
         pl.addWoodPart(new Part(materials.get(0), p, "Stolper nedgraves 90 cm. i jord"));
-
+        
     }
 
     //look at space between posts
