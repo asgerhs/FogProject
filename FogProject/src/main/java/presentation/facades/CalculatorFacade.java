@@ -1,9 +1,9 @@
-package presentation.facades;
+/*package presentation.facades;
 
 /**
  *
  * @author Martin Frederiksen
  */
-public class CalculatorFacade {
+/*public class CalculatorFacade {
 
-}
+}*/
