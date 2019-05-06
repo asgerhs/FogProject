@@ -36,7 +36,7 @@ public class RequestMapper implements MapperInterface<Request> {
                         rs.getInt("angle"),
                         rs.getString("name"),
                         rs.getString("address"),
-                        rs.getString("zipCode"),
+                        rs.getString("zipCity"),
                         rs.getString("phone"),
                         rs.getString("email"),
                         rs.getString("note")));
@@ -68,7 +68,7 @@ public class RequestMapper implements MapperInterface<Request> {
                         rs.getInt("angle"),
                         rs.getString("name"),
                         rs.getString("address"),
-                        rs.getString("zipCode"),
+                        rs.getString("zipCity"),
                         rs.getString("phone"),
                         rs.getString("email"),
                         rs.getString("note"));
@@ -81,15 +81,40 @@ public class RequestMapper implements MapperInterface<Request> {
     }
     
     public void add(Request request) throws RequestExceptions {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try (Connection con = new DBConnector().getConnection()) {
+            
+            String qry = "INSERT INTO requests"
+                    + "(width, length, shedWidth, shedLength, roof, angle, name, address, zipCity, phone, email, note)"
+                    + "VALUES (?,?,?,?,?,?,?,?,?,?,?,?);";
+
+            PreparedStatement ps = con.prepareStatement(qry);
+            ps.setInt(1, request.getWidth());
+            ps.setInt(2, request.getLength());
+            ps.setInt(3, request.getShedWidth());
+            ps.setInt(4, request.getShedLength());
+            ps.setString(5, request.getRoof());
+            ps.setInt(6, request.getAngle());
+            ps.setString(7, request.getName());
+            ps.setString(8, request.getAddress());
+            ps.setString(9, request.getZipCity());
+            ps.setString(10, request.getPhone());
+            ps.setString(11, request.getEmail());
+            ps.setString(12, request.getNote());
+            ps.executeUpdate();
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            throw new RequestExceptions("Error occoured while adding request to database");
+        }
     }
     
     public static void main(String[] args) throws RequestExceptions {
         RequestMapper rm = new RequestMapper();
-        //rm.getAll();
-        List<Request> requests = new ArrayList();
-        for (Request r : requests) {
-            rm.getAll();
-        }
+        Request rs = new Request(250, 250, 100, 100, "flat", 45, "Test", "TestAddress", "TestZip", "TestPhone", "Test@Test.Test", "This is a test");
+        System.out.println(rm.getById(1));
+//        List<Request> requests = new ArrayList();
+//        for (Request r : requests) {
+//            rm.getAll();
+//        }
     }
 }
