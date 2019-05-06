@@ -81,11 +81,11 @@ public class RequestMapper implements MapperInterface<Request> {
         }
     }
     
-    public void updateRequest(Request rqst) throws SQLException, RequestExceptions{
+    public void updateRequest(Request rqst, int Id) throws SQLException, RequestExceptions{
         try(Connection con = new DBConnector().getConnection()){
             
-            String qry = "UPDATE request SET width = ?, length = ?, shedWidth = ?, shedLength = ?,"
-                    + " roof = ?, angle = ?";
+            String qry = "UPDATE requests SET width = ?, length = ?, shedWidth = ?, shedLength = ?,"
+                    + " roof = ?, angle = ? where id = ?;";
             
             PreparedStatement ps = con.prepareStatement(qry);
             ps.setInt(1, rqst.getLength());
@@ -94,6 +94,7 @@ public class RequestMapper implements MapperInterface<Request> {
             ps.setInt(4, rqst.getShedLength());
             ps.setString(5, rqst.getRoof());
             ps.setInt(6, rqst.getAngle());
+            ps.setInt(7, Id);
             
             ps.executeUpdate();
             
@@ -132,12 +133,16 @@ public class RequestMapper implements MapperInterface<Request> {
         }
     }
 
-    public static void main(String[] args) throws RequestExceptions {
+    public static void main(String[] args) throws RequestExceptions, SQLException {
         RequestMapper rm = new RequestMapper();
-        //rm.getAll();
-        List<Request> requests = new ArrayList();
-        for (Request r : requests) {
-            rm.getAll();
-        }
+//        //rm.getAll();
+//        List<Request> requests = new ArrayList();
+//        for (Request r : requests) {
+//            rm.getAll();
+//        }
+
+        Request rqst = new Request(800, 800, 100, 100, "idfk", 0, "hej", "jeg", "hader", "Strings", "i", "add metoder");
+        rm.updateRequest(new Request(400, 200, 100, 100, "flat", 0, "hej", "jeg", "hader", "Strings", "i", "add metoder"), 4);
+//        rm.add(rqst);
     }
 }
