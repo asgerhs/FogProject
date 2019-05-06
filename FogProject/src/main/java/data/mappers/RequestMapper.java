@@ -51,7 +51,7 @@ public class RequestMapper implements MapperInterface<Request> {
     @Override
     public Request getById(int id) throws RequestExceptions {
         try (Connection con = new DBConnector().getConnection()) {
-            
+
             String qry = "SELECT * FROM requests WHERE id = ?";
 
             PreparedStatement ps = con.prepareStatement(qry);
@@ -79,11 +79,35 @@ public class RequestMapper implements MapperInterface<Request> {
             throw new RequestExceptions("Error occoured while getting data from database");
         }
     }
-    
+
     public void add(Request request) throws RequestExceptions {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try (Connection con = new DBConnector().getConnection()) {
+
+            String qry = "INSERT INTO requests"
+                    + "(width, length, shedWidth, shedLength, roof, angle, name, address, zipCity, phone, email, note)"
+                    + "VALUES (?,?,?,?,?,?,?,?,?,?,?,?);";
+
+            PreparedStatement ps = con.prepareStatement(qry);
+            ps.setInt(1, request.getWidth());
+            ps.setInt(2, request.getLength());
+            ps.setInt(3, request.getShedWidth());
+            ps.setInt(4, request.getShedLength());
+            ps.setString(5, request.getRoof());
+            ps.setInt(6, request.getAngle());
+            ps.setString(7, request.getName());
+            ps.setString(8, request.getAddress());
+            ps.setString(9, request.getZipCity());
+            ps.setString(10, request.getPhone());
+            ps.setString(11, request.getEmail());
+            ps.setString(12, request.getNote());
+            ps.executeUpdate();
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            throw new RequestExceptions("Error occoured while adding request to database");
+        }
     }
-    
+
     public static void main(String[] args) throws RequestExceptions {
         RequestMapper rm = new RequestMapper();
         //rm.getAll();
