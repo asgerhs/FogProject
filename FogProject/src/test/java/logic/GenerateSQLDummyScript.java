@@ -86,7 +86,7 @@ public class GenerateSQLDummyScript {
         cats.add(new Category("Beslag"));
         cats.add(new Category("Bolt"));
         cats.add(new Category("Skiver"));
-        cats.add(new Category("Diverse"));
+        cats.add(new Category("ShedMisc"));
         
         
         String sql = "";
@@ -139,6 +139,7 @@ public class GenerateSQLDummyScript {
         link.add(new MatCatLink("1037", 15));
         link.add(new MatCatLink("1040", 16));
         link.add(new MatCatLink("1041", 16));
+        link.add(new MatCatLink("1004", 16));
         
         String sql = "";
         String sqlStart = "INSERT INTO stockToCategory VALUES (";
