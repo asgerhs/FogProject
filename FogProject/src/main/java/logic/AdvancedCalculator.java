@@ -34,12 +34,10 @@ public class AdvancedCalculator {
         //catch exception here?
 
         try {
-            calcBottomFasciasFB();
-            calcBottomFasciasSide();
-            calcTopFasciasFront();
-            calcTopFasciasSide();
-            calcRem();
-            calcRafters();
+//            calcBottomFasciasFB();
+//            calcBottomFasciasSide();
+//            calcTopFasciasFront();
+//            calcTopFasciasSide();
             calcPosts(sheet);
             calcWaterBoardFront();
             calcWaterBoardSide();
@@ -88,49 +86,62 @@ public class AdvancedCalculator {
         } else {
             return (length % 480 == 0) ? (length / 480) * 2 : ((length / 480) + 1) * 2;
         }*/
-        addParts(length, 6, 2, "Remme i sider, sadles ned i stolper");
+        
+        int frontOuthang = 1000;
+        int backOuthang = 300;
+        
+        // Length without outhang
+        int calcLength= length - frontOuthang - backOuthang - 100;
+        // Extra posts other then the 4 corners        
+        int extraPosts = ((posts - 4)/2) + 1;
+        // Distance between posts from start to mid.
+        int a = calcLength / extraPosts + 50;
+        
+        addParts(a, 6, extraPosts * 2, "Remme i sider, sadles ned i stolper", new MatSortLowComparator());
+        
+        //addParts(length, 6, 2, "Remme i sider, sadles ned i stolper");
     }
 
     //Calculating the roof of carport
     private void calcRafters() throws MapperExceptions {
         rafters = length / 500;
-        addParts(width, 5, length / 500, "Spær, monteres på rem");
+        addParts(width, 5, length / 500, "Spær, monteres på rem", new MatSortHeighComparator());
     }
 
     //need a good way to present this
     private void calcTopFasciasFront() throws MapperExceptions {
-        addParts(width, 2, 1, "oversternbrædder til forenden");
+        addParts(width, 2, 1, "oversternbrædder til forenden", new MatSortHeighComparator());
     }
 
     private void calcTopFasciasSide() throws MapperExceptions {
-        addParts(length, 2, 2, "oversternbrædder til siderne");
+        addParts(length, 2, 2, "oversternbrædder til siderne", new MatSortHeighComparator());
     }
 
     private void calcBottomFasciasFB() throws MapperExceptions {
-        addParts(width, 1, 2, "understernbrædder til for & bag ende");
+        addParts(width, 1, 2, "understernbrædder til for & bag ende", new MatSortHeighComparator());
     }
 
     private void calcBottomFasciasSide() throws MapperExceptions {
-        addParts(length, 1, 2, "understernbrædder til siderne");
+        addParts(length, 1, 2, "understernbrædder til siderne", new MatSortHeighComparator());
     }
 
     private void calcWaterBoardFront() throws MapperExceptions {
-        addParts(width, 9, 1, "vandbrædt på stern i forende");
+        addParts(width, 9, 1, "vandbrædt på stern i forende", new MatSortHeighComparator());
     }
 
     private void calcWaterBoardSide() throws MapperExceptions {
-        addParts(length, 9, 2, "vandbrædt på stern i sider");
+        addParts(length, 9, 2, "vandbrædt på stern i sider", new MatSortHeighComparator());
     }
 
     private void calcRoofingSheets() throws MapperExceptions {
         int multiplier = (width % 1000 == 0) ? width / 1000 : (width / 1000) + 1;
-        addParts(length, 10, multiplier, "tagplader monteres på spær");
+        addParts(length, 10, multiplier, "tagplader monteres på spær", new MatSortHeighComparator());
     }
 
     //Calculating the pieces of carport
     private void calcBracketsRight() throws MapperExceptions {
         materials = mf.getAllByCategory(13);
-        materials.sort(new MatSortComparator());
+        materials.sort(new MatSortHeighComparator());
         for (Material m : materials) {
             if (m.getRef().charAt(m.getRef().length() - 1) == 'r') {
                 pl.addPart(new Part(m, rafters, "Til montering af spær på rem"));
@@ -140,7 +151,7 @@ public class AdvancedCalculator {
 
     private void calcBracketsLeft() throws MapperExceptions {
         materials = mf.getAllByCategory(13);
-        materials.sort(new MatSortComparator());
+        materials.sort(new MatSortHeighComparator());
         for (Material m : materials) {
             if (m.getRef().charAt(m.getRef().length() - 1) == 'l') {
                 pl.addPart(new Part(m, rafters, "Til montering af spær på rem"));
@@ -205,9 +216,9 @@ public class AdvancedCalculator {
         pl.addPart(new Part(squares.get(0), bolts, "Til montering af rem på stolper"));
     }
 
-    public void addParts(int lengthWidth, int categoryId, int multiplier, String description) throws MapperExceptions {
+    public void addParts(int lengthWidth, int categoryId, int multiplier, String description, Comparator<Material> comparator) throws MapperExceptions {
         materials = mf.getAllByCategory(categoryId);
-        materials.sort(new MatSortComparator());
+        materials.sort(comparator);
         int rest = lengthWidth;
         int antal = 0;
         for (Material m : materials) {
@@ -230,16 +241,22 @@ public class AdvancedCalculator {
     public static void main(String[] args) throws MapperExceptions {
         AdvancedCalculator ac = new AdvancedCalculator(7800, 6000, false, false);
         ac.calcFasciasScrews();
-        /*for (Part p : ac.getParts().getPartList()) {
+        for (Part p : ac.getParts().getPartList()) {
             System.out.println(p);
-        }*/
+        }
     }
 
-    private class MatSortComparator implements Comparator<Material> {
-
+    private class MatSortHeighComparator implements Comparator<Material> {
         @Override
         public int compare(Material o1, Material o2) {
             return o2.getLength() - o1.getLength();
+        }
+    }
+    
+    private class MatSortLowComparator implements Comparator<Material> {
+        @Override
+        public int compare(Material o1, Material o2) {
+            return o1.getLength() - o2.getLength();
         }
     }
 }
