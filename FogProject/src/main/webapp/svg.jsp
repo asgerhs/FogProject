@@ -37,7 +37,7 @@
     int rafterCount = 15;
     int rafterSpace = 55;
     int postCount = 3;
-    int shedLength = 0;
+    int shedLength = 210;
     //int distant = (width - 130 - 10) / (postCount - 2 + 1);
     int calcLine = 0;
     int distance = (width - frontOuthang - backOuthang - 10) / (postCount - 2 + 1);
