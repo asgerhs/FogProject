@@ -34,11 +34,13 @@ public class AdvancedCalculator {
         //catch exception here?
 
         try {
-//            calcBottomFasciasFB();
-//            calcBottomFasciasSide();
-//            calcTopFasciasFront();
-//            calcTopFasciasSide();
+            calcBottomFasciasFB();
+            calcBottomFasciasSide();
+            calcTopFasciasFront();
+            calcTopFasciasSide();
+            calcRafters();
             calcPosts(sheet);
+            calcRem();
             calcWaterBoardFront();
             calcWaterBoardSide();
             calcRoofingSheets();
