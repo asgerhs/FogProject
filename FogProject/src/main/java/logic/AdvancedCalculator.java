@@ -24,7 +24,7 @@ public class AdvancedCalculator {
     private ArrayList<Material> materials;
     private MaterialFacade mf;
 
-    public AdvancedCalculator(int length, int width, boolean sheet, boolean roof) throws MapperExceptions {
+    public AdvancedCalculator(int length, int width, boolean sheet, boolean roof) {
         this.length = length;
         this.width = width;
         this.sheet = sheet;
@@ -32,6 +32,21 @@ public class AdvancedCalculator {
         pl = new PartList();
         mf = new MaterialFacade();
         //catch exception here?
+        
+        try {
+            calcPosts();
+            calcTopFasciasFront();
+            calcTopFasciasSide();
+            calcBottomFasciasFB();
+            calcBottomFasciasSide();
+            calcRem();
+            calcRafters();
+            calcWaterBoardFront();
+            calcWaterBoardSide();
+            calcRoofingSheets();
+        } catch (MapperExceptions ex) {
+            // TODO: Exception
+        }
 
         calcTopFasciasFront();
         calcTopFasciasSide();

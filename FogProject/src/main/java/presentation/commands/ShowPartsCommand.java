@@ -16,7 +16,7 @@ public class ShowPartsCommand implements Command {
     private String target;
     private AdvancedCalculator calc;
 
-    public ShowPartsCommand(String target) throws MapperExceptions {
+    public ShowPartsCommand(String target) {
         this.target = target;
         
         calc = new AdvancedCalculator(780, 600, false, false);
