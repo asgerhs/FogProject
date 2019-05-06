@@ -32,37 +32,26 @@ public class AdvancedCalculator {
         pl = new PartList();
         mf = new MaterialFacade();
         //catch exception here?
-        
+
         try {
-            calcPosts();
             calcTopFasciasFront();
             calcTopFasciasSide();
             calcBottomFasciasFB();
             calcBottomFasciasSide();
             calcRem();
             calcRafters();
+            calcPosts(sheet);
             calcWaterBoardFront();
             calcWaterBoardSide();
             calcRoofingSheets();
+            calcBracketsRight();
+            calcBracketsLeft();
+
+            calcScrewPackages(sheet);
+            calcBoltsAndSquares();
         } catch (MapperExceptions ex) {
             // TODO: Exception
         }
-
-        calcTopFasciasFront();
-        calcTopFasciasSide();
-        calcBottomFasciasFB();
-        calcBottomFasciasSide();
-        calcRem();
-        calcRafters();
-        calcPosts(sheet);
-        calcWaterBoardFront();
-        calcWaterBoardSide();
-        calcRoofingSheets();
-        calcBracketsRight();
-        calcBracketsLeft();
-
-        calcScrewPackages(sheet);
-        calcBoltsAndSquares();
 
         if (roof) {
 
