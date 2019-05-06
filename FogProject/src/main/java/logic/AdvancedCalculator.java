@@ -146,7 +146,7 @@ public class AdvancedCalculator {
         materials.sort(new MatSortHeighComparator());
         for (Material m : materials) {
             if (m.getRef().charAt(m.getRef().length() - 1) == 'r') {
-                pl.addPart(new Part(m, rafters, "Til montering af spær på rem"));
+                pl.addMiscPart(new Part(m, rafters, "Til montering af spær på rem"));
             }
         }
     }
@@ -156,7 +156,7 @@ public class AdvancedCalculator {
         materials.sort(new MatSortHeighComparator());
         for (Material m : materials) {
             if (m.getRef().charAt(m.getRef().length() - 1) == 'l') {
-                pl.addPart(new Part(m, rafters, "Til montering af spær på rem"));
+                pl.addMiscPart(new Part(m, rafters, "Til montering af spær på rem"));
             }
         }
     }
@@ -173,7 +173,7 @@ public class AdvancedCalculator {
         //extra screws
         screws *= 1.1;
         packages = (screws % 250 == 0) ? screws / 250 : (screws / 250) + 1;
-        pl.addPart(new Part(materials.get(2), packages, "Til montering af universalbeslag + hulbånd"));
+        pl.addMiscPart(new Part(materials.get(2), packages, "Til montering af universalbeslag + hulbånd"));
     }
 
     //10% more?
@@ -206,7 +206,7 @@ public class AdvancedCalculator {
         //10%
         screws *= 1.1;
         int packages = (screws % 200 == 0) ? screws / 200 : (screws / 200) + 1;
-        pl.addPart(new Part(materials.get(1), packages, "Til montering af stern&vandbrædt"));
+        pl.addMiscPart(new Part(materials.get(1), packages, "Til montering af stern&vandbrædt"));
     }
     
     private void calcBoltsAndSquares() throws MapperExceptions {
@@ -243,7 +243,10 @@ public class AdvancedCalculator {
     public static void main(String[] args) throws MapperExceptions {
         AdvancedCalculator ac = new AdvancedCalculator(7800, 6000, false, false);
         ac.calcFasciasScrews();
-        for (Part p : ac.getParts().getPartList()) {
+        for (Part p : ac.getParts().getWoodList()) {
+            System.out.println(p);
+        }
+        for (Part p : ac.getParts().getMiscList()) {
             System.out.println(p);
         }
     }

@@ -10,7 +10,7 @@ import data.models.PartList;
  */
 public class BasicPartListPrinter {
     public static void print(PartList list) {
-        for(Part p : list.getPartList()) {
+        for(Part p : list.getWoodList()) {
             System.out.println(p);
         }
     }

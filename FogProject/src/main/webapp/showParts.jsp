@@ -11,7 +11,8 @@
 <%@include file = "header.jsp" %>
 
 <%
-    ArrayList<Part> parts = (ArrayList<Part>) session.getAttribute("parts");
+    ArrayList<Part> woodParts = (ArrayList<Part>) session.getAttribute("woodParts");
+    ArrayList<Part> miscParts = (ArrayList<Part>) session.getAttribute("miscParts");
 %>
 
 <table class="table">
@@ -26,23 +27,42 @@
   </thead>
   <tbody>
     <tr>
-      <th scope="row">Træ & Tagplader VI SKAL MÅSKE HAVE DELT LISTEN OP I 2???</th>
+      <th scope="row">Træ & Tagplader</th>
       <td></td>
       <td></td>
       <td></td>
       <td></td>
     </tr>
-    <% for(Part p : parts) { 
+    <% for(Part p : woodParts) { 
         Material m = p.getMaterial();
     %>
     <tr>
-      <th><%=m.getName()%></th>
+      <td><%=m.getName()%></td>
       <td><%=m.getLength()/10%></td>
       <td><%=p.getQty()%></td>
       <td><%=m.getUnit()%></td>
       <td><%=p.getDescription()%></td>
-  </tbody>
+    </tr>
   <%}%>
+    <tr>
+      <th scope="row">Miscellaneous</th>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <% for(Part p : miscParts) { 
+        Material m = p.getMaterial();
+    %>
+    <tr>
+      <td><%=m.getName()%></td>
+      <td></td>
+      <td><%=p.getQty()%></td>
+      <td><%=m.getUnit()%></td>
+      <td><%=p.getDescription()%></td>
+    </tr>
+  <%}%>
+  </tbody>
 </table>
 
 <%@include file = "footer.jsp" %>

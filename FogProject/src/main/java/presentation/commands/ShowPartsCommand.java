@@ -1,6 +1,5 @@
 package presentation.commands;
 
-import data.exceptions.MapperExceptions;
 import data.models.Part;
 import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
@@ -26,8 +25,10 @@ public class ShowPartsCommand implements Command {
     public String execute(HttpServletRequest request) {
         HttpSession session = request.getSession();
         
-        ArrayList<Part> parts = calc.getParts().getPartList();
-        session.setAttribute("parts", parts);
+        ArrayList<Part> wood = calc.getParts().getWoodList();
+        ArrayList<Part> misc = calc.getParts().getMiscList();
+        session.setAttribute("woodParts", wood);
+        session.setAttribute("miscParts", misc);
         
         return target;
     }
