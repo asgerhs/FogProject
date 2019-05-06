@@ -36,7 +36,7 @@ public class RequestMapper implements MapperInterface<Request> {
                         rs.getInt("angle"),
                         rs.getString("name"),
                         rs.getString("address"),
-                        rs.getString("zipCode"),
+                        rs.getString("zipCity"),
                         rs.getString("phone"),
                         rs.getString("email"),
                         rs.getString("note")));
@@ -69,7 +69,7 @@ public class RequestMapper implements MapperInterface<Request> {
                         rs.getInt("angle"),
                         rs.getString("name"),
                         rs.getString("address"),
-                        rs.getString("zipCode"),
+                        rs.getString("zipCity"),
                         rs.getString("phone"),
                         rs.getString("email"),
                         rs.getString("note"));
@@ -144,5 +144,7 @@ public class RequestMapper implements MapperInterface<Request> {
         Request rqst = new Request(800, 800, 100, 100, "idfk", 0, "hej", "jeg", "hader", "Strings", "i", "add metoder");
         rm.updateRequest(new Request(400, 200, 100, 100, "flat", 0, "hej", "jeg", "hader", "Strings", "i", "add metoder"), 4);
 //        rm.add(rqst);
+        Request rs = new Request(600, 760, 100, 100, "not flat", 30, "Someone", "TestAddress2", "TestZip2", "TestPhone", "Test@Test.Test", "This is a test");
+        rm.add(rs);
     }
 }
