@@ -49,7 +49,6 @@
     }
     int calcShedLine = (rafterCount - calcLine) - 1;
 %>
-
 <svg width="1000" height="1000">
 
 <!--

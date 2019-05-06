@@ -34,18 +34,18 @@ public class AdvancedCalculator {
         //catch exception here?
 
         try {
-            calcTopFasciasFront();
-            calcTopFasciasSide();
-            calcBottomFasciasFB();
-            calcBottomFasciasSide();
-            calcRem();
-            calcRafters();
+//            calcTopFasciasFront();
+//            calcTopFasciasSide();
+//            calcBottomFasciasFB();
+//            calcBottomFasciasSide();
             calcPosts(sheet);
-            calcWaterBoardFront();
-            calcWaterBoardSide();
-            calcRoofingSheets();
-            calcBracketsRight();
-            calcBracketsLeft();
+            calcRem();
+//            calcRafters();
+//            calcWaterBoardFront();
+//            calcWaterBoardSide();
+//            calcRoofingSheets();
+//            calcBracketsRight();
+//            calcBracketsLeft();
 
             calcScrewPackages(sheet);
             calcBoltsAndSquares();
@@ -84,7 +84,20 @@ public class AdvancedCalculator {
         } else {
             return (length % 480 == 0) ? (length / 480) * 2 : ((length / 480) + 1) * 2;
         }*/
-        addParts(length, 6, 2, "Remme i sider, sadles ned i stolper");
+        
+        int frontOuthang = 100;
+        int backOuthang = 30;
+        
+        // Length without outhang
+        int calcLength= length - frontOuthang - backOuthang - 10;
+        // Extra posts other then the 4 corners        
+        int extraPosts = ((posts - 4)/2) + 1;
+        // Distance between posts from start to mid.
+        int a = calcLength / extraPosts + 5;
+        System.out.println(a);
+        addParts(a, 6, extraPosts * 2, "Remme i sider, sadles ned i stolper");
+        
+        //addParts(length, 6, 2, "Remme i sider, sadles ned i stolper");
     }
 
     //Calculating the roof of carport
