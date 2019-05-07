@@ -1,10 +1,57 @@
-/*
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
-*/
 /* 
     Created on : 29-04-2019, 10:16:02
     Author     : Martin Frederiksen
 */
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+html {
+    font-family: 'Roboto', sans-serif;
+    position: relative;
+    width: 100%;
+    min-height: 100%;
+}
 
+.navbar-brand {
+    background-image: url("../images/foglogok.png");
+    background-size: cover;
+    width: 50px;
+    height: 50px;
+}
+
+footer {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 60px;
+    line-height: 60px;
+    background-color: #f5f5f5;
+    overflow: hidden;
+    text-align: center;
+}
+
+.greyBox  {
+    width: 85%;
+    margin: 0 auto;
+    text-align: center;
+    background-color: lightgrey;
+    padding: 15px;
+    border-radius: 10px;
+    margin-top: 1rem;
+}
+
+.bottomTable  {
+    margin-bottom: 3rem;
+}
+
+.request  {
+    margin-bottom: 5rem;
+}
+
+.table {
+    margin-bottom: 0;
+}
+
+a {
+    color: black;
+    text-decoration: none;
+}

@@ -4,7 +4,7 @@
     Author     : Martin Frederiksen
 --%>
     <footer>
-        <div class="footer">
+        <div class="footer bg-dark">
             <span class="text-muted"> © Copyright 2018 - Martin Frederiksen, William Huusfeldt, Asger Sørensen, & Andreas Vikke. All rights reserved. </span>
         </div>
     </footer>

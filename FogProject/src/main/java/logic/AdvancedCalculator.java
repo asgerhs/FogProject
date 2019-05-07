@@ -10,7 +10,7 @@ import logic.facades.MaterialFacade;
 
 /**
  *
- * @author William Sehested Huusfeldt
+ * @author William Sehested Huusfeldt & Martin Frederiksen & Andreas Vikke
  */
 public class AdvancedCalculator {
 
@@ -42,6 +42,7 @@ public class AdvancedCalculator {
         //catch exception here?
 
         try {
+            
             calcBottomFasciasFB();
             calcBottomFasciasSide();
             calcTopFasciasFront();
@@ -306,7 +307,7 @@ public class AdvancedCalculator {
         //with arbitrary values we should see if rem is in more than one piece before calculating this
         ArrayList<Material> boltType = mf.getAllByCategory(14);
         ArrayList<Material> squares = mf.getAllByCategory(15);
-        int bolts = (posts - 1 == 4) ? 4 * 2 : ((posts - 1) % 4) * 4 + (4 * 2);
+        int bolts = (posts == 4) ? 4 * 2 : (posts - 4) * 4 + ( 4 * 2);
         pl.addMiscPart(new Part(boltType.get(0), bolts, "Til montering af rem på stolper"));
         pl.addMiscPart(new Part(squares.get(0), bolts, "Til montering af rem på stolper"));
     }

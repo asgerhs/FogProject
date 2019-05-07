@@ -11,9 +11,10 @@
     ArrayList<Material> mats = (ArrayList<Material>)session.getAttribute("mats");
 %>
 
-<form method="POST">
+<form class='greyBox request' method="POST">
+    <thead class="thead-dark">
     <h2>Carport Information</h2>
-    <hr />
+    <hr />  
     <div class="form-group">
         <label>Carport Width</label>
         <input type="number" required="" class="form-control" name="width" min="240" max="750" placeholder="Min. 240 - Max. 750">
@@ -72,7 +73,9 @@
         <input type="text" required="" class="form-control" name="note">
     </div>
     
-    <button type="submit" class="btn btn-primary" formaction="FrontController?command=request&submit=true">Send request</button>
+    <button type="submit" class="btn btn-dark" formaction="FrontController?command=request&submit=true">Send request</button>
+    <button type="submit" class="btn btn-dark" formaction="FrontController?command=showParts&submit=true">Show part list</button>
+    <button type="submit" class="btn btn-dark" formaction="FrontController?command=request&submit=true">Show drawing</button>
 </form>
 
 <%@include file="footer.jsp" %>

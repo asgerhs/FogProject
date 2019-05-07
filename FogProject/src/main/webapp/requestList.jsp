@@ -15,9 +15,8 @@
     //ArrayList<Request> requests = (ArrayList<Request>) session.getAttribute("requests");
     RequestFacade requests = new RequestFacade();
 %>
-
 <table class="table">
-    <thead class="thead-light">
+    <thead class="thead-dark">
     <tr>
       <th scope="col">Brede</th>
       <th scope="col">Længde</th>
