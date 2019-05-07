@@ -2,6 +2,7 @@ package data.mappers;
 
 import data.DBConnector;
 import data.exceptions.OrderException;
+import data.exceptions.RequestExceptions;
 import data.interfaces.OrderMapperInterface;
 import data.models.Order;
 import data.models.Request;
@@ -88,6 +89,11 @@ public class OrderMapper implements OrderMapperInterface {
     }
 
     
+    public static void main(String[] args) throws RequestExceptions, OrderException {
+        OrderMapper om = new OrderMapper();
+        RequestMapper rm = new RequestMapper();
+        om.createOrder(rm.getById(1));
+    }
     
     
     
