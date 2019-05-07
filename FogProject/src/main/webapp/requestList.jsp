@@ -6,8 +6,7 @@
 
 <%@page import="logic.facades.RequestFacade"%>
 <%@page import="data.models.Request"%>
-<%@page import="java.util.ArrayList"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="java.util.ArrayList"%>  
 <%@include file = "header.jsp" %>
 
 <!DOCTYPE html>
@@ -19,9 +18,9 @@
     <thead class="thead-dark">
     <tr>
       <th scope="col">Brede</th>
-      <th scope="col">LÃ¦ngde</th>
+      <th scope="col">Længde</th>
       <th scope="col">Skur brede</th>
-      <th scope="col">Skur lÃ¦ngde</th>
+      <th scope="col">Skur længde</th>
       <th scope="col">Tagtype</th>
       <th scope="col">Vinkel</th>
       <th scope="col">Kundenavn</th>

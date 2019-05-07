@@ -16,9 +16,8 @@
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
         <link rel="stylesheet" type="text/css" href="css/styles.css">
         <title>Fog</title>
-
-
-
+</head>
+<body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <a class="navbar-brand" href=index.jsp></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -30,17 +29,12 @@
                     <a class="nav-link" href="#">Orders <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Features</a>
+                    <a class="nav-link" href="http://localhost:8080/FogProject/FrontController?command=showParts&submit=true&length=780&width=300&shed=true&shedLength=2100&shedWidth=300">PartList</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Pricing</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link disabled" href="#">Disabled</a>
+                    <a class="nav-link" href="http://localhost:8080/FogProject/FrontController?command=request">Request</a>
                 </li>
             </ul>
         </div>
     </nav>
-
-</head>
-<body>
+    <div class="main">
