@@ -67,7 +67,6 @@
         </thead>
     </table>
 </div>
-
 <%@include file = "svg.jsp" %>
 
 <%@include file = "footer.jsp" %>
