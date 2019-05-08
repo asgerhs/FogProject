@@ -10,6 +10,10 @@ html {
     min-height: 100%;
 }
 
+.main {
+    padding-bottom: 5rem;
+}
+
 .navbar-brand {
     background-image: url("../images/foglogok.png");
     background-size: cover;
@@ -30,6 +34,7 @@ footer {
 }
 
 .greyBox  {
+    display: block;
     width: 85%;
     margin: 0 auto;
     text-align: center;
@@ -37,9 +42,6 @@ footer {
     padding: 15px;
     border-radius: 10px;
     margin-top: 1rem;
-}
-
-.bottomTable  {
     margin-bottom: 3rem;
 }
 

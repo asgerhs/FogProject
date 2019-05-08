@@ -41,7 +41,7 @@
         </tbody>
     </table>
 </div>
-<div class="greyBox bottomTable">
+<div class="greyBox">
     <table class="table">
         <thead class="thead-dark">
             <tr>
@@ -66,7 +66,7 @@
         </tbody>
         </thead>
     </table>
-</div>>
+</div>
 
 <%@include file = "svg.jsp" %>
 

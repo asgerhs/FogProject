@@ -1,11 +1,6 @@
 package presentation.commands;
 
-import data.exceptions.CommandExceptions;
-import data.exceptions.MapperExceptions;
-import data.exceptions.RequestExceptions;
-import data.models.Material;
 import data.models.Part;
-import data.models.Request;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
@@ -46,22 +41,22 @@ public class ShowPartsCommand implements Command {
         }
 
         if (params.get("submit") != null) {
-            
+
             calc = new AdvancedCalculator(
-                    Integer.parseInt(params.get("length"))*10, 
-                    Integer.parseInt(params.get("width"))*10, 
-                    false,
-                    Integer.parseInt(params.get("shedLength"))*10, 
-                    Integer.parseInt(params.get("shedWidth"))*10,
+                    Integer.parseInt(params.get("length")) * 10,
+                    Integer.parseInt(params.get("width")) * 10,
+                    Boolean.parseBoolean(params.get("shed")),
+                    Integer.parseInt(params.get("shedLength")) * 10,
+                    Integer.parseInt(params.get("shedWidth")) * 10,
                     false);
+        }
+
+        ArrayList<Part> wood = calc.getParts().getWoodList();
+        ArrayList<Part> misc = calc.getParts().getMiscList();
+
+        session.setAttribute("woodParts", wood);
+        session.setAttribute("miscParts", misc);
+
+        return target;
     }
-
-    ArrayList<Part> wood = calc.getParts().getWoodList();
-    ArrayList<Part> misc = calc.getParts().getMiscList();
-
-    session.setAttribute ("woodParts", wood);
-    session.setAttribute ("miscParts", misc);
-        
-    return target ;
-}
 }
