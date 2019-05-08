@@ -37,10 +37,11 @@
     int rafterCount = 15;
     int rafterSpace = 55;
     int postCount = 3;
-    int shedLength = 0;
+    // shedLength may only be up to (width/2) - backouthang.
+    int shedLength = 210;
     //int distant = (width - 130 - 10) / (postCount - 2 + 1);
     int calcLine = 0;
-    int distance = (width - frontOuthang - backOuthang - 10) / (postCount - 2 + 1);
+    int distance = (width - frontOuthang - backOuthang -10) / (postCount - 2 + 1);
 
     if (shedLength % rafterSpace == 0) {
         calcLine = shedLength / rafterSpace;
@@ -48,6 +49,12 @@
         calcLine = shedLength / rafterSpace + 1;
     }
     int calcShedLine = (rafterCount - calcLine) - 1;
+    
+    int shedPost = (shedLength / distance);
+    
+    int shedDistance = shedLength/ (shedPost + 1);
+    
+
 %>
 
 <svg width="1000" height="1000">
@@ -72,15 +79,31 @@ For loop to create the necessary amount of rafts across the width of the Carport
 <rect x="<%= 100 + rafterSpace * i%>" y="100" height="<%= height%>" width="10" />
 <% }%>
 
+
+
+<% if(shedPost == 0){%>
+
 <!-- for loop for top posts -->
 <% for (int i = 0; i < postCount; i++) {%>
-<rect class="post" x="<%=100 + frontOuthang + distance * i%>" y="<%=100 + outhang%>" width="10" height="10"/>
+<rect class="post" x="<%=100 + frontOuthang + distance * i +10 %>" y="<%=100 + outhang%>" width="10" height="10"/>
 <% }%>
+<% } %>
+
+<% if(shedPost > 1) {%>
+<% for(int i = 0; i < postCount - shedPost - 1; i++){ %>
+<rect class="post" x="<%=100 + frontOuthang + distance * i + 10%>" y="<%=100 + outhang%>" width="10" height="10"/>
+<% } %>
+
+<% for(int i = 0; i < shedPost ; i++) { %>
+<rect class="post" x="<%= (100 + frontOuthang + distance * (postCount - shedPost)) + shedDistance * i%>" y="<%= 100 + outhang%>" width="10" height="10"/>
+<% } %>
+<rect class="post" x="<%= 100 + width - backOuthang%>" y="<%= 100 + outhang%>" width="10" height="10"/>
+<% } %>
 
 
 <!-- for loop for bottom posts -->
 <% for (int i = 0; i < postCount; i++) {%>
-<rect class="post" x="<%=100 + frontOuthang + distance * i%>" y="<%=100 + height - outhang - 10%>" width="10" height="10" />
+<rect class="post" x="<%=100 + frontOuthang + distance * i +10%>" y="<%=100 + height - outhang - 10%>" width="10" height="10" />
 <% }%>
 
 
