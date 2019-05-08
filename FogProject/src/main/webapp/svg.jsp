@@ -174,7 +174,7 @@
     
     
 <!-- Drawing of carport from 2nd perspective (sideview) -->
-
+<!-- hej Martin -->
 <div class="greyBox">
     <h1>Side view</h1>
     <svg width="<%= width + 110%>" height="<%= height / 2 + 150%>">
