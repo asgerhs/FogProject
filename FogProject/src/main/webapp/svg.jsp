@@ -144,10 +144,10 @@
     </svg>
 </div>
 
-<%  int a = ((calcShedLine * rafterSpace) + 100) - 55 + 10;
-    int b = rafterCount - calcLine;
-%>
 
+    
+    
+    
 <!-- Drawing of carport from 2nd perspective (sideview) -->
 
 <div class="greyBox bottom">
@@ -190,7 +190,7 @@
         <%for (int i = 0; i < postCount - 2; i++) {%>
         <line class="measure" x1="<%=100 + frontOuthang + distance * i%>" y1="425" x2="<%=(100 + frontOuthang + distance * i) + distance%>" y2="425"/>
         <line x1="<%=100 + frontOuthang + distance * i + distance%>" y1="430" x2="<%=100 + frontOuthang + distance * i + distance%>" y2="400" style="stroke: black"/>
-        <text x="<%=100 + frontOuthang + (distance / 2) + distance * i%>" y="440" fill="black"><%=distance%></text>
+        <text x="<%=100 + frontOuthang + (distance / 2) + distance * i%>" y="440"><%=distance%></text>
         <% }%>
 
         <!-- Measure for shed -->
@@ -202,7 +202,7 @@
         <!-- Measure for posts with last -->
         <%if (shedLength == 0) {%>
         <%for (int i = 0; i < postCount - 1; i++) {%>
-        <line class="measure" x1="<%=100 + frontOuthang + distance * i%>" y1="425" x2="<%=(100 + frontOuthang + distance * i) + distance%>" y2="425"/>
+        <line class="measure" x1="<%=100 + frontOuthang + distance * i%>" y1="425" x2="<%=(100 + frontOuthang + distance * i) + distance%>" y2="425" style="stroke:black"/>
         <line x1="<%=100 + frontOuthang + distance * i + distance%>" y1="430" x2="<%=100 + frontOuthang + distance * i + distance%>" y2="400" style="stroke: black"/>
         <text x="<%=100 + frontOuthang + (distance / 2) + distance * i%>" y="440" fill="black"><%=distance%></text>
         <% }%>

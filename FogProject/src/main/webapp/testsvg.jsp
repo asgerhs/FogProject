@@ -192,12 +192,7 @@ For loop to create the necessary amount of rafts across the width of the Carport
 
 </svg>
 
-<%  int a = ((calcShedLine * rafterSpace) + 100) - 55 + 10;
-    int b = rafterCount - calcLine;
-%>
-<%= b%>
 
-<%= distance%>
 
 <!-- Drawing of carport from 2nd perspective (sideview) -->
 
