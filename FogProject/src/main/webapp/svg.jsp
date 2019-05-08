@@ -3,31 +3,6 @@
     Created on : Apr 30, 2019, 10:41:33 AM
     Author     : Asger Hermind Sørensen & Andreas Vikke & William Huusfeldt
 --%>
-
-<style>
-    rect {
-        stroke:#000000; fill: transparent;
-    }
-    .post {
-        stroke-width: 4px;
-    }
-
-    .shed{
-        stroke-width: 3px;
-
-    }
-    line{
-        stroke: red;
-        stroke-width: 2px;
-    }
-
-    .measure{
-        stroke:#000000; 
-        marker-start: url(#beginArrow); 
-        marker-end: url(#endArrow);
-    }
-</style>
-
 <%
     int width = 780;
     int height = 600;
@@ -175,7 +150,7 @@
 
 <!-- Drawing of carport from 2nd perspective (sideview) -->
 
-<div class="greyBox">
+<div class="greyBox bottom">
     <h1>Side view</h1>
     <svg width="<%= width + 110%>" height="<%= height / 2 + 150%>">
         <!-- Upper line on roof -->
