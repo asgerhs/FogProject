@@ -36,7 +36,7 @@
     int backOuthang = 30;
     int rafterCount = 15;
     int rafterSpace = 55;
-    int postCount = 3;
+    int postCount = 5;
     // shedLength may only be up to (width/2) - backouthang.
     int shedLength = 360;
     //int distant = (width - 130 - 10) / (postCount - 2 + 1);
@@ -98,7 +98,7 @@ For loop to create the necessary amount of rafts across the width of the Carport
 <rect class="post" x="<%=100 + frontOuthang + distance * i + 10%>" y="<%=100 + outhang%>" width="10" height="10"/>
 <% } %>
 
-<%for(int i = 0; i <shedPost; i++) { %>
+<%for(int i = 0; i <shedPost + 1; i++) { %>
 <rect class="post" x="<%=(100 + width - backOuthang - shedLength) + shedDistance * i %>" y="<%= 100 + outhang %>" width="10" height="10" style="stroke:red"/>
 <%} %>
 <rect class="post" x="<%= 100 + width - 30%>" y="<%= 100 + outhang%>" width="10" height="10"/>
