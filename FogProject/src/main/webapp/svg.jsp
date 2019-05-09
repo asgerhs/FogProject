@@ -153,7 +153,7 @@
 
 <div class="greyBox">
     <h1>Side view</h1>
-    <svg width="<%= length + 110%>" height="<%= width%>">
+    <svg width="<%= length + 110%>" height="500">
         <!-- Upper line on roof -->
         <line x1="100" y1="100" x2="<%=100 + length%>" y2="<%=100 + 10%>" style="stroke:rgb(0, 0, 0);stroke-width:1"/>
 
