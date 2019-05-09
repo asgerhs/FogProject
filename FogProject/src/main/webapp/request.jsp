@@ -11,7 +11,7 @@
     ArrayList<Material> mats = (ArrayList<Material>)session.getAttribute("mats");
 %>
 
-<form class='greyBox bottom' method="POST">
+<form class='greyBox bottom ' method="POST">
     <thead class="thead-dark">
     <h2>Carport Information</h2>
     <hr />  
@@ -38,11 +38,11 @@
     <hr />
     <div class="form-group">
         <label>Shed Width</label>
-        <input type="number" required="" class="form-control" name="shedWidth" min="240" max="750" placeholder="Min. 240 - Max. 750" value="240">
+        <input type="number" required="" class="form-control" name="shedWidth" min="0" max="750" placeholder="Min. 240 - Max. 750" value="240">
     </div>
     <div class="form-group">
         <label>Shed Length</label>
-        <input type="number" required="" class="form-control" name="shedLength" min="240" max="780" placeholder="Min. 240 - Max. 780" value="240">
+        <input type="number" required="" class="form-control" name="shedLength" min="0" max="780" placeholder="Min. 240 - Max. 780" value="240">
     </div>
      
     <br /><br />

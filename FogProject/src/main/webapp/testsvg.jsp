@@ -36,9 +36,9 @@
     int backOuthang = 30;
     int rafterCount = 15;
     int rafterSpace = 55;
-    int postCount = 3;
+    int postCount = 5;
     // shedLength may only be up to (width/2) - backouthang.
-    int shedLength = 210;
+    int shedLength = 360;
     //int distant = (width - 130 - 10) / (postCount - 2 + 1);
     int calcLine = 0;
     int distance = (width - frontOuthang - backOuthang -10) / (postCount - 2 + 1);
@@ -48,9 +48,12 @@
     } else {
         calcLine = shedLength / rafterSpace + 1;
     }
+    
     int calcShedLine = (rafterCount - calcLine) - 1;
     
     int shedPost = (shedLength / distance);
+    
+    int postToShed = postCount - shedPost - 1;
     
     int shedDistance = shedLength/ (shedPost + 1);
     
@@ -81,33 +84,43 @@ For loop to create the necessary amount of rafts across the width of the Carport
 
 
 
+<!-- for loop for top posts -->
 <% if(shedPost == 0){%>
 
-<!-- for loop for top posts -->
 <% for (int i = 0; i < postCount; i++) {%>
 <rect class="post" x="<%=100 + frontOuthang + distance * i +10 %>" y="<%=100 + outhang%>" width="10" height="10"/>
 <% }%>
 <% } %>
 
-<% if(shedPost > 1) {%>
+
+<% if(shedPost >= 1) {%>
 <% for(int i = 0; i < postCount - shedPost - 1; i++){ %>
 <rect class="post" x="<%=100 + frontOuthang + distance * i + 10%>" y="<%=100 + outhang%>" width="10" height="10"/>
 <% } %>
 
-<% for(int i = 0; i < shedPost ; i++) { %>
-<rect class="post" x="<%= (100 + frontOuthang + distance * (postCount - shedPost)) + shedDistance * i%>" y="<%= 100 + outhang%>" width="10" height="10"/>
+<%for(int i = 0; i <shedPost + 1; i++) { %>
+<rect class="post" x="<%=(100 + width - backOuthang - shedLength) + shedDistance * i %>" y="<%= 100 + outhang %>" width="10" height="10"/>
+<%} %>
+<rect class="post" x="<%= 100 + width - 30%>" y="<%= 100 + outhang%>" width="10" height="10"/>
 <% } %>
-<rect class="post" x="<%= 100 + width - backOuthang%>" y="<%= 100 + outhang%>" width="10" height="10"/>
-<% } %>
-
 
 <!-- for loop for bottom posts -->
+<%if(shedPost == 0) {%>
 <% for (int i = 0; i < postCount; i++) {%>
 <rect class="post" x="<%=100 + frontOuthang + distance * i +10%>" y="<%=100 + height - outhang - 10%>" width="10" height="10" />
 <% }%>
+<% } %>
 
+<% if(shedPost >=1) { %>
+<% for(int i = 0; i < postCount - shedPost - 1; i++) {%>
+<rect class="post" x="<%=100 + frontOuthang + distance * i + 10%>" y="<%=100 + height - outhang - 10%>" width="10" height="10"/>
+<% } %>
 
-
+<% for(int i = 0; i < shedPost + 1; i++) { %>
+<rect class="post" x="<%= (100 + width - backOuthang - shedLength) + shedDistance * i %>" y="<%= 100 + height - outhang - 10%>" width="10" height="10"/> 
+<% } %>
+<rect class="post" x="<%= 100 + width - backOuthang%>" y="<%= 100 + height - outhang - 10%>" width="10" height="10"/>
+<% } %>
 
 
 <%if(shedLength > 0){ %>
@@ -192,68 +205,77 @@ For loop to create the necessary amount of rafts across the width of the Carport
 
 </svg>
 
-
+<%= postToShed%>
 
 <!-- Drawing of carport from 2nd perspective (sideview) -->
 
-<svg width="1000" height="1000">
-<!-- Upper line on roof -->
-<line x1="100" y1="100" x2="<%=100 + width%>" y2="<%=100 + 10%>" style="stroke:rgb(0, 0, 0);stroke-width:1"/>
+<svg width="<%= width + 110%>" height="<%= height / 2 + 150%>">
+        <!-- Upper line on roof -->
+        <line x1="100" y1="100" x2="<%=100 + width%>" y2="<%=100 + 10%>" style="stroke:rgb(0, 0, 0);stroke-width:1"/>
 
-<!-- bottom line on roof -->
-<line x1="100" y1="<%=100 + 40%>" x2="<%=100 + width%>" y2="<%=100 + 10 + 40%>" style="stroke:rgb(0, 0, 0); stroke-width:1"/>
+        <!-- bottom line on roof -->
+        <line x1="100" y1="<%=100 + 40%>" x2="<%=100 + width%>" y2="<%=100 + 10 + 40%>" style="stroke:rgb(0, 0, 0); stroke-width:1"/>
 
-<!-- Left vertical line on roof -->
-<line x1="100" y1="100" x2="<%=100%>" y2="<%=100 + 40%>" style="stroke:rgb(0, 0, 0); stroke-width:1"/>
+        <!-- Left vertical line on roof -->
+        <line x1="100" y1="100" x2="<%=100%>" y2="<%=100 + 40%>" style="stroke:rgb(0, 0, 0); stroke-width:1"/>
 
-<!-- Right vertical line on roof -->
-<line x1="<%=100 + width%>" y1="<%=100 + 10%>" x2="<%=100 + width%>" y2="<%=100 + 10 + 40%>" style="stroke:rgb(0, 0, 0); stroke-width:1"/>
-
-
-<!-- Posts -->
-<% for (int i = 0; i < postCount - 1; i++) {%>
-<rect class="post" x="<%=100 + frontOuthang + distance * i%>" y="<%=100 + 40 + (3 * i)%>" width="10" height="<%=250 - (3 * i)%>" style="stroke:rgb(0, 0, 0);stroke-width:1"/>
-<% }%>
-
-<!-- Last post -->
-<rect class="post" x="<%=100 + width - backOuthang - 10%>" y="<%=100 + 50%>" width="10" height="240" style="stroke:rgb(0, 0, 0);stroke-width:2"/>
-
-<!-- Shed -->
-<% for (int i = shedLength; i > 0; i -= 5) {%>
-<rect x="<%=100 + width - backOuthang - i%>" y="<%=100 + 40%>" height="250" width="5" />
-<% }%>
+        <!-- Right vertical line on roof -->
+        <line x1="<%=100 + width%>" y1="<%=100 + 10%>" x2="<%=100 + width%>" y2="<%=100 + 10 + 40%>" style="stroke:rgb(0, 0, 0); stroke-width:1"/>
 
 
-<!-- Measure for frontOuthang -->
-<line class="measure" x1="100" y1="425" x2="<%=100 + frontOuthang%>" y2="425"/>
-<line x1="<%=100 + frontOuthang%>" y1="430" x2="<%=100 + frontOuthang%>" y2="400"/>
-<text x="<%=100 + (frontOuthang/2)%>" y="<%=440%>" fill="black"><%=frontOuthang%></text>
+        <!-- Posts -->
+        <% for (int i = 0; i < postCount - 1; i++) {%>
+        <rect class="post" x="<%=100 + frontOuthang + distance * i%>" y="<%=100 + 40 + (3 * i)%>" width="10" height="<%=250 - (3 * i)%>" style="stroke:rgb(0, 0, 0);stroke-width:1"/>
+        <% }%>
 
-<!-- Measure for posts minus last for shed 
-<%for (int i = 0; i < postCount-2; i++) {%>
-<line class="measure" x1="<%=100 + frontOuthang + distance * i%>" y1="425" x2="<%=(100 + frontOuthang + distance * i) + distance%>" y2="425"/>
-<line x1="<%=100 + frontOuthang + distance * i + distance%>" y1="430" x2="<%=100 + frontOuthang + distance * i +distance%>" y2="400" style="stroke: black"/>
-<text x="<%=100 + frontOuthang +(distance/2)+ distance * i%>" y="440" fill="black"><%=distance%></text>
-<% }%>
--->
-<!-- Measure for posts with last -->
-<%for (int i = 0; i < postCount-1; i++) {%>
-<line class="measure" x1="<%=100 + frontOuthang + distance * i%>" y1="425" x2="<%=(100 + frontOuthang + distance * i) + distance%>" y2="425"/>
-<line x1="<%=100 + frontOuthang + distance * i + distance%>" y1="430" x2="<%=100 + frontOuthang + distance * i +distance%>" y2="400" style="stroke: black"/>
-<text x="<%=100 + frontOuthang +(distance/2)+ distance * i%>" y="440" fill="black"><%=distance%></text>
-<% }%>
+        <!-- Last post -->
+        <rect class="post" x="<%=100 + width - backOuthang - 10%>" y="<%=100 + 50%>" width="10" height="240" style="stroke:rgb(0, 0, 0);stroke-width:2"/>
 
-<!-- Measure for backOuthang (with last post) -->
-<line class="measure" x1="<%=100 + width - backOuthang - 10%>" y1="425" x2="<%=100 + width%>" y2="425" style="stroke: black"/>
-<line x1="<%=100 + width%>" y1="430" x2="<%=100 + width%>" y2="400" style="stroke: black"/>
-<text x="<%=100 + width - backOuthang/2 - 10%>" y="440" fill="black"><%=backOuthang + 10%></text>
+        <!-- Shed -->
+        <% for (int i = shedLength; i > 0; i -= 5) {%>
+        <rect x="<%=100 + width - backOuthang - i%>" y="<%=100 + 40%>" height="250" width="5" />
+        <% }%>
 
-<!-- Front height measurement -->
-<line class="measure" x1="75" y1="105" x2="75" y2="390"/>
-<text x="40" y="240">230</text>
 
-<!-- Back height measurement -->
-<line class="measure" x1="<%=100 + width + 25%>" y1="115" x2="<%=100 + width + 25%>" y2="390"/>
-<text x="<%=100 + width + 40%>" y="250">210</text>
+        <!-- Measure for frontOuthang -->
+        <line class="measure" x1="100" y1="425" x2="<%=100 + frontOuthang%>" y2="425"/>
+        <line x1="<%=100 + frontOuthang%>" y1="430" x2="<%=100 + frontOuthang%>" y2="400"/>
+        <text x="<%=100 + (frontOuthang / 2)%>" y="<%=440%>" fill="black"><%=frontOuthang%></text>
 
+        <!-- Measure for posts minus last for shed -->
+        <%if (shedLength > 0) {%>
+        <%for (int i = 0; i < postCount - 2; i++) {%>
+        <line class="measure" x1="<%=100 + frontOuthang + distance * i%>" y1="425" x2="<%=(100 + frontOuthang + distance * i) + distance%>" y2="425"/>
+        <line x1="<%=100 + frontOuthang + distance * i + distance%>" y1="430" x2="<%=100 + frontOuthang + distance * i + distance%>" y2="400" style="stroke: black"/>
+        <text x="<%=100 + frontOuthang + (distance / 2) + distance * i%>" y="440"><%=distance%></text>
+        <% }%>
+
+        <!-- Measure for shed -->
+        <line class="measure" x1="<%=100 + width - backOuthang%>" y1="425" x2="<%=100 + width - backOuthang - shedLength%>" y2="425"/>
+        <line x1="<%=100 + width - backOuthang - shedLength%>" y1="430" x2="<%=100 + width - backOuthang - shedLength%>" y2="400" style="stroke:black"/>
+        <text x="<%=100 + width - backOuthang - shedLength / 2%>" y="440" fill="black"><%=shedLength%></text>
+        <% }%>
+
+        <!-- Measure for posts with last -->
+        <%if (shedLength == 0) {%>
+        <%for (int i = 0; i < postCount - 1; i++) {%>
+        <line class="measure" x1="<%=100 + frontOuthang + distance * i%>" y1="425" x2="<%=(100 + frontOuthang + distance * i) + distance%>" y2="425" style="stroke:black"/>
+        <line x1="<%=100 + frontOuthang + distance * i + distance%>" y1="430" x2="<%=100 + frontOuthang + distance * i + distance%>" y2="400" style="stroke: black"/>
+        <text x="<%=100 + frontOuthang + (distance / 2) + distance * i%>" y="440" fill="black"><%=distance%></text>
+        <% }%>
+        <% }%>
+
+        <!-- Measure for backOuthang (with last post) -->
+        <line class="measure" x1="<%=100 + width - backOuthang%>" y1="425" x2="<%=100 + width%>" y2="425" style="stroke: black"/>
+        <line x1="<%=100 + width%>" y1="430" x2="<%=100 + width%>" y2="400" style="stroke: black"/>
+        <text x="<%=100 + width - backOuthang / 2 - 10%>" y="440" fill="black"><%=backOuthang%></text>
+
+        <!-- Front height measurement -->
+        <line class="measure" x1="75" y1="105" x2="75" y2="390"/>
+        <text x="40" y="240">230</text>
+
+        <!-- Back height measurement -->
+        <line class="measure" x1="<%=100 + width + 25%>" y1="115" x2="<%=100 + width + 25%>" y2="390"/>
+        <text x="<%=100 + width + 40%>" y="250">210</text>
+    </svg>
 </svg>

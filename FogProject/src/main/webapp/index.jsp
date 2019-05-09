@@ -17,7 +17,8 @@
   <button type="submit" class="btn btn-dark">Login</button>
   <button type="submit" class="btn btn-dark">Register</button>
   <br>
-  <a href="blank.jsp"> I just want to request a carport </a>
+  
+  <a href="FrontController?command=request" > I just want to request a carport </a>
 </form>
 
 <%@include file = "footer.jsp" %>
