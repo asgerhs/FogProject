@@ -6,18 +6,19 @@ package logic;
  */
 public class GenerateSVG {
     private String svg;
-    private int length;
+    private int height;
     private int width;
     
     public GenerateSVG(int length, int width) {
         svg = "<svg width='" + length + "' height='" + (width + 100) + "'>";
-        this.length = length;
-        this.width = width;
+        svg += generateRect(0, 0, width, length);
+        this.height = width;
+        this.width = length;
     }
     
     public void generateRafter(int count, int space) {
         for (int i = 0; i < count; i++) {
-            svg += generateRect(100 + space * i, 100, width, 10);
+            svg += generateRect(space * i, 0, height, 10);
         }
     }
     
