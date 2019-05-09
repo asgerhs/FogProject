@@ -24,6 +24,12 @@
         calcLine = shedLength / rafterSpace + 1;
     }
     int calcShedLine = (rafterCount - calcLine) - 1;
+    
+    int shedPost = (shedLength / distance);
+    
+    int postToShed = postCount - shedPost - 1;
+    
+    int shedDistance = shedLength/ (shedPost + 1);
 %>
 
 <div  class="greyBox">
@@ -49,15 +55,43 @@
         <% }%>
 
 
-        <% for (int i = 0; i < postCount; i++) {%>
-        <rect class="post" x="<%=100 + frontOuthang + distance * i + 10%>" y="<%=100 + outhang%>" width="10" height="10"/>
-        <% }%>
+       <!-- for loop for top posts -->
+<% if(shedPost == 0){%>
+
+<% for (int i = 0; i < postCount; i++) {%>
+<rect class="post" x="<%=100 + frontOuthang + distance * i +10 %>" y="<%=100 + outhang%>" width="10" height="10"/>
+<% }%>
+<% } %>
 
 
+<% if(shedPost >= 1) {%>
+<% for(int i = 0; i < postCount - shedPost - 1; i++){ %>
+<rect class="post" x="<%=100 + frontOuthang + distance * i + 10%>" y="<%=100 + outhang%>" width="10" height="10"/>
+<% } %>
 
-        <% for (int i = 0; i < postCount; i++) {%>
-        <rect class="post" x="<%=100 + frontOuthang + distance * i + 10%>" y="<%=100 + width - outhang - 10%>" width="10" height="10" />
-        <% }%>
+<%for(int i = 0; i <shedPost + 1; i++) { %>
+<rect class="post" x="<%=(100 + length - backOuthang - shedLength) + shedDistance * i %>" y="<%= 100 + outhang %>" width="10" height="10"/>
+<%} %>
+<rect class="post" x="<%= 100 + length - 30%>" y="<%= 100 + outhang%>" width="10" height="10"/>
+<% } %>
+
+<!-- for loop for bottom posts -->
+<%if(shedPost == 0) {%>
+<% for (int i = 0; i < postCount; i++) {%>
+<rect class="post" x="<%=100 + frontOuthang + distance * i +10%>" y="<%=100 + width - outhang - 10%>" width="10" height="10" />
+<% }%>
+<% } %>
+
+<% if(shedPost >=1) { %>
+<% for(int i = 0; i < postCount - shedPost - 1; i++) {%>
+<rect class="post" x="<%=100 + frontOuthang + distance * i + 10%>" y="<%=100 + width - outhang - 10%>" width="10" height="10"/>
+<% } %>
+
+<% for(int i = 0; i < shedPost + 1; i++) { %>
+<rect class="post" x="<%= (100 + length - backOuthang - shedLength) + shedDistance * i %>" y="<%= 100 + width - outhang - 10%>" width="10" height="10"/> 
+<% } %>
+<rect class="post" x="<%= 100 + length - backOuthang%>" y="<%= 100 + width - outhang - 10%>" width="10" height="10"/>
+<% } %>
 
 
 

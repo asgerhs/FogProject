@@ -84,9 +84,9 @@ For loop to create the necessary amount of rafts across the width of the Carport
 
 
 
+<!-- for loop for top posts -->
 <% if(shedPost == 0){%>
 
-<!-- for loop for top posts -->
 <% for (int i = 0; i < postCount; i++) {%>
 <rect class="post" x="<%=100 + frontOuthang + distance * i +10 %>" y="<%=100 + outhang%>" width="10" height="10"/>
 <% }%>
@@ -99,18 +99,28 @@ For loop to create the necessary amount of rafts across the width of the Carport
 <% } %>
 
 <%for(int i = 0; i <shedPost + 1; i++) { %>
-<rect class="post" x="<%=(100 + width - backOuthang - shedLength) + shedDistance * i %>" y="<%= 100 + outhang %>" width="10" height="10" style="stroke:red"/>
+<rect class="post" x="<%=(100 + width - backOuthang - shedLength) + shedDistance * i %>" y="<%= 100 + outhang %>" width="10" height="10"/>
 <%} %>
 <rect class="post" x="<%= 100 + width - 30%>" y="<%= 100 + outhang%>" width="10" height="10"/>
 <% } %>
 
 <!-- for loop for bottom posts -->
+<%if(shedPost == 0) {%>
 <% for (int i = 0; i < postCount; i++) {%>
 <rect class="post" x="<%=100 + frontOuthang + distance * i +10%>" y="<%=100 + height - outhang - 10%>" width="10" height="10" />
 <% }%>
+<% } %>
 
+<% if(shedPost >=1) { %>
+<% for(int i = 0; i < postCount - shedPost - 1; i++) {%>
+<rect class="post" x="<%=100 + frontOuthang + distance * i + 10%>" y="<%=100 + height - outhang - 10%>" width="10" height="10"/>
+<% } %>
 
-
+<% for(int i = 0; i < shedPost + 1; i++) { %>
+<rect class="post" x="<%= (100 + width - backOuthang - shedLength) + shedDistance * i %>" y="<%= 100 + height - outhang - 10%>" width="10" height="10"/> 
+<% } %>
+<rect class="post" x="<%= 100 + width - backOuthang%>" y="<%= 100 + height - outhang - 10%>" width="10" height="10"/>
+<% } %>
 
 
 <%if(shedLength > 0){ %>
