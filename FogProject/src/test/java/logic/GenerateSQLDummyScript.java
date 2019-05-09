@@ -40,6 +40,8 @@ public class GenerateSQLDummyScript {
         mats.add(new Material("1012", "19x100 mm. trykimp. Brædt", 5400, 1, "stk"));
         mats.add(new Material("1013", "Plastmo Ecolite blåtonet", 3600, 1, "stk"));
         mats.add(new Material("1014", "Plastmo Ecolite blåtonet", 6000, 1, "stk"));
+        mats.add(new Material("1015", "38x73 mm. taglægte T1", 5400, 1, "stk"));
+        mats.add(new Material("1016", "38x73 mm. taglægte T1", 4200, 1, "stk"));
 
         // Misc
         mats.add(new Material("1030", "Plastmo bundskruer 200 stk.", 0, 200, "pakke"));
@@ -55,6 +57,15 @@ public class GenerateSQLDummyScript {
         mats.add(new Material("1040", "Stalddørsgreb 50x75 mm", 75, 1, "sæt"));
         mats.add(new Material("1041", "T hængsel 390 mm", 390, 1, "stk"));
         mats.add(new Material("1042", "Vinkelbeslag 35 mm", 35, 1, "stk"));
+        mats.add(new Material("1043", "5,0 x 40 mm. beslagskruer 250 stk.", 40, 250, "pakke"));
+        mats.add(new Material("1044", "5,0 x 100 mm. skruer 100 stk", 100, 100, "pakke"));
+        
+        //Roof materials (pack)
+        mats.add(new Material("1060", "B & C Dobbelt -s sort", 0, 300, "stk"));
+        mats.add(new Material("1061", "B & C Rygsten sort", 0, 1, "stk"));
+        mats.add(new Material("1062", "B & C Toplægte holder", 0, 1, "stk"));
+        mats.add(new Material("1063", "B & C Rygstensbeslag", 0, 1, "stk"));
+        mats.add(new Material("1064", "B & C Tagstens bindere & nakkekroge", 0, 1, "pakke"));
 
         String sql = "";
         String sqlStart = "INSERT INTO stock VALUES (";
@@ -88,6 +99,7 @@ public class GenerateSQLDummyScript {
         cats.add(new Category("Bolt"));
         cats.add(new Category("Skiver"));
         cats.add(new Category("ShedMisc"));
+        cats.add(new Category("Tagpakke"));
         
         String sql = "";
         String sqlStart = "INSERT INTO categories(name) VALUES (";
@@ -105,6 +117,7 @@ public class GenerateSQLDummyScript {
         ArrayList<MatCatLink> link = new ArrayList();
 
         //all categories in database
+        //Wood materials
         link.add(new MatCatLink("1000", 1));
         link.add(new MatCatLink("1001", 1));
         link.add(new MatCatLink("1002", 2));
@@ -125,7 +138,10 @@ public class GenerateSQLDummyScript {
         link.add(new MatCatLink("1012", 9));
         link.add(new MatCatLink("1013", 10));
         link.add(new MatCatLink("1014", 10));
-
+        link.add(new MatCatLink("1015", 3));
+        link.add(new MatCatLink("1016", 3));
+        
+        //Misc materials
         link.add(new MatCatLink("1030", 11));
         link.add(new MatCatLink("1034", 11));
         link.add(new MatCatLink("1035", 11));
@@ -140,6 +156,15 @@ public class GenerateSQLDummyScript {
         link.add(new MatCatLink("1040", 16));
         link.add(new MatCatLink("1041", 16));
         link.add(new MatCatLink("1004", 16));
+        link.add(new MatCatLink("1043", 11));
+        link.add(new MatCatLink("1044", 11));
+        
+        //Materials for roof, might need to change the categories of some
+        link.add(new MatCatLink("1060", 17));
+        link.add(new MatCatLink("1061", 17));
+        link.add(new MatCatLink("1062", 17));
+        link.add(new MatCatLink("1063", 17));
+        link.add(new MatCatLink("1064", 17));
         
         String sql = "";
         String sqlStart = "INSERT INTO stockToCategory VALUES (";
