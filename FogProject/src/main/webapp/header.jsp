@@ -29,7 +29,7 @@
                     <a class="nav-link" href="#">Orders <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="http://localhost:8080/FogProject/FrontController?command=showParts&submit=true&length=780&width=300&shed=true&shedLength=2100&shedWidth=300">PartList</a>
+                    <a class="nav-link" href="http://localhost:8080/FogProject/FrontController?command=showParts&submit=true&length=780&width=600&shed=true&shedLength=2100&shedWidth=600">PartList</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="http://localhost:8080/FogProject/FrontController?command=request">Request</a>

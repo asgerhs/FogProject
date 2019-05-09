@@ -333,7 +333,23 @@ public class AdvancedCalculator {
     public PartList getParts() {
         return pl;
     }
-
+    
+    public int getLength(){
+        return length;
+    }
+    
+    public int getWidth(){
+        return width;
+    }
+    
+    public int getPosts(){
+        return posts;
+    }
+    
+    public int getRafters(){
+        return rafters;
+    }
+    
     public static void main(String[] args) throws MapperExceptions {
         AdvancedCalculator ac = new AdvancedCalculator(7800, 6000, true, 2100, 6000, false);
         ac.calcFasciasScrews();

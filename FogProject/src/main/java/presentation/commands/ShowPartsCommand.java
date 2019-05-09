@@ -57,6 +57,11 @@ public class ShowPartsCommand implements Command {
         session.setAttribute("woodParts", wood);
         session.setAttribute("miscParts", misc);
 
+        session.setAttribute("length", calc.getLength());
+        session.setAttribute("width", calc.getWidth());
+        session.setAttribute("rafters", calc.getRafters());
+        session.setAttribute("posts", calc.getPosts());
+        
         return target;
     }
 }
