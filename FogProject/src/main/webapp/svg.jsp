@@ -100,18 +100,18 @@
         <line x1="<%= 100 + rafterSpace%>" y1="<%= 100 + width - outhang - 10%>" x2="<%=(calcShedLine * rafterSpace) + 100 - 55 + 10%>" y2="<%= 100 + outhang + 10%>" stroke-dasharray="5,5"/>
 
         <defs>
-        <marker id="beginArrow" 
-                markerWidth="9" markerHeight="4" 
-                refX="2" refY="2" 
-                orient="auto">
-            <path d="M0,2 L8,4 L8,0 L0,2" style="fill: #000000;" />
-        </marker>
-        <marker id="endArrow" 
-                markerWidth="9" markerHeight="4" 
-                refX="7" refY="2" 
-                orient="auto">
-            <path d="M0,0 L0,4 L8,2 L0,0" style="fill: #000000;" />
-        </marker>
+            <marker id="beginArrow" 
+                    markerWidth="9" markerHeight="4" 
+                    refX="2" refY="2" 
+                    orient="auto">
+                <path d="M0,2 L8,4 L8,0 L0,2" style="fill: #000000;" />
+            </marker>
+            <marker id="endArrow" 
+                    markerWidth="9" markerHeight="4" 
+                    refX="7" refY="2" 
+                    orient="auto">
+                <path d="M0,0 L0,4 L8,2 L0,0" style="fill: #000000;" />
+            </marker>
         </defs>
 
 
