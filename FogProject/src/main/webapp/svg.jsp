@@ -10,10 +10,10 @@
     int frontOuthang = 100;
     int backOuthang = 30;
     int rafterCount = (int) session.getAttribute("rafters");
-    System.out.println(rafterCount);
     int rafterSpace = (length-4)/(rafterCount-1);
     int postCount = (int) session.getAttribute("posts") / 2;
-    int shedLength = 210;
+    int shedLength = (int) session.getAttribute("shedLength") / 10;
+    int shedWidth = (int) session.getAttribute("shedWidth") / 10;
     //int distant = (width - 130 - 10) / (postCount - 2 + 1);
     int calcLine = 0;
     int distance = (length - frontOuthang - backOuthang - 10) / (postCount - 2 + 1);
@@ -100,38 +100,38 @@
         <%if (shedLength > 0) {%>
 
         <!-- Shed left side raft -->
-        <rect class="shed" x="<%= 100 + length - shedLength - 30%>" y="<%= 100 + outhang%>" height="<%=width + (-outhang * 2)%>" width="10"/>
+        <rect class="shed" x="<%= 100 + length - shedLength - 30%>" y="<%= 100 + outhang%>" height="<%=shedWidth + (-outhang * 2)%>" width="10"/>
 
         <!-- Shed right side raft -->
-        <rect class="shed"  x="<%= 100 + length - 30%>" y="<%= 100 + outhang%>" height="<%=width + (-outhang * 2)%>" width="10"/>
+        <rect class="shed"  x="<%= 100 + length - 30%>" y="<%= 100 + outhang%>" height="<%=shedWidth + (-outhang * 2)%>" width="10"/>
 
         <!-- Shed top Raft -->
         <rect class="shed" x="<%= 100 + length - shedLength - 30%>" y="<%= 100 + outhang%>" height="10" width="<%= shedLength%>"/>
 
         <!-- Shed bottom Raft -->
-        <rect class="shed" x="<%= 100 + length - shedLength - 30%>" y="<%= 100 + width - outhang - 10%>" height="10" width="<%=shedLength%>"/>
+        <rect class="shed" x="<%= 100 + length - shedLength - 30%>" y="<%= 100 + shedWidth - outhang - 10%>" height="10" width="<%=shedLength%>"/>
 
         <!-- Shed top left post -->
         <rect class="post" x="<%=100 + length - shedLength - 30%>" y="<%= 100 + outhang%>" height="10" width="10"/>
 
         <!-- Shed middle post left -->
-        <rect class="post" x="<%=100 + length - shedLength - 30%>" y="<%= 100 + (width / 2) - 10%>" height="10" width="10"/>
+        <rect class="post" x="<%=100 + length - shedLength - 30%>" y="<%= 100 + (shedWidth / 2) - 10%>" height="10" width="10"/>
 
         <!-- Shed bottom left post-->
-        <rect class="post" x="<%=100 + length - shedLength - 30%>" y="<%= 100 + width - outhang - 10%>" height="10" width="10"/>
+        <rect class="post" x="<%=100 + length - shedLength - 30%>" y="<%= 100 + shedWidth - outhang - 10%>" height="10" width="10"/>
 
         <!-- Shed middle post right  -->
-        <rect class="post" x="<%= 100 + length - 30%>" y="<%=100 + (width / 2) - 10%>" height="10 " width="10"/>
+        <rect class="post" x="<%= 100 + length - 30%>" y="<%=100 + (shedWidth / 2) - 10%>" height="10 " width="10"/>
         <% }%>
 
 
 
 
         <!-- top left top bottom right striped line -->
-        <line x1="<%= 100 + rafterSpace%>" y1="<%= 100 + outhang + 10%>" x2="<%=(calcShedLine * rafterSpace) + 100 - 55 + 10%>" y2="<%= 100 + width - outhang - 10%>" stroke-dasharray="5,5"/>
+        <line x1="<%= 100 + rafterSpace%>" y1="<%= 100 + outhang + 10%>" x2="<%=(calcShedLine * rafterSpace) + 100 - rafterSpace + 10%>" y2="<%= 100 + width - outhang - 10%>" stroke-dasharray="5,5"/>
 
         <!-- bottom left to top right striped line -->
-        <line x1="<%= 100 + rafterSpace%>" y1="<%= 100 + width - outhang - 10%>" x2="<%=(calcShedLine * rafterSpace) + 100 - 55 + 10%>" y2="<%= 100 + outhang + 10%>" stroke-dasharray="5,5"/>
+        <line x1="<%= 100 + rafterSpace%>" y1="<%= 100 + width - outhang - 10%>" x2="<%=(calcShedLine * rafterSpace) + 100 - rafterSpace + 10%>" y2="<%= 100 + outhang + 10%>" stroke-dasharray="5,5"/>
 
         <defs>
             <marker id="beginArrow" 

@@ -342,6 +342,14 @@ public class AdvancedCalculator {
         return width;
     }
     
+    public int getShedLength(){
+        return shedLength;
+    }
+    
+    public int getShedWidth(){
+        return shedWidth;
+    }
+    
     public int getPosts(){
         return posts;
     }
