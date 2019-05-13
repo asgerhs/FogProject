@@ -6,7 +6,19 @@
 
 <%@include file="header.jsp" %>
 
-<a class="btn btn-primary" href="FrontController?command=showParts">Generate partslist</a>
-<a class="btn btn-primary" href="FrontController?command=request">Request Carport</a>
+<form class ="greyBox login" method="POST">
+  <div class="form-group">
+      <!-- aria-describedby="userHelp" -->
+      <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+  </div>
+  <div class="form-group">
+    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+  </div>
+  <button type="submit" class="btn btn-dark">Login</button>
+  <button type="submit" class="btn btn-dark">Register</button>
+  <br>
+  
+  <a href="FrontController?command=request" > I just want to request a carport </a>
+</form>
 
 <%@include file = "footer.jsp" %>

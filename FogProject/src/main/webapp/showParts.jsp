@@ -11,38 +11,62 @@
 <%@include file = "header.jsp" %>
 
 <%
-    ArrayList<Part> parts = (ArrayList<Part>) session.getAttribute("parts");
+    ArrayList<Part> woodParts = (ArrayList<Part>) session.getAttribute("woodParts");
+    ArrayList<Part> miscParts = (ArrayList<Part>) session.getAttribute("miscParts");
 %>
 
-<table class="table">
-  <thead class="thead-light">
-    <tr>
-      <th scope="col">Beskrivelse</th>
-      <th scope="col">Længde</th>
-      <th scope="col">Antal</th>
-      <th scope="col">Enhed</th>
-      <th scope="col">Beskrivelse</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row">Træ & Tagplader VI SKAL MÅSKE HAVE DELT LISTEN OP I 2???</th>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <% for(Part p : parts) { 
-        Material m = p.getMaterial();
-    %>
-    <tr>
-      <th><%=m.getName()%></th>
-      <td><%=m.getLength()/10%></td>
-      <td><%=p.getQty()%></td>
-      <td><%=m.getUnit()%></td>
-      <td><%=p.getDescription()%></td>
-  </tbody>
-  <%}%>
-</table>
+<div class="greyBox">
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Træ & Tagplader</th>
+                <th scope="col">Længde</th>
+                <th scope="col">Antal</th>
+                <th scope="col">Enhed</th>
+                <th scope="col">Beskrivelse</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% for (Part p : woodParts) {
+                    Material m = p.getMaterial();
+            %>
+            <tr>
+                <td><%=m.getName()%></td>
+                <td><%=m.getLength() / 10%></td>
+                <td><%=p.getQty()%></td>
+                <td><%=m.getUnit()%></td>
+                <td><%=p.getDescription()%></td>
+            </tr>
+            <%}%>
+        </tbody>
+    </table>
+</div>
+<div class="greyBox">
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Miscellaneous</th>
+                <th scope="col">Længde</th>
+                <th scope="col">Antal</th>
+                <th scope="col">Enhed</th>
+                <th scope="col">Beskrivelse</th>
+            </tr>
+            <% for (Part p : miscParts) {
+                    Material m = p.getMaterial();
+            %>
+        <tbody>
+            <tr>
+                <td><%=m.getName()%></td>
+                <td></td>
+                <td><%=p.getQty()%></td>
+                <td><%=m.getUnit()%></td>
+                <td><%=p.getDescription()%></td>
+            </tr>
+            <%}%>
+        </tbody>
+        </thead>
+    </table>
+</div>
+<%@include file = "svg.jsp" %>
 
 <%@include file = "footer.jsp" %>
