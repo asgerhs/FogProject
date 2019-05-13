@@ -193,9 +193,11 @@ public class GenerateSQLDummyScript {
                 name = faker.name().firstName();
             }
             names.add(name);
-            sql += sqlStart + "'" + name + "', '" + name + "@somewhere.dk', " + "'1234', 'SALESMAN'" + sqlEnd;
+            sql += sqlStart + "'" + name + "', '" + name + "@somewhere.dk', " + "'1234', 'CUSTOMER'" + sqlEnd;
         }
-
+        sql += sqlStart + "'" + "BestSalesman" + "', '" + "BestSalesman" + "@somewhere.dk', " + "'1234', 'EMPLOYEE'" + sqlEnd;
+        sql += sqlStart + "'" + "Admin" + "', '" + "Admin" + "@somewhere.dk', " + "'1234', 'ADMIN'" + sqlEnd;
+        
         f.format(sql);
     }
 

@@ -12,7 +12,7 @@ import logic.interfaces.FacadeInterface;
  *
  * @author Martin Frederiksen
  */
-public class MaterialFacade implements FacadeInterface<Material>{
+public class MaterialFacade implements FacadeInterface<Material, Integer>{
     MaterialMapper mm = new MaterialMapper();
     
     @Override
@@ -21,7 +21,7 @@ public class MaterialFacade implements FacadeInterface<Material>{
     }
 
     @Override
-    public Material getById(int id) throws MapperExceptions {
+    public Material getById(Integer id) throws MapperExceptions {
         return mm.getById(id);
     }
 

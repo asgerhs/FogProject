@@ -17,7 +17,7 @@ import java.util.TreeMap;
  *
  * @author Asger Hermind Sørensen & Martin Frederiksen
  */
-public class MaterialMapper implements MapperInterface<Material> {
+public class MaterialMapper implements MapperInterface<Material, Integer> {
 
     /**
      * Returns all materials in database
@@ -54,7 +54,7 @@ public class MaterialMapper implements MapperInterface<Material> {
      * @return material matching id in param
      */
     @Override
-    public Material getById(int id) throws MapperExceptions {
+    public Material getById(Integer id) throws MapperExceptions {
         try (Connection con = new DBConnector().getConnection()) {
             
             String qry = "SELECT * FROM stock WHERE id = ?";

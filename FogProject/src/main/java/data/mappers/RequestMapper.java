@@ -16,7 +16,7 @@ import java.util.List;
  *
  * @author William Sehested Huusfeldt
  */
-public class RequestMapper implements MapperInterface<Request> {
+public class RequestMapper implements MapperInterface<Request, Integer> {
 
     @Override
     public List<Request> getAll() throws RequestExceptions {
@@ -49,7 +49,7 @@ public class RequestMapper implements MapperInterface<Request> {
     }
 
     @Override
-    public Request getById(int id) throws RequestExceptions {
+    public Request getById(Integer id) throws RequestExceptions {
         try (Connection con = new DBConnector().getConnection()) {
 
             String qry = "SELECT * FROM requests WHERE id = ?";

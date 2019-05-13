@@ -59,7 +59,7 @@ CREATE TABLE `fogproject`.`users` (
   `username` VARCHAR(45) NOT NULL,
   `email` VARCHAR(100) NOT NULL,
   `password` VARCHAR(100) NOT NULL,
-  `role` ENUM('ADMIN', 'SALESMAN') NOT NULL,
+  `role` ENUM('ADMIN', 'EMPLOYEE', 'CUSTOMER') NOT NULL DEFAULT 'CUSTOMER',
   PRIMARY KEY (`username`),
   UNIQUE INDEX `email_UNIQUE` (`email` ASC) VISIBLE
 );

@@ -15,7 +15,10 @@ public class PingTest {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        String test = "123dsvf";
+        test = test.replaceAll("[^1-9]", "*");
+        
+        System.out.println(test.contains("*"));
     }
     
 }

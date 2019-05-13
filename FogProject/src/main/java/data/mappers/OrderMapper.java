@@ -3,7 +3,7 @@ package data.mappers;
 import data.DBConnector;
 import data.exceptions.OrderException;
 import data.exceptions.RequestExceptions;
-import data.interfaces.OrderMapperInterface;
+import data.interfaces.MapperInterface;
 import data.models.Order;
 import data.models.Request;
 import java.sql.Connection;
@@ -18,10 +18,10 @@ import java.util.List;
  *
  * @author Asger Hermind Sørensen
  */
-public class OrderMapper implements OrderMapperInterface {
+public class OrderMapper implements MapperInterface<Order, Integer> {
 
     @Override
-    public List<Order> getAllOrders() throws OrderException {
+    public List<Order> getAll() throws OrderException {
         try(Connection con = DBConnector.getConnection()){
             List<Order> order = new ArrayList();
             String qry = "SELECT * FROM orders;";
@@ -44,7 +44,7 @@ public class OrderMapper implements OrderMapperInterface {
     }
 
     @Override
-    public Order getById(int id) throws OrderException {
+    public Order getById(Integer id) throws OrderException {
         try(Connection con = DBConnector.getConnection()){
             String sql = "SELECT * FROM orders where id = ?;";
             PreparedStatement ps = con.prepareStatement(sql);
@@ -66,7 +66,6 @@ public class OrderMapper implements OrderMapperInterface {
         return null;
     }
 
-    @Override
     public void createOrder(Request request) throws OrderException {
         try(Connection con = DBConnector.getConnection()){
             String sql = "INSERT INTO orders "
@@ -93,7 +92,7 @@ public class OrderMapper implements OrderMapperInterface {
         OrderMapper om = new OrderMapper();
         RequestMapper rm = new RequestMapper();
         om.createOrder(rm.getById(1));
-    }
+    }    
     
     
     

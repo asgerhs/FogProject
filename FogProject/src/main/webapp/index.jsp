@@ -9,7 +9,7 @@
 <form class ="greyBox login" method="POST">
   <div class="form-group">
       <!-- aria-describedby="userHelp" -->
-      <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+      <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter username or email">
   </div>
   <div class="form-group">
     <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">

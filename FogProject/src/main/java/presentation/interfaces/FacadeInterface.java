@@ -1,12 +1,12 @@
 package presentation.interfaces;
 
-import java.util.List;
+import data.models.PartList;
 
 /**
  *
  * @author Martin Frederiksen
+ * @param <T>
  */
-public interface FacadeInterface <T>{
-    List<T> getAll() throws Exception;
-    T getById(int id) throws Exception;
+public interface FacadeInterface{
+    PartList getParts();
 }
