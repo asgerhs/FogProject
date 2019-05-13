@@ -59,8 +59,13 @@ public class ShowPartsCommand implements Command {
 
         session.setAttribute("length", calc.getLength());
         session.setAttribute("width", calc.getWidth());
+        session.setAttribute("shedLength", calc.getShedLength());
+        System.out.println(calc.getShedLength());
+        session.setAttribute("shedWidth", calc.getShedWidth());
         session.setAttribute("rafters", calc.getRafters());
         session.setAttribute("posts", calc.getPosts());
+        
+        
         
         return target;
     }
