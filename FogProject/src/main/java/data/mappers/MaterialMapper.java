@@ -38,7 +38,8 @@ public class MaterialMapper implements MapperInterface<Material> {
                         rs.getString("name"),
                         rs.getInt("length"),
                         rs.getInt("amount"),
-                        rs.getString("unit")));
+                        rs.getString("unit"),
+                        rs.getInt("price")));
             }
             return materials;
         } catch (SQLException ex) {
@@ -68,7 +69,8 @@ public class MaterialMapper implements MapperInterface<Material> {
                         rs.getString("name"),
                         rs.getInt("length"),
                         rs.getInt("amount"),
-                        rs.getString("unit"));
+                        rs.getString("unit"),
+                        rs.getInt("price"));
             }
             return null;
         } catch (SQLException ex) {
@@ -91,7 +93,8 @@ public class MaterialMapper implements MapperInterface<Material> {
                         rs.getString("name"),
                         rs.getInt("length"),
                         rs.getInt("amount"),
-                        rs.getString("unit")));
+                        rs.getString("unit"),
+                        rs.getInt("price")));
             }
             
             return materials;

@@ -14,13 +14,15 @@ public class Material {
     private int length;
     private int amount;
     private String unit;
+    private int price;
 
-    public Material(String ref, String name, int length, int amount, String unit) {
+    public Material(String ref, String name, int length, int amount, String unit, int price) {
         this.ref = ref;
         this.name = name;
         this.length = length;
         this.amount = amount;
         this.unit = unit;
+        this.price = price;
     }
 
     public String getRef() {
@@ -42,6 +44,11 @@ public class Material {
     public String getUnit() {
         return unit;
     }
+
+    public int getPrice() {
+        return price;
+    }
+    
 
     @Override
     public String toString() {

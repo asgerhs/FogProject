@@ -12,6 +12,7 @@ CREATE TABLE `fogproject`.`stock` (
   `length` INT NOT NULL,
   `amount` INT NOT NULL,
   `unit` VARCHAR(45) NOT NULL,
+  `price` INT NOT NULL,
   PRIMARY KEY (`ref`)
 );
 

@@ -25,54 +25,54 @@ public class GenerateSQLDummyScript {
         List<Material> mats = new ArrayList();
 
         // Woods
-        mats.add(new Material("1000", "25x200 mm. trykimp. Brædt", 3600, 1, "stk"));
-        mats.add(new Material("1001", "25x200 mm. trykimp. Brædt", 5400, 1, "stk"));
-        mats.add(new Material("1002", "25x125mm. trykimp. Brædt", 3600, 1, "stk"));
-        mats.add(new Material("1003", "25x125mm. trykimp. Brædt", 5400, 1, "stk"));
-        mats.add(new Material("1004", "38x73 mm. Lægte ubh.", 4200, 1, "stk"));
-        mats.add(new Material("1005", "45x95 mm. Reglar ub.", 2400, 1, "stk"));
-        mats.add(new Material("1006", "45x95 mm. Reglar ub.", 2700, 1, "stk"));
-        mats.add(new Material("1007", "45x195 mm. spærtræ ubh.", 4800, 1, "stk"));
-        mats.add(new Material("1008", "45x195 mm. spærtræ ubh.", 6000, 1, "stk"));
-        mats.add(new Material("1009", "97x97 mm. trykimp. Stolpe", 3000, 1, "stk"));
-        mats.add(new Material("1010", "19x100 mm. trykimp. Brædt", 2100, 1, "stk"));
-        mats.add(new Material("1011", "19x100 mm. trykimp. Brædt", 3600, 1, "stk"));
-        mats.add(new Material("1012", "19x100 mm. trykimp. Brædt", 5400, 1, "stk"));
-        mats.add(new Material("1013", "Plastmo Ecolite blåtonet", 3600, 1, "stk"));
-        mats.add(new Material("1014", "Plastmo Ecolite blåtonet", 6000, 1, "stk"));
-        mats.add(new Material("1015", "38x73 mm. taglægte T1", 5400, 1, "stk"));
-        mats.add(new Material("1016", "38x73 mm. taglægte T1", 4200, 1, "stk"));
+        mats.add(new Material("1000", "25x200 mm. trykimp. Brædt", 3600, 1, "stk", 17983));
+        mats.add(new Material("1001", "25x200 mm. trykimp. Brædt", 5400, 1, "stk", 26973));
+        mats.add(new Material("1002", "25x125mm. trykimp. Brædt", 3600, 1, "stk", 10783));
+        mats.add(new Material("1003", "25x125mm. trykimp. Brædt", 5400, 1, "stk", 16173));
+        mats.add(new Material("1004", "38x73 mm. Lægte ubh.", 4200, 1, "stk", 2499));
+        mats.add(new Material("1005", "45x95 mm. Reglar ub.", 2400, 1, "stk", 3108)); 
+        mats.add(new Material("1006", "45x95 mm. Reglar ub.", 2700, 1, "stk", 3496)); 
+        mats.add(new Material("1007", "45x195 mm. spærtræ ubh.", 4800, 1, "stk", 23016));
+        mats.add(new Material("1008", "45x195 mm. spærtræ ubh.", 6000, 1, "stk", 28770));
+        mats.add(new Material("1009", "97x97 mm. trykimp. Stolpe", 3000, 1, "stk", 11385));
+        mats.add(new Material("1010", "19x100 mm. trykimp. Brædt", 2100, 1, "stk", 1250));
+        mats.add(new Material("1011", "19x100 mm. trykimp. Brædt", 3600, 1, "stk", 2143));
+        mats.add(new Material("1012", "19x100 mm. trykimp. Brædt", 5400, 1, "stk", 3213));
+        mats.add(new Material("1013", "Plastmo Ecolite blåtonet", 3600, 1, "stk", 11900));
+        mats.add(new Material("1014", "Plastmo Ecolite blåtonet", 6000, 1, "stk", 23000));
+        mats.add(new Material("1015", "38x73 mm. taglægte T1", 5400, 1, "stk", 9153));
+        mats.add(new Material("1016", "38x73 mm. taglægte T1", 4200, 1, "stk", 7119));
 
         // Misc
-        mats.add(new Material("1030", "Plastmo bundskruer 200 stk.", 0, 200, "pakke"));
-        mats.add(new Material("1031", "Hulbånd 1x20 mm. 10 mtr.", 1000, 1, "rulle"));
-        mats.add(new Material("1032-r", "Universal 190 mm højre", 190, 1, "stk"));
-        mats.add(new Material("1032-l", "Universal 190 mm venstre", 190, 1, "stk"));
-        mats.add(new Material("1034", "4,5x60 mm. skruer 200 stk.", 60, 200, "pakke"));
-        mats.add(new Material("1035", "4,0x50 mm. skruer 250 stk.", 50, 250, "pakke"));
-        mats.add(new Material("1036", "Bræddebolt 10x120 mm.", 120, 1, "stk"));
-        mats.add(new Material("1037", "Firkantskiver 40x40x11mm", 11, 1, "stk"));
-        mats.add(new Material("1038", "4,5x70 mm. Skruer 400 stk.", 70, 400, "pakke"));
-        mats.add(new Material("1039", "4,5x50 mm. Skruer 300 stk.", 50, 300, "pakke"));
-        mats.add(new Material("1040", "Stalddørsgreb 50x75 mm", 75, 1, "sæt"));
-        mats.add(new Material("1041", "T hængsel 390 mm", 390, 1, "stk"));
-        mats.add(new Material("1042", "Vinkelbeslag 35 mm", 35, 1, "stk"));
-        mats.add(new Material("1043", "5,0 x 40 mm. beslagskruer 250 stk.", 40, 250, "pakke"));
-        mats.add(new Material("1044", "5,0 x 100 mm. skruer 100 stk", 100, 100, "pakke"));
+        mats.add(new Material("1030", "Plastmo bundskruer 200 stk.", 0, 200, "pakke", 39500));
+        mats.add(new Material("1031", "Hulbånd 1x20 mm. 10 mtr.", 1000, 1, "rulle", 20900));
+        mats.add(new Material("1032-r", "Universal 190 mm højre", 190, 1, "stk", 1590));
+        mats.add(new Material("1032-l", "Universal 190 mm venstre", 190, 1, "stk", 1590));
+        mats.add(new Material("1034", "4,5x60 mm. skruer 200 stk.", 60, 200, "pakke", 15900));
+        mats.add(new Material("1035", "4,0x50 mm. skruer 250 stk.", 50, 250, "pakke", 22900));
+        mats.add(new Material("1036", "Bræddebolt 10x120 mm.", 120, 1, "stk", 27900));
+        mats.add(new Material("1037", "Firkantskiver 40x40x11mm", 11, 1, "stk", 28900));
+        mats.add(new Material("1038", "4,5x70 mm. Skruer 400 stk.", 70, 400, "pakke", 19900));
+        mats.add(new Material("1039", "4,5x50 mm. Skruer 300 stk.", 50, 300, "pakke", 9595));
+        mats.add(new Material("1040", "Stalddørsgreb 50x75 mm", 75, 1, "sæt", 14320));
+        mats.add(new Material("1041", "T hængsel 390 mm", 390, 1, "stk", 6396));
+        mats.add(new Material("1042", "Vinkelbeslag 35 mm", 35, 1, "stk", 2495));
+        mats.add(new Material("1043", "5,0 x 40 mm. beslagskruer 250 stk.", 40, 250, "pakke", 21000));
+        mats.add(new Material("1044", "5,0 x 100 mm. skruer 100 stk", 100, 100, "pakke", 18900));
         
         //Roof materials (pack)
-        mats.add(new Material("1060", "B & C Dobbelt -s sort", 0, 300, "stk"));
-        mats.add(new Material("1061", "B & C Rygsten sort", 0, 1, "stk"));
-        mats.add(new Material("1062", "B & C Toplægte holder", 0, 1, "stk"));
-        mats.add(new Material("1063", "B & C Rygstensbeslag", 0, 1, "stk"));
-        mats.add(new Material("1064", "B & C Tagstens bindere & nakkekroge", 0, 1, "pakke"));
+        mats.add(new Material("1060", "B & C Dobbelt -s sort", 0, 300, "stk", 589));
+        mats.add(new Material("1061", "B & C Rygsten sort", 0, 1, "stk", 4500));
+        mats.add(new Material("1062", "B & C Toplægte holder", 0, 1, "stk", 1995));
+        mats.add(new Material("1063", "B & C Rygstensbeslag", 0, 1, "stk", 1010));
+        mats.add(new Material("1064", "B & C Tagstens bindere & nakkekroge", 0, 1, "pakke", 81900));
 
         String sql = "";
         String sqlStart = "INSERT INTO stock VALUES (";
         String sqlEnd = ");\n";
 
         for (Material m : mats) {
-            sql += sqlStart + "'" + m.getRef() + "', '" + m.getName() + "', " + m.getLength() + ", " + m.getAmount() + ", '" + m.getUnit() + "'" + sqlEnd;
+            sql += sqlStart + "'" + m.getRef() + "', '" + m.getName() + "', " + m.getLength() + ", " + m.getAmount() + ", '" + m.getUnit() + "', " + m.getPrice() + sqlEnd;
         }
 
         f.format(sql);
