@@ -30,7 +30,7 @@ public class AdvancedCalculator {
         this.shedWidth = shedWidth;
         this.roof = roof;
         pl = new PartList();
-        svg = new GenerateSVG(length, width, shedLength, shedWidth, 1000, 300, 350);
+        svg = new GenerateSVG(length, width, shedLength, shedWidth, 1000, 200, 350);
         mf = new MaterialFacade();
         //catch exception here?
 

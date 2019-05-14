@@ -156,7 +156,7 @@ public class GenerateSVG {
         
         // Back Outhang (with last post) Lines & Text
         sideViewSVG += generateMeasLine(offset + width - outhangBack - 10, 425, offset + width, 425, true);
-        sideViewSVG += generateMeasLine(offset + width, 430, offset + width, 405, false);
+        sideViewSVG += generateMeasLine(offset + width, 430, offset + width, 155, false);
         sideViewSVG += generateText(width + 10, 340, "" + (outhangBack + 10), true);
         
         for (int i = 0; i < postCount - (shedHeight > 0 && shedWidth > 0 ? 2 : 1); i++) {
