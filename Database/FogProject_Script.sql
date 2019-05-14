@@ -1,10 +1,10 @@
 CREATE SCHEMA IF NOT EXISTS `fogproject`;
+DROP TABLE IF EXISTS `fogproject`.`orders`;
 DROP TABLE IF EXISTS `fogproject`.`users`;
 DROP TABLE IF EXISTS `fogproject`.`requests`;
 DROP TABLE IF EXISTS `fogproject`.`stockToCategory`;
 DROP TABLE IF EXISTS `fogproject`.`categories`;
 DROP TABLE IF EXISTS `fogproject`.`stock`;
-DROP TABLE IF EXISTS `fogproject`.`orders`;
 
 CREATE TABLE `fogproject`.`stock` (
   `ref` VARCHAR(100) NOT NULL,
@@ -66,11 +66,18 @@ CREATE TABLE `fogproject`.`users` (
 
 CREATE TABLE `fogproject`.`orders` (
 	`id` INT NOT NULL AUTO_INCREMENT,
+    `username` VARCHAR(45) NOT NULL,
     `width` INT NOT NULL,
     `length` INT NOT NULL,
     `shedWidth` INT NOT NULL,
     `shedLength` INT NOT NULL,
     `roof` VARCHAR(100) NOT NULL,
     `angle` INT NOT NULL,
-     PRIMARY KEY(`id`)
+     PRIMARY KEY(`id`),
+     INDEX `usernameFK_idx` (`username` ASC) VISIBLE,
+     CONSTRAINT `usernameFK`,
+		FOREIGN KEY (`username`),
+		REFERENCES `fogproject`.`users` (`username`),
+		ON DELETE CASCADE,
+		ON UPDATE CASCADE    
 );

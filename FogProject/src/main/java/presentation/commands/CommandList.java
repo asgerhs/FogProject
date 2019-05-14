@@ -15,8 +15,9 @@ public class CommandList {
         commands.put("showParts", new ShowPartsCommand("showParts.jsp"));
         commands.put("request", new RequestCommand("request.jsp"));
         commands.put("requestList", new RequestListCommand("requestList.jsp"));
-        commands.put("login", new LoginCommand("request.jsp"));
+        commands.put("login", new LoginCommand("FrontController?command=request"));
         commands.put("logout", new LogoutCommand("index.jsp"));
+        commands.put("orders", new OrderCommand("order.jsp"));
     }
     
     public static synchronized Command commandForm(String key){

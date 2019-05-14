@@ -18,7 +18,7 @@ import java.util.List;
  *
  * @author Asger Hermind Sørensen
  */
-public class OrderMapper implements MapperInterface<Order, Integer> {
+public class OrderMapper implements MapperInterface<Order, String> {
 
     @Override
     public List<Order> getAll() throws OrderException {
@@ -44,11 +44,11 @@ public class OrderMapper implements MapperInterface<Order, Integer> {
     }
 
     @Override
-    public Order getById(Integer id) throws OrderException {
+    public Order getById(String username) throws OrderException {
         try(Connection con = DBConnector.getConnection()){
             String sql = "SELECT * FROM orders where id = ?;";
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1, id);
+            ps.setString(1, username);
             ResultSet rs = ps.executeQuery();
             
             while(rs.next()){
