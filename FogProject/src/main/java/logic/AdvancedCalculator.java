@@ -14,19 +14,11 @@ import logic.facades.MaterialFacade;
  */
 public class AdvancedCalculator {
 
-    private int length;
-    private int width;
-    private int posts;
-    private int rafters;
+    private int length, width, posts, rafters, rafterSpace, shedLength, shedWidth, shedPostsWidth, shedPostsLength, shedReglar, shedCladdings;
     private boolean shed;
-    private int shedLength;
-    private int shedWidth;
-    private int shedPostsWidth;
-    private int shedPostsLength;
-    private int shedReglar;
-    private int shedCladdings;
     private boolean roof;
     private PartList pl;
+    private GenerateSVG svg;
     private ArrayList<Material> materials;
     private MaterialFacade mf;
 
@@ -38,6 +30,7 @@ public class AdvancedCalculator {
         this.shedWidth = shedWidth;
         this.roof = roof;
         pl = new PartList();
+        svg = new GenerateSVG(length, width, shedLength, shedWidth, 1000, 300, 350);
         mf = new MaterialFacade();
         //catch exception here?
 
@@ -70,9 +63,12 @@ public class AdvancedCalculator {
                 calcShedReglarWidth();
                 calcShedCladding();
                 calcShedMisc();
+                svg.generateShed();
             }
             
             calcScrewPackages();
+            svg.generateMeasurements(rafters, rafterSpace, posts / 2);
+            svg.generateRoof();
         } catch (MapperExceptions ex) {
             // TODO: Exception
         }
@@ -84,10 +80,13 @@ public class AdvancedCalculator {
         p += (length % 5000 == 0) ? ((length / 500) - 1) * 2 : ((length / 5000) - 1 + 1) * 2;
         posts = p;
         
+        svg.generatePosts(p / 2, 10);
+        
         if(shed) {
             p += 2;
             p += calcShedPosts(true);
             p += calcShedPosts(false);
+            svg.generateShedPosts(10);
         }
         
         materials = mf.getAllByCategory(7);
@@ -153,6 +152,8 @@ public class AdvancedCalculator {
                 break;
             }
         }
+        
+        svg.generateShedReglar(10);
     }
      
     private void calcShedCladding() throws MapperExceptions {
@@ -189,12 +190,16 @@ public class AdvancedCalculator {
         int a = calcLength / extraPosts + 50;
         
         addParts(a, 6, extraPosts * 2, "Remme i sider, sadles ned i stolper", new MatSortLowComparator());
+        
+        svg.generateRem(10);
     }
 
     //Calculating the roof of carport
     private void calcRafters() throws MapperExceptions {
         rafters = length / 500;
+        rafterSpace = (length / 10) / (rafters - 1);
         addParts(width, 5, length / 500, "Spær, monteres på rem", new MatSortHeighComparator());
+        svg.generateRafter(rafters, rafterSpace, 10);
     }
 
     //need a good way to present this
@@ -286,6 +291,7 @@ public class AdvancedCalculator {
         double bandLength = Math.sqrt(Math.pow(fullSpace, 2) + Math.pow(width, 2)) * 2;
         int bandCount = (bandLength % 10000.0 == 0) ? (int) (bandLength / 10000.0) : (int) (bandLength / 10000.0 + 1.0);
         pl.addMiscPart(new Part(materials.get(0), bandCount, "Til vindkryds på spær"));
+        svg.generateBand(rafters, rafterSpace, 10);
     }
     
     private void calcFasciasScrews() throws MapperExceptions {
@@ -332,6 +338,10 @@ public class AdvancedCalculator {
 
     public PartList getParts() {
         return pl;
+    }
+    
+     public GenerateSVG getTopViewSVG() {
+        return svg;
     }
     
     public int getLength(){
