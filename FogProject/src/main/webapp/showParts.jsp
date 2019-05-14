@@ -13,6 +13,8 @@
 <%
     ArrayList<Part> woodParts = (ArrayList<Part>) session.getAttribute("woodParts");
     ArrayList<Part> miscParts = (ArrayList<Part>) session.getAttribute("miscParts");
+    String topViewSVG = (String) session.getAttribute("topViewSVG");
+    String sideViewSVG = (String) session.getAttribute("sideViewSVG");
 %>
 
 <div class="greyBox">
@@ -67,6 +69,15 @@
         </thead>
     </table>
 </div>
-<%@include file = "svg.jsp" %>
+            
+<div class="greyBox">
+    <h1>Top View</h1>
+    <%= topViewSVG %>
+</div>
 
+<div class="greyBox">
+    <h1>Side View</h1>
+    <%= sideViewSVG %>
+</div>
+    
 <%@include file = "footer.jsp" %>

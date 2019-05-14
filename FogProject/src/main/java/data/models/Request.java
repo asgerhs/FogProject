@@ -5,19 +5,8 @@ package data.models;
  * @author Andreas Vikke
  */
 public class Request {
-    private int id;
-    private int width;
-    private int length;
-    private int shedWidth;
-    private int shedLength;
-    private String roof;
-    private int angle;
-    private String name;
-    private String address;
-    private String zipCity;
-    private String phone;
-    private String email;
-    private String note;
+    private int id, width, length, shedWidth, shedLength, angle;
+    private String roof, name, address, zipCity, phone, email, note;
 
     public Request(int width, int length, int shedWidth, int shedLength, String roof, int angle, String name, String address, String zipCity, String phone, String email, String note) {
         this.width = width;

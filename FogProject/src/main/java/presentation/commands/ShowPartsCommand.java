@@ -56,6 +56,8 @@ public class ShowPartsCommand implements Command {
 
         session.setAttribute("woodParts", wood);
         session.setAttribute("miscParts", misc);
+        session.setAttribute("topViewSVG", calc.getTopViewSVG().getTopViewSVG());
+        session.setAttribute("sideViewSVG", calc.getTopViewSVG().getSideViewSVG());
 
         session.setAttribute("length", calc.getLength());
         session.setAttribute("width", calc.getWidth());

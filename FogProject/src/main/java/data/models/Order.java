@@ -50,5 +50,4 @@ public class Order {
     public int getAngle() {
         return angle;
     }
-
 }

@@ -60,14 +60,24 @@ rect {
 .post {
     stroke-width: 4px;
 }
-
+.svgBold {
+    stroke-width: 4px;
+}
 .shed{
     stroke-width: 3px;
 
 }
 line{
+    stroke: black;
+    stroke-width: 2px;
+}
+.svgDashed{
     stroke: red;
     stroke-width: 2px;
+}
+.svgThin{
+    stroke: #000;
+    stroke-width: 1px;
 }
 
 .measure{

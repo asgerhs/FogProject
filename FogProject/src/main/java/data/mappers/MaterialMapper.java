@@ -11,7 +11,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.TreeMap;
 
 /**
  *
@@ -38,7 +37,8 @@ public class MaterialMapper implements MapperInterface<Material, Integer> {
                         rs.getString("name"),
                         rs.getInt("length"),
                         rs.getInt("amount"),
-                        rs.getString("unit")));
+                        rs.getString("unit"),
+                        rs.getInt("price")));
             }
             return materials;
         } catch (SQLException ex) {
@@ -68,7 +68,8 @@ public class MaterialMapper implements MapperInterface<Material, Integer> {
                         rs.getString("name"),
                         rs.getInt("length"),
                         rs.getInt("amount"),
-                        rs.getString("unit"));
+                        rs.getString("unit"),
+                        rs.getInt("price"));
             }
             return null;
         } catch (SQLException ex) {
@@ -91,7 +92,8 @@ public class MaterialMapper implements MapperInterface<Material, Integer> {
                         rs.getString("name"),
                         rs.getInt("length"),
                         rs.getInt("amount"),
-                        rs.getString("unit")));
+                        rs.getString("unit"),
+                        rs.getInt("price")));
             }
             
             return materials;
