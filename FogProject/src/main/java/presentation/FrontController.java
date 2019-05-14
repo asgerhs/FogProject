@@ -1,6 +1,11 @@
 package presentation;
 
+import data.mappers.MaterialMapper;
 import java.io.IOException;
+import java.util.logging.FileHandler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,6 +22,25 @@ import presentation.commands.CommandList;
  */
 @WebServlet(name = "FrontController", urlPatterns = {"/FrontController"})
 public class FrontController extends HttpServlet {
+    
+
+    private static Logger logger = Logger.getLogger(MaterialMapper.class.getName());
+     
+    public FrontController() {
+        try {
+
+            FileHandler handler = new FileHandler("Fog-frontController-log.%u.%g.txt",
+                    1024 * 1024, 10);
+            logger.addHandler(handler);
+
+            handler.setFormatter(new SimpleFormatter());
+        } catch (IOException ex) {
+            logger.log(Level.SEVERE, "Error in logger", new IOException("Error: "));
+
+        }
+    }    
+    
+    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -40,6 +64,8 @@ public class FrontController extends HttpServlet {
         } catch (Exception ex) {
             request.setAttribute("message", ex.getMessage());
             System.out.println(ex.getMessage());
+            logger.log(Level.SEVERE, "Error: ", new Exception("hello"));
+            
             //RequestDispatcher dispatcher = request.getRequestDispatcher(ex.getMessage());
             //dispatcher.forward(request, response);
             //backup exception???

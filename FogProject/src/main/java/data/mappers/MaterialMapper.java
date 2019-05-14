@@ -50,7 +50,7 @@ public class MaterialMapper implements MapperInterface<Material> {
     public List<Material> getAll() throws MapperExceptions {
         try (Connection con = new DBConnector().getConnection()) {
             List<Material> materials = new ArrayList();
-            String qry = "SELECT * FROM stock";
+            String qry = "SELECT * FROM stockk";
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery(qry);
 

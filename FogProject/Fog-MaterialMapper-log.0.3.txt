@@ -1,6 +1,6 @@
-May 14, 2019 12:49:07 PM data.mappers.MaterialMapper getAll
-SEVERE: Error in getAll Method.
+May 14, 2019 12:51:40 PM data.mappers.MaterialMapper getById
+SEVERE: Error in getByID Method.
 java.sql.SQLException: Error: 
-	at data.mappers.MaterialMapper.getAll(MaterialMapper.java:66)
-	at data.mappers.MaterialMapper.main(MaterialMapper.java:129)
+	at data.mappers.MaterialMapper.getById(MaterialMapper.java:98)
+	at data.mappers.MaterialMapper.main(MaterialMapper.java:131)
 
