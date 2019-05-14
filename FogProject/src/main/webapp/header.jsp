@@ -34,6 +34,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="http://localhost:8080/FogProject/FrontController?command=request">Request</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="http://localhost:8080/FogProject/FrontController?command=requestList">RequestList</a>
+                </li>
             </ul>
         </div>
     </nav>

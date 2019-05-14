@@ -1,9 +1,5 @@
 package data.models;
 
-import java.util.Map;
-import java.util.Objects;
-import java.util.TreeMap;
-
 /**
  *
  * @author Martin Frederiksen
@@ -49,7 +45,6 @@ public class Material {
         return price;
     }
     
-
     @Override
     public String toString() {
         return "Material{" + "ref=" + ref + ", name=" + name + ", length=" + length + ", amount=" + amount + ", unit=" + unit + '}';

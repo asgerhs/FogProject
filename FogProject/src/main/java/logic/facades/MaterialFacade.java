@@ -5,7 +5,6 @@ import data.mappers.MaterialMapper;
 import data.models.Material;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.TreeMap;
 import logic.interfaces.FacadeInterface;
 
 /**
