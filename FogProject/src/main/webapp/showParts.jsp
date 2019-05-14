@@ -76,7 +76,7 @@
 </div>
 
 <div class="greyBox">
-    <h1>Top View</h1>
+    <h1>Side View</h1>
     <%= sideViewSVG %>
 </div>
     
