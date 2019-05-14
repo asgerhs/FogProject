@@ -1,12 +1,11 @@
-CREATE SCHEMA IF NOT EXISTS `fogproject`;
-DROP TABLE IF EXISTS `fogproject`.`users`;
-DROP TABLE IF EXISTS `fogproject`.`requests`;
-DROP TABLE IF EXISTS `fogproject`.`stockToCategory`;
-DROP TABLE IF EXISTS `fogproject`.`categories`;
-DROP TABLE IF EXISTS `fogproject`.`stock`;
-DROP TABLE IF EXISTS `fogproject`.`orders`;
+DROP TABLE IF EXISTS `users`;
+DROP TABLE IF EXISTS `requests`;
+DROP TABLE IF EXISTS `stockToCategory`;
+DROP TABLE IF EXISTS `categories`;
+DROP TABLE IF EXISTS `stock`;
+DROP TABLE IF EXISTS `orders`;
 
-CREATE TABLE `fogproject`.`stock` (
+CREATE TABLE `stock` (
   `ref` VARCHAR(100) NOT NULL,
   `name` VARCHAR(45) NOT NULL,
   `length` INT NOT NULL,
@@ -16,30 +15,30 @@ CREATE TABLE `fogproject`.`stock` (
   PRIMARY KEY (`ref`)
 );
 
-CREATE TABLE `fogproject`.`categories` (
+CREATE TABLE `categories` (
 	`id` INT NOT NULL AUTO_INCREMENT,
     `name` VARCHAR(100) NOT NULL,
     PRIMARY KEY(`id`)
 );
 
-CREATE TABLE `fogproject`.`stockToCategory` (
+CREATE TABLE `stockToCategory` (
   `stockRef` VARCHAR(100) NOT NULL,
   `categoryId` INT NOT NULL,
   PRIMARY KEY (`stockRef`, `categoryId`),
   INDEX `categoryId_FK_idx` (`categoryId` ASC) VISIBLE,
   CONSTRAINT `stockRef_FK`
     FOREIGN KEY (`stockRef`)
-    REFERENCES `fogproject`.`stock` (`ref`)
+    REFERENCES `stock` (`ref`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `categoryId_FK`
     FOREIGN KEY (`categoryId`)
-    REFERENCES `fogproject`.`categories` (`id`)
+    REFERENCES `categories` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION
 );
 
-CREATE TABLE `fogproject`.`requests` (
+CREATE TABLE `requests` (
 	`id` INT NOT NULL AUTO_INCREMENT,
     `width` INT NOT NULL,
     `length` INT NOT NULL,
@@ -56,7 +55,7 @@ CREATE TABLE `fogproject`.`requests` (
     PRIMARY KEY(`id`)
 );
 
-CREATE TABLE `fogproject`.`users` (
+CREATE TABLE `users` (
   `username` VARCHAR(45) NOT NULL,
   `email` VARCHAR(100) NOT NULL,
   `password` VARCHAR(100) NOT NULL,
@@ -65,7 +64,7 @@ CREATE TABLE `fogproject`.`users` (
   UNIQUE INDEX `email_UNIQUE` (`email` ASC) VISIBLE
 );
 
-CREATE TABLE `fogproject`.`orders` (
+CREATE TABLE `orders` (
 	`id` INT NOT NULL AUTO_INCREMENT,
     `width` INT NOT NULL,
     `length` INT NOT NULL,

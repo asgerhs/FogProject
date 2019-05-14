@@ -1,6 +1,6 @@
 package data.mappers;
 
-import data.DBConnector;
+import data.DatabaseConnector;
 import data.exceptions.MapperExceptions;
 import data.interfaces.MapperInterface;
 import data.models.Material;
@@ -11,12 +11,19 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import javax.sql.DataSource;
 
 /**
  *
  * @author Asger Hermind Sørensen & Martin Frederiksen
  */
 public class MaterialMapper implements MapperInterface<Material> {
+    
+    DatabaseConnector dbc = new DatabaseConnector();
+    
+    public MaterialMapper(DataSource ds) {
+        dbc.setDataSource(ds);
+    }
 
     /**
      * Returns all materials in database
@@ -26,7 +33,7 @@ public class MaterialMapper implements MapperInterface<Material> {
      */
     @Override
     public List<Material> getAll() throws MapperExceptions {
-        try (Connection con = new DBConnector().getConnection()) {
+        try (Connection con = dbc.open()) {
             List<Material> materials = new ArrayList();
             String qry = "SELECT * FROM stock";
             Statement stmt = con.createStatement();
@@ -55,7 +62,7 @@ public class MaterialMapper implements MapperInterface<Material> {
      */
     @Override
     public Material getById(int id) throws MapperExceptions {
-        try (Connection con = new DBConnector().getConnection()) {
+        try (Connection con = dbc.open()) {
             
             String qry = "SELECT * FROM stock WHERE id = ?";
 
@@ -79,7 +86,7 @@ public class MaterialMapper implements MapperInterface<Material> {
     }
     
     public ArrayList<Material> getAllByCategory(int id) throws MapperExceptions {
-        try (Connection con = new DBConnector().getConnection()) {
+        try (Connection con = dbc.open()) {
             ArrayList<Material> materials = new ArrayList();
             String qry = "SELECT * FROM stock JOIN stockToCategory ON ref = stockRef WHERE categoryId = ?";
             
@@ -101,13 +108,5 @@ public class MaterialMapper implements MapperInterface<Material> {
             ex.printStackTrace();
             throw new MapperExceptions("Error occoured while getting data from database");
         }
-    }
-
-    public static void main(String[] args) throws MapperExceptions {
-        MaterialMapper mm = new MaterialMapper();
-        ArrayList<Material> mml = mm.getAllByCategory(1);
-        mml = mm.getAllByCategory(2);
-        
-        System.out.println(mml);
     }
 }

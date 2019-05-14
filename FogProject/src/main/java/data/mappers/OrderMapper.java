@@ -1,6 +1,6 @@
 package data.mappers;
 
-import data.DBConnector;
+import data.DatabaseConnector;
 import data.exceptions.OrderException;
 import data.exceptions.RequestExceptions;
 import data.interfaces.OrderMapperInterface;
@@ -13,16 +13,23 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import javax.sql.DataSource;
 
 /**
  *
  * @author Asger Hermind Sørensen
  */
 public class OrderMapper implements OrderMapperInterface {
+    
+    DatabaseConnector dbc = new DatabaseConnector();
+    
+    public OrderMapper(DataSource ds) {
+        dbc.setDataSource(ds);
+    }
 
     @Override
     public List<Order> getAllOrders() throws OrderException {
-        try(Connection con = DBConnector.getConnection()){
+        try(Connection con = dbc.open()){
             List<Order> order = new ArrayList();
             String qry = "SELECT * FROM orders;";
             Statement stmt = con.createStatement();
@@ -45,7 +52,7 @@ public class OrderMapper implements OrderMapperInterface {
 
     @Override
     public Order getById(int id) throws OrderException {
-        try(Connection con = DBConnector.getConnection()){
+        try(Connection con = dbc.open()){
             String sql = "SELECT * FROM orders where id = ?;";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, id);
@@ -68,7 +75,7 @@ public class OrderMapper implements OrderMapperInterface {
 
     @Override
     public void createOrder(Request request) throws OrderException {
-        try(Connection con = DBConnector.getConnection()){
+        try(Connection con = dbc.open()){
             String sql = "INSERT INTO orders "
                     + "(width, length, shedWidth, shedLength, roof, angle)"
                     + "VALUES(?,?,?,?,?,?);";
@@ -87,15 +94,4 @@ public class OrderMapper implements OrderMapperInterface {
             throw new OrderException("Couldn't create Order");
         }
     }
-
-    
-    public static void main(String[] args) throws RequestExceptions, OrderException {
-        OrderMapper om = new OrderMapper();
-        RequestMapper rm = new RequestMapper();
-        om.createOrder(rm.getById(1));
-    }
-    
-    
-    
-    
 }

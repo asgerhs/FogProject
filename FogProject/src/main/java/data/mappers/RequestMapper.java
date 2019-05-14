@@ -1,6 +1,6 @@
 package data.mappers;
 
-import data.DBConnector;
+import data.DatabaseConnector;
 import data.exceptions.RequestExceptions;
 import data.interfaces.MapperInterface;
 import data.models.Request;
@@ -11,16 +11,23 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import javax.sql.DataSource;
 
 /**
  *
  * @author William Sehested Huusfeldt
  */
 public class RequestMapper implements MapperInterface<Request> {
+    
+    DatabaseConnector dbc = new DatabaseConnector();
+    
+    public RequestMapper(DataSource ds) {
+        dbc.setDataSource(ds);
+    }
 
     @Override
     public List<Request> getAll() throws RequestExceptions {
-        try (Connection con = new DBConnector().getConnection()) {
+        try (Connection con = dbc.open()) {
             List<Request> requests = new ArrayList();
             String qry = "SELECT * FROM requests";
             Statement stmt = con.createStatement();
@@ -50,7 +57,7 @@ public class RequestMapper implements MapperInterface<Request> {
 
     @Override
     public Request getById(int id) throws RequestExceptions {
-        try (Connection con = new DBConnector().getConnection()) {
+        try (Connection con = dbc.open()) {
 
             String qry = "SELECT * FROM requests WHERE id = ?";
 
@@ -82,7 +89,7 @@ public class RequestMapper implements MapperInterface<Request> {
     }
     
     public void updateRequest(Request rqst, int Id) throws SQLException, RequestExceptions{
-        try(Connection con = new DBConnector().getConnection()){
+        try(Connection con = dbc.open()){
             
             String qry = "UPDATE requests SET width = ?, length = ?, shedWidth = ?, shedLength = ?,"
                     + " roof = ?, angle = ? where id = ?;";
@@ -106,7 +113,7 @@ public class RequestMapper implements MapperInterface<Request> {
     
     
     public void add(Request request) throws RequestExceptions {
-        try (Connection con = new DBConnector().getConnection()) {
+        try (Connection con = dbc.open()) {
 
             String qry = "INSERT INTO requests"
                     + "(width, length, shedWidth, shedLength, roof, angle, name, address, zipCity, phone, email, note)"
@@ -131,20 +138,5 @@ public class RequestMapper implements MapperInterface<Request> {
             ex.printStackTrace();
             throw new RequestExceptions("Error occoured while adding request to database");
         }
-    }
-
-    public static void main(String[] args) throws RequestExceptions, SQLException {
-        RequestMapper rm = new RequestMapper();
-//        //rm.getAll();
-//        List<Request> requests = new ArrayList();
-//        for (Request r : requests) {
-//            rm.getAll();
-//        }
-
-        Request rqst = new Request(800, 800, 100, 100, "idfk", 0, "hej", "jeg", "hader", "Strings", "i", "add metoder");
-        rm.updateRequest(new Request(400, 200, 100, 100, "flat", 0, "hej", "jeg", "hader", "Strings", "i", "add metoder"), 4);
-//        rm.add(rqst);
-        Request rs = new Request(600, 760, 100, 100, "not flat", 30, "Someone", "TestAddress2", "TestZip2", "TestPhone", "Test@Test.Test", "This is a test");
-        rm.add(rs);
     }
 }

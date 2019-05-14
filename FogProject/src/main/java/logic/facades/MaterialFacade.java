@@ -1,5 +1,6 @@
 package logic.facades;
 
+import data.DataSourceMySQL;
 import data.exceptions.MapperExceptions;
 import data.mappers.MaterialMapper;
 import data.models.Material;
@@ -12,7 +13,7 @@ import logic.interfaces.FacadeInterface;
  * @author Martin Frederiksen
  */
 public class MaterialFacade implements FacadeInterface<Material>{
-    MaterialMapper mm = new MaterialMapper();
+    MaterialMapper mm = new MaterialMapper(new DataSourceMySQL().getDataSource());
     
     @Override
     public List<Material> getAll() throws MapperExceptions {
