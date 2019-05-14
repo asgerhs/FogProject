@@ -20,7 +20,7 @@ public class GenerateSQLDummyScript {
     private Formatter f;
 
     private void generateMaterialScript() throws IOException {
-        f.format("-- Woods\n");
+        //f.format("-- Woods\n");
         List<Material> mats = new ArrayList();
 
         // Woods
@@ -67,7 +67,7 @@ public class GenerateSQLDummyScript {
         mats.add(new Material("1064", "B & C Tagstens bindere & nakkekroge", 0, 1, "pakke", 81900));
 
         String sql = "";
-        String sqlStart = "INSERT INTO stock VALUES (";
+        String sqlStart = "INSERT INTO `stock` VALUES (";
         String sqlEnd = ");\n";
 
         for (Material m : mats) {
@@ -78,7 +78,7 @@ public class GenerateSQLDummyScript {
     }
 
     private void generateMatCategoriesScript() throws IOException {
-        f.format("\n\n-- Categories\n");
+        //f.format("\n\n-- Categories\n");
         List<Category> cats = new ArrayList();
 
         //all categories in database
@@ -101,7 +101,7 @@ public class GenerateSQLDummyScript {
         cats.add(new Category("Tagpakke"));
         
         String sql = "";
-        String sqlStart = "INSERT INTO categories(name) VALUES (";
+        String sqlStart = "INSERT INTO `categories`(name) VALUES (";
         String sqlEnd = ");\n";
 
         for (Category c : cats) {
@@ -112,7 +112,7 @@ public class GenerateSQLDummyScript {
     }
 
     private void generateMatCategoriesLinkScript() throws IOException {
-        f.format("\n\n-- Categories - Stock link\n");
+        //f.format("\n\n-- Categories - Stock link\n");
         ArrayList<MatCatLink> link = new ArrayList();
 
         //all categories in database
@@ -166,7 +166,7 @@ public class GenerateSQLDummyScript {
         link.add(new MatCatLink("1064", 17));
         
         String sql = "";
-        String sqlStart = "INSERT INTO stockToCategory VALUES (";
+        String sqlStart = "INSERT INTO `stockToCategory` VALUES (";
         String sqlEnd = ");\n";
 
         for (MatCatLink mcl : link) {
@@ -177,10 +177,10 @@ public class GenerateSQLDummyScript {
     }
 
     private void generateUserScript() throws IOException {
-        f.format("\n\n-- Users\n");
+        //f.format("\n\n-- Users\n");
 
         String sql = "";
-        String sqlStart = "INSERT INTO users VALUES (";
+        String sqlStart = "INSERT INTO `users` VALUES (";
         String sqlEnd = ");\n";
 
         ArrayList<String> names = new ArrayList();
@@ -192,17 +192,19 @@ public class GenerateSQLDummyScript {
                 name = faker.name().firstName();
             }
             names.add(name);
-            sql += sqlStart + "'" + name + "', '" + name + "@somewhere.dk', " + "'1234', 'SALESMAN'" + sqlEnd;
+            sql += sqlStart + "'" + name + "', '" + name + "@somewhere.dk', " + "'1234', 'CUSTOMER'" + sqlEnd;
         }
-
+        sql += sqlStart + "'" + "BestSalesman" + "', '" + "BestSalesman" + "@somewhere.dk', " + "'1234', 'EMPLOYEE'" + sqlEnd;
+        sql += sqlStart + "'" + "Admin" + "', '" + "Admin" + "@somewhere.dk', " + "'1234', 'ADMIN'" + sqlEnd;
+        
         f.format(sql);
     }
 
     private void generateRequestScript() throws IOException {
-        f.format("\n\n-- Requests\n");
+        //f.format("\n\n-- Requests\n");
 
         String sql = "";
-        String sqlStart = "INSERT INTO requests"
+        String sqlStart = "INSERT INTO `requests`"
                 + "(width, length, shedWidth, shedLength, roof, angle, name, address, zipCity, phone, email, note) VALUES (";
         String sqlEnd = ");\n";
 
@@ -224,7 +226,7 @@ public class GenerateSQLDummyScript {
 
     @Test
     public void runTests() throws IOException {
-        FileWriter fw = new FileWriter("GeneratedDummyData.sql", false);
+        FileWriter fw = new FileWriter("../Database/GeneratedDummyData.sql", false);
         f = new Formatter(fw);
 
         generateMaterialScript();

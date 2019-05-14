@@ -11,7 +11,7 @@ import logic.interfaces.FacadeInterface;
  *
  * @author Martin Frederiksen
  */
-public class RequestFacade implements FacadeInterface<Request>{
+public class RequestFacade implements FacadeInterface<Request, Integer>{
     RequestMapper rm = new RequestMapper(new DataSourceMySQL().getDataSource());
     
     @Override
@@ -20,7 +20,7 @@ public class RequestFacade implements FacadeInterface<Request>{
     }
 
     @Override
-    public Request getById(int id) throws RequestExceptions {
+    public Request getById(Integer id) throws RequestExceptions {
         return rm.getById(id);
     }
     

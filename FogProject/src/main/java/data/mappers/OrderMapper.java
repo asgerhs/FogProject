@@ -3,7 +3,7 @@ package data.mappers;
 import data.DatabaseConnector;
 import data.exceptions.OrderException;
 import data.exceptions.RequestExceptions;
-import data.interfaces.OrderMapperInterface;
+import data.interfaces.MapperInterface;
 import data.models.Order;
 import data.models.Request;
 import java.sql.Connection;
@@ -19,8 +19,8 @@ import javax.sql.DataSource;
  *
  * @author Asger Hermind Sørensen
  */
-public class OrderMapper implements OrderMapperInterface {
-    
+public class OrderMapper implements MapperInterface<Order, String> {
+
     DatabaseConnector dbc = new DatabaseConnector();
     
     public OrderMapper(DataSource ds) {
@@ -28,7 +28,7 @@ public class OrderMapper implements OrderMapperInterface {
     }
 
     @Override
-    public List<Order> getAllOrders() throws OrderException {
+    public List<Order> getAll() throws OrderException {
         try(Connection con = dbc.open()){
             List<Order> order = new ArrayList();
             String qry = "SELECT * FROM orders;";
@@ -51,11 +51,11 @@ public class OrderMapper implements OrderMapperInterface {
     }
 
     @Override
-    public Order getById(int id) throws OrderException {
+    public Order getById(String username) throws OrderException {
         try(Connection con = dbc.open()){
             String sql = "SELECT * FROM orders where id = ?;";
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1, id);
+            ps.setString(1, username);
             ResultSet rs = ps.executeQuery();
             
             while(rs.next()){
@@ -73,7 +73,6 @@ public class OrderMapper implements OrderMapperInterface {
         return null;
     }
 
-    @Override
     public void createOrder(Request request) throws OrderException {
         try(Connection con = dbc.open()){
             String sql = "INSERT INTO orders "

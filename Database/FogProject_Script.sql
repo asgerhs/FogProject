@@ -59,18 +59,25 @@ CREATE TABLE `users` (
   `username` VARCHAR(45) NOT NULL,
   `email` VARCHAR(100) NOT NULL,
   `password` VARCHAR(100) NOT NULL,
-  `role` ENUM('ADMIN', 'SALESMAN') NOT NULL,
+  `role` ENUM('ADMIN', 'EMPLOYEE', 'CUSTOMER') NOT NULL DEFAULT 'CUSTOMER',
   PRIMARY KEY (`username`),
   UNIQUE INDEX `email_UNIQUE` (`email` ASC) VISIBLE
 );
 
 CREATE TABLE `orders` (
 	`id` INT NOT NULL AUTO_INCREMENT,
+    `username` VARCHAR(45) NOT NULL,
     `width` INT NOT NULL,
     `length` INT NOT NULL,
     `shedWidth` INT NOT NULL,
     `shedLength` INT NOT NULL,
     `roof` VARCHAR(100) NOT NULL,
     `angle` INT NOT NULL,
-     PRIMARY KEY(`id`)
+     PRIMARY KEY(`id`),
+     INDEX `usernameFK_idx` (`username` ASC) VISIBLE,
+     CONSTRAINT `usernameFK`
+		FOREIGN KEY (`username`)
+		REFERENCES `fogproject`.`users` (`username`)
+		ON DELETE CASCADE
+		ON UPDATE CASCADE    
 );

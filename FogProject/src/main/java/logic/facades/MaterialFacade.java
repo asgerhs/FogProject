@@ -12,7 +12,7 @@ import logic.interfaces.FacadeInterface;
  *
  * @author Martin Frederiksen
  */
-public class MaterialFacade implements FacadeInterface<Material>{
+public class MaterialFacade implements FacadeInterface<Material, String>{
     MaterialMapper mm = new MaterialMapper(new DataSourceMySQL().getDataSource());
     
     @Override
@@ -21,19 +21,11 @@ public class MaterialFacade implements FacadeInterface<Material>{
     }
 
     @Override
-    public Material getById(int id) throws MapperExceptions {
-        return mm.getById(id);
+    public Material getById(String ref) throws MapperExceptions {
+        return mm.getById(ref);
     }
 
     public ArrayList<Material> getAllByCategory(int id) throws MapperExceptions {
         return mm.getAllByCategory(id);
-    }
-
-    public static void main(String[] args) throws MapperExceptions {
-        MaterialFacade mf = new MaterialFacade();
-        ArrayList<Material> mats = new ArrayList();
-        mats = mf.getAllByCategory(1);
-        mats = mf.getAllByCategory(2);
-        System.out.println(mats);
     }
 }

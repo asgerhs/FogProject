@@ -17,7 +17,7 @@ import javax.sql.DataSource;
  *
  * @author Asger Hermind Sørensen & Martin Frederiksen
  */
-public class MaterialMapper implements MapperInterface<Material> {
+public class MaterialMapper implements MapperInterface<Material, String> {
     
     DatabaseConnector dbc = new DatabaseConnector();
     
@@ -61,13 +61,13 @@ public class MaterialMapper implements MapperInterface<Material> {
      * @return material matching id in param
      */
     @Override
-    public Material getById(int id) throws MapperExceptions {
+    public Material getById(String ref) throws MapperExceptions {
         try (Connection con = dbc.open()) {
             
-            String qry = "SELECT * FROM stock WHERE id = ?";
+            String qry = "SELECT * FROM stock WHERE ref = ?";
 
             PreparedStatement ps = con.prepareStatement(qry);
-            ps.setInt(1, id);
+            ps.setString(1, ref);
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {

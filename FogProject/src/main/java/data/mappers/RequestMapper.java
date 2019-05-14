@@ -17,7 +17,7 @@ import javax.sql.DataSource;
  *
  * @author William Sehested Huusfeldt
  */
-public class RequestMapper implements MapperInterface<Request> {
+public class RequestMapper implements MapperInterface<Request, Integer> {
     
     DatabaseConnector dbc = new DatabaseConnector();
     
@@ -56,7 +56,7 @@ public class RequestMapper implements MapperInterface<Request> {
     }
 
     @Override
-    public Request getById(int id) throws RequestExceptions {
+    public Request getById(Integer id) throws RequestExceptions {
         try (Connection con = dbc.open()) {
 
             String qry = "SELECT * FROM requests WHERE id = ?";

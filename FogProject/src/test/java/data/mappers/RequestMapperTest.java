@@ -1,12 +1,12 @@
 package data.mappers;
 
 import data.DatabaseConnector;
-import data.models.Material;
+import data.exceptions.RequestExceptions;
+import data.models.Request;
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.sql.Connection;
-import java.util.ArrayList;
 import java.util.List;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -16,9 +16,9 @@ import static org.junit.Assert.*;
  *
  * @author Andreas Vikke
  */
-public class MaterialMapperTest {
+public class RequestMapperTest {
     
-    private static MaterialMapper materialMapper;
+    private static RequestMapper requestMapper;
     
     @BeforeClass
     public static void beforeClass() {
@@ -53,38 +53,51 @@ public class MaterialMapperTest {
             ex.printStackTrace();
         }
         
-        materialMapper = new MaterialMapper(new TestDataSourceMySQL().getDataSource());
+        requestMapper = new RequestMapper(new TestDataSourceMySQL().getDataSource());
     }
-
+    
     /**
-     * Test of getAll method, of class MaterialMapper.
+     * Test of getAll method, of class RequestMapper.
      */
     @Test
     public void testGetAll() throws Exception {
         System.out.println("getAll");
-        List<Material> result = materialMapper.getAll();
+        List<Request> result = requestMapper.getAll();
+        assertNotNull(result);
         assertTrue(result.size() > 10);
     }
 
     /**
-     * Test of getById method, of class MaterialMapper.
+     * Test of getById method, of class RequestMapper.
      */
     @Test
     public void testGetById() throws Exception {
         System.out.println("getById");
-        String ref = "1000";
-        Material result = materialMapper.getById(ref);
-        assertEquals("25x200 mm. trykimp. Brædt", result.getName());
+        Integer id = 4;
+        Request result = requestMapper.getById(id);
+        assertNotNull(result);
     }
 
     /**
-     * Test of getAllByCategory method, of class MaterialMapper.
+     * Test of updateRequest method, of class RequestMapper.
      */
     @Test
-    public void testGetAllByCategory() throws Exception {
-        System.out.println("getAllByCategory");
-        int id = 11;
-        ArrayList<Material> result = materialMapper.getAllByCategory(id);
-        assertTrue(result.size() > 3);
-    }    
+    public void testUpdateRequest() throws Exception {
+        System.out.println("updateRequest");
+        assertTrue(true);
+    }
+
+    /**
+     * Test of add method, of class RequestMapper.
+     */
+    @Test
+    public void testAdd() {
+        System.out.println("add");
+        try {
+            Request request = new Request(100, 100, 100, 100, "1013", 0, "Test", "Test", "Test", "Test", "Test", "Test");
+            requestMapper.add(request);
+        } catch (RequestExceptions ex) {
+            fail(ex.getMessage());
+        }
+    }
 }
