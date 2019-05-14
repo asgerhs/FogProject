@@ -107,12 +107,14 @@ public class UserMapper implements MapperInterface<User, String> {
     public static void main(String[] args) throws MapperExceptions {
         UserMapper um = new UserMapper();
         List<User> u = new ArrayList();
-        User user;
-        user = um.getById("ALBERT");
+        User user = null;
+        //user = um.getById("admin");
+        //System.out.println(RoleEnum.ADMIN.equals(user.getRole()));
+        /*user = um.getById("ALBERT");
         System.out.println(user.getEmail());
         System.out.println(um.validateUser(user.getUsername(), "1234"));
         um.changePassword(user.getUsername(), "12345");
-        
+        */
         /*u = um.getAll();
         for (User us : u) {
             System.out.println(us.getUsername());

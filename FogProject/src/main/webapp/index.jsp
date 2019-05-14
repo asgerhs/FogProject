@@ -9,12 +9,12 @@
 <form class ="greyBox login" method="POST">
   <div class="form-group">
       <!-- aria-describedby="userHelp" -->
-      <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter username or email">
+      <input type="text" class="form-control" id="exampleInputEmail1" name="username"  placeholder="Enter username or email">
   </div>
   <div class="form-group">
-    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+      <input type="password" class="form-control" id="exampleInputPassword1" name="password" placeholder="Password">
   </div>
-  <button type="submit" class="btn btn-dark">Login</button>
+  <button type="submit" class="btn btn-dark" formaction="FrontController?command=login">Login</button>
   <button type="submit" class="btn btn-dark">Register</button>
   <br>
   

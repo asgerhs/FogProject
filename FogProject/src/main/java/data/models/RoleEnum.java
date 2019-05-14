@@ -6,5 +6,6 @@ package data.models;
  */
 public enum RoleEnum{
     ADMIN,
-    SALESMAN
+    EMPLOYEE,
+    CUSTOMER 
 }

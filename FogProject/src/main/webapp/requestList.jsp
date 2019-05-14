@@ -4,6 +4,7 @@
     Author     : William Sehested Huusfeldt
 --%>
 
+<%@page import="java.util.List"%>
 <%@page import="logic.facades.RequestFacade"%>
 <%@page import="data.models.Request"%>
 <%@page import="java.util.ArrayList"%>  
@@ -11,8 +12,7 @@
 
 <!DOCTYPE html>
 <%
-    //ArrayList<Request> requests = (ArrayList<Request>) session.getAttribute("requests");
-    RequestFacade requests = new RequestFacade();
+    List<Request> requests = (List<Request>) session.getAttribute("requestList");
 %>
 <table class="table">
     <thead class="thead-dark">
@@ -32,7 +32,7 @@
     </tr>
   </thead>
   <tbody>
-    <% for(Request r : requests.getAll()) { 
+    <% for(Request r : requests) { 
     %>
     <tr>
       <td><%=r.getWidth() %></td>
