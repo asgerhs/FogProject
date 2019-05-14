@@ -4,6 +4,7 @@ import data.exceptions.OrderException;
 import data.mappers.OrderMapper;
 import data.models.Order;
 import data.models.Request;
+import data.models.User;
 import java.util.List;
 import logic.interfaces.FacadeInterface;
 
@@ -26,5 +27,9 @@ public class OrderFacade implements FacadeInterface<Order, String> {
 
     public void createOrder(Request req) throws OrderException{
         om.createOrder(req);
+    }
+    
+    public List<Order> getAllByUser(User user) throws OrderException {
+        return om.getAllByUser(user);
     }
 }

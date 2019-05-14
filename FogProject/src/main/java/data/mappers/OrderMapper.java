@@ -6,6 +6,7 @@ import data.exceptions.RequestExceptions;
 import data.interfaces.MapperInterface;
 import data.models.Order;
 import data.models.Request;
+import data.models.User;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -23,20 +24,20 @@ public class OrderMapper implements MapperInterface<Order, String> {
     @Override
     public List<Order> getAll() throws OrderException {
         try(Connection con = DBConnector.getConnection()){
-            List<Order> order = new ArrayList();
+            List<Order> orders = new ArrayList();
             String qry = "SELECT * FROM orders;";
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery(qry);
             
             while(rs.next()){
-                order.add(new Order(rs.getInt("width"),
+                orders.add(new Order(rs.getInt("width"),
                         rs.getInt("length"),
                         rs.getInt("shedWidth"),
                         rs.getInt("shedLength"),
                         rs.getString("roof"),
                         rs.getInt("angle")));
             }
-            return order;
+            return orders;
         }catch(SQLException ex){
             ex.printStackTrace();
             throw new OrderException("Couldn't access orders from Database");
@@ -79,11 +80,34 @@ public class OrderMapper implements MapperInterface<Order, String> {
             ps.setString(5, request.getRoof());
             ps.setInt(6, request.getAngle());
             
-            ps.executeUpdate();
+            ps.executeQuery();
             
         }catch(SQLException ex){
             ex.printStackTrace();
             throw new OrderException("Couldn't create Order");
+        }
+    }
+    
+    public List<Order> getAllByUser(User user) throws OrderException{
+        try(Connection con = DBConnector.getConnection()){
+            List<Order> orders = new ArrayList();
+            String qry = "SELECT * FROM orders WHERE username = ?;";
+            PreparedStatement ps = con.prepareStatement(qry);
+            ps.setString(1, user.getUsername());
+            ResultSet rs = ps.executeQuery();
+            
+            while(rs.next()){
+                orders.add(new Order(rs.getInt("width"),
+                        rs.getInt("length"),
+                        rs.getInt("shedWidth"),
+                        rs.getInt("shedLength"),
+                        rs.getString("roof"),
+                        rs.getInt("angle")));
+            }
+            return orders;
+        }catch(SQLException ex){
+            ex.printStackTrace();
+            throw new OrderException("Couldn't access orders from Database");
         }
     }
 
@@ -92,6 +116,9 @@ public class OrderMapper implements MapperInterface<Order, String> {
         OrderMapper om = new OrderMapper();
         RequestMapper rm = new RequestMapper();
         om.createOrder(rm.getById(1));
+        
+        
+        
     }    
     
     

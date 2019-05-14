@@ -135,11 +135,10 @@ public class RequestMapper implements MapperInterface<Request, Integer> {
 
     public static void main(String[] args) throws RequestExceptions, SQLException {
         RequestMapper rm = new RequestMapper();
-//        //rm.getAll();
-//        List<Request> requests = new ArrayList();
-//        for (Request r : requests) {
-//            rm.getAll();
-//        }
+        /*List<Request> requests = rm.getAll();
+        for (Request r : requests) {
+            System.out.println(r.getAddress());
+        }*/
 
         Request rqst = new Request(800, 800, 100, 100, "idfk", 0, "hej", "jeg", "hader", "Strings", "i", "add metoder");
         rm.updateRequest(new Request(400, 200, 100, 100, "flat", 0, "hej", "jeg", "hader", "Strings", "i", "add metoder"), 4);

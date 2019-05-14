@@ -11,7 +11,7 @@
 <%@include file = "header.jsp" %>
 
 <%
-    ArrayList<Request> requests = (ArrayList<Request>) session.getAttribute("requests");
+    ArrayList<Request> requests = (ArrayList<Request>) session.getAttribute("requestList");
 %>
 <div class="greyBox">
     <table class="table">
@@ -36,3 +36,5 @@
       </tbody>
     </table>
 </div>
+
+<%@include file = "footer.jsp" %>

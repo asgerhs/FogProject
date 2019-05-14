@@ -46,10 +46,10 @@
 
                     <%if (u != null && u.getRole().equals(RoleEnum.EMPLOYEE)) {%>
                     <li class="nav-item active">
-                        <a class="nav-link" href="#">Request<span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="FrontController?command=request">Request<span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item active">
-                        <a class="nav-link" href="#">Requests</a>
+                        <a class="nav-link" href="FrontController?command=requestList">Requests</a>
                     </li>
                     <%}%>
 
