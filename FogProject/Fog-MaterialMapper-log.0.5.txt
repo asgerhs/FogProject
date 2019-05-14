@@ -1,0 +1,6 @@
+May 14, 2019 12:45:44 PM data.mappers.MaterialMapper getAll
+SEVERE: Error in getAll Method.
+java.sql.SQLException: Error: 
+	at data.mappers.MaterialMapper.getAll(MaterialMapper.java:66)
+	at data.mappers.MaterialMapper.main(MaterialMapper.java:129)
+

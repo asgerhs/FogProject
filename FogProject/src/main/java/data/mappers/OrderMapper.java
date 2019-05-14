@@ -6,6 +6,7 @@ import data.exceptions.RequestExceptions;
 import data.interfaces.OrderMapperInterface;
 import data.models.Order;
 import data.models.Request;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -13,6 +14,10 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.FileHandler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 
 /**
  *
@@ -20,6 +25,27 @@ import java.util.List;
  */
 public class OrderMapper implements OrderMapperInterface {
 
+    
+    private static Logger logger = Logger.getLogger(MaterialMapper.class.getName());
+     
+    public OrderMapper() {
+        try {
+
+            FileHandler handler = new FileHandler("Fog-DBConnector-log.%u.%g.txt",
+                    1024 * 1024, 10);
+            logger.addHandler(handler);
+
+            handler.setFormatter(new SimpleFormatter());
+        } catch (IOException ex) {
+            logger.log(Level.SEVERE, "Error in logger", new IOException("Error: "));
+
+        }
+    }
+    
+    
+    
+    
+    
     @Override
     public List<Order> getAllOrders() throws OrderException {
         try(Connection con = DBConnector.getConnection()){
