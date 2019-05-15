@@ -45,7 +45,7 @@ public class DBConnector {
                Class.forName(DRIVER);
                connection = DriverManager.getConnection(URL, USER, PASSWORD);
            }catch(SQLException | ClassNotFoundException ex){
-               logger.log(Level.SEVERE, "Error in DBConnector", ex );
+               logger.log(Level.SEVERE, "Error in DBConnector", ex.getCause());
            }
        return connection;
     }
