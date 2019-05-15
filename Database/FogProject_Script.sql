@@ -67,7 +67,7 @@ CREATE TABLE `fogproject`.`users` (
 
 CREATE TABLE `fogproject`.`orders` (
 	`id` INT NOT NULL AUTO_INCREMENT,
-    `username` VARCHAR(45) NOT NULL,
+    `email` VARCHAR(45) NOT NULL,
     `width` INT NOT NULL,
     `length` INT NOT NULL,
     `shedWidth` INT NOT NULL,
@@ -75,10 +75,10 @@ CREATE TABLE `fogproject`.`orders` (
     `roof` VARCHAR(100) NOT NULL,
     `angle` INT NOT NULL,
      PRIMARY KEY(`id`),
-     INDEX `usernameFK_idx` (`username` ASC) VISIBLE,
-     CONSTRAINT `usernameFK`,
-		FOREIGN KEY (`username`),
-		REFERENCES `fogproject`.`users` (`username`),
-		ON DELETE CASCADE,
+     INDEX `emailFK_idx` (`email` ASC) VISIBLE,
+     CONSTRAINT `emailFK`
+		FOREIGN KEY (`email`)
+		REFERENCES `fogproject`.`users` (`email`)
+		ON DELETE CASCADE
 		ON UPDATE CASCADE    
 );
