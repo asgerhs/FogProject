@@ -12,6 +12,7 @@ import logic.interfaces.FacadeInterface;
  * @author Martin Frederiksen
  */
 public class MaterialFacade implements FacadeInterface<Material>{
+    
     MaterialMapper mm = new MaterialMapper();
     
     @Override
