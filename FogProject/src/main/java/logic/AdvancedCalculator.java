@@ -1,11 +1,17 @@
 package logic;
 
 import data.exceptions.MapperExceptions;
+import data.mappers.MaterialMapper;
 import data.models.Material;
 import data.models.Part;
 import data.models.PartList;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.logging.FileHandler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 import logic.facades.MaterialFacade;
 
 /**
@@ -33,7 +39,18 @@ public class AdvancedCalculator {
         pl = new PartList();
         svg = new GenerateSVG(length, width, shedLength, shedWidth, 1000, 200, 350);
         mf = new MaterialFacade();
-        //catch exception here?
+        
+        try{
+            FileHandler handler = new FileHandler("Logs/AdvancedCalculator/AdvancedCalculator-log.%u.%g.txt",
+            1024 * 1024, 10);
+            logger.addHandler(handler);
+
+            handler.setFormatter(new SimpleFormatter());
+        } catch (IOException ex) {
+            logger.log(Level.SEVERE, "Error in logger", new IOException("Error: "));
+
+        }
+        
 
         try {
 
@@ -72,7 +89,7 @@ public class AdvancedCalculator {
             svg.generateMeasurements(rafters, rafterSpace, posts / 2);
             svg.generateRoof();
         } catch (MapperExceptions ex) {
-            // TODO: Exception
+            logger.log(Level.SEVERE, "Error in AdvancedCalculator: ", new MapperExceptions("Error: "));
         }
     }
 

@@ -3,7 +3,6 @@ package logic;
 import com.github.javafaker.Faker;
 import data.models.Category;
 import data.models.Material;
-import data.models.Request;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
