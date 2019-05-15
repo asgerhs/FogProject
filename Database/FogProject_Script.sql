@@ -76,9 +76,9 @@ CREATE TABLE `fogproject`.`orders` (
     `angle` INT NOT NULL,
      PRIMARY KEY(`id`),
      INDEX `usernameFK_idx` (`username` ASC) VISIBLE,
-     CONSTRAINT `usernameFK`,
-		FOREIGN KEY (`username`),
-		REFERENCES `fogproject`.`users` (`username`),
-		ON DELETE CASCADE,
+     CONSTRAINT `usernameFK`
+		FOREIGN KEY (`username`)
+		REFERENCES `fogproject`.`users` (`username`)
+		ON DELETE CASCADE
 		ON UPDATE CASCADE    
 );
