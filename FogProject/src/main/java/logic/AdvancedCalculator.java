@@ -28,6 +28,8 @@ public class AdvancedCalculator {
     private ArrayList<Material> materials;
     private MaterialFacade mf;
     private double angle;
+    
+    private static Logger logger = Logger.getLogger(AdvancedCalculator.class.getName());
 
     public AdvancedCalculator(int length, int width, boolean shed, int shedLength, int shedWidth, boolean roof) {
         this.length = length;
