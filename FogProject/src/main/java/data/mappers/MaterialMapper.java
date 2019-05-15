@@ -29,7 +29,7 @@ public class MaterialMapper implements MapperInterface<Material> {
     public MaterialMapper() {
         try {
 
-            FileHandler handler = new FileHandler("Logs/MaterialMapper/MaterialMapper-log.%u.%g.txt",
+            FileHandler handler = new FileHandler("logs/MaterialMapper/MaterialMapper-log.%u.%g.txt",
                     1024 * 1024, 10);
             logger.addHandler(handler);
 
