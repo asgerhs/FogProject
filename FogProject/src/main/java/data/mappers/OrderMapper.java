@@ -70,17 +70,18 @@ public class OrderMapper implements MapperInterface<Order, String> {
     public void createOrder(Request request) throws OrderException {
         try(Connection con = DBConnector.getConnection()){
             String sql = "INSERT INTO orders "
-                    + "(width, length, shedWidth, shedLength, roof, angle)"
-                    + "VALUES(?,?,?,?,?,?);";
+                    + "(email, width, length, shedWidth, shedLength, roof, angle)"
+                    + "VALUES(?,?,?,?,?,?,?);";
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1, request.getWidth());
-            ps.setInt(2, request.getLength());
-            ps.setInt(3, request.getShedWidth());
-            ps.setInt(4, request.getShedLength());
-            ps.setString(5, request.getRoof());
-            ps.setInt(6, request.getAngle());
+            ps.setString(1, request.getEmail());
+            ps.setInt(2, request.getWidth());
+            ps.setInt(3, request.getLength());
+            ps.setInt(4, request.getShedWidth());
+            ps.setInt(5, request.getShedLength());
+            ps.setString(6, request.getRoof());
+            ps.setInt(7, request.getAngle());
             
-            ps.executeQuery();
+            ps.executeUpdate();
             
         }catch(SQLException ex){
             ex.printStackTrace();
@@ -115,7 +116,9 @@ public class OrderMapper implements MapperInterface<Order, String> {
     public static void main(String[] args) throws RequestExceptions, OrderException {
         OrderMapper om = new OrderMapper();
         RequestMapper rm = new RequestMapper();
-        om.createOrder(rm.getById(1));
+        Request r = new Request(6000, 7800, 2400, 2400, "flat", 200, "Admin", "test", "test", "test", "Admin@Somewhere.dk", "");
+        //new Request(0, 0, 0, 0, roof, 0, name, address, zipCity, phone, email, note)
+        om.createOrder(r);
         
         
         

@@ -26,4 +26,8 @@ public class RequestFacade implements FacadeInterface<Request, Integer>{
     public void add(Request request) throws RequestExceptions {
         rm.add(request);
     }
+    
+    public void remove(int id) throws RequestExceptions {
+        rm.remove(id);
+    }
 }

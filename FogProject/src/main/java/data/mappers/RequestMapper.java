@@ -27,7 +27,7 @@ public class RequestMapper implements MapperInterface<Request, Integer> {
             ResultSet rs = stmt.executeQuery(qry);
 
             while (rs.next()) {
-                requests.add(new Request(
+                Request r = new Request(
                         rs.getInt("width"),
                         rs.getInt("length"),
                         rs.getInt("shedWidth"),
@@ -39,7 +39,9 @@ public class RequestMapper implements MapperInterface<Request, Integer> {
                         rs.getString("zipCity"),
                         rs.getString("phone"),
                         rs.getString("email"),
-                        rs.getString("note")));
+                        rs.getString("note"));
+                r.setId(rs.getInt("id"));
+                requests.add(r);
             }
             return requests;
         } catch (SQLException ex) {
@@ -132,18 +134,33 @@ public class RequestMapper implements MapperInterface<Request, Integer> {
             throw new RequestExceptions("Error occoured while adding request to database");
         }
     }
+    
+    public void remove(int id) throws RequestExceptions{
+        try(Connection con = new DBConnector().getConnection()){
+            String qry = "DELETE FROM requests WHERE id = ?;";
+            PreparedStatement ps = con.prepareStatement(qry);
+            ps.setInt(1, id);
+            ps.executeUpdate();
+            
+            
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            throw new RequestExceptions("Error while removing request from database");
+        }
+    }
 
     public static void main(String[] args) throws RequestExceptions, SQLException {
         RequestMapper rm = new RequestMapper();
-        /*List<Request> requests = rm.getAll();
+        List<Request> requests = rm.getAll();
         for (Request r : requests) {
-            System.out.println(r.getAddress());
-        }*/
+            System.out.println(r.getId());
+        }
 
-        Request rqst = new Request(800, 800, 100, 100, "idfk", 0, "hej", "jeg", "hader", "Strings", "i", "add metoder");
-        rm.updateRequest(new Request(400, 200, 100, 100, "flat", 0, "hej", "jeg", "hader", "Strings", "i", "add metoder"), 4);
-//        rm.add(rqst);
-        Request rs = new Request(600, 760, 100, 100, "not flat", 30, "Someone", "TestAddress2", "TestZip2", "TestPhone", "Test@Test.Test", "This is a test");
-        rm.add(rs);
+        //Request rqst = new Request(800, 800, 100, 100, "idfk", 0, "hej", "jeg", "hader", "Strings", "i", "add metoder");
+        //rm.updateRequest(new Request(400, 200, 100, 100, "flat", 0, "hej", "jeg", "hader", "Strings", "i", "add metoder"), 4);
+        //rm.add(rqst);
+        //Request rs = new Request(600, 760, 100, 100, "not flat", 30, "Someone", "TestAddress2", "TestZip2", "TestPhone", "Test@Test.Test", "This is a test");
+        //rm.add(rs);
+        //rm.remove(28);
     }
 }

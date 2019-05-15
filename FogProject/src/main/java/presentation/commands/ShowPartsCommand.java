@@ -1,9 +1,13 @@
 package presentation.commands;
 
+import data.exceptions.RequestExceptions;
 import data.models.Part;
+import data.models.Request;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import logic.AdvancedCalculator;
@@ -40,8 +44,15 @@ public class ShowPartsCommand implements Command {
             params.put(pName, request.getParameter(pName));
         }
 
-        if (params.get("submit") != null) {
-
+        /*if (request.getParameter("requestId") != null) {
+            try {
+                Request r = rf.getById(Integer.parseInt(request.getParameter("requestId")));
+                System.out.println(r.getId());
+                calc = new AdvancedCalculator(r.getLength(), r.getWidth(), true, r.getShedLength(), r.getShedWidth(), false);
+            } catch (RequestExceptions ex) {
+                ex.printStackTrace();
+            }
+        } else*/ if (params.get("submit") != null) {
             calc = new AdvancedCalculator(
                     Integer.parseInt(params.get("length")) * 10,
                     Integer.parseInt(params.get("width")) * 10,
@@ -66,9 +77,7 @@ public class ShowPartsCommand implements Command {
         session.setAttribute("shedWidth", calc.getShedWidth());
         session.setAttribute("rafters", calc.getRafters());
         session.setAttribute("posts", calc.getPosts());
-        
-        
-        
+
         return target;
     }
 }

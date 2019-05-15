@@ -26,7 +26,14 @@
     </head>
     <body>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <a class="navbar-brand" href=index.jsp></a>
+            
+            <%if (u != null && (u.getRole().equals(RoleEnum.ADMIN) || u.getRole().equals(RoleEnum.EMPLOYEE))) {%>
+            <a class="navbar-brand" href=FrontController?command=requestList></a>
+            <%}else if (u != null && u.getRole().equals(RoleEnum.CUSTOMER)) {%>
+            <a class="navbar-brand" href=FrontController?command=request></a>
+            <%}else{%>
+            <a class="navbar-brand" href=#></a>
+            <%}%>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -40,7 +47,7 @@
                         <a class="nav-link" href="#">Users</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Orders</a>
+                        <a class="nav-link" href="FrontController?command=orders">Orders</a>
                     </li>
                     <%}%>
 

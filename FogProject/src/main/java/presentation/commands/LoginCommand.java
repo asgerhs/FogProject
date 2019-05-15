@@ -2,6 +2,7 @@ package presentation.commands;
 
 import data.exceptions.CommandExceptions;
 import data.exceptions.MapperExceptions;
+import data.models.RoleEnum;
 import data.models.User;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -32,6 +33,7 @@ public class LoginCommand implements Command {
             if (valid) {
                 User user = uf.getById(username);
                 session.setAttribute("user", user);
+                if(user.getRole().equals(RoleEnum.ADMIN) || user.getRole().equals(RoleEnum.EMPLOYEE)) return "FrontController?command=requestList";
                 return target;
             } else {
                 return "index.jsp";
