@@ -4,6 +4,7 @@ import data.DBConnector;
 import data.exceptions.RequestExceptions;
 import data.interfaces.MapperInterface;
 import data.models.Request;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -11,6 +12,10 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.FileHandler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 
 /**
  *
@@ -18,6 +23,22 @@ import java.util.List;
  */
 public class RequestMapper implements MapperInterface<Request> {
 
+    private static Logger logger = Logger.getLogger(MaterialMapper.class.getName());
+
+    public RequestMapper() {
+        try {
+
+            FileHandler handler = new FileHandler("Logs/RequestMapper/MaterialMapper-log.%u.%g.txt",
+                    1024 * 1024, 10);
+            logger.addHandler(handler);
+
+            handler.setFormatter(new SimpleFormatter());
+        } catch (IOException ex) {
+            logger.log(Level.SEVERE, "Error in logger", new IOException("Error: "));
+
+        }
+    }
+    
     @Override
     public List<Request> getAll() throws RequestExceptions {
         try (Connection con = new DBConnector().getConnection()) {
@@ -43,7 +64,7 @@ public class RequestMapper implements MapperInterface<Request> {
             }
             return requests;
         } catch (SQLException ex) {
-            ex.printStackTrace();
+            logger.log(Level.SEVERE, "Error in getAll Method:", new SQLException("Error: "));
             throw new RequestExceptions("Error occoured while getting data from database");
         }
     }
@@ -76,7 +97,7 @@ public class RequestMapper implements MapperInterface<Request> {
             }
             return null;
         } catch (SQLException ex) {
-            ex.printStackTrace();
+            logger.log(Level.SEVERE, "Error in getById Method:", new SQLException("Error: "));
             throw new RequestExceptions("Error occoured while getting data from database");
         }
     }
@@ -99,7 +120,7 @@ public class RequestMapper implements MapperInterface<Request> {
             ps.executeUpdate();
             
         }catch(SQLException ex){
-            ex.printStackTrace();
+            logger.log(Level.SEVERE, "Error in updateRequest Method:", new SQLException("Error: "));
             throw new RequestExceptions("Error occoured while updating data in database");
         }
     }
@@ -128,7 +149,7 @@ public class RequestMapper implements MapperInterface<Request> {
             ps.executeUpdate();
 
         } catch (SQLException ex) {
-            ex.printStackTrace();
+            logger.log(Level.SEVERE, "Error in add Method:", new SQLException("Error: "));
             throw new RequestExceptions("Error occoured while adding request to database");
         }
     }
@@ -138,13 +159,16 @@ public class RequestMapper implements MapperInterface<Request> {
 //        //rm.getAll();
 //        List<Request> requests = new ArrayList();
 //        for (Request r : requests) {
-//            rm.getAll();
-//        }
-
+////            rm.getAll();
+////        }
+//
         Request rqst = new Request(800, 800, 100, 100, "idfk", 0, "hej", "jeg", "hader", "Strings", "i", "add metoder");
-        rm.updateRequest(new Request(400, 200, 100, 100, "flat", 0, "hej", "jeg", "hader", "Strings", "i", "add metoder"), 4);
-//        rm.add(rqst);
-        Request rs = new Request(600, 760, 100, 100, "not flat", 30, "Someone", "TestAddress2", "TestZip2", "TestPhone", "Test@Test.Test", "This is a test");
-        rm.add(rs);
+//        rm.updateRequest(new Request(400, 200, 100, 100, "flat", 0, "hej", "jeg", "hader", "Strings", "i", "add metoder"), 4);
+////        rm.add(rqst);
+//        Request rs = new Request(600, 760, 100, 100, "not flat", 30, "Someone", "TestAddress2", "TestZip2", "TestPhone", "Test@Test.Test", "This is a test");
+//        rm.add(rs);
+  
+    rm.add(rqst);
+
     }
 }

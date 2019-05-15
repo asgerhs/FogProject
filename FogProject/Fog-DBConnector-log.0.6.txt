@@ -1,4 +1,4 @@
-May 14, 2019 1:17:28 PM data.DBConnector getConnection
+May 15, 2019 10:26:48 AM data.DBConnector getConnection
 SEVERE: Error in DBConnector
 java.sql.SQLException: Access denied for user 'root'@'localhost' (using password: YES)
 	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:129)
@@ -11,6 +11,6 @@ java.sql.SQLException: Access denied for user 'root'@'localhost' (using password
 	at java.sql.DriverManager.getConnection(DriverManager.java:664)
 	at java.sql.DriverManager.getConnection(DriverManager.java:247)
 	at data.DBConnector.getConnection(DBConnector.java:46)
-	at data.mappers.RequestMapper.getById(RequestMapper.java:53)
-	at data.mappers.OrderMapper.main(OrderMapper.java:121)
+	at data.mappers.MaterialMapper.getAll(MaterialMapper.java:51)
+	at data.mappers.MaterialMapper.main(MaterialMapper.java:129)
 

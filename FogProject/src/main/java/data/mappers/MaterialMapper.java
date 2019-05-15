@@ -29,7 +29,7 @@ public class MaterialMapper implements MapperInterface<Material> {
     public MaterialMapper() {
         try {
 
-            FileHandler handler = new FileHandler("Fog-MaterialMapper-log.%u.%g.txt",
+            FileHandler handler = new FileHandler("Logs/MaterialMapper/MaterialMapper-log.%u.%g.txt",
                     1024 * 1024, 10);
             logger.addHandler(handler);
 
@@ -50,7 +50,7 @@ public class MaterialMapper implements MapperInterface<Material> {
     public List<Material> getAll() throws MapperExceptions {
         try (Connection con = new DBConnector().getConnection()) {
             List<Material> materials = new ArrayList();
-            String qry = "SELECT * FROM stockk";
+            String qry = "SELECT * FROM stock";
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery(qry);
 
@@ -129,10 +129,7 @@ public class MaterialMapper implements MapperInterface<Material> {
         List<Material> mml = mm.getAll();
         List<Material> mmll = mm.getAllByCategory(2);
         Material mmlll = mm.getById(1);
-        mml = mm.getAll();
-        mmll = mm.getAllByCategory(2);
-        mmlll = mm.getById(2);
 
-        System.out.println(mmlll);
+        System.out.println(mmll);
     }
 }

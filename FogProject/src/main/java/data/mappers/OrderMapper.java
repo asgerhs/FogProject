@@ -30,7 +30,7 @@ public class OrderMapper implements OrderMapperInterface {
     public OrderMapper() {
         try {
 
-            FileHandler handler = new FileHandler("Fog-DBConnector-log.%u.%g.txt",
+            FileHandler handler = new FileHandler("logs/OrderMapper/OrderMapper-log.%u.%g.txt",
                     1024 * 1024, 10);
             logger.addHandler(handler);
 
@@ -45,7 +45,7 @@ public class OrderMapper implements OrderMapperInterface {
     public List<Order> getAllOrders() throws OrderException {
         try (Connection con = DBConnector.getConnection()) {
             List<Order> order = new ArrayList();
-            String qry = "SELECT * FROM orders;";
+            String qry = "SELECT * FROM orderrs;";
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery(qry);
 
@@ -67,7 +67,7 @@ public class OrderMapper implements OrderMapperInterface {
     @Override
     public Order getById(int id) throws OrderException {
         try (Connection con = DBConnector.getConnection()) {
-            String sql = "SELECT * FROM orders where id = ?;";
+            String sql = "SELECT * FROM orderrs where id = ?;";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
@@ -104,7 +104,7 @@ public class OrderMapper implements OrderMapperInterface {
             ps.executeUpdate();
 
         } catch (SQLException ex) {
-            ex.printStackTrace();
+            logger.log(Level.SEVERE, "Error in createOrder method", new SQLException("Error: "));
             throw new OrderException("Couldn't create Order");
         }
     }
