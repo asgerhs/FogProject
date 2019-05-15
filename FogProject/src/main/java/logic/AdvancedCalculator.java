@@ -316,6 +316,8 @@ public class AdvancedCalculator {
         int bandCount = (bandLength % 10000.0 == 0) ? (int) (bandLength / 10000.0) : (int) (bandLength / 10000.0 + 1.0);
         pl.addMiscPart(new Part(materials.get(0), bandCount, "Til vindkryds på spær", materials.get(0).getPrice() * bandCount));
         svg.generateBand(rafters, rafterSpace, 10);
+        System.out.println(bandCount);
+        System.out.println(materials.get(0).getPrice());
     }
 
     private void calcFasciasScrews() throws MapperExceptions {
@@ -417,14 +419,15 @@ public class AdvancedCalculator {
 
     public static void main(String[] args) throws MapperExceptions {
         AdvancedCalculator ac = new AdvancedCalculator(7800, 6500, true, 1000, 1000, false);
+        ac.calcBand();
 //        ac.calcLathsRoof();
 //        ac.calcRoofBricks();
-        for (Part p : ac.getParts().getWoodList()) {
-            System.out.println(p);
-        }
-        for (Part p : ac.getParts().getMiscList()) {
-            System.out.println(p);
-        }
+//        for (Part p : ac.getParts().getWoodList()) {
+//            System.out.println(p);
+//        }
+//        for (Part p : ac.getParts().getMiscList()) {
+//            System.out.println(p);
+//        }
     }
 
     private class MatSortHeighComparator implements Comparator<Material> {

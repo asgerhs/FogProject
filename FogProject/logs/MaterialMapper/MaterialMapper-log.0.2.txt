@@ -1,16 +1,6 @@
-May 15, 2019 10:28:06 AM data.DBConnector getConnection
-SEVERE: Error in DBConnector
-java.sql.SQLException: Access denied for user 'root'@'localhost' (using password: YES)
-	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:129)
-	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97)
-	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
-	at com.mysql.cj.jdbc.ConnectionImpl.createNewIO(ConnectionImpl.java:835)
-	at com.mysql.cj.jdbc.ConnectionImpl.<init>(ConnectionImpl.java:455)
-	at com.mysql.cj.jdbc.ConnectionImpl.getInstance(ConnectionImpl.java:240)
-	at com.mysql.cj.jdbc.NonRegisteringDriver.connect(NonRegisteringDriver.java:199)
-	at java.sql.DriverManager.getConnection(DriverManager.java:664)
-	at java.sql.DriverManager.getConnection(DriverManager.java:247)
-	at data.DBConnector.getConnection(DBConnector.java:46)
-	at data.mappers.MaterialMapper.getAll(MaterialMapper.java:51)
-	at data.mappers.MaterialMapper.main(MaterialMapper.java:129)
+May 15, 2019 11:02:44 AM data.mappers.MaterialMapper getById
+SEVERE: Error in getByID Method.
+java.sql.SQLException: Error: 
+	at data.mappers.MaterialMapper.getById(MaterialMapper.java:98)
+	at data.mappers.MaterialMapper.main(MaterialMapper.java:131)
 

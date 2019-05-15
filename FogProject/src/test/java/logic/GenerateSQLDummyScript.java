@@ -49,8 +49,8 @@ public class GenerateSQLDummyScript {
         mats.add(new Material("1032-l", "Universal 190 mm venstre", 190, 1, "stk", 1590));
         mats.add(new Material("1034", "4,5x60 mm. skruer 200 stk.", 60, 200, "pakke", 15900));
         mats.add(new Material("1035", "4,0x50 mm. skruer 250 stk.", 50, 250, "pakke", 22900));
-        mats.add(new Material("1036", "Bræddebolt 10x120 mm.", 120, 1, "stk", 27900));
-        mats.add(new Material("1037", "Firkantskiver 40x40x11mm", 11, 1, "stk", 28900));
+        mats.add(new Material("1036", "Bræddebolt 10x120 mm.", 120, 1, "stk", 1953));
+        mats.add(new Material("1037", "Firkantskiver 40x40x11mm", 11, 1, "stk", 1011));
         mats.add(new Material("1038", "4,5x70 mm. Skruer 400 stk.", 70, 400, "pakke", 19900));
         mats.add(new Material("1039", "4,5x50 mm. Skruer 300 stk.", 50, 300, "pakke", 9595));
         mats.add(new Material("1040", "Stalddørsgreb 50x75 mm", 75, 1, "sæt", 14320));
