@@ -5,8 +5,6 @@ import data.exceptions.OrderException;
 import data.exceptions.RequestExceptions;
 import data.models.Request;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import logic.facades.OrderFacade;
