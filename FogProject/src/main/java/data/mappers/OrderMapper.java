@@ -25,7 +25,7 @@ import java.util.logging.SimpleFormatter;
  */
 public class OrderMapper implements OrderMapperInterface {
 
-    private static Logger logger = Logger.getLogger(MaterialMapper.class.getName());
+    private static Logger logger = Logger.getLogger(OrderMapper.class.getName());
 
     public OrderMapper() {
         try {

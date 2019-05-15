@@ -23,7 +23,7 @@ import java.util.logging.SimpleFormatter;
  */
 public class RequestMapper implements MapperInterface<Request> {
 
-    private static Logger logger = Logger.getLogger(MaterialMapper.class.getName());
+    private static Logger logger = Logger.getLogger(RequestMapper.class.getName());
 
     public RequestMapper() {
         try {
