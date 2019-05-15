@@ -1,5 +1,6 @@
 package presentation;
 
+import data.exceptions.CommandExceptions;
 import data.mappers.MaterialMapper;
 import java.io.IOException;
 import java.util.logging.FileHandler;
@@ -49,11 +50,7 @@ public class FrontController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    protected void service(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
 
-        String commandKey = request.getParameter("command");
-        Command command = CommandList.commandForm(commandKey);
 
     protected void service(HttpServletRequest request, HttpServletResponse response) {
         try {
