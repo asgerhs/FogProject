@@ -59,7 +59,7 @@ public class MaterialMapperTest {
     /**
      * Test of getAll method, of class MaterialMapper.
      */
-    @Test
+    //@Test
     public void testGetAll() throws Exception {
         System.out.println("getAll");
         List<Material> result = materialMapper.getAll();
@@ -69,7 +69,7 @@ public class MaterialMapperTest {
     /**
      * Test of getById method, of class MaterialMapper.
      */
-    @Test
+    //@Test
     public void testGetById() throws Exception {
         System.out.println("getById");
         String ref = "1000";
@@ -80,7 +80,7 @@ public class MaterialMapperTest {
     /**
      * Test of getAllByCategory method, of class MaterialMapper.
      */
-    @Test
+    //@Test
     public void testGetAllByCategory() throws Exception {
         System.out.println("getAllByCategory");
         int id = 11;

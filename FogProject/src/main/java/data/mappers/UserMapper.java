@@ -1,7 +1,6 @@
 package data.mappers;
 
 import data.DatabaseConnector;
-import data.exceptions.MaterialException;
 import data.exceptions.UsersException;
 import data.interfaces.MapperInterface;
 import data.models.RoleEnum;

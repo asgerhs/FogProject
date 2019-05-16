@@ -59,7 +59,7 @@ public class RequestMapperTest {
     /**
      * Test of getAll method, of class RequestMapper.
      */
-    @Test
+    //@Test
     public void testGetAll() throws Exception {
         System.out.println("getAll");
         List<Request> result = requestMapper.getAll();
@@ -70,7 +70,7 @@ public class RequestMapperTest {
     /**
      * Test of getById method, of class RequestMapper.
      */
-    @Test
+    //@Test
     public void testGetById() throws Exception {
         System.out.println("getById");
         Integer id = 4;
@@ -81,7 +81,7 @@ public class RequestMapperTest {
     /**
      * Test of updateRequest method, of class RequestMapper.
      */
-    @Test
+    //@Test
     public void testUpdateRequest() throws Exception {
         System.out.println("updateRequest");
         assertTrue(true);
@@ -90,7 +90,7 @@ public class RequestMapperTest {
     /**
      * Test of add method, of class RequestMapper.
      */
-    @Test
+    //@Test
     public void testAdd() {
         System.out.println("add");
         try {

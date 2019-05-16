@@ -24,8 +24,8 @@ public class UserFacade implements FacadeInterface<User, String>{
         return um.getById(email);
     }
 
-    public boolean validateUser(String username, String password) throws UsersException {
-        return um.validateUser(username, password);
+    public boolean validateUser(String email, String password) throws UsersException {
+        return um.validateUser(email, password);
     }
     
     public int changePassword(String username, String password) throws UsersException {
