@@ -77,7 +77,7 @@ public class AdvancedCalculator {
     //Calculating the square of carport
     private void calcPosts() throws MapperExceptions {
         int p = 4;
-        p += (length % 5000 == 0) ? ((length / 500) - 1) * 2 : ((length / 5000) - 1 + 1) * 2;
+        p += (length % 5000 == 0) ? ((length / 5000) - 1) * 2 : ((length / 5000) - 1 + 1) * 2;
         posts = p;
         
         svg.generatePosts(p / 2, 10);

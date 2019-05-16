@@ -51,9 +51,10 @@ CREATE TABLE `fogproject`.`requests` (
     `address` VARCHAR(100) NOT NULL,
     `zipCity` VARCHAR(200) NOT NULL,
     `phone` VARCHAR(30) NOT NULL, 
-    `email` VARCHAR(200) NOT NULL,  
+    `email` VARCHAR(100) NOT NULL,  
     `note` VARCHAR(500) NOT NULL, 
     PRIMARY KEY(`id`)
+    -- UNIQUE INDEX `email_UNIQUE` (`email` ASC) VISIBLE
 );
 
 CREATE TABLE `fogproject`.`users` (
@@ -74,11 +75,11 @@ CREATE TABLE `fogproject`.`orders` (
     `shedLength` INT NOT NULL,
     `roof` VARCHAR(100) NOT NULL,
     `angle` INT NOT NULL,
-     PRIMARY KEY(`id`),
-     INDEX `emailFK_idx` (`email` ASC) VISIBLE,
-     CONSTRAINT `emailFK`
-		FOREIGN KEY (`email`)
-		REFERENCES `fogproject`.`users` (`email`)
-		ON DELETE CASCADE
-		ON UPDATE CASCADE    
+     PRIMARY KEY(`id`)
+     -- INDEX `emailFK_idx` (`email` ASC) VISIBLE,
+     -- CONSTRAINT `emailFK`
+		-- FOREIGN KEY (`email`)
+		-- REFERENCES `fogproject`.`requests` (`email`)
+		-- ON DELETE CASCADE
+		-- ON UPDATE CASCADE
 );

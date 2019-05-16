@@ -19,7 +19,7 @@ public class RequestListCommand implements Command {
     private String target;
     private RequestFacade rf;
     private OrderFacade of;
-    
+
     public RequestListCommand(String target) {
         this.target = target;
         rf = new RequestFacade();
@@ -30,25 +30,27 @@ public class RequestListCommand implements Command {
     public String execute(HttpServletRequest request) throws CommandExceptions {
         HttpSession session = request.getSession();
         List<Request> requests;
-        
-        if (request.getParameter("requestId") != null) {
+        if (request.getParameter("orderId") != null) {
+            try {
+                Request r = rf.getById(Integer.parseInt(request.getParameter("orderId")));
+                of.createOrder(r);
+                rf.remove(Integer.parseInt(request.getParameter("orderId")));
+                requests = rf.getAll();
+                session.setAttribute("requestList", requests);
+            } catch (RequestExceptions | OrderException ex) {
+                ex.printStackTrace();
+                throw new CommandExceptions("Something went wrong!");
+            }
+        } else if (request.getParameter("requestId") != null) {
             try {
                 rf.remove(Integer.parseInt(request.getParameter("requestId")));
                 requests = rf.getAll();
                 session.setAttribute("requestList", requests);
             } catch (RequestExceptions ex) {
                 ex.printStackTrace();
+                throw new CommandExceptions("Something went wrong!");
             }
-        } else if(request.getParameter("OrderId") != null) {
-            try {
-                of.createOrder(rf.getById(Integer.parseInt(request.getParameter("OrderId"))));
-                rf.remove(Integer.parseInt(request.getParameter("OrderId")));
-                requests = rf.getAll();
-                session.setAttribute("requestList", requests);
-            } catch (RequestExceptions | OrderException ex) {
-                ex.printStackTrace();
-            }
-        }else {
+        } else {
             try {
                 requests = rf.getAll();
                 session.setAttribute("requestList", requests);

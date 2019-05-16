@@ -8,6 +8,8 @@ import data.models.Request;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import logic.facades.MaterialFacade;
@@ -32,12 +34,25 @@ public class RequestCommand implements Command {
 
     @Override
     public String execute(HttpServletRequest request) throws CommandExceptions {
+        HttpSession session = request.getSession();
         Enumeration<String> paramNames = request.getParameterNames();
         HashMap<String, String> params = new HashMap();
         while(paramNames.hasMoreElements()) {
             String pName = paramNames.nextElement();
             params.put(pName, request.getParameter(pName));
         }
+        
+        if(request.getParameter("requestId") != null) {
+            try {
+                Request r = rf.getById(Integer.parseInt(request.getParameter("requestId")));
+                session.setAttribute("request", r);
+            } catch (RequestExceptions ex) {
+                ex.printStackTrace();
+                throw new CommandExceptions("Can't find request");
+            }
+        }
+        
+        
         
         if(params.get("submit") != null) {
             try {
@@ -65,8 +80,6 @@ public class RequestCommand implements Command {
             }
         } else {
             try {
-                HttpSession session = request.getSession();
-
                 ArrayList<Material> mats;
                 mats = mf.getAllByCategory(10);
 

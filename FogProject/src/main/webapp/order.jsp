@@ -16,6 +16,7 @@
     <thead class="thead-dark">
     <tr>
       <th scope="col">Id</th>
+      <th scope="col">Email</th>
       <th scope="col">Carport brede</th>
       <th scope="col">Carport Længde</th>
       <th scope="col">Skur brede</th>
@@ -29,6 +30,7 @@
     %>
     <tr>
       <td><%=o.getId()%></td>
+      <td><%=o.getEmail()%></td>
       <td><%=o.getWidth()%></td>
       <td><%=o.getLength()%></td>
       <td><%=o.getShedWidth()%></td>

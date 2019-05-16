@@ -19,7 +19,7 @@ import java.util.List;
  *
  * @author Asger Hermind Sørensen
  */
-public class OrderMapper implements MapperInterface<Order, String> {
+public class OrderMapper implements MapperInterface<Order, Integer> {
 
     @Override
     public List<Order> getAll() throws OrderException {
@@ -30,12 +30,15 @@ public class OrderMapper implements MapperInterface<Order, String> {
             ResultSet rs = stmt.executeQuery(qry);
             
             while(rs.next()){
-                orders.add(new Order(rs.getInt("width"),
+                Order o = new Order(rs.getString("email"),
+                        rs.getInt("width"),
                         rs.getInt("length"),
                         rs.getInt("shedWidth"),
                         rs.getInt("shedLength"),
                         rs.getString("roof"),
-                        rs.getInt("angle")));
+                        rs.getInt("angle"));
+                o.setId(rs.getInt("id"));
+                orders.add(o);
             }
             return orders;
         }catch(SQLException ex){
@@ -45,20 +48,24 @@ public class OrderMapper implements MapperInterface<Order, String> {
     }
 
     @Override
-    public Order getById(String username) throws OrderException {
+    public Order getById(Integer id) throws OrderException {
         try(Connection con = DBConnector.getConnection()){
             String sql = "SELECT * FROM orders where id = ?;";
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setString(1, username);
+            ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
             
             while(rs.next()){
-                return new Order(rs.getInt("width"),
+                Order o = new Order(rs.getString("email"),
+                rs.getInt("width"),
                 rs.getInt("length"),
                 rs.getInt("shedWidth"),
                 rs.getInt("shedLength"),
                 rs.getString("roof"),
                 rs.getInt("angle"));
+                o.setId(rs.getInt("id"));
+                return o;
+                
             }
         }catch(SQLException ex){
             ex.printStackTrace();
@@ -98,12 +105,16 @@ public class OrderMapper implements MapperInterface<Order, String> {
             ResultSet rs = ps.executeQuery();
             
             while(rs.next()){
-                orders.add(new Order(rs.getInt("width"),
+                Order o = new Order(rs.getString("email"),
+                        rs.getInt("width"),
                         rs.getInt("length"),
                         rs.getInt("shedWidth"),
                         rs.getInt("shedLength"),
                         rs.getString("roof"),
-                        rs.getInt("angle")));
+                        rs.getInt("angle"));
+                o.setId(rs.getInt("id"));
+                orders.add(o);
+                
             }
             return orders;
         }catch(SQLException ex){
@@ -116,9 +127,12 @@ public class OrderMapper implements MapperInterface<Order, String> {
     public static void main(String[] args) throws RequestExceptions, OrderException {
         OrderMapper om = new OrderMapper();
         RequestMapper rm = new RequestMapper();
-        Request r = new Request(6000, 7800, 2400, 2400, "flat", 200, "Admin", "test", "test", "test", "Admin@Somewhere.dk", "");
+        //Request r = new Request(2000, 2000, 2400, 2400, "flat", 200, "Admin", "test", "test", "test", "Admin@Somewhere.dk", "");
         //new Request(0, 0, 0, 0, roof, 0, name, address, zipCity, phone, email, note)
-        om.createOrder(r);
+        Request rr = rm.getById(12);
+        System.out.println(rr.toString());
+        om.createOrder(rr);
+        //System.out.println(om.getById(10).getLength());
         
         
         

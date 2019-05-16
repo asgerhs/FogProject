@@ -4,11 +4,15 @@
     Author     : Andreas Vikke
 --%>
 
+<%@page import="data.models.Request"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="data.models.Material"%>
 <%@include file="header.jsp" %>
 <%
     ArrayList<Material> mats = (ArrayList<Material>)session.getAttribute("mats");
+    if((Request)session.getAttribute("request") != null){
+        Request r = (Request)session.getAttribute("request");
+    }
 %>
 
 <form class='greyBox bottom ' method="POST">
@@ -72,6 +76,8 @@
         <label>Note</label>
         <input type="text" required="" class="form-control" name="note" value="test">
     </div>
+    
+    
     
     <button type="submit" class="btn btn-dark" formaction="FrontController?command=request&submit=true">Send request</button>
     <button type="submit" class="btn btn-dark" formaction="FrontController?command=showParts&submit=true">Show part list</button>

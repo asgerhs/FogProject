@@ -37,7 +37,7 @@
                 <td>
                     <form id="requestForm" method="POST">
                         <input type="hidden" name="requestId" value="<%=r.getId()%>">
-                        <button type="submit" class="btn btn-dark" formaction="#">Rediger</button>
+                        <button type="submit" class="btn btn-dark" formaction="FrontController?command=request">Rediger</button>
                     </form>    
                 </td>
                 <td>

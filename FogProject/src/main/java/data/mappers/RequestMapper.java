@@ -62,7 +62,7 @@ public class RequestMapper implements MapperInterface<Request, Integer> {
             
 
             while (rs.next()) {
-                return new Request(
+                Request r = new Request(
                         rs.getInt("width"),
                         rs.getInt("length"),
                         rs.getInt("shedWidth"),
@@ -75,6 +75,8 @@ public class RequestMapper implements MapperInterface<Request, Integer> {
                         rs.getString("phone"),
                         rs.getString("email"),
                         rs.getString("note"));
+                r.setId(rs.getInt("id"));
+                return r;
             }
             return null;
         } catch (SQLException ex) {
@@ -151,6 +153,7 @@ public class RequestMapper implements MapperInterface<Request, Integer> {
 
     public static void main(String[] args) throws RequestExceptions, SQLException {
         RequestMapper rm = new RequestMapper();
+        
         List<Request> requests = rm.getAll();
         for (Request r : requests) {
             System.out.println(r.getId());
@@ -161,6 +164,6 @@ public class RequestMapper implements MapperInterface<Request, Integer> {
         //rm.add(rqst);
         //Request rs = new Request(600, 760, 100, 100, "not flat", 30, "Someone", "TestAddress2", "TestZip2", "TestPhone", "Test@Test.Test", "This is a test");
         //rm.add(rs);
-        //rm.remove(28);
+        //rm.remove(7);
     }
 }

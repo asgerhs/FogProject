@@ -44,7 +44,7 @@
                         <a class="nav-link" href="FrontController?command=requestList">Requests<span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Users</a>
+                        <a class="nav-link" href="FrontController?command=showUsers">Users</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="FrontController?command=orders">Orders</a>
