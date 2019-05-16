@@ -17,7 +17,10 @@ import static org.junit.Assert.*;
  */
 public class GenerateSQLDummyScript {
 
-    private Formatter f;
+    private Formatter f; 
+    private String name;
+    ArrayList<String> names = new ArrayList();
+    
 
     private void generateMaterialScript() throws IOException {
         //f.format("-- Woods\n");
@@ -182,12 +185,11 @@ public class GenerateSQLDummyScript {
         String sql = "";
         String sqlStart = "INSERT INTO `users` VALUES (";
         String sqlEnd = ");\n";
-
-        ArrayList<String> names = new ArrayList();
+        
 
         for (int i = 0; i < 100; i++) {
             Faker faker = new Faker();
-            String name = faker.name().firstName();
+            name = faker.name().firstName();
             while (names.contains(name)) {
                 name = faker.name().firstName();
             }
@@ -199,6 +201,7 @@ public class GenerateSQLDummyScript {
         
         f.format(sql);
     }
+    
 
     private void generateRequestScript() throws IOException {
         //f.format("\n\n-- Requests\n");
@@ -208,22 +211,42 @@ public class GenerateSQLDummyScript {
                 + "(width, length, shedWidth, shedLength, roof, angle, name, address, zipCity, phone, email, note) VALUES (";
         String sqlEnd = ");\n";
 
-        for (int i = 0; i < 25; i++) {
+        for (String str : names) {
             Faker faker = new Faker();
             int num = faker.number().numberBetween(500, 780);
             int shed = faker.number().numberBetween(100, 210);
             String phone = faker.phoneNumber().cellPhone();
             String address = faker.address().streetAddress();
-            String name = faker.name().firstName();
+            //String name = faker.name().firstName();
 
             sql += sqlStart + num + ", " + num + ", " + shed + ", " + shed + ", " + "'not flat'" + ", " + 30 + ", '"
-                    + name + "', '" + address + "', '" + name + "s Zip" + "', '" + phone
-                    + "', '" + name + "@somewhere.com" + "', '" + "This is a test for " + name + "'" + sqlEnd;
+                    + str + "', '" + address + "', '" + str + "s Zip" + "', '" + phone
+                    + "', '" + str + "@somewhere.com" + "', '" + "This is a test for " + str + "'" + sqlEnd;
 
         }
         f.format(sql);
     }
 
+     private void generateOrderScript(){
+        f.format("\n\n-- Orders\n");
+        
+        String sql = "";
+        String sqlStart = "INSERT INTO orders"
+                + "(username, width, length, shedWidth, shedLength, roof, angle) VALUES(";
+        String sqlEnd = "); \n";
+        
+        for(String str : names) {
+            Faker faker = new Faker();
+            int num = faker.number().numberBetween(500, 780);
+            int shed = faker.number().numberBetween(100, 210);
+            
+            sql += sqlStart + "'" + str + "'" + ", " + num + ", " + num + ", " + shed + ", " + shed +
+                    ", " + "'not flat'" + ", " + 30 + sqlEnd;
+        }
+        f.format(sql);
+    }
+    
+    
     @Test
     public void runTests() throws IOException {
         FileWriter fw = new FileWriter("../Database/GeneratedDummyData.sql", false);
@@ -233,10 +256,22 @@ public class GenerateSQLDummyScript {
         generateMatCategoriesScript();
         generateMatCategoriesLinkScript();
         generateUserScript();
+        
         generateRequestScript();
-
+        generateOrderScript();
+        
+        for(String str : names){
+            System.out.println(str);
+        }
+        System.out.println("------------------------------");
+        for(String str : names){
+            System.out.println(str);
+        }
+        
         f.close();
         assertTrue(true);
+        
+        
     }
 
     private class MatCatLink {

@@ -50,9 +50,10 @@ CREATE TABLE `requests` (
     `address` VARCHAR(100) NOT NULL,
     `zipCity` VARCHAR(200) NOT NULL,
     `phone` VARCHAR(30) NOT NULL, 
-    `email` VARCHAR(200) NOT NULL,  
+    `email` VARCHAR(100) NOT NULL,  
     `note` VARCHAR(500) NOT NULL, 
     PRIMARY KEY(`id`)
+    -- UNIQUE INDEX `email_UNIQUE` (`email` ASC) VISIBLE
 );
 
 CREATE TABLE `users` (
@@ -66,18 +67,18 @@ CREATE TABLE `users` (
 
 CREATE TABLE `orders` (
 	`id` INT NOT NULL AUTO_INCREMENT,
-    `username` VARCHAR(45) NOT NULL,
+    `email` VARCHAR(45) NOT NULL,
     `width` INT NOT NULL,
     `length` INT NOT NULL,
     `shedWidth` INT NOT NULL,
     `shedLength` INT NOT NULL,
     `roof` VARCHAR(100) NOT NULL,
     `angle` INT NOT NULL,
-     PRIMARY KEY(`id`),
-     INDEX `usernameFK_idx` (`username` ASC) VISIBLE,
-     CONSTRAINT `usernameFK`
-		FOREIGN KEY (`username`)
-		REFERENCES `fogproject`.`users` (`username`)
-		ON DELETE CASCADE
-		ON UPDATE CASCADE    
+     PRIMARY KEY(`id`)
+     -- INDEX `emailFK_idx` (`email` ASC) VISIBLE,
+     -- CONSTRAINT `emailFK`
+		-- FOREIGN KEY (`email`)
+		-- REFERENCES `fogproject`.`requests` (`email`)
+		-- ON DELETE CASCADE
+		-- ON UPDATE CASCADE
 );

@@ -26,7 +26,14 @@
     </head>
     <body>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <a class="navbar-brand" href=index.jsp></a>
+            
+            <%if (u != null && (u.getRole().equals(RoleEnum.ADMIN) || u.getRole().equals(RoleEnum.EMPLOYEE))) {%>
+            <a class="navbar-brand" href=FrontController?command=requestList></a>
+            <%}else if (u != null && u.getRole().equals(RoleEnum.CUSTOMER)) {%>
+            <a class="navbar-brand" href=FrontController?command=request></a>
+            <%}else{%>
+            <a class="navbar-brand" href=#></a>
+            <%}%>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -37,19 +44,19 @@
                         <a class="nav-link" href="FrontController?command=requestList">Requests<span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Users</a>
+                        <a class="nav-link" href="FrontController?command=showUsers">Users</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Orders</a>
+                        <a class="nav-link" href="FrontController?command=orders">Orders</a>
                     </li>
                     <%}%>
 
                     <%if (u != null && u.getRole().equals(RoleEnum.EMPLOYEE)) {%>
                     <li class="nav-item active">
-                        <a class="nav-link" href="#">Request<span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="FrontController?command=request">Request<span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item active">
-                        <a class="nav-link" href="#">Requests</a>
+                        <a class="nav-link" href="FrontController?command=requestList">Requests</a>
                     </li>
                     <%}%>
 

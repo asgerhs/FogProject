@@ -23,7 +23,7 @@ import javax.sql.DataSource;
  *
  * @author Asger Hermind Sørensen
  */
-public class OrderMapper implements MapperInterface<Order, String> {
+public class OrderMapper implements MapperInterface<Order, Integer> {
 
     DatabaseConnector dbc = new DatabaseConnector();
     
@@ -61,30 +61,22 @@ public class OrderMapper implements MapperInterface<Order, String> {
                         rs.getInt("shedWidth"),
                         rs.getInt("shedLength"),
                         rs.getString("roof"),
-                        rs.getInt("angle")));
+                        rs.getInt("angle"));
+                o.setId(rs.getInt("id"));
+                orders.add(o);
             }
-            return order;
-        } catch (SQLException ex) {
-            logger.log(Level.SEVERE, "Error in getAllOrders method", new SQLException("Error: "));
             throw new OrderException("Couldn't access orders from Database");
         }
     }
 
     @Override
-    public Order getById(String username) throws OrderException {
-        try(Connection con = dbc.open()){
             String sql = "SELECT * FROM orders where id = ?;";
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setString(1, username);
+            ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
-
-            while (rs.next()) {
-                return new Order(rs.getInt("width"),
-                        rs.getInt("length"),
-                        rs.getInt("shedWidth"),
-                        rs.getInt("shedLength"),
-                        rs.getString("roof"),
-                        rs.getInt("angle"));
+            return order;
+        } catch (SQLException ex) {
+            logger.log(Level.SEVERE, "Error in getAllOrders method", new SQLException("Error: "));
             }
         } catch (SQLException ex) {
             logger.log(Level.SEVERE, "Error in getById method", new SQLException("Error: "));
@@ -96,16 +88,9 @@ public class OrderMapper implements MapperInterface<Order, String> {
     public void createOrder(Request request) throws OrderException {
         try(Connection con = dbc.open()){
             String sql = "INSERT INTO orders "
-                    + "(width, length, shedWidth, shedLength, roof, angle)"
-                    + "VALUES(?,?,?,?,?,?);";
+                    + "(email, width, length, shedWidth, shedLength, roof, angle)"
+                    + "VALUES(?,?,?,?,?,?,?);";
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1, request.getWidth());
-            ps.setInt(2, request.getLength());
-            ps.setInt(3, request.getShedWidth());
-            ps.setInt(4, request.getShedLength());
-            ps.setString(5, request.getRoof());
-            ps.setInt(6, request.getAngle());
-
             ps.executeUpdate();
 
         } catch (SQLException ex) {
@@ -113,4 +98,6 @@ public class OrderMapper implements MapperInterface<Order, String> {
             throw new OrderException("Couldn't create Order");
         }
     }
+    public Order getById(String username) throws OrderException {
+        try(Connection con = dbc.open()){
 }
