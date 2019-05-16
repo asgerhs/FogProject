@@ -15,7 +15,8 @@ public class Order {
     private int angle;
     private String email;
 
-    public Order(String email, int width, int length, int shedWidth, int shedLength, String roof, int angle) {
+    public Order(int id, String email, int width, int length, int shedWidth, int shedLength, String roof, int angle) {
+        this.id = id;
         this.width = width;
         this.length = length;
         this.shedWidth = shedWidth;
@@ -27,10 +28,6 @@ public class Order {
 
     public int getId() {
         return id;
-    }
-    
-    public void setId(int id){
-        this.id = id;
     }
 
     public int getWidth() {

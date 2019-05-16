@@ -23,26 +23,20 @@ import javax.sql.DataSource;
  * @author William Sehested Huusfeldt
  */
 public class RequestMapper implements MapperInterface<Request, Integer> {
-    
     DatabaseConnector dbc = new DatabaseConnector();
     
     public RequestMapper(DataSource ds) {
         dbc.setDataSource(ds);
     }
-
     private static Logger logger = Logger.getLogger(RequestMapper.class.getName());
-
     public RequestMapper() {
         try {
-
             FileHandler handler = new FileHandler("Logs/RequestMapper/MaterialMapper-log.%u.%g.txt",
                     1024 * 1024, 10);
             logger.addHandler(handler);
-
             handler.setFormatter(new SimpleFormatter());
         } catch (IOException ex) {
             logger.log(Level.SEVERE, "Error in logger", new IOException("Error: "));
-
         }
     }
     
@@ -53,9 +47,8 @@ public class RequestMapper implements MapperInterface<Request, Integer> {
             String qry = "SELECT * FROM requests";
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery(qry);
-
             while (rs.next()) {
-                Request r = new Request(
+                requests.add(new Request(
                         rs.getInt("width"),
                         rs.getInt("length"),
                         rs.getInt("shedWidth"),
@@ -67,9 +60,7 @@ public class RequestMapper implements MapperInterface<Request, Integer> {
                         rs.getString("zipCity"),
                         rs.getString("phone"),
                         rs.getString("email"),
-                        rs.getString("note"));
-                r.setId(rs.getInt("id"));
-                requests.add(r);
+                        rs.getString("note")));
             }
             return requests;
         } catch (SQLException ex) {
@@ -77,20 +68,16 @@ public class RequestMapper implements MapperInterface<Request, Integer> {
             throw new RequestExceptions("Error occoured while getting data from database");
         }
     }
-
     @Override
     public Request getById(Integer id) throws RequestExceptions {
         try (Connection con = dbc.open()) {
-
             String qry = "SELECT * FROM requests WHERE id = ?";
-
             PreparedStatement ps = con.prepareStatement(qry);
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
             
-
             while (rs.next()) {
-                Request r = new Request(
+                return new Request(
                         rs.getInt("width"),
                         rs.getInt("length"),
                         rs.getInt("shedWidth"),
@@ -103,8 +90,6 @@ public class RequestMapper implements MapperInterface<Request, Integer> {
                         rs.getString("phone"),
                         rs.getString("email"),
                         rs.getString("note"));
-                r.setId(rs.getInt("id"));
-                return r;
             }
             return null;
         } catch (SQLException ex) {
@@ -139,11 +124,9 @@ public class RequestMapper implements MapperInterface<Request, Integer> {
     
     public void add(Request request) throws RequestExceptions {
         try (Connection con = dbc.open()) {
-
             String qry = "INSERT INTO requests"
                     + "(width, length, shedWidth, shedLength, roof, angle, name, address, zipCity, phone, email, note)"
                     + "VALUES (?,?,?,?,?,?,?,?,?,?,?,?);";
-
             PreparedStatement ps = con.prepareStatement(qry);
             ps.setInt(1, request.getWidth());
             ps.setInt(2, request.getLength());
@@ -158,7 +141,6 @@ public class RequestMapper implements MapperInterface<Request, Integer> {
             ps.setString(11, request.getEmail());
             ps.setString(12, request.getNote());
             ps.executeUpdate();
-
         } catch (SQLException ex) {
             logger.log(Level.SEVERE, "Error in add Method:", new SQLException("Error: "));
             throw new RequestExceptions("Error occoured while adding request to database");
@@ -166,13 +148,12 @@ public class RequestMapper implements MapperInterface<Request, Integer> {
     }
     
     public void remove(int id) throws RequestExceptions{
-        try(Connection con = new DBConnector().getConnection()){
+        try(Connection con = dbc.open()){
             String qry = "DELETE FROM requests WHERE id = ?;";
             PreparedStatement ps = con.prepareStatement(qry);
             ps.setInt(1, id);
             ps.executeUpdate();
-            
-            
+        
         } catch (SQLException ex) {
             ex.printStackTrace();
             throw new RequestExceptions("Error while removing request from database");

@@ -23,8 +23,8 @@ public class OrderFacade implements FacadeInterface<Order, String> {
     }
 
     @Override
-    public Order getById(Integer id) throws OrderException {
-        return om.getById(id);
+    public Order getById(String username) throws OrderException {
+        return om.getById(username);
     }
 
     public void createOrder(Request req) throws OrderException{
