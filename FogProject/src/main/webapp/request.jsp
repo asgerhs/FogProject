@@ -75,7 +75,6 @@
     
     <button type="submit" class="btn btn-dark" formaction="FrontController?command=request&submit=true">Send request</button>
     <button type="submit" class="btn btn-dark" formaction="FrontController?command=showParts&submit=true">Show part list</button>
-    <button type="submit" class="btn btn-dark" formaction="FrontController?command=request&submit=true">Show drawing</button>
 </form>
 
 <%@include file="footer.jsp" %>

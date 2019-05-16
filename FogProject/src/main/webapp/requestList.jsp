@@ -4,13 +4,14 @@
     Author     : William Sehested Huusfeldt
 --%>
 
+<%@page import="java.util.List"%>
 <%@page import="logic.facades.RequestFacade"%>
 <%@page import="data.models.Request"%>
 <%@page import="java.util.ArrayList"%>  
 <%@include file = "header.jsp" %>
 
 <%
-    ArrayList<Request> requests = (ArrayList<Request>) session.getAttribute("requests");
+    ArrayList<Request> requests = (ArrayList<Request>) session.getAttribute("requestList");
 %>
 <div class="greyBox">
     <table class="table">

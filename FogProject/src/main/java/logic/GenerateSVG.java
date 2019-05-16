@@ -121,7 +121,7 @@ public class GenerateSVG {
         // Top-View measurements
         // Width Line & Text
         topViewSVG += generateMeasLine(0 + offset, height + outhangSites + offset, width + offset, height + outhangSites + offset, true);
-        topViewSVG += generateText(width / 2, height + outhangBack * 2, "" + width, true);
+        topViewSVG += generateText(width / 2, height + 60, "" + width, true);
 
         // Entire height Line & Text
         topViewSVG += generateMeasLine(outhangSites, offset, outhangSites, offset + height, true);

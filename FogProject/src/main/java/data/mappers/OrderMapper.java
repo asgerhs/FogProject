@@ -1,9 +1,8 @@
 package data.mappers;
 
-import data.DBConnector;
+import data.DatabaseConnector;
 import data.exceptions.OrderException;
-import data.exceptions.RequestExceptions;
-import data.interfaces.OrderMapperInterface;
+import data.interfaces.MapperInterface;
 import data.models.Order;
 import data.models.Request;
 import java.io.IOException;
@@ -18,12 +17,19 @@ import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
+import javax.sql.DataSource;
 
 /**
  *
  * @author Asger Hermind Sørensen
  */
-public class OrderMapper implements OrderMapperInterface {
+public class OrderMapper implements MapperInterface<Order, String> {
+
+    DatabaseConnector dbc = new DatabaseConnector();
+    
+    public OrderMapper(DataSource ds) {
+        dbc.setDataSource(ds);
+    }
 
     private static Logger logger = Logger.getLogger(OrderMapper.class.getName());
 
@@ -42,8 +48,8 @@ public class OrderMapper implements OrderMapperInterface {
     }
 
     @Override
-    public List<Order> getAllOrders() throws OrderException {
-        try (Connection con = DBConnector.getConnection()) {
+    public List<Order> getAll() throws OrderException {
+        try(Connection con = dbc.open()){
             List<Order> order = new ArrayList();
             String qry = "SELECT * FROM orderrs;";
             Statement stmt = con.createStatement();
@@ -65,11 +71,11 @@ public class OrderMapper implements OrderMapperInterface {
     }
 
     @Override
-    public Order getById(int id) throws OrderException {
-        try (Connection con = DBConnector.getConnection()) {
-            String sql = "SELECT * FROM orderrs where id = ?;";
+    public Order getById(String username) throws OrderException {
+        try(Connection con = dbc.open()){
+            String sql = "SELECT * FROM orders where id = ?;";
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1, id);
+            ps.setString(1, username);
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
@@ -87,9 +93,8 @@ public class OrderMapper implements OrderMapperInterface {
         return null;
     }
 
-    @Override
     public void createOrder(Request request) throws OrderException {
-        try (Connection con = DBConnector.getConnection()) {
+        try(Connection con = dbc.open()){
             String sql = "INSERT INTO orders "
                     + "(width, length, shedWidth, shedLength, roof, angle)"
                     + "VALUES(?,?,?,?,?,?);";
@@ -108,11 +113,4 @@ public class OrderMapper implements OrderMapperInterface {
             throw new OrderException("Couldn't create Order");
         }
     }
-
-    public static void main(String[] args) throws RequestExceptions, OrderException {
-        OrderMapper om = new OrderMapper();
-        RequestMapper rm = new RequestMapper();
-        om.createOrder(rm.getById(1));
-    }
-
 }
