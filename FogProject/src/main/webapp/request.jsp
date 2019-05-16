@@ -76,9 +76,6 @@
         <label>Note</label>
         <input type="text" required="" class="form-control" name="note" value="test">
     </div>
-    
-    
-    
     <button type="submit" class="btn btn-dark" formaction="FrontController?command=request&submit=true">Send request</button>
 </form>
 

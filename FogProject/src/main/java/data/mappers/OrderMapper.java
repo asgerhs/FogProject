@@ -25,7 +25,7 @@ import javax.sql.DataSource;
  *
  * @author Asger Hermind Sørensen & Martin Frederiksen
  */
-public class OrderMapper implements MapperInterface<Order, String> {
+public class OrderMapper implements MapperInterface<Order, Integer> {
 
     DatabaseConnector dbc = new DatabaseConnector();
     RequestMapper requestMapper;
@@ -71,11 +71,11 @@ public class OrderMapper implements MapperInterface<Order, String> {
     }
 
     @Override
-    public Order getById(String username) throws OrderException {
+    public Order getById(Integer id) throws OrderException {
         try (Connection con = dbc.open()) {
             String sql = "SELECT * FROM orders where id = ?;";
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setString(1, username);
+            ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
@@ -108,7 +108,7 @@ public class OrderMapper implements MapperInterface<Order, String> {
     public List<Order> getAllByUser(User user) throws OrderException {
         try (Connection con = dbc.open()) {
             List<Order> orders = new ArrayList();
-            String qry = "SELECT * FROM orders JOIN requests ON requestId = requests.id WHERE request.email = ?";
+            String qry = "SELECT * FROM orders JOIN requests ON requestId = requests.id WHERE requests.email = ?";
             PreparedStatement ps = con.prepareStatement(qry);
             ps.setString(1, user.getEmail());
             ResultSet rs = ps.executeQuery();

@@ -1,5 +1,6 @@
 package data.mappers;
 
+import data.DataSourceMySQL;
 import data.DatabaseConnector;
 import data.exceptions.UsersException;
 import data.interfaces.MapperInterface;
@@ -82,7 +83,7 @@ public class UserMapper implements MapperInterface<User, String> {
     
     public void add(User user) throws UsersException {
         try (Connection con = dbc.open()) {
-            String qry = "INSERT INTO accounts"
+            String qry = "INSERT INTO accounts "
                     + "VALUES (?,?,?,?,?,?,?);";
             PreparedStatement ps = con.prepareStatement(qry);
             ps.setString(1, user.getEmail());

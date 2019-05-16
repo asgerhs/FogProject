@@ -13,7 +13,7 @@ import logic.interfaces.FacadeInterface;
  *
  * @author Martin Frederiksen
  */
-public class OrderFacade implements FacadeInterface<Order, String> {
+public class OrderFacade implements FacadeInterface<Order, Integer> {
     OrderMapper om = new OrderMapper(new DataSourceMySQL().getDataSource());
 
     @Override
@@ -22,8 +22,8 @@ public class OrderFacade implements FacadeInterface<Order, String> {
     }
 
     @Override
-    public Order getById(String username) throws OrderException {
-        return om.getById(username);
+    public Order getById(Integer id) throws OrderException {
+        return om.getById(id);
     }
 
     public void createOrder(Request req) throws OrderException{

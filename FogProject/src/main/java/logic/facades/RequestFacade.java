@@ -2,6 +2,7 @@ package logic.facades;
 
 import data.DataSourceMySQL;
 import data.exceptions.RequestExceptions;
+import data.exceptions.UsersException;
 import data.mappers.RequestMapper;
 import data.models.Request;
 import java.util.List;
@@ -30,5 +31,11 @@ public class RequestFacade implements FacadeInterface<Request, Integer>{
     
     public void remove(int id) throws RequestExceptions {
         rm.remove(id);
+    }
+    
+    public static void main(String[] args) throws UsersException, RequestExceptions {
+        RequestFacade rf = new RequestFacade();
+        UserFacade uf = new UserFacade();
+        rf.add(new Request(500, 500, 500, 500, "TEST", 500, "TEST", uf.getById("Alec@somewhere.dk")));
     }
 }

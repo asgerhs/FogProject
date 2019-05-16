@@ -1,14 +1,11 @@
 package presentation.commands;
 
 import data.exceptions.CommandException;
-import data.exceptions.MaterialException;
 import data.exceptions.OrderException;
 import data.models.Order;
 import data.models.RoleEnum;
 import data.models.User;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import logic.facades.OrderFacade;
