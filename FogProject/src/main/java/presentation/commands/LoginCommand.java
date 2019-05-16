@@ -1,7 +1,7 @@
 package presentation.commands;
 
 import data.exceptions.CommandException;
-import data.exceptions.MapperException;
+import data.exceptions.MaterialException;
 import data.models.RoleEnum;
 import data.models.User;
 import javax.servlet.http.HttpServletRequest;
@@ -39,7 +39,7 @@ public class LoginCommand implements Command {
                 return "index.jsp";
             }
 
-        } catch (MapperException ex) {
+        } catch (MaterialException ex) {
             ex.printStackTrace();
             throw new CommandException("Wrong username or password!");
         }

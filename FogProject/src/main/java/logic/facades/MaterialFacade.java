@@ -1,7 +1,7 @@
 package logic.facades;
 
 import data.DataSourceMySQL;
-import data.exceptions.MapperException;
+import data.exceptions.MaterialException;
 import data.mappers.MaterialMapper;
 import data.models.Material;
 import java.util.ArrayList;
@@ -16,16 +16,16 @@ public class MaterialFacade implements FacadeInterface<Material, String>{
     MaterialMapper mm = new MaterialMapper(new DataSourceMySQL().getDataSource());
     
     @Override
-    public List<Material> getAll() throws MapperException {
+    public List<Material> getAll() throws MaterialException {
         return mm.getAll();
     }
 
     @Override
-    public Material getById(String ref) throws MapperException {
+    public Material getById(String ref) throws MaterialException {
         return mm.getById(ref);
     }
 
-    public ArrayList<Material> getAllByCategory(int id) throws MapperException {
+    public ArrayList<Material> getAllByCategory(int id) throws MaterialException {
         return mm.getAllByCategory(id);
     }
 }

@@ -1,7 +1,7 @@
 package data.mappers;
 
 import data.DatabaseConnector;
-import data.exceptions.MapperException;
+import data.exceptions.MaterialException;
 import data.interfaces.MapperInterface;
 import data.models.Material;
 import java.io.IOException;
@@ -50,10 +50,10 @@ public class MaterialMapper implements MapperInterface<Material, String> {
      * Returns all materials in database
      *
      * @return all materials
-     * @throws data.exceptions.MapperException
+     * @throws data.exceptions.MaterialException
      */
     @Override
-    public List<Material> getAll() throws MapperException {
+    public List<Material> getAll() throws MaterialException {
         try (Connection con = dbc.open()) {
             List<Material> materials = new ArrayList();
             String qry = "SELECT * FROM stock";
@@ -72,7 +72,7 @@ public class MaterialMapper implements MapperInterface<Material, String> {
         } catch (SQLException ex) {
             logger.log(Level.SEVERE, "Error in getAll Method.", new SQLException("Error: "));
 
-            throw new MapperException("Error occoured while getting data from database");
+            throw new MaterialException("Error occoured while getting data from database");
 
         }
     }
@@ -84,7 +84,7 @@ public class MaterialMapper implements MapperInterface<Material, String> {
      * @return material matching id in param
      */
     @Override
-    public Material getById(String ref) throws MapperException {
+    public Material getById(String ref) throws MaterialException {
         try (Connection con = dbc.open()) {
             
             String qry = "SELECT * FROM stock WHERE ref = ?";
@@ -104,11 +104,11 @@ public class MaterialMapper implements MapperInterface<Material, String> {
             return null;
         } catch (SQLException ex) {
             logger.log(Level.SEVERE, "Error in getByID Method.", new SQLException("Error: "));
-            throw new MapperException("Error occoured while getting data from database");
+            throw new MaterialException("Error occoured while getting data from database");
         }
     }
 
-    public ArrayList<Material> getAllByCategory(int id) throws MapperException {
+    public ArrayList<Material> getAllByCategory(int id) throws MaterialException {
         try (Connection con = dbc.open()) {
             ArrayList<Material> materials = new ArrayList();
             String qry = "SELECT * FROM stock JOIN stockToCategory ON ref = stockRef WHERE categoryId = ?";
@@ -129,7 +129,7 @@ public class MaterialMapper implements MapperInterface<Material, String> {
             return materials;
         } catch (SQLException ex) {
               logger.log(Level.SEVERE, "Error in getAllByCategory Method.", new SQLException("Error: "));
-            throw new MapperException("Error occoured while getting data from database");
+            throw new MaterialException("Error occoured while getting data from database");
         }
     }
 }

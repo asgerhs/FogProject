@@ -1,7 +1,7 @@
 package presentation.commands;
 
 import data.exceptions.CommandException;
-import data.exceptions.MapperException;
+import data.exceptions.MaterialException;
 import data.models.User;
 import java.util.List;
 import java.util.logging.Level;
@@ -31,7 +31,7 @@ public class ShowUsersCommand implements Command{
         try {
             List<User> users = uf.getAll();
             session.setAttribute("users", users);
-        } catch (MapperException ex) {
+        } catch (MaterialException ex) {
             ex.printStackTrace();
             throw new CommandException("Could not find users from database");
         }

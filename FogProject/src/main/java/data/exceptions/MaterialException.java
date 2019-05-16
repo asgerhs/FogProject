@@ -4,10 +4,10 @@ package data.exceptions;
  *
  * @author Asger Hermind Sørensen
  */
-public class MapperException extends Exception {
+public class MaterialException extends Exception {
 
     
-    public MapperException(String msg){
+    public MaterialException(String msg){
         super(msg); 
     }
 }

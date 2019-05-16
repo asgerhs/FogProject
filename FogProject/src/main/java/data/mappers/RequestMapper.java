@@ -1,7 +1,7 @@
 package data.mappers;
 
 import data.DatabaseConnector;
-import data.exceptions.MapperException;
+import data.exceptions.MaterialException;
 import data.exceptions.RequestExceptions;
 import data.exceptions.UsersException;
 import data.interfaces.MapperInterface;
@@ -22,7 +22,7 @@ import javax.sql.DataSource;
 
 /**
  *
- * @author William Sehested Huusfeldt
+ * @author William Sehested Huusfeldt & Martin Frederiksen
  */
 public class RequestMapper implements MapperInterface<Request, Integer> {
     DatabaseConnector dbc = new DatabaseConnector();

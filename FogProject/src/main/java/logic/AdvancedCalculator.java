@@ -1,6 +1,6 @@
 package logic;
 
-import data.exceptions.MapperException;
+import data.exceptions.MaterialException;
 import data.mappers.MaterialMapper;
 import data.models.Material;
 import data.models.Part;
@@ -90,13 +90,13 @@ public class AdvancedCalculator {
             calcScrewPackages();
             svg.generateMeasurements(rafters, rafterSpace, posts / 2);
             svg.generateRoof();
-        } catch (MapperException ex) {
-            logger.log(Level.SEVERE, "Error in AdvancedCalculator: ", new MapperException("Error: "));
+        } catch (MaterialException ex) {
+            logger.log(Level.SEVERE, "Error in AdvancedCalculator: ", new MaterialException("Error: "));
         }
     }
 
     //Calculating the square of carport
-    private void calcPosts() throws MapperException {
+    private void calcPosts() throws MaterialException {
         int p = 4;
         p += (length % 5000 == 0) ? ((length / 500) - 1) * 2 : ((length / 5000) - 1 + 1) * 2;
         posts = p;
@@ -114,7 +114,7 @@ public class AdvancedCalculator {
         pl.addWoodPart(new Part(materials.get(0), p, "Stolper nedgraves 90 cm. i jord", materials.get(0).getPrice() * p));
     }
 
-    private int calcShedPosts(boolean isWidth) throws MapperException {
+    private int calcShedPosts(boolean isWidth) throws MaterialException {
         int widthOuthang = 350 * 2;
         int lengthOuthang = 0; //1000 + 300;
         materials = mf.getAllByCategory(4);
@@ -149,7 +149,7 @@ public class AdvancedCalculator {
         return esp * 2;
     }
 
-    private void calcShedReglarWidth() throws MapperException {
+    private void calcShedReglarWidth() throws MaterialException {
         int outhang = 350;
 
         int countWidth = (shedPostsWidth + 1) * 3 * 2;
@@ -180,7 +180,7 @@ public class AdvancedCalculator {
         svg.generateShedReglar(10);
     }
 
-    private void calcShedCladding() throws MapperException {
+    private void calcShedCladding() throws MaterialException {
         int widthOuthang = 350 * 2;
         materials = mf.getAllByCategory(8);
         materials.sort(new MatSortLowComparator());
@@ -190,7 +190,7 @@ public class AdvancedCalculator {
         pl.addWoodPart(new Part(materials.get(0), shedCladdings, "Til beklædning af skur. 1 på 2", materials.get(0).getPrice() * shedCladdings));
     }
 
-    private void calcShedMisc() throws MapperException {
+    private void calcShedMisc() throws MaterialException {
         materials = mf.getAllByCategory(16);
         materials.sort(new MatSortLowComparator());
         pl.addMiscPart(new Part(materials.get(0), 1, "Til lås på dør i skur", materials.get(0).getPrice() * 1));
@@ -202,7 +202,7 @@ public class AdvancedCalculator {
         pl.addMiscPart(new Part(materials.get(0), shedReglar * 2, "Til montering af løsholter i skur", materials.get(0).getPrice() * (shedReglar * 2)));
     }
 
-    private void calcRem() throws MapperException {
+    private void calcRem() throws MaterialException {
         int frontOuthang = 1000;
         int backOuthang = 300;
 
@@ -219,7 +219,7 @@ public class AdvancedCalculator {
     }
 
     //Calculating the roof of carport
-    private void calcRafters() throws MapperException {
+    private void calcRafters() throws MaterialException {
         rafters = length / 500;
         rafterSpace = (length / 10) / (rafters - 1);
         addParts(width, 5, length / 500, "Spær, monteres på rem", new MatSortHeighComparator());
@@ -227,37 +227,37 @@ public class AdvancedCalculator {
     }
 
     //need a good way to present this
-    private void calcTopFasciasFront() throws MapperException {
+    private void calcTopFasciasFront() throws MaterialException {
         addParts(width, 2, 1, "oversternbrædder til forenden", new MatSortHeighComparator());
     }
 
-    private void calcTopFasciasSide() throws MapperException {
+    private void calcTopFasciasSide() throws MaterialException {
         addParts(length, 2, 2, "oversternbrædder til siderne", new MatSortHeighComparator());
     }
 
-    private void calcBottomFasciasFB() throws MapperException {
+    private void calcBottomFasciasFB() throws MaterialException {
         addParts(width, 1, 2, "understernbrædder til for & bag ende", new MatSortHeighComparator());
     }
 
-    private void calcBottomFasciasSide() throws MapperException {
+    private void calcBottomFasciasSide() throws MaterialException {
         addParts(length, 1, 2, "understernbrædder til siderne", new MatSortHeighComparator());
     }
 
-    private void calcWaterBoardFront() throws MapperException {
+    private void calcWaterBoardFront() throws MaterialException {
         addParts(width, 9, 1, "vandbrædt på stern i forende", new MatSortHeighComparator());
     }
 
-    private void calcWaterBoardSide() throws MapperException {
+    private void calcWaterBoardSide() throws MaterialException {
         addParts(length, 9, 2, "vandbrædt på stern i sider", new MatSortHeighComparator());
     }
 
-    private void calcRoofingSheets() throws MapperException {
+    private void calcRoofingSheets() throws MaterialException {
         int multiplier = (width % 1000 == 0) ? width / 1000 : (width / 1000) + 1;
         addParts(length, 10, multiplier, "tagplader monteres på spær", new MatSortHeighComparator());
     }
 
     //Calculating the pieces of carport
-    private void calcBracketsRight() throws MapperException {
+    private void calcBracketsRight() throws MaterialException {
         materials = mf.getAllByCategory(13);
         materials.sort(new MatSortHeighComparator());
         for (Material m : materials) {
@@ -267,7 +267,7 @@ public class AdvancedCalculator {
         }
     }
 
-    private void calcBracketsLeft() throws MapperException {
+    private void calcBracketsLeft() throws MaterialException {
         materials = mf.getAllByCategory(13);
         materials.sort(new MatSortHeighComparator());
         for (Material m : materials) {
@@ -277,7 +277,7 @@ public class AdvancedCalculator {
         }
     }
 
-    private void calcScrewPackages() throws MapperException {
+    private void calcScrewPackages() throws MaterialException {
         //needs a fix
         materials = mf.getAllByCategory(11);
         int screws = 0;
@@ -300,7 +300,7 @@ public class AdvancedCalculator {
     }
 
     //10% more?
-    private void calcRoofScrews() throws MapperException {
+    private void calcRoofScrews() throws MaterialException {
         materials = mf.getAllByCategory(11);
         int screws = (width * length * 12) / 1000000;
         int packages = (screws % 200 == 0) ? screws / 200 : (screws / 200) + 1;
@@ -308,7 +308,7 @@ public class AdvancedCalculator {
     }
 
     //10% more ?
-    private void calcBand() throws MapperException {
+    private void calcBand() throws MaterialException {
         materials = mf.getAllByCategory(12);
         double spaceBetweenRafters = (length - 4.5) / (rafters - 1);
         double fullSpace = length - (spaceBetweenRafters * 2) - 4.5;
@@ -320,7 +320,7 @@ public class AdvancedCalculator {
         System.out.println(materials.get(0).getPrice());
     }
 
-    private void calcFasciasScrews() throws MapperException {
+    private void calcFasciasScrews() throws MaterialException {
         materials = mf.getAllByCategory(11);
         int screws = 0;
         //bottomFascias with 2 screws for each meter
@@ -335,7 +335,7 @@ public class AdvancedCalculator {
         pl.addMiscPart(new Part(materials.get(1), packages, "Til montering af stern&vandbrædt", materials.get(1).getPrice() * packages));
     }
 
-    private void calcBoltsAndSquares() throws MapperException {
+    private void calcBoltsAndSquares() throws MaterialException {
         //with arbitrary values we should see if rem is in more than one piece before calculating this
         ArrayList<Material> boltType = mf.getAllByCategory(14);
         ArrayList<Material> squares = mf.getAllByCategory(15);
@@ -344,7 +344,7 @@ public class AdvancedCalculator {
         pl.addMiscPart(new Part(squares.get(0), bolts, "Til montering af rem på stolper", squares.get(0).getPrice() * bolts));
     }
 
-    private void calcLathsRoof() throws MapperException {
+    private void calcLathsRoof() throws MaterialException {
         ArrayList<Material> lathType = mf.getAllByCategory(3);
         ArrayList<Material> lathHolder = mf.getAllByCategory(17);
         angle = 20; // Remove when 
@@ -356,7 +356,7 @@ public class AdvancedCalculator {
         pl.addMiscPart(new Part(lathHolder.get(2), length/1000 + 1, "monteres på toppen af spæret (til toplægte)", lathHolder.get(2).getPrice() * (length/1000 + 1)));
     }
     
-    private void calcRoofBricks() throws MapperException {
+    private void calcRoofBricks() throws MaterialException {
         ArrayList<Material> bricks = mf.getAllByCategory(17);
         int sideBricks = length / 300;
         int topBricks = length / 333;
@@ -367,7 +367,7 @@ public class AdvancedCalculator {
         pl.addMiscPart(new Part(bricks.get(4), 2, "til montering af tagsten, alle ydersten + hver anden fastgøres", bricks.get(4).getPrice() * 2));
     }
 
-    public void addParts(int lengthWidth, int categoryId, int multiplier, String description, Comparator<Material> comparator) throws MapperException {
+    public void addParts(int lengthWidth, int categoryId, int multiplier, String description, Comparator<Material> comparator) throws MaterialException {
         materials = mf.getAllByCategory(categoryId);
         materials.sort(comparator);
         int rest = lengthWidth;
@@ -417,7 +417,7 @@ public class AdvancedCalculator {
         return rafters;
     }
 
-    public static void main(String[] args) throws MapperException {
+    public static void main(String[] args) throws MaterialException {
         AdvancedCalculator ac = new AdvancedCalculator(7800, 6500, true, 1000, 1000, false);
         ac.calcBand();
 //        ac.calcLathsRoof();

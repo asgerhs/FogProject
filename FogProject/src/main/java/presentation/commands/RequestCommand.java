@@ -1,7 +1,7 @@
 package presentation.commands;
 
 import data.exceptions.CommandException;
-import data.exceptions.MapperException;
+import data.exceptions.MaterialException;
 import data.exceptions.RequestExceptions;
 import data.models.Material;
 import data.models.Request;
@@ -89,7 +89,7 @@ public class RequestCommand implements Command {
                 session.setAttribute("mats", mats);
 
                 return target;
-            } catch (MapperException ex) {
+            } catch (MaterialException ex) {
                 ex.printStackTrace();
                 throw new CommandException("Test");
             }

@@ -23,7 +23,7 @@ import javax.sql.DataSource;
 
 /**
  *
- * @author Asger Hermind Sørensen
+ * @author Asger Hermind Sørensen & Martin Frederiksen
  */
 public class OrderMapper implements MapperInterface<Order, String> {
 

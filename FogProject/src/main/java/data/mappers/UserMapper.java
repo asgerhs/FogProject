@@ -1,7 +1,7 @@
 package data.mappers;
 
 import data.DatabaseConnector;
-import data.exceptions.MapperException;
+import data.exceptions.MaterialException;
 import data.exceptions.UsersException;
 import data.interfaces.MapperInterface;
 import data.models.RoleEnum;
@@ -25,6 +25,10 @@ public class UserMapper implements MapperInterface<User, String> {
     
     public UserMapper(DataSource ds) {
         dbc.setDataSource(ds);
+    }
+
+    UserMapper() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
