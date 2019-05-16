@@ -56,13 +56,15 @@ public class RequestCommand implements Command {
         
         if(params.get("submit") != null) {
             try {
+                boolean shed = params.get("shed") == null ? false : true;
+                boolean angle = params.get("angleCheck") == null ? false : true;
                 Request re = new Request(
                     Integer.parseInt(params.get("width")),
                     Integer.parseInt(params.get("length")),
-                    Integer.parseInt(params.get("shedWidth")),
-                    Integer.parseInt(params.get("shedLength")),
+                    shed ? Integer.parseInt(params.get("shedWidth")) : 0,
+                    shed ? Integer.parseInt(params.get("shedLength")) : 0,
                     params.get("roof"),
-                    0, //angle
+                    angle ? Integer.parseInt(params.get("angle")) : 0,
                     params.get("note"),
                     new User(
                             params.get("email"),

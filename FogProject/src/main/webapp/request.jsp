@@ -36,15 +36,32 @@
             <% } %>
           </select>
     </div>
+    <div class="form-group">
+        <label>Angle</label>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <div class="input-group-text">
+                    <input type="checkbox" name="angleCheck" id="angleToggle">
+                </div>
+            </div>
+            <input type="number" id="angleToggleNumber" disabled name="angle" class="form-control" value="0">
+        </div>
+    </div>
     
     <br /><br />
     <h2>Shed Information</h2>
     <hr />
-    <div class="form-group">
+    <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="" name="shed" id="shedCheckbox">
+        <label class="form-check-label">
+            Shed
+        </label>
+    </div>
+    <div class="form-group shedToggle" id="shedToggleWidth">
         <label>Shed Width</label>
         <input type="number" required="" class="form-control" name="shedWidth" min="0" max="750" placeholder="Min. 240 - Max. 750" value="240">
     </div>
-    <div class="form-group">
+    <div class="form-group shedToggle" id="shedToggleLength">
         <label>Shed Length</label>
         <input type="number" required="" class="form-control" name="shedLength" min="0" max="780" placeholder="Min. 240 - Max. 780" value="240">
     </div>

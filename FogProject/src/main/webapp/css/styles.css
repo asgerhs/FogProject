@@ -85,3 +85,7 @@ line{
     marker-start: url(#beginArrow); 
     marker-end: url(#endArrow);
 }
+
+.shedToggle {
+    display: none;
+}
