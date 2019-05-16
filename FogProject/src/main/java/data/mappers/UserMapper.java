@@ -1,7 +1,6 @@
 package data.mappers;
 
 import data.DatabaseConnector;
-import data.exceptions.MaterialException;
 import data.exceptions.UsersException;
 import data.interfaces.MapperInterface;
 import data.models.RoleEnum;
@@ -106,7 +105,7 @@ public class UserMapper implements MapperInterface<User, String> {
             String qry = "SELECT email FROM accounts WHERE (email = ?) AND password = ?;";
             PreparedStatement ps = con.prepareStatement(qry);
             ps.setString(1, email);
-            ps.setString(3, password);
+            ps.setString(2, password);
             ResultSet rs = ps.executeQuery();
             boolean valid = false;
             while (rs.next()) {

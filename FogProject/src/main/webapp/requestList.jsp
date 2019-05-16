@@ -30,9 +30,9 @@
             <% for (Request r : requests) {
             %>
             <tr>
-                <td><%=r.getName()%></td>
-                <td><%=r.getPhone()%></td>
-                <td><%=r.getEmail()%></td>
+                <td><%=r.getUser().getName()%></td>
+                <td><%=r.getUser().getPhone()%></td>
+                <td><%=r.getUser().getEmail()%></td>
                 <td><%=r.getId()%></td>
                 <td>
                     <form id="requestForm" method="POST">
