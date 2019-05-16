@@ -1,6 +1,6 @@
 package presentation.commands;
 
-import data.exceptions.CommandExceptions;
+import data.exceptions.CommandException;
 import data.exceptions.OrderException;
 import data.exceptions.RequestExceptions;
 import data.models.Request;
@@ -27,7 +27,7 @@ public class RequestListCommand implements Command {
     }
 
     @Override
-    public String execute(HttpServletRequest request) throws CommandExceptions {
+    public String execute(HttpServletRequest request) throws CommandException {
         HttpSession session = request.getSession();
         List<Request> requests;
         if (request.getParameter("orderId") != null) {
@@ -39,7 +39,7 @@ public class RequestListCommand implements Command {
                 session.setAttribute("requestList", requests);
             } catch (RequestExceptions | OrderException ex) {
                 ex.printStackTrace();
-                throw new CommandExceptions("Something went wrong!");
+                throw new CommandException("Something went wrong!");
             }
         } else if (request.getParameter("requestId") != null) {
             try {
@@ -48,7 +48,7 @@ public class RequestListCommand implements Command {
                 session.setAttribute("requestList", requests);
             } catch (RequestExceptions ex) {
                 ex.printStackTrace();
-                throw new CommandExceptions("Something went wrong!");
+                throw new CommandException("Something went wrong!");
             }
         } else {
             try {
@@ -56,7 +56,7 @@ public class RequestListCommand implements Command {
                 session.setAttribute("requestList", requests);
             } catch (RequestExceptions ex) {
                 ex.printStackTrace();
-                throw new CommandExceptions("Something went wrong!");
+                throw new CommandException("Something went wrong!");
             }
         }
 

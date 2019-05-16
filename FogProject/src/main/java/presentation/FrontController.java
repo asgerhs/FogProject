@@ -1,6 +1,6 @@
 package presentation;
 
-import data.exceptions.CommandExceptions;
+import data.exceptions.CommandException;
 import data.mappers.MaterialMapper;
 import java.io.IOException;
 import java.util.logging.FileHandler;
@@ -60,7 +60,7 @@ public class FrontController extends HttpServlet {
             String target = command.execute(request);
             RequestDispatcher dispatcher = request.getRequestDispatcher(target);
             dispatcher.forward(request, response);
-        } catch (CommandExceptions | ServletException | IOException ex) {
+        } catch (CommandException | ServletException | IOException ex) {
             request.setAttribute("message", ex.getMessage());
             System.out.println(ex.getMessage());
             logger.log(Level.SEVERE, "Error: ", new Exception("hello"));

@@ -1,7 +1,7 @@
 package presentation.commands;
 
-import data.exceptions.CommandExceptions;
-import data.exceptions.MapperExceptions;
+import data.exceptions.CommandException;
+import data.exceptions.MapperException;
 import data.models.User;
 import java.util.List;
 import java.util.logging.Level;
@@ -26,14 +26,14 @@ public class ShowUsersCommand implements Command{
     
 
     @Override
-    public String execute(HttpServletRequest request) throws CommandExceptions {
+    public String execute(HttpServletRequest request) throws CommandException {
         HttpSession session = request.getSession();
         try {
             List<User> users = uf.getAll();
             session.setAttribute("users", users);
-        } catch (MapperExceptions ex) {
+        } catch (MapperException ex) {
             ex.printStackTrace();
-            throw new CommandExceptions("Could not find users from database");
+            throw new CommandException("Could not find users from database");
         }
         return target;
     }

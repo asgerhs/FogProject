@@ -94,7 +94,7 @@ public class RequestMapperTest {
     public void testAdd() {
         System.out.println("add");
         try {
-            Request request = new Request(100, 100, 100, 100, "1013", 0, "Test", "Test", "Test", "Test", "Test", "Test");
+            Request request = new Request(100, 100, 100, 100, "1013", 0, "Test", null);
             requestMapper.add(request);
         } catch (RequestExceptions ex) {
             fail(ex.getMessage());

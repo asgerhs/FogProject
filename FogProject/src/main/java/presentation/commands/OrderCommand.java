@@ -1,7 +1,7 @@
 package presentation.commands;
 
-import data.exceptions.CommandExceptions;
-import data.exceptions.MapperExceptions;
+import data.exceptions.CommandException;
+import data.exceptions.MapperException;
 import data.exceptions.OrderException;
 import data.models.Order;
 import data.models.RoleEnum;
@@ -28,7 +28,7 @@ public class OrderCommand implements Command {
     }
 
     @Override
-    public String execute(HttpServletRequest request) throws CommandExceptions {
+    public String execute(HttpServletRequest request) throws CommandException {
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
 

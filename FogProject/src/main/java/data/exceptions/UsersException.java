@@ -4,10 +4,10 @@ package data.exceptions;
  *
  * @author Asger Hermind Sørensen
  */
-public class CommandExceptions extends Exception {
+public class UsersException extends Exception {
 
     
-    public CommandExceptions(String msg){
+    public UsersException(String msg){
         super(msg); 
     }
 }

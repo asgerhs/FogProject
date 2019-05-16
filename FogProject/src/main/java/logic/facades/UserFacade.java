@@ -1,10 +1,9 @@
 package logic.facades;
 
 import data.DataSourceMySQL;
-import data.exceptions.MapperExceptions;
+import data.exceptions.UsersException;
 import data.mappers.UserMapper;
 import data.models.User;
-import java.util.ArrayList;
 import java.util.List;
 import logic.interfaces.FacadeInterface;
 
@@ -16,20 +15,20 @@ public class UserFacade implements FacadeInterface<User, String>{
     UserMapper um = new UserMapper(new DataSourceMySQL().getDataSource());
     
     @Override
-    public List getAll() throws MapperExceptions {
+    public List getAll() throws UsersException {
         return um.getAll();
     }
 
     @Override
-    public User getById(String username) throws MapperExceptions {
-        return um.getById(username);
+    public User getById(String email) throws UsersException {
+        return um.getById(email);
     }
 
-    public boolean validateUser(String username, String password) throws MapperExceptions {
+    public boolean validateUser(String username, String password) throws UsersException {
         return um.validateUser(username, password);
     }
     
-    public int changePassword(String username, String password) throws MapperExceptions {
+    public int changePassword(String username, String password) throws UsersException {
         return um.changePassword(username, password);
     }    
 }

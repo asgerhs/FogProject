@@ -1,7 +1,7 @@
 package presentation.commands;
 
-import data.exceptions.CommandExceptions;
-import data.exceptions.MapperExceptions;
+import data.exceptions.CommandException;
+import data.exceptions.MapperException;
 import data.models.RoleEnum;
 import data.models.User;
 import javax.servlet.http.HttpServletRequest;
@@ -23,7 +23,7 @@ public class LoginCommand implements Command {
     }
 
     @Override
-    public String execute(HttpServletRequest request) throws CommandExceptions {
+    public String execute(HttpServletRequest request) throws CommandException {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         HttpSession session = request.getSession();
@@ -39,9 +39,9 @@ public class LoginCommand implements Command {
                 return "index.jsp";
             }
 
-        } catch (MapperExceptions ex) {
+        } catch (MapperException ex) {
             ex.printStackTrace();
-            throw new CommandExceptions("Wrong username or password!");
+            throw new CommandException("Wrong username or password!");
         }
     }
 

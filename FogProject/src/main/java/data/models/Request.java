@@ -6,29 +6,22 @@ package data.models;
  */
 public class Request {
     private int id, width, length, shedWidth, shedLength, angle;
-    private String roof, name, address, zipCity, phone, email, note;
+    private String roof, note;
+    private User user;
 
-    public Request(int width, int length, int shedWidth, int shedLength, String roof, int angle, String name, String address, String zipCity, String phone, String email, String note) {
+    public Request(int width, int length, int shedWidth, int shedLength, String roof, int angle, String note, User user) {
         this.width = width;
         this.length = length;
         this.shedWidth = shedWidth;
         this.shedLength = shedLength;
         this.roof = roof;
         this.angle = angle;
-        this.name = name;
-        this.address = address;
-        this.zipCity = zipCity;
-        this.phone = phone;
-        this.email = email;
         this.note = note;
+        this.user = user;
     }
 
     public int getId() {
         return id;
-    }
-    
-    public void setId(int id){
-        this.id = id;
     }
 
     public int getWidth() {
@@ -47,40 +40,19 @@ public class Request {
         return shedLength;
     }
 
-    public String getRoof() {
-        return roof;
-    }
-
     public int getAngle() {
         return angle;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public String getZipCity() {
-        return zipCity;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public String getEmail() {
-        return email;
+    public String getRoof() {
+        return roof;
     }
 
     public String getNote() {
         return note;
     }
 
-    @Override
-    public String toString() {
-        return "Request{" + "id=" + id + ", width=" + width + ", length=" + length + ", shedWidth=" + shedWidth + ", shedLength=" + shedLength + ", roof=" + roof + ", angle=" + angle + ", name=" + name + ", address=" + address + ", zipCity=" + zipCity + ", phone=" + phone + ", email=" + email + ", note=" + note + '}';
+    public User getUser() {
+        return user;
     }
 }

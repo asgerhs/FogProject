@@ -1,15 +1,15 @@
 package presentation.commands;
 
-import data.exceptions.CommandExceptions;
-import data.exceptions.MapperExceptions;
+import data.exceptions.CommandException;
+import data.exceptions.MapperException;
 import data.exceptions.RequestExceptions;
 import data.models.Material;
 import data.models.Request;
+import data.models.RoleEnum;
+import data.models.User;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import logic.facades.MaterialFacade;
@@ -33,7 +33,7 @@ public class RequestCommand implements Command {
     }
 
     @Override
-    public String execute(HttpServletRequest request) throws CommandExceptions {
+    public String execute(HttpServletRequest request) throws CommandException {
         HttpSession session = request.getSession();
         Enumeration<String> paramNames = request.getParameterNames();
         HashMap<String, String> params = new HashMap();
@@ -48,7 +48,7 @@ public class RequestCommand implements Command {
                 session.setAttribute("request", r);
             } catch (RequestExceptions ex) {
                 ex.printStackTrace();
-                throw new CommandExceptions("Can't find request");
+                throw new CommandException("Can't find request");
             }
         }
         
@@ -63,12 +63,15 @@ public class RequestCommand implements Command {
                     Integer.parseInt(params.get("shedLength")),
                     params.get("roof"),
                     0, //angle
-                    params.get("name"),
-                    params.get("address"),
-                    params.get("zipCity"),
-                    params.get("phone"),
-                    params.get("email"),
-                    params.get("note"));
+                    params.get("note"),
+                    new User(
+                            params.get("email"),
+                            "1234", // Password
+                            RoleEnum.CUSTOMER,
+                            params.get("name"),
+                            params.get("address"),
+                            params.get("zipCity"),
+                            params.get("phone")));
             
                 System.out.println(re);
                 rf.add(re);
@@ -76,7 +79,7 @@ public class RequestCommand implements Command {
                 return target;
             } catch (RequestExceptions ex) {
                 ex.printStackTrace();
-                throw new CommandExceptions("Test");
+                throw new CommandException("Test");
             }
         } else {
             try {
@@ -86,9 +89,9 @@ public class RequestCommand implements Command {
                 session.setAttribute("mats", mats);
 
                 return target;
-            } catch (MapperExceptions ex) {
+            } catch (MapperException ex) {
                 ex.printStackTrace();
-                throw new CommandExceptions("Test");
+                throw new CommandException("Test");
             }
         }
     }

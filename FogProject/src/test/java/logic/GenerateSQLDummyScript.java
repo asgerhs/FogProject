@@ -1,6 +1,8 @@
 package logic;
 
+import com.github.javafaker.Address;
 import com.github.javafaker.Faker;
+import com.github.javafaker.PhoneNumber;
 import data.models.Category;
 import data.models.Material;
 import java.io.FileWriter;
@@ -183,7 +185,7 @@ public class GenerateSQLDummyScript {
         //f.format("\n\n-- Users\n");
 
         String sql = "";
-        String sqlStart = "INSERT INTO `users` VALUES (";
+        String sqlStart = "INSERT INTO `accounts` VALUES (";
         String sqlEnd = ");\n";
         
 
@@ -194,10 +196,14 @@ public class GenerateSQLDummyScript {
                 name = faker.name().firstName();
             }
             names.add(name);
-            sql += sqlStart + "'" + name + "', '" + name + "@somewhere.dk', " + "'1234', 'CUSTOMER'" + sqlEnd;
+            Address address = faker.address();
+            PhoneNumber phone = faker.phoneNumber();
+            
+            sql += sqlStart + "'" + name + "@somewhere.dk', " + "'1234', 'CUSTOMER', '" + name + "', '" + address.streetAddress().replace("'", " ") + "', '" +
+                    address.zipCode() + " " + address.city().replace("'", " ") + "', '" + phone.phoneNumber() + "'" + sqlEnd;
         }
-        sql += sqlStart + "'" + "BestSalesman" + "', '" + "BestSalesman" + "@somewhere.dk', " + "'1234', 'EMPLOYEE'" + sqlEnd;
-        sql += sqlStart + "'" + "Admin" + "', '" + "Admin" + "@somewhere.dk', " + "'1234', 'ADMIN'" + sqlEnd;
+        sql += sqlStart + "'bsm@e.dk', '1234', 'EMPLOYEE', 'BestSalesman', 'Salesman', '1234 By', '1234'" + sqlEnd;
+        sql += sqlStart + "'admin@a.dk', '1234', 'ADMIN', 'Admin', 'Admin', '1234 By', '1234'" + sqlEnd;
         
         f.format(sql);
     }
@@ -208,40 +214,33 @@ public class GenerateSQLDummyScript {
 
         String sql = "";
         String sqlStart = "INSERT INTO `requests`"
-                + "(width, length, shedWidth, shedLength, roof, angle, name, address, zipCity, phone, email, note) VALUES (";
+                + "(width, length, shedWidth, shedLength, roof, angle, note, email) VALUES (";
         String sqlEnd = ");\n";
 
         for (String str : names) {
             Faker faker = new Faker();
             int num = faker.number().numberBetween(500, 780);
             int shed = faker.number().numberBetween(100, 210);
-            String phone = faker.phoneNumber().cellPhone();
-            String address = faker.address().streetAddress();
             //String name = faker.name().firstName();
 
-            sql += sqlStart + num + ", " + num + ", " + shed + ", " + shed + ", " + "'not flat'" + ", " + 30 + ", '"
-                    + str + "', '" + address + "', '" + str + "s Zip" + "', '" + phone
-                    + "', '" + str + "@somewhere.com" + "', '" + "This is a test for " + str + "'" + sqlEnd;
+            sql += sqlStart + num + ", " + num + ", " + shed + ", " + shed + ", " + "'not flat'" + ", " + 30
+                    + ", '" + "This is a test for " + str + "', '"
+                    + str + "@somewhere.dk'" +  sqlEnd;
 
         }
         f.format(sql);
     }
 
      private void generateOrderScript(){
-        f.format("\n\n-- Orders\n");
+        //f.format("\n\n-- Orders\n");
         
         String sql = "";
         String sqlStart = "INSERT INTO orders"
-                + "(username, width, length, shedWidth, shedLength, roof, angle) VALUES(";
+                + "(requestId) VALUES(";
         String sqlEnd = "); \n";
         
-        for(String str : names) {
-            Faker faker = new Faker();
-            int num = faker.number().numberBetween(500, 780);
-            int shed = faker.number().numberBetween(100, 210);
-            
-            sql += sqlStart + "'" + str + "'" + ", " + num + ", " + num + ", " + shed + ", " + shed +
-                    ", " + "'not flat'" + ", " + 30 + sqlEnd;
+        for(int i = 1; i <= 10; i++) {
+            sql += sqlStart + i + sqlEnd;
         }
         f.format(sql);
     }

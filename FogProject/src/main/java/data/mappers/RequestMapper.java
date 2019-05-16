@@ -1,7 +1,9 @@
 package data.mappers;
 
 import data.DatabaseConnector;
+import data.exceptions.MapperException;
 import data.exceptions.RequestExceptions;
+import data.exceptions.UsersException;
 import data.interfaces.MapperInterface;
 import data.models.Request;
 import java.io.IOException;
@@ -24,10 +26,13 @@ import javax.sql.DataSource;
  */
 public class RequestMapper implements MapperInterface<Request, Integer> {
     DatabaseConnector dbc = new DatabaseConnector();
+    UserMapper userMapper;
     
     public RequestMapper(DataSource ds) {
+        this.userMapper = new UserMapper(ds);
         dbc.setDataSource(ds);
     }
+    
     private static Logger logger = Logger.getLogger(RequestMapper.class.getName());
     public RequestMapper() {
         try {
@@ -47,6 +52,7 @@ public class RequestMapper implements MapperInterface<Request, Integer> {
             String qry = "SELECT * FROM requests";
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery(qry);
+            
             while (rs.next()) {
                 requests.add(new Request(
                         rs.getInt("width"),
@@ -55,15 +61,12 @@ public class RequestMapper implements MapperInterface<Request, Integer> {
                         rs.getInt("shedLength"),
                         rs.getString("roof"),
                         rs.getInt("angle"),
-                        rs.getString("name"),
-                        rs.getString("address"),
-                        rs.getString("zipCity"),
-                        rs.getString("phone"),
-                        rs.getString("email"),
-                        rs.getString("note")));
+                        rs.getString("note"),
+                        userMapper.getById(rs.getString("email"))));
             }
+            
             return requests;
-        } catch (SQLException ex) {
+        } catch (SQLException | UsersException ex) {
             logger.log(Level.SEVERE, "Error in getAll Method:", new SQLException("Error: "));
             throw new RequestExceptions("Error occoured while getting data from database");
         }
@@ -84,15 +87,11 @@ public class RequestMapper implements MapperInterface<Request, Integer> {
                         rs.getInt("shedLength"),
                         rs.getString("roof"),
                         rs.getInt("angle"),
-                        rs.getString("name"),
-                        rs.getString("address"),
-                        rs.getString("zipCity"),
-                        rs.getString("phone"),
-                        rs.getString("email"),
-                        rs.getString("note"));
+                        rs.getString("note"),
+                        userMapper.getById(rs.getString("email")));
             }
             return null;
-        } catch (SQLException ex) {
+        } catch (SQLException | UsersException ex) {
             logger.log(Level.SEVERE, "Error in getById Method:", new SQLException("Error: "));
             throw new RequestExceptions("Error occoured while getting data from database");
         }
@@ -124,23 +123,28 @@ public class RequestMapper implements MapperInterface<Request, Integer> {
     
     public void add(Request request) throws RequestExceptions {
         try (Connection con = dbc.open()) {
-            String qry = "INSERT INTO requests"
-                    + "(width, length, shedWidth, shedLength, roof, angle, name, address, zipCity, phone, email, note)"
-                    + "VALUES (?,?,?,?,?,?,?,?,?,?,?,?);";
-            PreparedStatement ps = con.prepareStatement(qry);
-            ps.setInt(1, request.getWidth());
-            ps.setInt(2, request.getLength());
-            ps.setInt(3, request.getShedWidth());
-            ps.setInt(4, request.getShedLength());
-            ps.setString(5, request.getRoof());
-            ps.setInt(6, request.getAngle());
-            ps.setString(7, request.getName());
-            ps.setString(8, request.getAddress());
-            ps.setString(9, request.getZipCity());
-            ps.setString(10, request.getPhone());
-            ps.setString(11, request.getEmail());
-            ps.setString(12, request.getNote());
-            ps.executeUpdate();
+            
+            try {
+                userMapper.add(request.getUser());
+                
+                String qry = "INSERT INTO requests"
+                        + "(width, length, shedWidth, shedLength, roof, angle, note, email)"
+                        + "VALUES (?,?,?,?,?,?,?,?);";
+                PreparedStatement ps = con.prepareStatement(qry);
+                ps.setInt(1, request.getWidth());
+                ps.setInt(2, request.getLength());
+                ps.setInt(3, request.getShedWidth());
+                ps.setInt(4, request.getShedLength());
+                ps.setString(5, request.getRoof());
+                ps.setInt(6, request.getAngle());
+                ps.setString(7, request.getNote());
+                ps.setString(8, request.getUser().getEmail());
+                ps.executeUpdate();
+            } catch(UsersException ex) {
+                con.rollback();
+                logger.log(Level.SEVERE, "Error in add Method:", new SQLException("Error: "));
+                throw new RequestExceptions("Error occoured while adding user to database");
+            }
         } catch (SQLException ex) {
             logger.log(Level.SEVERE, "Error in add Method:", new SQLException("Error: "));
             throw new RequestExceptions("Error occoured while adding request to database");
@@ -158,21 +162,5 @@ public class RequestMapper implements MapperInterface<Request, Integer> {
             ex.printStackTrace();
             throw new RequestExceptions("Error while removing request from database");
         }
-    }
-
-    public static void main(String[] args) throws RequestExceptions, SQLException {
-        RequestMapper rm = new RequestMapper();
-        
-        List<Request> requests = rm.getAll();
-        for (Request r : requests) {
-            System.out.println(r.getId());
-        }
-
-        //Request rqst = new Request(800, 800, 100, 100, "idfk", 0, "hej", "jeg", "hader", "Strings", "i", "add metoder");
-        //rm.updateRequest(new Request(400, 200, 100, 100, "flat", 0, "hej", "jeg", "hader", "Strings", "i", "add metoder"), 4);
-        //rm.add(rqst);
-        //Request rs = new Request(600, 760, 100, 100, "not flat", 30, "Someone", "TestAddress2", "TestZip2", "TestPhone", "Test@Test.Test", "This is a test");
-        //rm.add(rs);
-        //rm.remove(7);
     }
 }
