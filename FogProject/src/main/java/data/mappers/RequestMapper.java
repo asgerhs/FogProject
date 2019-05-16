@@ -20,7 +20,7 @@ import javax.sql.DataSource;
 
 /**
  *
- * @author William Sehested Huusfeldt
+ * @author William Sehested Huusfeldt & Martin Frederiksen
  */
 public class RequestMapper implements MapperInterface<Request, Integer> {
     DatabaseConnector dbc = new DatabaseConnector();

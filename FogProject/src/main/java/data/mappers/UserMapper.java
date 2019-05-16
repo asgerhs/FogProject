@@ -26,6 +26,10 @@ public class UserMapper implements MapperInterface<User, String> {
         dbc.setDataSource(ds);
     }
 
+    UserMapper() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     @Override
     public List getAll() throws MapperExceptions {
         try (Connection con = dbc.open()) {

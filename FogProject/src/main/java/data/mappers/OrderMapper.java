@@ -22,7 +22,7 @@ import javax.sql.DataSource;
 
 /**
  *
- * @author Asger Hermind Sørensen
+ * @author Asger Hermind Sørensen & Martin Frederiksen
  */
 public class OrderMapper implements MapperInterface<Order, String> {
 DatabaseConnector dbc = new DatabaseConnector();
@@ -121,9 +121,9 @@ DatabaseConnector dbc = new DatabaseConnector();
    public List<Order> getAllByUser(User user) throws OrderException{
         try(Connection con = dbc.open()){
             List<Order> orders = new ArrayList();
-            String qry = "SELECT * FROM orders WHERE username = ?;";
+            String qry = "SELECT * FROM orders WHERE email = ?;";
             PreparedStatement ps = con.prepareStatement(qry);
-            ps.setString(1, user.getUsername());
+            ps.setString(1, user.getEmail());
             ResultSet rs = ps.executeQuery();
             
             while(rs.next()){

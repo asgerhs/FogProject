@@ -1,6 +1,7 @@
 package logic.facades;
 
 import data.DataSourceMySQL;
+import data.exceptions.MapperExceptions;
 import data.exceptions.OrderException;
 import data.exceptions.RequestExceptions;
 import data.mappers.OrderMapper;
@@ -36,10 +37,17 @@ public class OrderFacade implements FacadeInterface<Order, String> {
     }
     
     
-    public static void main(String[] args) throws RequestExceptions, OrderException {
+    public static void main(String[] args) throws RequestExceptions, OrderException, MapperExceptions {
         RequestFacade rf = new RequestFacade();
         OrderFacade of = new OrderFacade();
-        Request r = rf.getById(12);
-        of.createOrder(r);
+        UserFacade uf = new UserFacade();
+        
+        List<Order> orders = of.getAllByUser(uf.getById("admin"));
+        /*for(Order o : orders){
+            System.out.println(o.getId());
+        }*/
+        
+        //Request r = rf.getById(12);
+        //of.createOrder(r);
     }
 }
