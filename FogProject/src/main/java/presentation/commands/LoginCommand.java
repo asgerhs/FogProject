@@ -1,7 +1,7 @@
 package presentation.commands;
 
 import data.exceptions.CommandException;
-import data.exceptions.MaterialException;
+import data.exceptions.UsersException;
 import data.models.RoleEnum;
 import data.models.User;
 import javax.servlet.http.HttpServletRequest;
@@ -24,14 +24,14 @@ public class LoginCommand implements Command {
 
     @Override
     public String execute(HttpServletRequest request) throws CommandException {
-        String username = request.getParameter("username");
+        String email = request.getParameter("email");
         String password = request.getParameter("password");
         HttpSession session = request.getSession();
 
         try {
-            boolean valid = uf.validateUser(username, password);
+            boolean valid = uf.validateUser(email, password);
             if (valid) {
-                User user = uf.getById(username);
+                User user = uf.getById(email);
                 session.setAttribute("user", user);
                 if(user.getRole().equals(RoleEnum.ADMIN) || user.getRole().equals(RoleEnum.EMPLOYEE)) return "FrontController?command=requestList";
                 return target;
@@ -39,7 +39,7 @@ public class LoginCommand implements Command {
                 return "index.jsp";
             }
 
-        } catch (MaterialException ex) {
+        } catch (UsersException ex) {
             ex.printStackTrace();
             throw new CommandException("Wrong username or password!");
         }
