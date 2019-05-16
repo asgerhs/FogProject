@@ -1,7 +1,6 @@
 package data.mappers;
 
 import data.DatabaseConnector;
-import data.exceptions.MaterialException;
 import data.exceptions.RequestExceptions;
 import data.exceptions.UsersException;
 import data.interfaces.MapperInterface;
@@ -54,7 +53,7 @@ public class RequestMapper implements MapperInterface<Request, Integer> {
             ResultSet rs = stmt.executeQuery(qry);
             
             while (rs.next()) {
-                requests.add(new Request(
+                Request r = new Request(
                         rs.getInt("width"),
                         rs.getInt("length"),
                         rs.getInt("shedWidth"),
@@ -62,7 +61,11 @@ public class RequestMapper implements MapperInterface<Request, Integer> {
                         rs.getString("roof"),
                         rs.getInt("angle"),
                         rs.getString("note"),
-                        userMapper.getById(rs.getString("email"))));
+                        userMapper.getById(rs.getString("email")));
+                r.setId(rs.getInt("id"));
+                requests.add(r);
+                        
+                
             }
             
             return requests;
@@ -80,7 +83,7 @@ public class RequestMapper implements MapperInterface<Request, Integer> {
             ResultSet rs = ps.executeQuery();
             
             while (rs.next()) {
-                return new Request(
+                Request r = new Request(
                         rs.getInt("width"),
                         rs.getInt("length"),
                         rs.getInt("shedWidth"),
@@ -89,6 +92,8 @@ public class RequestMapper implements MapperInterface<Request, Integer> {
                         rs.getInt("angle"),
                         rs.getString("note"),
                         userMapper.getById(rs.getString("email")));
+                r.setId(rs.getInt("id"));
+                return r;
             }
             return null;
         } catch (SQLException | UsersException ex) {

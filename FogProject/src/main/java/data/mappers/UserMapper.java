@@ -58,7 +58,7 @@ public class UserMapper implements MapperInterface<User, String> {
     @Override
     public User getById(String email) throws UsersException {
         try (Connection con = dbc.open()) {
-            String qry = "SELECT * FROM accounts WHERE username = ?;";
+            String qry = "SELECT * FROM accounts WHERE email = ?;";
             PreparedStatement ps = con.prepareStatement(qry);
             ps.setString(1, email);
             ResultSet rs = ps.executeQuery();
@@ -106,7 +106,7 @@ public class UserMapper implements MapperInterface<User, String> {
             String qry = "SELECT email FROM accounts WHERE (email = ?) AND password = ?;";
             PreparedStatement ps = con.prepareStatement(qry);
             ps.setString(1, email);
-            ps.setString(3, password);
+            ps.setString(2, password);
             ResultSet rs = ps.executeQuery();
             boolean valid = false;
             while (rs.next()) {

@@ -15,7 +15,7 @@
 <table class="table">
     <thead class="thead-dark">
     <tr>
-      <th scope="col">Id</th>
+      <th scope="col">Order id</th>
       <th scope="col">Email</th>
       <th scope="col">Carport brede</th>
       <th scope="col">Carport Længde</th>
@@ -30,13 +30,13 @@
     %>
     <tr>
       <td><%=o.getId()%></td>
-      <td><%=o.getEmail()%></td>
-      <td><%=o.getWidth()%></td>
-      <td><%=o.getLength()%></td>
-      <td><%=o.getShedWidth()%></td>
-      <td><%=o.getShedLength()%></td>
-      <td><%=o.getRoof()%></td>
-      <td><%=o.getAngle()%></td>
+      <td><%=o.getRequest().getUser().getEmail()%></td>
+      <td><%=o.getRequest().getWidth()%></td>
+      <td><%=o.getRequest().getLength()%></td>
+      <td><%=o.getRequest().getShedWidth()%></td>
+      <td><%=o.getRequest().getShedLength()%></td>
+      <td><%=o.getRequest().getRoof()%></td>
+      <td><%=o.getRequest().getAngle()%></td>
     </tr>
   <%}%>
   </tbody>

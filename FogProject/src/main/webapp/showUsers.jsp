@@ -25,7 +25,7 @@
                     
             %>
             <tr>
-                <td><%=user.getUsername()%></td>
+                <td><%=user.getName()%></td>
                 <td><%=user.getEmail()%></td>
                 <td><%=user.getRole()%></td>
             </tr>
