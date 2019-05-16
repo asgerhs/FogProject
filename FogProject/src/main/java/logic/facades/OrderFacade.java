@@ -43,9 +43,9 @@ public class OrderFacade implements FacadeInterface<Order, String> {
         UserFacade uf = new UserFacade();
         
         List<Order> orders = of.getAllByUser(uf.getById("admin"));
-        /*for(Order o : orders){
+        for(Order o : orders){
             System.out.println(o.getId());
-        }*/
+        }
         
         //Request r = rf.getById(12);
         //of.createOrder(r);

@@ -33,7 +33,7 @@ DatabaseConnector dbc = new DatabaseConnector();
 
    private static Logger logger = Logger.getLogger(OrderMapper.class.getName());
 
-   public OrderMapper() {
+   /*public OrderMapper() {
        try {
 
            FileHandler handler = new FileHandler("logs/OrderMapper/OrderMapper-log.%u.%g.txt",
@@ -45,13 +45,13 @@ DatabaseConnector dbc = new DatabaseConnector();
            logger.log(Level.SEVERE, "Error in logger", new IOException("Error: "));
 
        }
-   }
+   }*/
 
    @Override
    public List<Order> getAll() throws OrderException {
        try(Connection con = dbc.open()){
            List<Order> order = new ArrayList();
-           String qry = "SELECT * FROM orderrs;";
+           String qry = "SELECT * FROM orders;";
            Statement stmt = con.createStatement();
            ResultSet rs = stmt.executeQuery(qry);
 
