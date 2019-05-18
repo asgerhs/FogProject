@@ -89,3 +89,7 @@ line{
 .shedToggle {
     display: none;
 }
+
+.alert {
+    display: none;
+}

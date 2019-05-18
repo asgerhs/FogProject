@@ -2,6 +2,7 @@ package presentation;
 
 import data.exceptions.CommandException;
 import data.mappers.MaterialMapper;
+import data.models.CommandTarget;
 import java.io.IOException;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
@@ -57,32 +58,18 @@ public class FrontController extends HttpServlet {
             String commandKey = request.getParameter("command");
             Command command = CommandList.commandForm(commandKey);
             
-            String target = command.execute(request);
-            RequestDispatcher dispatcher = request.getRequestDispatcher(target);
+            CommandTarget commandTarget = command.execute(request);
+            
+            response.setHeader("message", "" + commandTarget.getMessage());
+            
+            RequestDispatcher dispatcher = request.getRequestDispatcher(commandTarget.getTarget());
             dispatcher.forward(request, response);
         } catch (CommandException | ServletException | IOException ex) {
-            request.setAttribute("message", ex.getMessage());
-            System.out.println(ex.getMessage());
-            logger.log(Level.SEVERE, "Error: ", new Exception("hello"));
+            response.setHeader("error", "true");
+            response.setHeader("message", ex.getMessage());
             
-            //RequestDispatcher dispatcher = request.getRequestDispatcher(ex.getMessage());
-            //dispatcher.forward(request, response);
-            //backup exception???
-            /*
-        } catch (Exception e) {
-            PrintWriter out = response.getWriter();
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("  <head><title>PANIC Page</title></head>");
-            out.println("  <body>");
-            out.println("    <h3>" + e.getMessage() + "</h3><hr/>");
-            out.println("    <pre>");
-            //e.printStackTrace(out); // Don't do this in production code!
-            out.print("</pre>");
-            out.println("  </body>");
-            out.println("</html>");
-        }
-             */
+            System.out.println(ex.getMessage());
+            logger.log(Level.SEVERE, "Error: ", ex.getMessage());
         }
     }
 

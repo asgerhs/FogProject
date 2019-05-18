@@ -31,11 +31,4 @@ public class UserFacade implements FacadeInterface<User, String>{
     public int changePassword(String username, String password) throws UsersException {
         return um.changePassword(username, password);
     }
-    public static void main(String[] args) throws UsersException {
-        UserFacade uf = new UserFacade();
-        List<User> users = uf.getAll();
-        for(User u : users){
-            System.out.println(u.getEmail());
-        }
-    }
 }

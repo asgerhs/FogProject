@@ -2,7 +2,8 @@ package presentation.commands;
 
 import data.exceptions.CommandException;
 import data.exceptions.MaterialException;
-import data.exceptions.RequestExceptions;
+import data.exceptions.RequestException;
+import data.models.CommandTarget;
 import data.models.Material;
 import data.models.Request;
 import data.models.RoleEnum;
@@ -33,7 +34,7 @@ public class RequestCommand implements Command {
     }
 
     @Override
-    public String execute(HttpServletRequest request) throws CommandException {
+    public CommandTarget execute(HttpServletRequest request) throws CommandException {
         HttpSession session = request.getSession();
         Enumeration<String> paramNames = request.getParameterNames();
         HashMap<String, String> params = new HashMap();
@@ -46,7 +47,7 @@ public class RequestCommand implements Command {
             try {
                 Request r = rf.getById(Integer.parseInt(request.getParameter("requestId")));
                 session.setAttribute("request", r);
-            } catch (RequestExceptions ex) {
+            } catch (RequestException ex) {
                 ex.printStackTrace();
                 throw new CommandException("Can't find request");
             }
@@ -66,22 +67,31 @@ public class RequestCommand implements Command {
                     params.get("roof"),
                     angle ? Integer.parseInt(params.get("angle")) : 0,
                     params.get("note"),
+                    params.get("loggedin") != null ?
                     new User(
                             params.get("email"),
-                            "1234", // Password
+                            null,
+                            RoleEnum.CUSTOMER,
+                            null,
+                            null,
+                            null,
+                            null) 
+                    :
+                    new User(
+                            params.get("email"),
+                            params.get("password"),
                             RoleEnum.CUSTOMER,
                             params.get("name"),
                             params.get("address"),
                             params.get("zipCity"),
                             params.get("phone")));
             
-                System.out.println(re);
                 rf.add(re);
                 
-                return target;
-            } catch (RequestExceptions ex) {
+                return new CommandTarget(target, "Request send successfully");
+            } catch (RequestException ex) {
                 ex.printStackTrace();
-                throw new CommandException("Test");
+                throw new CommandException(ex.getMessage());
             }
         } else {
             try {
@@ -90,10 +100,10 @@ public class RequestCommand implements Command {
 
                 session.setAttribute("mats", mats);
 
-                return target;
+                return new CommandTarget(target, "Request loaded successfully");
             } catch (MaterialException ex) {
                 ex.printStackTrace();
-                throw new CommandException("Test");
+                throw new CommandException(ex.getMessage());
             }
         }
     }

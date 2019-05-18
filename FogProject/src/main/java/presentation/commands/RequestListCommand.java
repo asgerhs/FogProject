@@ -2,7 +2,8 @@ package presentation.commands;
 
 import data.exceptions.CommandException;
 import data.exceptions.OrderException;
-import data.exceptions.RequestExceptions;
+import data.exceptions.RequestException;
+import data.models.CommandTarget;
 import data.models.Request;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
@@ -27,7 +28,7 @@ public class RequestListCommand implements Command {
     }
 
     @Override
-    public String execute(HttpServletRequest request) throws CommandException {
+    public CommandTarget execute(HttpServletRequest request) throws CommandException {
         HttpSession session = request.getSession();
         List<Request> requests;
         if (request.getParameter("orderId") != null) {
@@ -37,30 +38,30 @@ public class RequestListCommand implements Command {
                 rf.remove(Integer.parseInt(request.getParameter("orderId")));
                 requests = rf.getAll();
                 session.setAttribute("requestList", requests);
-            } catch (RequestExceptions | OrderException ex) {
+            } catch (RequestException | OrderException ex) {
                 ex.printStackTrace();
-                throw new CommandException("Something went wrong!");
+                throw new CommandException(ex.getMessage());
             }
         } else if (request.getParameter("requestId") != null) {
             try {
                 rf.remove(Integer.parseInt(request.getParameter("requestId")));
                 requests = rf.getAll();
                 session.setAttribute("requestList", requests);
-            } catch (RequestExceptions ex) {
+            } catch (RequestException ex) {
                 ex.printStackTrace();
-                throw new CommandException("Something went wrong!");
+                throw new CommandException(ex.getMessage());
             }
         } else {
             try {
                 requests = rf.getAll();
                 session.setAttribute("requestList", requests);
-            } catch (RequestExceptions ex) {
+            } catch (RequestException ex) {
                 ex.printStackTrace();
-                throw new CommandException("Something went wrong!");
+                throw new CommandException(ex.getMessage());
             }
         }
 
-        return target;
+        return new CommandTarget(target, "Request List Loaded Successfully");
     }
 
 }

@@ -2,6 +2,7 @@ package presentation.commands;
 
 import data.exceptions.CommandException;
 import data.exceptions.OrderException;
+import data.models.CommandTarget;
 import data.models.Order;
 import data.models.RoleEnum;
 import data.models.User;
@@ -25,7 +26,7 @@ public class OrderCommand implements Command {
     }
 
     @Override
-    public String execute(HttpServletRequest request) throws CommandException {
+    public CommandTarget execute(HttpServletRequest request) throws CommandException {
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
 
@@ -39,9 +40,9 @@ public class OrderCommand implements Command {
             }
         } catch (OrderException ex) {
             ex.printStackTrace();
-            System.out.println("Something was wrong with orders!");
+            throw new CommandException(ex.getMessage());
         }
 
-        return target;
+        return new CommandTarget(target, "OrderList Loaded Successfully");
     }
 }

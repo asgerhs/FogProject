@@ -1,12 +1,10 @@
 package data.mappers;
 
-import data.DataSourceMySQL;
 import data.DatabaseConnector;
-import data.exceptions.RequestExceptions;
+import data.exceptions.RequestException;
 import data.exceptions.UsersException;
 import data.interfaces.MapperInterface;
 import data.models.Request;
-import data.models.User;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -49,7 +47,7 @@ public class RequestMapper implements MapperInterface<Request, Integer> {
     }
 
     @Override
-    public List<Request> getAll() throws RequestExceptions {
+    public List<Request> getAll() throws RequestException {
         try (Connection con = dbc.open()) {
             List<Request> requests = new ArrayList();
             String qry = "SELECT * FROM requests";
@@ -74,12 +72,12 @@ public class RequestMapper implements MapperInterface<Request, Integer> {
             return requests;
         } catch (SQLException | UsersException ex) {
             logger.log(Level.SEVERE, "Error in getAll Method:", new SQLException("Error: "));
-            throw new RequestExceptions("Error occoured while getting data from database");
+            throw new RequestException("Error occoured while getting data from database");
         }
     }
 
     @Override
-    public Request getById(Integer id) throws RequestExceptions {
+    public Request getById(Integer id) throws RequestException {
         try (Connection con = dbc.open()) {
             String qry = "SELECT * FROM requests WHERE id = ?";
             PreparedStatement ps = con.prepareStatement(qry);
@@ -102,11 +100,11 @@ public class RequestMapper implements MapperInterface<Request, Integer> {
             return null;
         } catch (SQLException | UsersException ex) {
             logger.log(Level.SEVERE, "Error in getById Method:", new SQLException("Error: "));
-            throw new RequestExceptions("Error occoured while getting data from database");
+            throw new RequestException("Error occoured while getting data from database");
         }
     }
 
-    public void updateRequest(Request rqst, int Id) throws SQLException, RequestExceptions {
+    public void updateRequest(Request rqst, int Id) throws SQLException, RequestException {
         try (Connection con = dbc.open()) {
 
             String qry = "UPDATE requests SET width = ?, length = ?, shedWidth = ?, shedLength = ?,"
@@ -125,16 +123,17 @@ public class RequestMapper implements MapperInterface<Request, Integer> {
 
         } catch (SQLException ex) {
             logger.log(Level.SEVERE, "Error in updateRequest Method:", new SQLException("Error: "));
-            throw new RequestExceptions("Error occoured while updating data in database");
+            throw new RequestException("Error occoured while updating data in database");
         }
     }
 
-    public void add(Request request) throws RequestExceptions {
+    public void add(Request request) throws RequestException {
         try (Connection con = dbc.open()) {
 
             try {
-                if(userMapper.getById(request.getUser().getEmail()) == null){
-                userMapper.add(request.getUser());
+                con.setAutoCommit(false);
+                if(request.getUser().getName() != null){
+                    userMapper.add(request.getUser());
                 }
 
                 String qry = "INSERT INTO requests"
@@ -152,16 +151,19 @@ public class RequestMapper implements MapperInterface<Request, Integer> {
                 ps.executeUpdate();
             } catch (UsersException ex) {
                 con.rollback();
+                con.setAutoCommit(true);
+                
                 logger.log(Level.SEVERE, "Error in add Method:", new SQLException("Error: "));
-                throw new RequestExceptions("Error occoured while adding user to database");
+                throw new RequestException("Error occoured while adding user to database - Email already in use");
             }
+            con.setAutoCommit(true);
         } catch (SQLException ex) {
             logger.log(Level.SEVERE, "Error in add Method:", new SQLException("Error: "));
-            throw new RequestExceptions("Error occoured while adding request to database");
+            throw new RequestException("Error occoured while adding request to database");
         }
     }
 
-    public void remove(int id) throws RequestExceptions {
+    public void remove(int id) throws RequestException {
         try (Connection con = dbc.open()) {
             String qry = "DELETE FROM requests WHERE id = ?;";
             PreparedStatement ps = con.prepareStatement(qry);
@@ -170,7 +172,7 @@ public class RequestMapper implements MapperInterface<Request, Integer> {
 
         } catch (SQLException ex) {
             ex.printStackTrace();
-            throw new RequestExceptions("Error while removing request from database");
+            throw new RequestException("Error while removing request from database");
         }
     }
 }

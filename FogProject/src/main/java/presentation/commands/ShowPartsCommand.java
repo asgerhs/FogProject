@@ -1,13 +1,10 @@
 package presentation.commands;
 
-import data.exceptions.RequestExceptions;
+import data.models.CommandTarget;
 import data.models.Part;
-import data.models.Request;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import logic.AdvancedCalculator;
@@ -34,7 +31,7 @@ public class ShowPartsCommand implements Command {
     }
 
     @Override
-    public String execute(HttpServletRequest request) {
+    public CommandTarget execute(HttpServletRequest request) {
         HttpSession session = request.getSession();
 
         Enumeration<String> paramNames = request.getParameterNames();
@@ -78,6 +75,6 @@ public class ShowPartsCommand implements Command {
         session.setAttribute("rafters", calc.getRafters());
         session.setAttribute("posts", calc.getPosts());
 
-        return target;
+        return new CommandTarget(target, "PartList Loaded Successfully");
     }
 }

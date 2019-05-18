@@ -1,6 +1,7 @@
 package presentation.commands;
 
 import data.exceptions.CommandException;
+import data.models.CommandTarget;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -17,10 +18,10 @@ public class LogoutCommand implements Command{
     
 
     @Override
-    public String execute(HttpServletRequest request) throws CommandException {
+    public CommandTarget execute(HttpServletRequest request) throws CommandException {
         HttpSession session = request.getSession();
         session.invalidate();
-        return target;
+        return new CommandTarget(target, "Logged out Successfully");
     }
 
 }

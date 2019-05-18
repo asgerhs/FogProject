@@ -1,8 +1,8 @@
 package presentation.commands;
 
 import data.exceptions.CommandException;
-import data.exceptions.MaterialException;
 import data.exceptions.UsersException;
+import data.models.CommandTarget;
 import data.models.User;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
@@ -25,16 +25,16 @@ public class ShowUsersCommand implements Command{
     
 
     @Override
-    public String execute(HttpServletRequest request) throws CommandException {
+    public CommandTarget execute(HttpServletRequest request) throws CommandException {
         HttpSession session = request.getSession();
         try {
             List<User> users = uf.getAll();
             session.setAttribute("users", users);
         } catch (UsersException ex) {
             ex.printStackTrace();
-            throw new CommandException("Could not find users from database");
+            throw new CommandException(ex.getMessage());
         }
-        return target;
+        return new CommandTarget(target, "User List Loaded Successfully");
     }
 
 }

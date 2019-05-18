@@ -1,7 +1,7 @@
 package data.mappers;
 
 import data.DatabaseConnector;
-import data.exceptions.RequestExceptions;
+import data.exceptions.RequestException;
 import data.models.Request;
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -96,7 +96,7 @@ public class RequestMapperTest {
         try {
             Request request = new Request(100, 100, 100, 100, "1013", 0, "Test", null);
             requestMapper.add(request);
-        } catch (RequestExceptions ex) {
+        } catch (RequestException ex) {
             fail(ex.getMessage());
         }
     }

@@ -117,7 +117,7 @@ public class UserMapper implements MapperInterface<User, String> {
             return valid;
         } catch (SQLException ex) {
             ex.printStackTrace();
-            throw new UsersException(ex.getMessage());
+            throw new UsersException("Error occoured while validating user");
         }
     }
     
@@ -133,7 +133,7 @@ public class UserMapper implements MapperInterface<User, String> {
             return result;
         } catch (SQLException ex) {
             ex.printStackTrace();
-            throw new UsersException(ex.getMessage());
+            throw new UsersException("Error occoured while updating user");
         }
     }
 }

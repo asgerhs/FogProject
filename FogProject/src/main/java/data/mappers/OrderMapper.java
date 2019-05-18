@@ -2,7 +2,7 @@ package data.mappers;
 
 import data.DatabaseConnector;
 import data.exceptions.OrderException;
-import data.exceptions.RequestExceptions;
+import data.exceptions.RequestException;
 import data.interfaces.MapperInterface;
 import data.models.Order;
 import data.models.Request;
@@ -64,7 +64,7 @@ public class OrderMapper implements MapperInterface<Order, Integer> {
                         requestMapper.getById(rs.getInt("requestId"))));
             }
             return order;
-        } catch (SQLException | RequestExceptions ex) {
+        } catch (SQLException | RequestException ex) {
             logger.log(Level.SEVERE, "Error in getAllOrders method", new SQLException("Error: "));
             throw new OrderException("Couldn't access orders from Database");
         }
@@ -82,7 +82,7 @@ public class OrderMapper implements MapperInterface<Order, Integer> {
                 return new Order(rs.getInt("id"),
                         requestMapper.getById(rs.getInt("requestId")));
             }
-        } catch (SQLException | RequestExceptions ex) {
+        } catch (SQLException | RequestException ex) {
             logger.log(Level.SEVERE, "Error in getById method", new SQLException("Error: "));
             throw new OrderException("Something went wrong with retrieving the specific order from the database");
         }
@@ -118,7 +118,7 @@ public class OrderMapper implements MapperInterface<Order, Integer> {
                         requestMapper.getById(rs.getInt("requestId"))));
             }
             return orders;
-        } catch (SQLException | RequestExceptions ex) {
+        } catch (SQLException | RequestException ex) {
             ex.printStackTrace();
             throw new OrderException("Couldn't access orders from Database");
         }
