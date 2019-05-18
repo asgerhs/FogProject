@@ -26,8 +26,8 @@ public class OrderFacade implements FacadeInterface<Order, Integer> {
         return om.getById(id);
     }
 
-    public void createOrder(Request req) throws OrderException{
-        om.createOrder(req);
+    public void createOrder(int requestId) throws OrderException{
+        om.createOrder(requestId);
     }
     
     public List<Order> getAllByUser(User user) throws OrderException {

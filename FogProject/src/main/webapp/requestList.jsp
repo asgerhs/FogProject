@@ -45,7 +45,7 @@
                 <td>
                     <form id="requestForm" method="POST">
                         <input type="hidden" name="orderId" value="<%=r.getId()%>">
-                        <button type="submit" class="btn btn-dark" formaction="FrontController?command=requestList">Gennemfør</button>
+                        <button type="submit" class="btn btn-dark" formaction="FrontController?command=requestList">Godkend</button>
                     </form>    
                 </td>
                 <td>
