@@ -53,8 +53,6 @@ public class RequestCommand implements Command {
             }
         }
         
-        
-        
         if(params.get("submit") != null) {
             try {
                 boolean shed = params.get("shed") == null ? false : true;

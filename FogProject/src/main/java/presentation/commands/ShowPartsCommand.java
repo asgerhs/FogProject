@@ -2,7 +2,6 @@ package presentation.commands;
 
 import data.models.CommandTarget;
 import data.exceptions.OrderException;
-import data.exceptions.RequestExceptions;
 import data.models.Order;
 import data.models.Part;
 import java.util.ArrayList;
@@ -60,15 +59,7 @@ public class ShowPartsCommand implements Command {
             } catch (OrderException ex) {
                 ex.printStackTrace();
             }
-        } /*else if (params.get("submit") != null) {
-            calc = new AdvancedCalculator(
-                    Integer.parseInt(params.get("length")) * 10,
-                    Integer.parseInt(params.get("width")) * 10,
-                    Boolean.parseBoolean(params.get("shed")),
-                    Integer.parseInt(params.get("shedLength")) * 10,
-                    Integer.parseInt(params.get("shedWidth")) * 10,
-                    false);
-        }*/
+        }
 
         ArrayList<Part> wood = calc.getParts().getWoodList();
         ArrayList<Part> misc = calc.getParts().getMiscList();
