@@ -6,7 +6,7 @@ import java.util.List;
  *
  * @author Martin Frederiksen
  */
-public interface MapperInterface <T> {
+public interface MapperInterface <T, S> {
     List<T> getAll() throws Exception;
-    T getById(int id) throws Exception;
+    T geSingle(S t) throws Exception;
 }

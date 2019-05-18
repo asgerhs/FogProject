@@ -6,7 +6,7 @@ import java.util.List;
  *
  * @author Martin Frederiksen
  */
-public interface FacadeInterface <T>{
+public interface FacadeInterface <T, S>{
     List<T> getAll() throws Exception;
-    T getById(int id) throws Exception;
+    T getSingle(S t) throws Exception;
 }

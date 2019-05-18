@@ -1,13 +1,18 @@
 package presentation.commands;
 
-import data.exceptions.CommandExceptions;
-import data.exceptions.MapperExceptions;
-import data.exceptions.RequestExceptions;
+import data.exceptions.CommandException;
+import data.exceptions.MaterialException;
+import data.exceptions.RequestException;
+import data.models.CommandTarget;
 import data.models.Material;
 import data.models.Request;
+import data.models.RoleEnum;
+import data.models.User;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import logic.facades.MaterialFacade;
@@ -31,7 +36,8 @@ public class RequestCommand implements Command {
     }
 
     @Override
-    public String execute(HttpServletRequest request) throws CommandExceptions {
+    public CommandTarget execute(HttpServletRequest request) throws CommandException {
+        HttpSession session = request.getSession();
         Enumeration<String> paramNames = request.getParameterNames();
         HashMap<String, String> params = new HashMap();
         while(paramNames.hasMoreElements()) {
@@ -39,43 +45,69 @@ public class RequestCommand implements Command {
             params.put(pName, request.getParameter(pName));
         }
         
+        if(request.getParameter("requestId") != null) {
+            try {
+                Request r = rf.getSingle(Integer.parseInt(request.getParameter("requestId")));
+                session.setAttribute("request", r);
+            } catch (RequestException ex) {
+                ex.printStackTrace();
+                throw new CommandException("Can't find request");
+            }
+        }
+        
         if(params.get("submit") != null) {
             try {
+                boolean shed = params.get("shed") == null ? false : true;
+                boolean angle = params.get("angleCheck") == null ? false : true;
                 Request re = new Request(
                     Integer.parseInt(params.get("width")),
                     Integer.parseInt(params.get("length")),
-                    Integer.parseInt(params.get("shedWidth")),
-                    Integer.parseInt(params.get("shedLength")),
+                    shed ? Integer.parseInt(params.get("shedWidth")) : 0,
+                    shed ? Integer.parseInt(params.get("shedLength")) : 0,
                     params.get("roof"),
-                    0, //angle
-                    params.get("name"),
-                    params.get("address"),
-                    params.get("zipCity"),
-                    params.get("phone"),
-                    params.get("email"),
-                    params.get("note"));
+                    angle ? Integer.parseInt(params.get("angle")) : 0,
+                    params.get("note"),
+                    params.get("loggedin") != null ?
+                    new User(
+                            params.get("email"),
+                            null,
+                            RoleEnum.CUSTOMER,
+                            null,
+                            null,
+                            null,
+                            null) 
+                    :
+                    new User(
+                            params.get("email"),
+                            params.get("password"),
+                            RoleEnum.CUSTOMER,
+                            params.get("name"),
+                            params.get("address"),
+                            params.get("zipCity"),
+                            params.get("phone")));
             
-                System.out.println(re);
+                if(request.getParameter("requestId") != null) {
+                    re.setId(Integer.parseInt(request.getParameter("requestId")));
+                    rf.update(re);
+                }
                 rf.add(re);
                 
-                return target;
-            } catch (RequestExceptions ex) {
+                return new CommandTarget(target, "Request send successfully");
+            } catch (RequestException ex) {
                 ex.printStackTrace();
-                throw new CommandExceptions("Test");
+                throw new CommandException(ex.getMessage());
             }
         } else {
             try {
-                HttpSession session = request.getSession();
-
                 ArrayList<Material> mats;
                 mats = mf.getAllByCategory(10);
 
                 session.setAttribute("mats", mats);
 
-                return target;
-            } catch (MapperExceptions ex) {
+                return new CommandTarget(target, "Request loaded successfully");
+            } catch (MaterialException ex) {
                 ex.printStackTrace();
-                throw new CommandExceptions("Test");
+                throw new CommandException(ex.getMessage());
             }
         }
     }

@@ -14,8 +14,12 @@ html {
     margin-bottom: 7rem;
 }
 
+.requestButton {
+    margin-top: 2rem;
+}
+
 .navbar-brand {
-    background-image: url("../images/foglogok.png");
+    background-image: url("../images/foglogo.png");
     background-size: cover;
     width: 50px;
     height: 50px;
@@ -60,18 +64,40 @@ rect {
 .post {
     stroke-width: 4px;
 }
-
+.svgBold {
+    stroke-width: 4px;
+}
 .shed{
     stroke-width: 3px;
 
 }
 line{
+    stroke: black;
+    stroke-width: 2px;
+}
+.svgDashed{
     stroke: red;
     stroke-width: 2px;
+}
+.svgThin{
+    stroke: #000;
+    stroke-width: 1px;
 }
 
 .measure{
     stroke:#000000; 
     marker-start: url(#beginArrow); 
     marker-end: url(#endArrow);
+}
+
+.shedToggle {
+    display: none;
+}
+
+.alert {
+    display: none;
+}
+
+.requestButton {
+  background-image: linear-gradient(black, grey, blue, lightblue, white);
 }

@@ -13,6 +13,10 @@
 <%
     ArrayList<Part> woodParts = (ArrayList<Part>) session.getAttribute("woodParts");
     ArrayList<Part> miscParts = (ArrayList<Part>) session.getAttribute("miscParts");
+    String topViewSVG = (String) session.getAttribute("topViewSVG");
+    String sideViewSVG = (String) session.getAttribute("sideViewSVG");
+    int woodPrice = 0;
+    int miscPrice = 0;
 %>
 
 <div class="greyBox">
@@ -24,11 +28,13 @@
                 <th scope="col">Antal</th>
                 <th scope="col">Enhed</th>
                 <th scope="col">Beskrivelse</th>
+                <th scope="col">Pris</th>
             </tr>
         </thead>
         <tbody>
             <% for (Part p : woodParts) {
                     Material m = p.getMaterial();
+                    woodPrice += p.getPrice();
             %>
             <tr>
                 <td><%=m.getName()%></td>
@@ -36,8 +42,17 @@
                 <td><%=p.getQty()%></td>
                 <td><%=m.getUnit()%></td>
                 <td><%=p.getDescription()%></td>
+                <td><%=(p.getPrice()/100) + " DKK"%></td>
             </tr>
             <%}%>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td><%=woodPrice/100 + " DKK"%></td>
+            </tr>
         </tbody>
     </table>
 </div>
@@ -50,9 +65,11 @@
                 <th scope="col">Antal</th>
                 <th scope="col">Enhed</th>
                 <th scope="col">Beskrivelse</th>
+                <th scope="col">Pris</th>
             </tr>
             <% for (Part p : miscParts) {
                     Material m = p.getMaterial();
+                    miscPrice+=p.getPrice();
             %>
         <tbody>
             <tr>
@@ -61,12 +78,30 @@
                 <td><%=p.getQty()%></td>
                 <td><%=m.getUnit()%></td>
                 <td><%=p.getDescription()%></td>
+                <td><%=p.getPrice()/100 + " DKK"%>
             </tr>
             <%}%>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td><%=miscPrice/100 + " DKK"%></td>
+            </tr>
         </tbody>
         </thead>
     </table>
 </div>
-<%@include file = "svg.jsp" %>
+            
+<div class="greyBox">
+    <h1>Top View</h1>
+    <%= topViewSVG %>
+</div>
 
+<div class="greyBox">
+    <h1>Side View</h1>
+    <%= sideViewSVG %>
+</div>
+    
 <%@include file = "footer.jsp" %>

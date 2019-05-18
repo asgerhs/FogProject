@@ -1,9 +1,10 @@
 package logic;
 
+import com.github.javafaker.Address;
 import com.github.javafaker.Faker;
+import com.github.javafaker.PhoneNumber;
 import data.models.Category;
 import data.models.Material;
-import data.models.Request;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -18,68 +19,71 @@ import static org.junit.Assert.*;
  */
 public class GenerateSQLDummyScript {
 
-    private Formatter f;
+    private Formatter f; 
+    private String name;
+    ArrayList<String> names = new ArrayList();
+    
 
     private void generateMaterialScript() throws IOException {
-        f.format("-- Woods\n");
+        //f.format("-- Woods\n");
         List<Material> mats = new ArrayList();
 
         // Woods
-        mats.add(new Material("1000", "25x200 mm. trykimp. Brædt", 3600, 1, "stk"));
-        mats.add(new Material("1001", "25x200 mm. trykimp. Brædt", 5400, 1, "stk"));
-        mats.add(new Material("1002", "25x125mm. trykimp. Brædt", 3600, 1, "stk"));
-        mats.add(new Material("1003", "25x125mm. trykimp. Brædt", 5400, 1, "stk"));
-        mats.add(new Material("1004", "38x73 mm. Lægte ubh.", 4200, 1, "stk"));
-        mats.add(new Material("1005", "45x95 mm. Reglar ub.", 2400, 1, "stk"));
-        mats.add(new Material("1006", "45x95 mm. Reglar ub.", 2700, 1, "stk"));
-        mats.add(new Material("1007", "45x195 mm. spærtræ ubh.", 4800, 1, "stk"));
-        mats.add(new Material("1008", "45x195 mm. spærtræ ubh.", 6000, 1, "stk"));
-        mats.add(new Material("1009", "97x97 mm. trykimp. Stolpe", 3000, 1, "stk"));
-        mats.add(new Material("1010", "19x100 mm. trykimp. Brædt", 2100, 1, "stk"));
-        mats.add(new Material("1011", "19x100 mm. trykimp. Brædt", 3600, 1, "stk"));
-        mats.add(new Material("1012", "19x100 mm. trykimp. Brædt", 5400, 1, "stk"));
-        mats.add(new Material("1013", "Plastmo Ecolite blåtonet", 3600, 1, "stk"));
-        mats.add(new Material("1014", "Plastmo Ecolite blåtonet", 6000, 1, "stk"));
-        mats.add(new Material("1015", "38x73 mm. taglægte T1", 5400, 1, "stk"));
-        mats.add(new Material("1016", "38x73 mm. taglægte T1", 4200, 1, "stk"));
+        mats.add(new Material("1000", "25x200 mm. trykimp. Brædt", 3600, 1, "stk", 17983));
+        mats.add(new Material("1001", "25x200 mm. trykimp. Brædt", 5400, 1, "stk", 26973));
+        mats.add(new Material("1002", "25x125mm. trykimp. Brædt", 3600, 1, "stk", 10783));
+        mats.add(new Material("1003", "25x125mm. trykimp. Brædt", 5400, 1, "stk", 16173));
+        mats.add(new Material("1004", "38x73 mm. Lægte ubh.", 4200, 1, "stk", 2499));
+        mats.add(new Material("1005", "45x95 mm. Reglar ub.", 2400, 1, "stk", 3108)); 
+        mats.add(new Material("1006", "45x95 mm. Reglar ub.", 2700, 1, "stk", 3496)); 
+        mats.add(new Material("1007", "45x195 mm. spærtræ ubh.", 4800, 1, "stk", 23016));
+        mats.add(new Material("1008", "45x195 mm. spærtræ ubh.", 6000, 1, "stk", 28770));
+        mats.add(new Material("1009", "97x97 mm. trykimp. Stolpe", 3000, 1, "stk", 11385));
+        mats.add(new Material("1010", "19x100 mm. trykimp. Brædt", 2100, 1, "stk", 1250));
+        mats.add(new Material("1011", "19x100 mm. trykimp. Brædt", 3600, 1, "stk", 2143));
+        mats.add(new Material("1012", "19x100 mm. trykimp. Brædt", 5400, 1, "stk", 3213));
+        mats.add(new Material("1013", "Plastmo Ecolite blåtonet", 3600, 1, "stk", 11900));
+        mats.add(new Material("1014", "Plastmo Ecolite blåtonet", 6000, 1, "stk", 23000));
+        mats.add(new Material("1015", "38x73 mm. taglægte T1", 5400, 1, "stk", 9153));
+        mats.add(new Material("1016", "38x73 mm. taglægte T1", 4200, 1, "stk", 7119));
 
         // Misc
-        mats.add(new Material("1030", "Plastmo bundskruer 200 stk.", 0, 200, "pakke"));
-        mats.add(new Material("1031", "Hulbånd 1x20 mm. 10 mtr.", 1000, 1, "rulle"));
-        mats.add(new Material("1032-r", "Universal 190 mm højre", 190, 1, "stk"));
-        mats.add(new Material("1032-l", "Universal 190 mm venstre", 190, 1, "stk"));
-        mats.add(new Material("1034", "4,5x60 mm. skruer 200 stk.", 60, 200, "pakke"));
-        mats.add(new Material("1035", "4,0x50 mm. skruer 250 stk.", 50, 250, "pakke"));
-        mats.add(new Material("1036", "Bræddebolt 10x120 mm.", 120, 1, "stk"));
-        mats.add(new Material("1037", "Firkantskiver 40x40x11mm", 11, 1, "stk"));
-        mats.add(new Material("1038", "4,5x70 mm. Skruer 400 stk.", 70, 400, "pakke"));
-        mats.add(new Material("1039", "4,5x50 mm. Skruer 300 stk.", 50, 300, "pakke"));
-        mats.add(new Material("1040", "Stalddørsgreb 50x75 mm", 75, 1, "sæt"));
-        mats.add(new Material("1041", "T hængsel 390 mm", 390, 1, "stk"));
-        mats.add(new Material("1042", "Vinkelbeslag 35 mm", 35, 1, "stk"));
-        mats.add(new Material("1043", "5,0 x 40 mm. beslagskruer 250 stk.", 40, 250, "pakke"));
-        mats.add(new Material("1044", "5,0 x 100 mm. skruer 100 stk", 100, 100, "pakke"));
+        mats.add(new Material("1030", "Plastmo bundskruer 200 stk.", 0, 200, "pakke", 39500));
+        mats.add(new Material("1031", "Hulbånd 1x20 mm. 10 mtr.", 1000, 1, "rulle", 20900));
+        mats.add(new Material("1032-r", "Universal 190 mm højre", 190, 1, "stk", 1590));
+        mats.add(new Material("1032-l", "Universal 190 mm venstre", 190, 1, "stk", 1590));
+        mats.add(new Material("1034", "4,5x60 mm. skruer 200 stk.", 60, 200, "pakke", 15900));
+        mats.add(new Material("1035", "4,0x50 mm. skruer 250 stk.", 50, 250, "pakke", 22900));
+        mats.add(new Material("1036", "Bræddebolt 10x120 mm.", 120, 1, "stk", 1953));
+        mats.add(new Material("1037", "Firkantskiver 40x40x11mm", 11, 1, "stk", 1011));
+        mats.add(new Material("1038", "4,5x70 mm. Skruer 400 stk.", 70, 400, "pakke", 19900));
+        mats.add(new Material("1039", "4,5x50 mm. Skruer 300 stk.", 50, 300, "pakke", 9595));
+        mats.add(new Material("1040", "Stalddørsgreb 50x75 mm", 75, 1, "sæt", 14320));
+        mats.add(new Material("1041", "T hængsel 390 mm", 390, 1, "stk", 6396));
+        mats.add(new Material("1042", "Vinkelbeslag 35 mm", 35, 1, "stk", 2495));
+        mats.add(new Material("1043", "5,0 x 40 mm. beslagskruer 250 stk.", 40, 250, "pakke", 21000));
+        mats.add(new Material("1044", "5,0 x 100 mm. skruer 100 stk", 100, 100, "pakke", 18900));
         
         //Roof materials (pack)
-        mats.add(new Material("1060", "B & C Dobbelt -s sort", 0, 300, "stk"));
-        mats.add(new Material("1061", "B & C Rygsten sort", 0, 1, "stk"));
-        mats.add(new Material("1062", "B & C Toplægte holder", 0, 1, "stk"));
-        mats.add(new Material("1063", "B & C Rygstensbeslag", 0, 1, "stk"));
-        mats.add(new Material("1064", "B & C Tagstens bindere & nakkekroge", 0, 1, "pakke"));
+        mats.add(new Material("1060", "B & C Dobbelt -s sort", 0, 300, "stk", 589));
+        mats.add(new Material("1061", "B & C Rygsten sort", 0, 1, "stk", 4500));
+        mats.add(new Material("1062", "B & C Toplægte holder", 0, 1, "stk", 1995));
+        mats.add(new Material("1063", "B & C Rygstensbeslag", 0, 1, "stk", 1010));
+        mats.add(new Material("1064", "B & C Tagstens bindere & nakkekroge", 0, 1, "pakke", 81900));
 
         String sql = "";
-        String sqlStart = "INSERT INTO stock VALUES (";
+        String sqlStart = "INSERT INTO `stock` VALUES (";
         String sqlEnd = ");\n";
 
         for (Material m : mats) {
-            sql += sqlStart + "'" + m.getRef() + "', '" + m.getName() + "', " + m.getLength() + ", " + m.getAmount() + ", '" + m.getUnit() + "'" + sqlEnd;
+            sql += sqlStart + "'" + m.getRef() + "', '" + m.getName() + "', " + m.getLength() + ", " + m.getAmount() + ", '" + m.getUnit() + "', " + m.getPrice() + sqlEnd;
         }
 
         f.format(sql);
     }
 
     private void generateMatCategoriesScript() throws IOException {
-        f.format("\n\n-- Categories\n");
+        //f.format("\n\n-- Categories\n");
         List<Category> cats = new ArrayList();
 
         //all categories in database
@@ -102,7 +106,7 @@ public class GenerateSQLDummyScript {
         cats.add(new Category("Tagpakke"));
         
         String sql = "";
-        String sqlStart = "INSERT INTO categories(name) VALUES (";
+        String sqlStart = "INSERT INTO `categories`(name) VALUES (";
         String sqlEnd = ");\n";
 
         for (Category c : cats) {
@@ -113,7 +117,7 @@ public class GenerateSQLDummyScript {
     }
 
     private void generateMatCategoriesLinkScript() throws IOException {
-        f.format("\n\n-- Categories - Stock link\n");
+        //f.format("\n\n-- Categories - Stock link\n");
         ArrayList<MatCatLink> link = new ArrayList();
 
         //all categories in database
@@ -167,7 +171,7 @@ public class GenerateSQLDummyScript {
         link.add(new MatCatLink("1064", 17));
         
         String sql = "";
-        String sqlStart = "INSERT INTO stockToCategory VALUES (";
+        String sqlStart = "INSERT INTO `stockToCategory` VALUES (";
         String sqlEnd = ");\n";
 
         for (MatCatLink mcl : link) {
@@ -178,64 +182,95 @@ public class GenerateSQLDummyScript {
     }
 
     private void generateUserScript() throws IOException {
-        f.format("\n\n-- Users\n");
+        //f.format("\n\n-- Users\n");
 
         String sql = "";
-        String sqlStart = "INSERT INTO users VALUES (";
+        String sqlStart = "INSERT INTO `accounts` VALUES (";
         String sqlEnd = ");\n";
-
-        ArrayList<String> names = new ArrayList();
+        
 
         for (int i = 0; i < 100; i++) {
             Faker faker = new Faker();
-            String name = faker.name().firstName();
+            name = faker.name().firstName();
             while (names.contains(name)) {
                 name = faker.name().firstName();
             }
             names.add(name);
-            sql += sqlStart + "'" + name + "', '" + name + "@somewhere.dk', " + "'1234', 'SALESMAN'" + sqlEnd;
+            Address address = faker.address();
+            PhoneNumber phone = faker.phoneNumber();
+            
+            sql += sqlStart + "'" + name + "@somewhere.dk', " + "'1234', 'CUSTOMER', '" + name + "', '" + address.streetAddress().replace("'", " ") + "', '" +
+                    address.zipCode() + " " + address.city().replace("'", " ") + "', '" + phone.phoneNumber() + "'" + sqlEnd;
         }
-
+        sql += sqlStart + "'bsm@e.dk', '1234', 'EMPLOYEE', 'BestSalesman', 'Salesman', '1234 By', '1234'" + sqlEnd;
+        sql += sqlStart + "'admin@a.dk', '1234', 'ADMIN', 'Admin', 'Admin', '1234 By', '1234'" + sqlEnd;
+        
         f.format(sql);
     }
+    
 
     private void generateRequestScript() throws IOException {
-        f.format("\n\n-- Requests\n");
+        //f.format("\n\n-- Requests\n");
 
         String sql = "";
-        String sqlStart = "INSERT INTO requests"
-                + "(width, length, shedWidth, shedLength, roof, angle, name, address, zipCity, phone, email, note) VALUES (";
+        String sqlStart = "INSERT INTO `requests`"
+                + "(width, length, shedWidth, shedLength, roof, angle, note, email) VALUES (";
         String sqlEnd = ");\n";
 
-        for (int i = 0; i < 25; i++) {
+        for (String str : names) {
             Faker faker = new Faker();
             int num = faker.number().numberBetween(500, 780);
             int shed = faker.number().numberBetween(100, 210);
-            String phone = faker.phoneNumber().cellPhone();
-            String address = faker.address().streetAddress();
-            String name = faker.name().firstName();
+            //String name = faker.name().firstName();
 
-            sql += sqlStart + num + ", " + num + ", " + shed + ", " + shed + ", " + "'not flat'" + ", " + 30 + ", '"
-                    + name + "', '" + address + "', '" + name + "s Zip" + "', '" + phone
-                    + "', '" + name + "@somewhere.com" + "', '" + "This is a test for " + name + "'" + sqlEnd;
+            sql += sqlStart + num + ", " + num + ", " + shed + ", " + shed + ", " + "'not flat'" + ", " + 30
+                    + ", '" + "This is a test for " + str + "', '"
+                    + str + "@somewhere.dk'" +  sqlEnd;
 
         }
         f.format(sql);
     }
 
+     private void generateOrderScript(){
+        //f.format("\n\n-- Orders\n");
+        
+        String sql = "";
+        String sqlStart = "INSERT INTO orders"
+                + "(requestId) VALUES(";
+        String sqlEnd = "); \n";
+        
+        for(int i = 1; i <= 10; i++) {
+            sql += sqlStart + i + sqlEnd;
+        }
+        f.format(sql);
+    }
+    
+    
     @Test
     public void runTests() throws IOException {
-        FileWriter fw = new FileWriter("GeneratedDummyData.sql", false);
+        FileWriter fw = new FileWriter("../Database/GeneratedDummyData.sql", false);
         f = new Formatter(fw);
 
         generateMaterialScript();
         generateMatCategoriesScript();
         generateMatCategoriesLinkScript();
         generateUserScript();
+        
         generateRequestScript();
-
+        generateOrderScript();
+        
+        for(String str : names){
+            System.out.println(str);
+        }
+        System.out.println("------------------------------");
+        for(String str : names){
+            System.out.println(str);
+        }
+        
         f.close();
         assertTrue(true);
+        
+        
     }
 
     private class MatCatLink {

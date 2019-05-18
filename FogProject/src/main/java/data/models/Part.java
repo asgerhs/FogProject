@@ -7,13 +7,14 @@ package data.models;
 public class Part {
 
     private Material material;
-    private int qty;
+    private int qty, price;
     private String description;
 
-    public Part(Material material, int qty, String description) {
+    public Part(Material material, int qty, String description, int price) {
         this.material = material;
         this.qty = qty;
         this.description = description;
+        this.price = price;
     }
 
     public Material getMaterial() {
@@ -28,8 +29,14 @@ public class Part {
         return description;
     }
 
+    public int getPrice() {
+        return price;
+    }
+
     @Override
     public String toString() {
-        return "Part{" + "material=" + material + ", qty=" + qty + ", description=" + description + '}';
+        return "Part{" + "material=" + material + ", qty=" + qty + ", description=" + description + ", price=" + price + '}';
     }
+    
+   
 }
