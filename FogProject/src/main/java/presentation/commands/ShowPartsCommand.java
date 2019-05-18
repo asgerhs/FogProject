@@ -48,7 +48,7 @@ public class ShowPartsCommand implements Command {
 
         if(request.getParameter("orderId") != null){
             try {
-                Order o = of.getById(Integer.parseInt(request.getParameter("orderId")));
+                Order o = of.getSingle(Integer.parseInt(request.getParameter("orderId")));
                 calc = new AdvancedCalculator(
                     o.getRequest().getLength() * 10,
                     o.getRequest().getWidth() * 10,

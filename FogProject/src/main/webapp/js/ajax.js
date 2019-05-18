@@ -14,11 +14,11 @@ function ajax(formObj) {
         data: $(formObj).serialize()
     }).done(function (data, textStatus, request) {
         if (request.getResponseHeader('error') !== null) {
-            $("#errorBox").html(request.getResponseHeader('message'));
+            $("#errorBox").prepend(request.getResponseHeader('message'));
             $("#errorBox").show();
             $("#successBox").hide();
         } else {
-            $("#successBox").html(request.getResponseHeader('message'));
+            $("#successBox").prepend(request.getResponseHeader('message'));
             $("#successBox").show();
             $("#errorBox").hide();
         }

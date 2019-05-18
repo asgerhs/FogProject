@@ -45,7 +45,7 @@ public class RequestCommand implements Command {
         
         if(request.getParameter("requestId") != null) {
             try {
-                Request r = rf.getById(Integer.parseInt(request.getParameter("requestId")));
+                Request r = rf.getSingle(Integer.parseInt(request.getParameter("requestId")));
                 session.setAttribute("request", r);
             } catch (RequestException ex) {
                 ex.printStackTrace();

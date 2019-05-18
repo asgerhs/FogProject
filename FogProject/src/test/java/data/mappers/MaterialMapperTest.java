@@ -73,7 +73,7 @@ public class MaterialMapperTest {
     public void testGetById() throws Exception {
         System.out.println("getById");
         String ref = "1000";
-        Material result = materialMapper.getById(ref);
+        Material result = materialMapper.geSingle(ref);
         assertEquals("25x200 mm. trykimp. Brædt", result.getName());
     }
 

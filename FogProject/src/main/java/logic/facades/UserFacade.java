@@ -21,8 +21,8 @@ public class UserFacade implements FacadeInterface<User, String> {
     }
 
     @Override
-    public User getById(String email) throws UsersException {
-        return um.getById(email);
+    public User getSingle(String email) throws UsersException {
+        return um.geSingle(email);
     }
 
     public boolean validateUser(String email, String password) throws UsersException {

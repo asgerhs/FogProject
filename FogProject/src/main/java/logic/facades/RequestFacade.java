@@ -21,8 +21,8 @@ public class RequestFacade implements FacadeInterface<Request, Integer>{
     }
 
     @Override
-    public Request getById(Integer id) throws RequestException {
-        return rm.getById(id);
+    public Request getSingle(Integer id) throws RequestException {
+        return rm.geSingle(id);
     }
     
     public void add(Request request) throws RequestException {
@@ -31,11 +31,5 @@ public class RequestFacade implements FacadeInterface<Request, Integer>{
     
     public void remove(int id) throws RequestException {
         rm.remove(id);
-    }
-    
-    public static void main(String[] args) throws UsersException, RequestException {
-        RequestFacade rf = new RequestFacade();
-        UserFacade uf = new UserFacade();
-        rf.add(new Request(500, 500, 500, 500, "TEST", 500, "TEST", uf.getById("Alec@somewhere.dk")));
     }
 }

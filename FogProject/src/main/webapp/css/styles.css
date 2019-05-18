@@ -14,6 +14,10 @@ html {
     margin-bottom: 7rem;
 }
 
+.requestButton {
+    margin-top: 2rem;
+}
+
 .navbar-brand {
     background-image: url("../images/foglogok.png");
     background-size: cover;

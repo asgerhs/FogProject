@@ -21,8 +21,8 @@ public class MaterialFacade implements FacadeInterface<Material, String>{
     }
 
     @Override
-    public Material getById(String ref) throws MaterialException {
-        return mm.getById(ref);
+    public Material getSingle(String ref) throws MaterialException {
+        return mm.geSingle(ref);
     }
 
     public ArrayList<Material> getAllByCategory(int id) throws MaterialException {
