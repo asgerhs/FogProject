@@ -89,13 +89,13 @@ public class OrderMapper implements MapperInterface<Order, Integer> {
         return null;
     }
 
-    public void createOrder(Request request) throws OrderException {
+    public void createOrder(int requestId) throws OrderException {
         try (Connection con = dbc.open()) {
             String sql = "INSERT INTO orders "
                     + "(requestId)"
                     + "VALUES(?);";
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1, request.getId());
+            ps.setInt(1, requestId);
 
             ps.executeUpdate();
 

@@ -1,6 +1,5 @@
 package data.mappers;
 
-import data.DataSourceMySQL;
 import data.DatabaseConnector;
 import data.exceptions.UsersException;
 import data.interfaces.MapperInterface;
@@ -134,6 +133,19 @@ public class UserMapper implements MapperInterface<User, String> {
         } catch (SQLException ex) {
             ex.printStackTrace();
             throw new UsersException("Error occoured while updating user");
+        }
+    }
+    
+     public void remove(String email) throws UsersException {
+        try (Connection con = dbc.open()) {
+            String qry = "DELETE FROM accounts WHERE email = ?;";
+            PreparedStatement ps = con.prepareStatement(qry);
+            ps.setString(1, email);
+            ps.executeUpdate();
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            throw new UsersException("Error while removing request from database");
         }
     }
 }

@@ -10,8 +10,19 @@
 <%@include file="header.jsp" %>
 <%
     ArrayList<Material> mats = (ArrayList<Material>)session.getAttribute("mats");
+    Request r = null;
+    int length = 0;
+    int width = 0;
+    int angle = 0;
+    int shedLength = 0;
+    int shedWidth = 0;
     if((Request)session.getAttribute("request") != null){
-        Request r = (Request)session.getAttribute("request");
+        r = (Request)session.getAttribute("request");
+        length = r.getLength();
+        width = r.getWidth();
+        angle = r.getAngle();
+        shedLength = r.getShedLength();
+        shedWidth = r.getShedWidth();
     }
     User user = (User)session.getAttribute("user");
 %>
@@ -22,14 +33,14 @@
     
     <thead class="thead-dark">
     <h2>Carport Information</h2>
-    <hr />  
+    <hr />
     <div class="form-group">
         <label>Carport Width</label>
-        <input type="number" required="" class="form-control" name="width" min="240" max="750" placeholder="Min. 240 - Max. 750" value="600">
+        <input type="number" required="" class="form-control" name="width" min="240" max="750" placeholder="Min. 240 - Max. 750" value="<%=width%>">
     </div>
     <div class="form-group">
         <label>Carport Length</label>
-        <input type="number" required="" class="form-control" name="length" min="240" max="780" placeholder="Min. 240 - Max. 780" value="780">
+        <input type="number" required="" class="form-control" name="length" min="240" max="780" placeholder="Min. 240 - Max. 780" value="<%=length%>">
     </div>
     <div class="form-group">
         <label>Roof Type</label>
@@ -45,10 +56,10 @@
         <div class="input-group mb-3">
             <div class="input-group-prepend">
                 <div class="input-group-text">
-                    <input type="checkbox" name="angleCheck" id="angleToggle">
+                    <input type="checkbox" name="angleCheck" <%=(angle > 0) ? "checked" : ""%> id="angleToggle">
                 </div>
             </div>
-            <input type="number" id="angleToggleNumber" disabled name="angle" class="form-control" value="0">
+            <input type="number" id="angleToggleNumber" disabled name="angle" class="form-control" value="<%=angle%>">
         </div>
     </div>
     
@@ -56,18 +67,18 @@
     <h2>Shed Information</h2>
     <hr />
     <div class="form-check">
-        <input class="form-check-input" type="checkbox" value="" name="shed" id="shedCheckbox">
+        <input class="form-check-input" type="checkbox" <%=(shedLength > 0 && shedWidth > 0) ? "checked" : ""%> value="" name="shed" id="shedCheckbox">
         <label class="form-check-label">
             Shed
         </label>
     </div>
     <div class="form-group shedToggle" id="shedToggleWidth">
         <label>Shed Width</label>
-        <input type="number" required="" class="form-control" name="shedWidth" min="0" max="750" placeholder="Min. 240 - Max. 750" value="240">
+        <input type="number" required="" class="form-control" name="shedWidth" min="0" max="750" placeholder="Min. 240 - Max. 750" value="<%=shedWidth%>">
     </div>
     <div class="form-group shedToggle" id="shedToggleLength">
         <label>Shed Length</label>
-        <input type="number" required="" class="form-control" name="shedLength" min="0" max="780" placeholder="Min. 240 - Max. 780" value="240">
+        <input type="number" required="" class="form-control" name="shedLength" min="0" max="780" placeholder="Min. 240 - Max. 780" value="<%=shedLength%>">
     </div>
      
     <br /><br />

@@ -1,6 +1,9 @@
 package presentation.commands;
 
 import data.models.CommandTarget;
+import data.exceptions.OrderException;
+import data.exceptions.RequestExceptions;
+import data.models.Order;
 import data.models.Part;
 import java.util.ArrayList;
 import java.util.Enumeration;
@@ -9,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import logic.AdvancedCalculator;
 import logic.facades.MaterialFacade;
+import logic.facades.OrderFacade;
 import logic.facades.RequestFacade;
 
 /**
@@ -20,6 +24,7 @@ public class ShowPartsCommand implements Command {
     private String target;
     private MaterialFacade mf;
     private RequestFacade rf;
+    private OrderFacade of;
     private AdvancedCalculator calc;
 
     public ShowPartsCommand(String target) {
@@ -27,7 +32,8 @@ public class ShowPartsCommand implements Command {
 
         mf = new MaterialFacade();
         rf = new RequestFacade();
-        //calc = new AdvancedCalculator(7800, 6000, true, 2100, 6000, false);
+        of = new OrderFacade();
+        
     }
 
     @Override
@@ -41,15 +47,20 @@ public class ShowPartsCommand implements Command {
             params.put(pName, request.getParameter(pName));
         }
 
-        /*if (request.getParameter("requestId") != null) {
+        if(request.getParameter("orderId") != null){
             try {
-                Request r = rf.getById(Integer.parseInt(request.getParameter("requestId")));
-                System.out.println(r.getId());
-                calc = new AdvancedCalculator(r.getLength(), r.getWidth(), true, r.getShedLength(), r.getShedWidth(), false);
-            } catch (RequestExceptions ex) {
+                Order o = of.getById(Integer.parseInt(request.getParameter("orderId")));
+                calc = new AdvancedCalculator(
+                    o.getRequest().getLength() * 10,
+                    o.getRequest().getWidth() * 10,
+                    (o.getRequest().getShedLength() > 0 && o.getRequest().getShedWidth() > 0),
+                    o.getRequest().getLength() * 10,
+                    o.getRequest().getWidth() * 10,
+                    o.getRequest().getAngle() > 0);
+            } catch (OrderException ex) {
                 ex.printStackTrace();
             }
-        } else*/ if (params.get("submit") != null) {
+        } /*else if (params.get("submit") != null) {
             calc = new AdvancedCalculator(
                     Integer.parseInt(params.get("length")) * 10,
                     Integer.parseInt(params.get("width")) * 10,
@@ -57,7 +68,7 @@ public class ShowPartsCommand implements Command {
                     Integer.parseInt(params.get("shedLength")) * 10,
                     Integer.parseInt(params.get("shedWidth")) * 10,
                     false);
-        }
+        }*/
 
         ArrayList<Part> wood = calc.getParts().getWoodList();
         ArrayList<Part> misc = calc.getParts().getMiscList();

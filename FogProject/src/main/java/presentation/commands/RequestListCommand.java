@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import logic.facades.OrderFacade;
 import logic.facades.RequestFacade;
+import logic.facades.UserFacade;
 
 /**
  *
@@ -34,8 +35,8 @@ public class RequestListCommand implements Command {
         if (request.getParameter("orderId") != null) {
             try {
                 Request r = rf.getById(Integer.parseInt(request.getParameter("orderId")));
-                of.createOrder(r);
-                rf.remove(Integer.parseInt(request.getParameter("orderId")));
+                of.createOrder(r.getId());
+                //rf.remove(Integer.parseInt(request.getParameter("orderId")));
                 requests = rf.getAll();
                 session.setAttribute("requestList", requests);
             } catch (RequestException | OrderException ex) {

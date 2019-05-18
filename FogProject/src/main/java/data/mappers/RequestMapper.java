@@ -50,7 +50,7 @@ public class RequestMapper implements MapperInterface<Request, Integer> {
     public List<Request> getAll() throws RequestException {
         try (Connection con = dbc.open()) {
             List<Request> requests = new ArrayList();
-            String qry = "SELECT * FROM requests";
+            String qry = "SELECT * FROM `requests` LEFT JOIN `orders` ON `orders`.requestId = `requests`.id WHERE `orders`.id IS NULL;";
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery(qry);
 
