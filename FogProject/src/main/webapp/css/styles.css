@@ -97,3 +97,7 @@ line{
 .alert {
     display: none;
 }
+
+.btn {
+  background-image: linear-gradient(red, yellow);
+}

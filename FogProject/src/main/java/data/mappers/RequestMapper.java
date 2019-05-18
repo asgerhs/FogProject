@@ -104,7 +104,7 @@ public class RequestMapper implements MapperInterface<Request, Integer> {
         }
     }
 
-    public void updateRequest(Request rqst, int Id) throws SQLException, RequestException {
+    public void update(Request rqst) throws RequestException {
         try (Connection con = dbc.open()) {
 
             String qry = "UPDATE requests SET width = ?, length = ?, shedWidth = ?, shedLength = ?,"
@@ -117,7 +117,7 @@ public class RequestMapper implements MapperInterface<Request, Integer> {
             ps.setInt(4, rqst.getShedLength());
             ps.setString(5, rqst.getRoof());
             ps.setInt(6, rqst.getAngle());
-            ps.setInt(7, Id);
+            ps.setInt(7, rqst.getId());
 
             ps.executeUpdate();
 

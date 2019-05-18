@@ -5,6 +5,7 @@ import data.exceptions.RequestException;
 import data.exceptions.UsersException;
 import data.mappers.RequestMapper;
 import data.models.Request;
+import java.sql.SQLException;
 import java.util.List;
 import logic.interfaces.FacadeInterface;
 
@@ -23,6 +24,10 @@ public class RequestFacade implements FacadeInterface<Request, Integer>{
     @Override
     public Request getSingle(Integer id) throws RequestException {
         return rm.geSingle(id);
+    }
+    
+    public void update(Request rqst) throws RequestException {
+        rm.update(rqst);
     }
     
     public void add(Request request) throws RequestException {
