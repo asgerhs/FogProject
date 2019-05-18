@@ -34,7 +34,7 @@ public class RequestListCommand implements Command {
             try {
                 Request r = rf.getById(Integer.parseInt(request.getParameter("orderId")));
                 of.createOrder(r);
-                rf.remove(Integer.parseInt(request.getParameter("orderId")));
+                //rf.remove(Integer.parseInt(request.getParameter("orderId")));
                 requests = rf.getAll();
                 session.setAttribute("requestList", requests);
             } catch (RequestExceptions | OrderException ex) {

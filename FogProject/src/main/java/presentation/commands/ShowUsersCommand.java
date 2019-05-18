@@ -28,6 +28,9 @@ public class ShowUsersCommand implements Command{
     public String execute(HttpServletRequest request) throws CommandException {
         HttpSession session = request.getSession();
         try {
+            if(request.getParameter("userId") != null){
+                uf.remove(request.getParameter("userId")); 
+            }        
             List<User> users = uf.getAll();
             session.setAttribute("users", users);
         } catch (UsersException ex) {

@@ -10,18 +10,19 @@
 <%@include file="header.jsp" %>
 <%
     ArrayList<Material> mats = (ArrayList<Material>)session.getAttribute("mats");
+    Request r = null;
     if((Request)session.getAttribute("request") != null){
-        Request r = (Request)session.getAttribute("request");
+        r = (Request)session.getAttribute("request");
     }
 %>
 
 <form class='greyBox bottom ' method="POST">
     <thead class="thead-dark">
     <h2>Carport Information</h2>
-    <hr />  
+    <hr />
     <div class="form-group">
         <label>Carport Width</label>
-        <input type="number" required="" class="form-control" name="width" min="240" max="750" placeholder="Min. 240 - Max. 750" value="600">
+        <input type="number" required="" class="form-control" name="width" min="240" max="750" placeholder="Min. 240 - Max. 750">
     </div>
     <div class="form-group">
         <label>Carport Length</label>

@@ -15,19 +15,26 @@
     <table class="table">
         <thead class="thead-dark">
             <tr>
-                <th scope="col">Username</th>
+                <th scope="col">Brugernavn</th>
                 <th scope="col">Email</th>
-                <th scope="col">Role</th>
+                <th scope="col">Rolle</th>
+                <th scope="col">Fjern bruger</th>
             </tr>
         </thead>
         <tbody>
             <% for (User user : users) {
-                    
+
             %>
             <tr>
                 <td><%=user.getName()%></td>
                 <td><%=user.getEmail()%></td>
                 <td><%=user.getRole()%></td>
+                <td>
+                    <form id="requestForm" method="POST">
+                        <input type="hidden" name="userId" value="<%=user.getEmail()%>">
+                        <button type="submit" class="btn btn-dark" formaction="FrontController?command=showUsers">Fjern</button>
+                    </form> 
+                </td>
             </tr>
             <%}%>
         </tbody>
