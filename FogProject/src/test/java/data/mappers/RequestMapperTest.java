@@ -74,7 +74,7 @@ public class RequestMapperTest {
     public void testGetById() throws Exception {
         System.out.println("getById");
         Integer id = 4;
-        Request result = requestMapper.getById(id);
+        Request result = requestMapper.geSingle(id);
         assertNotNull(result);
     }
 

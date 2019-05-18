@@ -34,7 +34,7 @@ public class RequestListCommand implements Command {
         List<Request> requests;
         if (request.getParameter("orderId") != null) {
             try {
-                Request r = rf.getById(Integer.parseInt(request.getParameter("orderId")));
+                Request r = rf.getSingle(Integer.parseInt(request.getParameter("orderId")));
                 of.createOrder(r.getId());
                 //rf.remove(Integer.parseInt(request.getParameter("orderId")));
                 requests = rf.getAll();

@@ -8,5 +8,5 @@ import java.util.List;
  */
 public interface FacadeInterface <T, S>{
     List<T> getAll() throws Exception;
-    T getById(S t) throws Exception;
+    T getSingle(S t) throws Exception;
 }
