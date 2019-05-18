@@ -19,7 +19,7 @@
     <button type="submit" class="btn btn-dark">Registrer</button>
     <br>
 
-    <a href="FrontController?command=request" class="btn">Lav carport forespørgsel</a>
+    <a href="FrontController?command=request" class="btn btn-primary requestButton" id="requestButton">Lav carport forespørgsel</a>
 </form>
 
 <%@include file = "footer.jsp" %>

@@ -98,6 +98,6 @@ line{
     display: none;
 }
 
-.btn {
-  background-image: linear-gradient(red, yellow);
+.requestButton {
+  background-image: linear-gradient(black, grey, blue, lightblue, white);
 }
