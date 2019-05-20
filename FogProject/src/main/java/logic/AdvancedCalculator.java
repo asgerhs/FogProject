@@ -419,15 +419,15 @@ public class AdvancedCalculator {
 
     public static void main(String[] args) throws MaterialException {
         AdvancedCalculator ac = new AdvancedCalculator(7800, 6500, true, 1000, 1000, false);
-        ac.calcBand();
+//        ac.calcBand();
 //        ac.calcLathsRoof();
 //        ac.calcRoofBricks();
-//        for (Part p : ac.getParts().getWoodList()) {
-//            System.out.println(p);
-//        }
-//        for (Part p : ac.getParts().getMiscList()) {
-//            System.out.println(p);
-//        }
+        for (Part p : ac.getParts().getWoodList()) {
+            System.out.println(p);
+        }
+        for (Part p : ac.getParts().getMiscList()) {
+            System.out.println(p);
+        }
     }
 
     private class MatSortHeighComparator implements Comparator<Material> {
