@@ -4,7 +4,6 @@ import data.DataSourceMySQL;
 import data.exceptions.OrderException;
 import data.mappers.OrderMapper;
 import data.models.Order;
-import data.models.Request;
 import data.models.User;
 import java.util.List;
 import logic.interfaces.FacadeInterface;

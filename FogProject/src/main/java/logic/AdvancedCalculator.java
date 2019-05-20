@@ -1,7 +1,6 @@
 package logic;
 
 import data.exceptions.MaterialException;
-import data.mappers.MaterialMapper;
 import data.models.Material;
 import data.models.Part;
 import data.models.PartList;
@@ -107,6 +106,8 @@ public class AdvancedCalculator {
             p += 2;
             p += calcShedPosts(true);
             p += calcShedPosts(false);
+            if(shedWidth != width)
+                p++;
             svg.generateShedPosts(10);
         }
 
@@ -145,7 +146,7 @@ public class AdvancedCalculator {
         } else {
             shedPostsLength = esp;
         }
-
+        
         return esp * 2;
     }
 
@@ -354,6 +355,7 @@ public class AdvancedCalculator {
         laths = (int) (roofWidth - 380) % 307 == 0 ? (int) ((roofWidth - 380) / 307) + 2 : (int) ((roofWidth - 380) / 307) + 3;
         pl.addWoodPart(new Part(lathType.get(1), (int) laths * 2, "Til montering på tag", lathType.get(1).getPrice() * ((int)laths * 2)));
         pl.addMiscPart(new Part(lathHolder.get(2), length/1000 + 1, "monteres på toppen af spæret (til toplægte)", lathHolder.get(2).getPrice() * (length/1000 + 1)));
+        svg.generateRoofWithAngle(laths);
     }
     
     private void calcRoofBricks() throws MaterialException {

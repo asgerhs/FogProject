@@ -29,6 +29,7 @@
 
 <form class="greyBox" method="POST" id="ajaxForm">
     <div id="errorBox" class="alert alert-danger" role="alert">
+        <p id="message"></p>
         <a class="btn btn-dark" href="FrontController?command=login">Goto Login</a>
     </div>
     <div id="successBox" class="alert alert-success" role="alert"></div>
