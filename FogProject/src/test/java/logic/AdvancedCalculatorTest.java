@@ -39,19 +39,23 @@ public class AdvancedCalculatorTest {
 
     /**
      * Test of getParts method, of class AdvancedCalculator.
+     * 
      */
     @Test
-    public void testGetParts() {
-        System.out.println("getParts");
+    public void testGetPrice() {
+        System.out.println("Tests for price");
         AdvancedCalculator instance = new AdvancedCalculator(7800, 6500, false, 0, 0, false);
+        
         int price = 0;
+        int expectedTotalPrice = 1906912;
+        
         for (Part p : instance.getParts().getWoodList()) {
             price += p.getPrice();
         }
         for (Part p : instance.getParts().getMiscList()) {
             price += p.getPrice();
         }
-        int expectedTotalPrice = 1906912;
+        
         assertEquals(expectedTotalPrice, price);
         // TODO review the generated test code and remove the default call to fail.
         //fail("The test case is a prototype.");
