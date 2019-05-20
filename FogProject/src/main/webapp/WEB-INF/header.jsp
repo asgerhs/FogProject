@@ -45,37 +45,37 @@
                 <ul class="navbar-nav">
                     <%if (u != null && u.getRole().equals(RoleEnum.ADMIN)) {%>
                     <li class="nav-item active">
-                        <a class="nav-link" href="FrontController?command=requestList">Requests<span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="FrontController?command=requestList">Forespørgsels liste</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="FrontController?command=showUsers">Users</a>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="FrontController?command=showUsers">Brugere</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="FrontController?command=orders">Orders</a>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="FrontController?command=orders">Ordre</a>
                     </li>
                     <%}%>
 
                     <%if (u != null && u.getRole().equals(RoleEnum.EMPLOYEE)) {%>
                     <li class="nav-item active">
-                        <a class="nav-link" href="FrontController?command=request">Request<span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="FrontController?command=request">Lav forespørgsel</a>
                     </li>
                     <li class="nav-item active">
-                        <a class="nav-link" href="FrontController?command=requestList">Requests</a>
+                        <a class="nav-link" href="FrontController?command=requestList">Forespørgsels liste</a>
                     </li>
                     <%}%>
 
                     <%if (u != null && u.getRole().equals(RoleEnum.CUSTOMER)) {%>
                     <li class="nav-item active">
-                        <a class="nav-link" href="FrontController?command=request">Request<span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="FrontController?command=request">Forespørgsel</a>
                     </li>
                     <li class="nav-item active">
-                        <a class="nav-link" href="FrontController?command=orders">Orders</a>
+                        <a class="nav-link" href="FrontController?command=orders">Ordre</a>
                     </li>
                     <%}%>
 
                     <%if (u != null) {%>
                     <li class="nav-item">
-                        <a class="nav-link" href="FrontController?command=logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                        <a class="nav-link" href="FrontController?command=logout"><i class="fas fa-sign-out-alt"></i> Log ud</a>
                     </li>
                     <%}%>
                 </ul>
