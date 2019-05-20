@@ -87,7 +87,9 @@ public class AdvancedCalculator {
 
             calcScrewPackages();
             svg.generateMeasurements(rafters, rafterSpace, posts / 2);
+            if(!roof){
             svg.generateRoof();
+            }
         } catch (MaterialException ex) {
             logger.log(Level.SEVERE, "Error in AdvancedCalculator: ", new MaterialException("Error: "));
         }
