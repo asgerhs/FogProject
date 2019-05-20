@@ -77,7 +77,9 @@ public class AdvancedCalculatorTest {
     
 
     /**
-     * Test of getParts method, of class AdvancedCalculator.
+     * Tests if the summed price for the carport is equal to the expected price. 
+     *  It sums up all prices of each material multiplied by its quantity. 
+     * The test passes if the two variables are idential.
      * 
      */
     @Test
@@ -101,25 +103,32 @@ public class AdvancedCalculatorTest {
     }
     
     /**
-     * 
+     * Test for calcLathsRoof method, it will return true if the carport has an angled roof,
+     * it will return falls if it doesn't. 
+     * The test checks if a material for said method is added to the partlist.
      */
     @Test
     public void testLathsTrue() throws MaterialException {
         HashMap<String, ArrayList> miscHash = new HashMap<String, ArrayList>();
-        AdvancedCalculator instanceWithAngle = new AdvancedCalculator(7800, 6500, false, 0, 0, true);
-        for (int i = 0; i < instanceWithAngle.getParts().getMiscList().size(); i++) {
-            miscHash.put(instanceWithAngle.getParts().getMiscList().get(i).getMaterial().getRef(), instanceWithAngle.getParts().getMiscList());
-        }
-        assertTrue(miscHash.containsKey("1062"));
-    }
-
-    @Test
-    public void testLathsFalse() throws MaterialException {
-        HashMap<String, ArrayList> miscHash = new HashMap<String, ArrayList>();
-        AdvancedCalculator instance = new AdvancedCalculator(7800, 6500, false, 0, 0, false);
+        AdvancedCalculator instance = new AdvancedCalculator(7800, 6500, false, 0, 0, true);
         for (int i = 0; i < instance.getParts().getMiscList().size(); i++) {
             miscHash.put(instance.getParts().getMiscList().get(i).getMaterial().getRef(), instance.getParts().getMiscList());
         }
-        assertFalse(miscHash.containsKey("1062"));
+        assertTrue(miscHash.containsKey("1062"));
+    }
+    
+    /**
+     * Test for calcLathsRoof method, it will return true if the carport doesn't have an angled roof,
+     * it will return falls if it does. 
+     * The test checks if a material for said method is added to the partlist.
+     */
+    @Test
+    public void testLathsFalse() throws MaterialException {
+        HashMap<String, ArrayList> woodHash = new HashMap<String, ArrayList>();
+        AdvancedCalculator instance = new AdvancedCalculator(7800, 6500, false, 0, 0, false);
+        for (int i = 0; i < instance.getParts().getWoodList().size(); i++) {
+            woodHash.put(instance.getParts().getWoodList().get(i).getMaterial().getRef(), instance.getParts().getWoodList());
+        }
+        assertFalse(woodHash.containsKey("1015"));
     }
 }
