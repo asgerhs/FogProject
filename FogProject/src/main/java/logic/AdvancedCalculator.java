@@ -1,7 +1,6 @@
 package logic;
 
 import data.exceptions.MaterialException;
-import data.mappers.MaterialMapper;
 import data.models.Material;
 import data.models.Part;
 import data.models.PartList;
@@ -107,6 +106,8 @@ public class AdvancedCalculator {
             p += 2;
             p += calcShedPosts(true);
             p += calcShedPosts(false);
+            if(shedWidth != width)
+                p++;
             svg.generateShedPosts(10);
         }
 
@@ -145,7 +146,7 @@ public class AdvancedCalculator {
         } else {
             shedPostsLength = esp;
         }
-
+        
         return esp * 2;
     }
 
