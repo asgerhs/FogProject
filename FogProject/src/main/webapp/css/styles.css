@@ -97,7 +97,3 @@ line{
 .alert {
     display: none;
 }
-
-.requestButton {
-  background-image: linear-gradient(black, grey, blue, lightblue, white);
-}
