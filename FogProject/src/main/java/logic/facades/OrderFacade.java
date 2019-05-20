@@ -23,7 +23,7 @@ public class OrderFacade implements FacadeInterface<Order, Integer> {
 
     @Override
     public Order getSingle(Integer id) throws OrderException {
-        return om.geSingle(id);
+        return om.getSingle(id);
     }
 
     public void createOrder(int requestId) throws OrderException{

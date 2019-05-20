@@ -23,7 +23,7 @@ public class RequestFacade implements FacadeInterface<Request, Integer>{
 
     @Override
     public Request getSingle(Integer id) throws RequestException {
-        return rm.geSingle(id);
+        return rm.getSingle(id);
     }
     
     public void update(Request rqst) throws RequestException {

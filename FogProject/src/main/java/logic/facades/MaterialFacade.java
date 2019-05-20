@@ -22,7 +22,7 @@ public class MaterialFacade implements FacadeInterface<Material, String>{
 
     @Override
     public Material getSingle(String ref) throws MaterialException {
-        return mm.geSingle(ref);
+        return mm.getSingle(ref);
     }
 
     public ArrayList<Material> getAllByCategory(int id) throws MaterialException {

@@ -8,5 +8,5 @@ import java.util.List;
  */
 public interface MapperInterface <T, S> {
     List<T> getAll() throws Exception;
-    T geSingle(S t) throws Exception;
+    T getSingle(S t) throws Exception;
 }
