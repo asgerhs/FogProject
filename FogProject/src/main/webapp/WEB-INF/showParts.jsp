@@ -45,14 +45,6 @@
                 <td><%=(p.getPrice()/100) + " DKK"%></td>
             </tr>
             <%}%>
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td><%=woodPrice/100 + " DKK"%></td>
-            </tr>
         </tbody>
     </table>
 </div>
@@ -81,16 +73,31 @@
                 <td><%=p.getPrice()/100 + " DKK"%>
             </tr>
             <%}%>
+        </tbody>
+    </table>
+</div>
+            
+<div class="greyBox">
+    <table class="table">
+        <thead class="thead-dark">
             <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <th scope="col">Tabel</th>
+                <th scope="col">Pris</th>
+            </tr>
+        <tbody>
+            <tr>
+                <td>Træ & tagplader</td>
+                <td><%=woodPrice/100 + " DKK"%></td>
+            </tr>
+            <tr>
+                <td>Miscellaneous</td>
                 <td><%=miscPrice/100 + " DKK"%></td>
             </tr>
+            <tr>
+                <td>I alt</td>
+                <td><%=(woodPrice + miscPrice)/100 + " DKK"%>
+            </tr>
         </tbody>
-        </thead>
     </table>
 </div>
             
