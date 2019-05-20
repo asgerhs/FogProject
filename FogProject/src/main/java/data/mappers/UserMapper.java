@@ -25,11 +25,7 @@ public class UserMapper implements MapperInterface<User, String> {
     public UserMapper(DataSource ds) {
         dbc.setDataSource(ds);
     }
-
-    UserMapper() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
+    
     @Override
     public List getAll() throws UsersException {
         try (Connection con = dbc.open()) {
@@ -126,10 +122,21 @@ public class UserMapper implements MapperInterface<User, String> {
             PreparedStatement ps = con.prepareStatement(qry);
             ps.setString(1, password);
             ps.setString(2, email);
-            con.setAutoCommit(false);
             int result = ps.executeUpdate();
-            con.commit();
             return result;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            throw new UsersException("Error occoured while updating user");
+        }
+    }
+    
+    public void changeUserRole(String email, RoleEnum role) throws UsersException {
+        try(Connection con = dbc.open()){
+            String qry = "UPDATE accounts SET role = ? WHERE email = ?;";
+            PreparedStatement ps = con.prepareStatement(qry);
+            ps.setString(1, role.toString());
+            ps.setString(2, email);
+            ps.executeUpdate();
         } catch (SQLException ex) {
             ex.printStackTrace();
             throw new UsersException("Error occoured while updating user");

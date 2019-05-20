@@ -12,13 +12,14 @@ public class CommandList {
     private final Map<String, Command> commands = new HashMap();
     
     private CommandList(){
-        commands.put("showParts", new ShowPartsCommand("showParts.jsp"));
-        commands.put("request", new RequestCommand("request.jsp"));
-        commands.put("requestList", new RequestListCommand("requestList.jsp"));
+        commands.put("showParts", new ShowPartsCommand("WEB-INF/showParts.jsp"));
+        commands.put("request", new RequestCommand("WEB-INF/request.jsp"));
+        commands.put("requestList", new RequestListCommand("WEB-INF/requestList.jsp"));
         commands.put("login", new LoginCommand("FrontController?command=request"));
-        commands.put("logout", new LogoutCommand("index.jsp"));
-        commands.put("orders", new OrderCommand("order.jsp"));
-        commands.put("showUsers", new ShowUsersCommand("showUsers.jsp"));
+        commands.put("logout", new LogoutCommand("WEB-INF/index.jsp"));
+        commands.put("orders", new OrderCommand("WEB-INF/order.jsp"));
+        commands.put("showUsers", new ShowUsersCommand("WEB-INF/showUsers.jsp"));
+        commands.put("updateRole", new UpdateUserCommand("FrontController?command=showUsers"));
     }
     
     public static synchronized Command commandForm(String key){

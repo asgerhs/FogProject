@@ -3,6 +3,7 @@ package logic.facades;
 import data.DataSourceMySQL;
 import data.exceptions.UsersException;
 import data.mappers.UserMapper;
+import data.models.RoleEnum;
 import data.models.User;
 import java.util.List;
 import logic.interfaces.FacadeInterface;
@@ -29,8 +30,12 @@ public class UserFacade implements FacadeInterface<User, String> {
         return um.validateUser(email, password);
     }
 
-    public int changePassword(String username, String password) throws UsersException {
-        return um.changePassword(username, password);
+    public int changePassword(String email, String password) throws UsersException {
+        return um.changePassword(email, password);
+    }
+    
+    public void changeUserRole(String email, RoleEnum role) throws UsersException {
+        um.changeUserRole(email, role);
     }
 
     public void remove(String email) throws UsersException {
