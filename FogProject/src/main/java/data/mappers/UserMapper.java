@@ -41,9 +41,7 @@ public class UserMapper implements MapperInterface<User, String> {
             logger.log(Level.SEVERE, "Error in logger", new IOException("Error: "));
         }
     }
-
- 
-
+    
     @Override
     public List getAll() throws UsersException {
         try (Connection con = dbc.open()) {
@@ -70,7 +68,7 @@ public class UserMapper implements MapperInterface<User, String> {
     }
 
     @Override
-    public User geSingle(String email) throws UsersException {
+    public User getSingle(String email) throws UsersException {
         try (Connection con = dbc.open()) {
             String qry = "SELECT * FROM accounts WHERE email = ?;";
             PreparedStatement ps = con.prepareStatement(qry);
@@ -143,13 +141,24 @@ public class UserMapper implements MapperInterface<User, String> {
             PreparedStatement ps = con.prepareStatement(qry);
             ps.setString(1, password);
             ps.setString(2, email);
-            con.setAutoCommit(false);
             int result = ps.executeUpdate();
-            con.commit();
             return result;
         } catch (SQLException ex) {
             ex.printStackTrace();
             logger.log(Level.SEVERE, "Error in changePassword", new SQLException("Error: "));
+            throw new UsersException("Error occoured while updating user");
+        }
+    }
+    
+    public int changeUserRole(String email, RoleEnum role) throws UsersException {
+        try(Connection con = dbc.open()){
+            String qry = "UPDATE accounts SET role = ? WHERE email = ?;";
+            PreparedStatement ps = con.prepareStatement(qry);
+            ps.setString(1, role.toString());
+            ps.setString(2, email);
+            return ps.executeUpdate();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
             throw new UsersException("Error occoured while updating user");
         }
     }

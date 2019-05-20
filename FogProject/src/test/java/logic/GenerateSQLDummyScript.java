@@ -204,6 +204,7 @@ public class GenerateSQLDummyScript {
         }
         sql += sqlStart + "'bsm@e.dk', '1234', 'EMPLOYEE', 'BestSalesman', 'Salesman', '1234 By', '1234'" + sqlEnd;
         sql += sqlStart + "'admin@a.dk', '1234', 'ADMIN', 'Admin', 'Admin', '1234 By', '1234'" + sqlEnd;
+        sql += sqlStart + "'Remove@remove.dk', '1234', 'Remove', 'Remove', 'Remove', '1234 By', '1234'" + sqlEnd;
         
         f.format(sql);
     }

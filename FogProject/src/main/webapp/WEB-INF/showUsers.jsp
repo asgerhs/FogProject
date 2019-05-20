@@ -22,13 +22,20 @@
             </tr>
         </thead>
         <tbody>
-            <% for (User user : users) {
-
-            %>
+            <% for (User user : users) { %>
             <tr>
                 <td><%=user.getName()%></td>
                 <td><%=user.getEmail()%></td>
-                <td><%=user.getRole()%></td>
+                <td>
+                    <form action="FrontController?command=updateRole" method="POST">
+                        <input type="hidden" name="email" value="<%=user.getEmail()%>" />
+                        <select class="custom-select" onchange="this.form.submit()" required="" name="role" id="roleSelector">
+                            <% for(RoleEnum role : RoleEnum.values()) { %>
+                                <option value="<%=role%>" <%=user.getRole() == role ? "selected" : "" %>><%=role%></option>
+                            <% } %>
+                        </select>
+                    </form>
+                </td>
                 <td>
                     <form id="requestForm" method="POST">
                         <input type="hidden" name="userId" value="<%=user.getEmail()%>">

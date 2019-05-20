@@ -59,7 +59,7 @@ public class OrderMapper implements MapperInterface<Order, Integer> {
 
             while (rs.next()) {
                 order.add(new Order(rs.getInt("id"),
-                        requestMapper.geSingle(rs.getInt("requestId"))));
+                        requestMapper.getSingle(rs.getInt("requestId"))));
             }
             return order;
         } catch (SQLException | RequestException ex) {
@@ -70,7 +70,7 @@ public class OrderMapper implements MapperInterface<Order, Integer> {
     }
 
     @Override
-    public Order geSingle(Integer id) throws OrderException {
+    public Order getSingle(Integer id) throws OrderException {
         try (Connection con = dbc.open()) {
             String sql = "SELECT * FROM orders where id = ?;";
             PreparedStatement ps = con.prepareStatement(sql);
@@ -79,7 +79,7 @@ public class OrderMapper implements MapperInterface<Order, Integer> {
 
             while (rs.next()) {
                 return new Order(rs.getInt("id"),
-                        requestMapper.geSingle(rs.getInt("requestId")));
+                        requestMapper.getSingle(rs.getInt("requestId")));
             }
         } catch (SQLException | RequestException ex) {
             ex.printStackTrace();
@@ -116,7 +116,7 @@ public class OrderMapper implements MapperInterface<Order, Integer> {
 
             while (rs.next()) {
                 orders.add(new Order(rs.getInt("id"),
-                        requestMapper.geSingle(rs.getInt("requestId"))));
+                        requestMapper.getSingle(rs.getInt("requestId"))));
             }
             return orders;
         } catch (SQLException | RequestException ex) {

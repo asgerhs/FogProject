@@ -59,4 +59,12 @@ public class Request {
     public User getUser() {
         return user;
     }
+
+    public void setWidth(int width) {
+        this.width = width;
+    }
+
+    public void setLength(int length) {
+        this.length = length;
+    }
 }

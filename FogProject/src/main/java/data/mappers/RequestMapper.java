@@ -62,7 +62,7 @@ public class RequestMapper implements MapperInterface<Request, Integer> {
                         rs.getString("roof"),
                         rs.getInt("angle"),
                         rs.getString("note"),
-                        userMapper.geSingle(rs.getString("email")));
+                        userMapper.getSingle(rs.getString("email")));
                 r.setId(rs.getInt("id"));
                 requests.add(r);
 
@@ -77,7 +77,7 @@ public class RequestMapper implements MapperInterface<Request, Integer> {
     }
 
     @Override
-    public Request geSingle(Integer id) throws RequestException {
+    public Request getSingle(Integer id) throws RequestException {
         try (Connection con = dbc.open()) {
             String qry = "SELECT * FROM requests WHERE id = ?";
             PreparedStatement ps = con.prepareStatement(qry);
@@ -93,7 +93,7 @@ public class RequestMapper implements MapperInterface<Request, Integer> {
                         rs.getString("roof"),
                         rs.getInt("angle"),
                         rs.getString("note"),
-                        userMapper.geSingle(rs.getString("email")));
+                        userMapper.getSingle(rs.getString("email")));
                 r.setId(rs.getInt("id"));
                 return r;
             }
@@ -112,8 +112,8 @@ public class RequestMapper implements MapperInterface<Request, Integer> {
                     + " roof = ?, angle = ? where id = ?;";
 
             PreparedStatement ps = con.prepareStatement(qry);
-            ps.setInt(1, rqst.getLength());
-            ps.setInt(2, rqst.getWidth());
+            ps.setInt(1, rqst.getWidth());
+            ps.setInt(2, rqst.getLength());
             ps.setInt(3, rqst.getShedWidth());
             ps.setInt(4, rqst.getShedLength());
             ps.setString(5, rqst.getRoof());

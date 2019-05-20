@@ -45,7 +45,7 @@ public class MaterialMapperTest {
             DatabaseConnector dbc = new DatabaseConnector();
             dbc.setDataSource(new TestDataSourceMySQL().getDataSource());
             try (Connection con = dbc.open()) {
-                con.prepareStatement(sqlStatement).executeUpdate();
+                con.prepareStatement(sqlStatements).executeUpdate();
             }
         }
         catch (Exception ex)
@@ -59,7 +59,7 @@ public class MaterialMapperTest {
     /**
      * Test of getAll method, of class MaterialMapper.
      */
-    //@Test
+    @Test
     public void testGetAll() throws Exception {
         System.out.println("getAll");
         List<Material> result = materialMapper.getAll();
@@ -69,18 +69,18 @@ public class MaterialMapperTest {
     /**
      * Test of getById method, of class MaterialMapper.
      */
-    //@Test
+    @Test
     public void testGetById() throws Exception {
         System.out.println("getById");
         String ref = "1000";
-        Material result = materialMapper.geSingle(ref);
+        Material result = materialMapper.getSingle(ref);
         assertEquals("25x200 mm. trykimp. Brædt", result.getName());
     }
 
     /**
      * Test of getAllByCategory method, of class MaterialMapper.
      */
-    //@Test
+    @Test
     public void testGetAllByCategory() throws Exception {
         System.out.println("getAllByCategory");
         int id = 11;

@@ -82,7 +82,7 @@ public class MaterialMapper implements MapperInterface<Material, String> {
      * @return material matching id in param
      */
     @Override
-    public Material geSingle(String ref) throws MaterialException {
+    public Material getSingle(String ref) throws MaterialException {
         try (Connection con = dbc.open()) {
             
             String qry = "SELECT * FROM stock WHERE ref = ?";
