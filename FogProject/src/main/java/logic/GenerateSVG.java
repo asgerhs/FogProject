@@ -176,6 +176,13 @@ public class GenerateSVG {
             sideViewSVG += generateText(outhangFront + postSpace + (postSpace - shedWidth) / 2, 340, "" + (postSpace - shedWidth), true);
         }
     }
+    
+    public void generateRoofWithAngle(int laths){
+        int lathSpace = width / laths * 2;
+        for(int i = 0; i < laths * 2; i++){
+            topViewSVG +=generateRect(0, i*lathSpace, 10, width, true);
+        }
+    }
 
     private String generateRect(int x, int y, int height, int width, boolean bold) {
         return "<rect class='" + (bold ? "svgBold" : "") + "' x='" + (x + offset) + "' y='" + (y + offset) + "' height='" + height + "' width='" + width + "'/>";
