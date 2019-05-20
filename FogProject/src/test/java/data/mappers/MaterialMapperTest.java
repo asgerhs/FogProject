@@ -69,13 +69,13 @@ public class MaterialMapperTest {
     /**
      * Test of getById method, of class MaterialMapper.
      */
-    @Test
-    public void testGetById() throws Exception {
-        System.out.println("getById");
-        String ref = "1000";
-        Material result = materialMapper.getSingle(ref);
-        assertEquals("25x200 mm. trykimp. Brædt", result.getName());
-    }
+//    @Test
+//    public void testGetById() throws Exception {
+//        System.out.println("getById");
+//        String ref = "1000";
+//        Material result = materialMapper.getSingle(ref);
+//        assertEquals("25x200 mm. trykimp. Brædt", result.getName());
+//    }
 
     /**
      * Test of getAllByCategory method, of class MaterialMapper.
