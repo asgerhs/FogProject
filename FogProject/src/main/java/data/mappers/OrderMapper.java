@@ -30,14 +30,11 @@ public class OrderMapper implements MapperInterface<Order, Integer> {
     DatabaseConnector dbc = new DatabaseConnector();
     RequestMapper requestMapper;
 
+    private static Logger logger = Logger.getLogger(OrderMapper.class.getName());
+
     public OrderMapper(DataSource ds) {
         requestMapper = new RequestMapper(ds);
         dbc.setDataSource(ds);
-    }
-
-    private static Logger logger = Logger.getLogger(OrderMapper.class.getName());
-
-    public OrderMapper() {
         try {
 
             FileHandler handler = new FileHandler("logs/OrderMapper/OrderMapper-log.%u.%g.txt",
@@ -46,6 +43,7 @@ public class OrderMapper implements MapperInterface<Order, Integer> {
 
             handler.setFormatter(new SimpleFormatter());
         } catch (IOException ex) {
+            ex.printStackTrace();
             logger.log(Level.SEVERE, "Error in logger", new IOException("Error: "));
 
         }
@@ -65,6 +63,7 @@ public class OrderMapper implements MapperInterface<Order, Integer> {
             }
             return order;
         } catch (SQLException | RequestException ex) {
+            ex.printStackTrace();
             logger.log(Level.SEVERE, "Error in getAllOrders method", new SQLException("Error: "));
             throw new OrderException("Couldn't access orders from Database");
         }
@@ -83,6 +82,7 @@ public class OrderMapper implements MapperInterface<Order, Integer> {
                         requestMapper.getSingle(rs.getInt("requestId")));
             }
         } catch (SQLException | RequestException ex) {
+            ex.printStackTrace();
             logger.log(Level.SEVERE, "Error in getById method", new SQLException("Error: "));
             throw new OrderException("Something went wrong with retrieving the specific order from the database");
         }
@@ -100,6 +100,7 @@ public class OrderMapper implements MapperInterface<Order, Integer> {
             ps.executeUpdate();
 
         } catch (SQLException ex) {
+            ex.printStackTrace();
             logger.log(Level.SEVERE, "Error in createOrder method", new SQLException("Error: "));
             throw new OrderException("Couldn't create Order");
         }
@@ -120,6 +121,7 @@ public class OrderMapper implements MapperInterface<Order, Integer> {
             return orders;
         } catch (SQLException | RequestException ex) {
             ex.printStackTrace();
+            logger.log(Level.SEVERE, "Error in getAllByUser method", ex.getCause());
             throw new OrderException("Couldn't access orders from Database");
         }
     }

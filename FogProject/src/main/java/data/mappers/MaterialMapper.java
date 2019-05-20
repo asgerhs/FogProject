@@ -26,13 +26,10 @@ public class MaterialMapper implements MapperInterface<Material, String> {
     
     DatabaseConnector dbc = new DatabaseConnector();
     
-    public MaterialMapper(DataSource ds) {
-        dbc.setDataSource(ds);
-    }
-
   private static Logger logger = Logger.getLogger(MaterialMapper.class.getName());
 
-    public MaterialMapper() {
+    public MaterialMapper(DataSource ds) {
+        dbc.setDataSource(ds);
         try {
 
             FileHandler handler = new FileHandler("logs/MaterialMapper/MaterialMapper-log.%u.%g.txt",
@@ -41,6 +38,7 @@ public class MaterialMapper implements MapperInterface<Material, String> {
 
             handler.setFormatter(new SimpleFormatter());
         } catch (IOException ex) {
+            ex.printStackTrace();
             logger.log(Level.SEVERE, "Error in logger", new IOException("Error: "));
 
         }
@@ -70,8 +68,8 @@ public class MaterialMapper implements MapperInterface<Material, String> {
             }
             return materials;
         } catch (SQLException ex) {
+            ex.printStackTrace();
             logger.log(Level.SEVERE, "Error in getAll Method.", new SQLException("Error: "));
-
             throw new MaterialException("Error occoured while getting data from database");
 
         }
@@ -103,6 +101,7 @@ public class MaterialMapper implements MapperInterface<Material, String> {
             }
             return null;
         } catch (SQLException ex) {
+            ex.printStackTrace();
             logger.log(Level.SEVERE, "Error in getByID Method.", new SQLException("Error: "));
             throw new MaterialException("Error occoured while getting data from database");
         }
@@ -128,7 +127,8 @@ public class MaterialMapper implements MapperInterface<Material, String> {
 
             return materials;
         } catch (SQLException ex) {
-              logger.log(Level.SEVERE, "Error in getAllByCategory Method.", new SQLException("Error: "));
+            ex.printStackTrace();
+            logger.log(Level.SEVERE, "Error in getAllByCategory Method.", new SQLException("Error: "));
             throw new MaterialException("Error occoured while getting data from database");
         }
     }

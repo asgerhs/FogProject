@@ -28,14 +28,13 @@ public class RequestMapper implements MapperInterface<Request, Integer> {
     DatabaseConnector dbc = new DatabaseConnector();
     UserMapper userMapper;
 
-    public RequestMapper(DataSource ds) {
-        this.userMapper = new UserMapper(ds);
-        dbc.setDataSource(ds);
-    }
+    
 
     private static Logger logger = Logger.getLogger(RequestMapper.class.getName());
 
-    public RequestMapper() {
+    public RequestMapper(DataSource ds) {
+        this.userMapper = new UserMapper(ds);
+        dbc.setDataSource(ds);
         try {
             FileHandler handler = new FileHandler("Logs/RequestMapper/MaterialMapper-log.%u.%g.txt",
                     1024 * 1024, 10);
@@ -71,6 +70,7 @@ public class RequestMapper implements MapperInterface<Request, Integer> {
 
             return requests;
         } catch (SQLException | UsersException ex) {
+            ex.printStackTrace();
             logger.log(Level.SEVERE, "Error in getAll Method:", new SQLException("Error: "));
             throw new RequestException("Error occoured while getting data from database");
         }
@@ -99,6 +99,7 @@ public class RequestMapper implements MapperInterface<Request, Integer> {
             }
             return null;
         } catch (SQLException | UsersException ex) {
+            ex.printStackTrace();
             logger.log(Level.SEVERE, "Error in getById Method:", new SQLException("Error: "));
             throw new RequestException("Error occoured while getting data from database");
         }
@@ -122,6 +123,7 @@ public class RequestMapper implements MapperInterface<Request, Integer> {
             ps.executeUpdate();
 
         } catch (SQLException ex) {
+            ex.printStackTrace();
             logger.log(Level.SEVERE, "Error in updateRequest Method:", new SQLException("Error: "));
             throw new RequestException("Error occoured while updating data in database");
         }
@@ -153,11 +155,13 @@ public class RequestMapper implements MapperInterface<Request, Integer> {
                 con.rollback();
                 con.setAutoCommit(true);
                 
+                
                 logger.log(Level.SEVERE, "Error in add Method:", new SQLException("Error: "));
                 throw new RequestException("Error occoured while adding user to database - Email already in use");
             }
             con.setAutoCommit(true);
         } catch (SQLException ex) {
+            ex.printStackTrace();
             logger.log(Level.SEVERE, "Error in add Method:", new SQLException("Error: "));
             throw new RequestException("Error occoured while adding request to database");
         }
@@ -172,6 +176,7 @@ public class RequestMapper implements MapperInterface<Request, Integer> {
 
         } catch (SQLException ex) {
             ex.printStackTrace();
+            logger.log(Level.SEVERE, "Error in remove Method", new SQLException("Error: "));
             throw new RequestException("Error while removing request from database");
         }
     }

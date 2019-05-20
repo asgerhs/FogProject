@@ -5,9 +5,13 @@
  */
 package logic;
 
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
+import data.DatabaseConnector;
+import data.mappers.RequestMapper;
+import data.mappers.TestDataSourceMySQL;
+import data.models.Material;
+import data.models.Part;
+import data.models.PartList;
+import java.util.ArrayList;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -18,28 +22,39 @@ import static org.junit.Assert.*;
  */
 public class AdvancedCalculatorTest {
     
-    public AdvancedCalculatorTest() {
-    }
+    private static PartList pl;
+    private ArrayList<Part> wood;
+    private ArrayList<Part> misc;
     
     @BeforeClass
-    public static void setUpClass() {
+    public static void beforeClass() {
+        System.out.println("Setup test for calculating PartList");
+        
+//        pl = new PartList();
+//        pl.addMiscPart(new Part());
+//        pl.addWoodPart(new Part());
     }
     
-    @AfterClass
-    public static void tearDownClass() {
-    }
     
-    @Before
-    public void setUp() {
-    }
-    
-    @After
-    public void tearDown() {
+
+    /**
+     * Test of getParts method, of class AdvancedCalculator.
+     */
+    @Test
+    public void testGetParts() {
+        System.out.println("getParts");
+        AdvancedCalculator instance = new AdvancedCalculator(7800, 6500, false, 0, 0, false);
+        int price = 0;
+        for (Part p : instance.getParts().getWoodList()) {
+            price += p.getPrice();
+        }
+        for (Part p : instance.getParts().getMiscList()) {
+            price += p.getPrice();
+        }
+        int expectedTotalPrice = 1906912;
+        assertEquals(expectedTotalPrice, price);
+        // TODO review the generated test code and remove the default call to fail.
+        //fail("The test case is a prototype.");
     }
 
-    // TODO add test methods here.
-    // The methods must be annotated with annotation @Test. For example:
-    //
-    // @Test
-    // public void hello() {}
 }
