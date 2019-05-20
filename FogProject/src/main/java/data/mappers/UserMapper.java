@@ -51,7 +51,7 @@ public class UserMapper implements MapperInterface<User, String> {
     }
 
     @Override
-    public User geSingle(String email) throws UsersException {
+    public User getSingle(String email) throws UsersException {
         try (Connection con = dbc.open()) {
             String qry = "SELECT * FROM accounts WHERE email = ?;";
             PreparedStatement ps = con.prepareStatement(qry);
@@ -130,13 +130,13 @@ public class UserMapper implements MapperInterface<User, String> {
         }
     }
     
-    public void changeUserRole(String email, RoleEnum role) throws UsersException {
+    public int changeUserRole(String email, RoleEnum role) throws UsersException {
         try(Connection con = dbc.open()){
             String qry = "UPDATE accounts SET role = ? WHERE email = ?;";
             PreparedStatement ps = con.prepareStatement(qry);
             ps.setString(1, role.toString());
             ps.setString(2, email);
-            ps.executeUpdate();
+            return ps.executeUpdate();
         } catch (SQLException ex) {
             ex.printStackTrace();
             throw new UsersException("Error occoured while updating user");

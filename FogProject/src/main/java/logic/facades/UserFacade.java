@@ -23,7 +23,7 @@ public class UserFacade implements FacadeInterface<User, String> {
 
     @Override
     public User getSingle(String email) throws UsersException {
-        return um.geSingle(email);
+        return um.getSingle(email);
     }
 
     public boolean validateUser(String email, String password) throws UsersException {
@@ -34,8 +34,8 @@ public class UserFacade implements FacadeInterface<User, String> {
         return um.changePassword(email, password);
     }
     
-    public void changeUserRole(String email, RoleEnum role) throws UsersException {
-        um.changeUserRole(email, role);
+    public int changeUserRole(String email, RoleEnum role) throws UsersException {
+        return um.changeUserRole(email, role);
     }
 
     public void remove(String email) throws UsersException {
