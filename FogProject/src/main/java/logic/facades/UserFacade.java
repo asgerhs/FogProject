@@ -6,6 +6,7 @@ import data.mappers.UserMapper;
 import data.models.RoleEnum;
 import data.models.User;
 import java.util.List;
+import javax.sql.DataSource;
 import logic.interfaces.FacadeInterface;
 
 /**
@@ -13,8 +14,14 @@ import logic.interfaces.FacadeInterface;
  * @author Martin Frederiksen
  */
 public class UserFacade implements FacadeInterface<User, String> {
-
-    UserMapper um = new UserMapper(new DataSourceMySQL().getDataSource());
+    UserMapper um;
+    
+    public UserFacade() {
+        um = new UserMapper(new DataSourceMySQL().getDataSource());
+    }
+    public UserFacade(DataSource ds) {
+        um = new UserMapper(ds);
+    }
 
     @Override
     public List getAll() throws UsersException {

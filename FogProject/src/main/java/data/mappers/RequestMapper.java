@@ -129,6 +129,7 @@ public class RequestMapper implements MapperInterface<Request, Integer> {
         }
     }
 
+    @Override
     public void add(Request request) throws RequestException {
         try (Connection con = dbc.open()) {
 

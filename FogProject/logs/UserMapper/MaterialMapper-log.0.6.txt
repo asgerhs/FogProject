@@ -1,6 +1,0 @@
-May 20, 2019 10:22:18 AM data.mappers.UserMapper getAll
-SEVERE: Error in getAll Method
-java.sql.SQLException: Error: 
-	at data.mappers.UserMapper.getAll(UserMapper.java:67)
-	at data.mappers.UserMapper.main(UserMapper.java:174)
-
