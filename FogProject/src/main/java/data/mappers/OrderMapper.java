@@ -5,7 +5,6 @@ import data.exceptions.OrderException;
 import data.exceptions.RequestException;
 import data.interfaces.MapperInterface;
 import data.models.Order;
-import data.models.Request;
 import data.models.User;
 import java.io.IOException;
 import java.sql.Connection;
@@ -89,13 +88,14 @@ public class OrderMapper implements MapperInterface<Order, Integer> {
         return null;
     }
 
-    public void createOrder(int requestId) throws OrderException {
+    @Override
+    public void add(Order order) throws OrderException {
         try (Connection con = dbc.open()) {
             String sql = "INSERT INTO orders "
                     + "(requestId)"
                     + "VALUES(?);";
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1, requestId);
+            ps.setInt(1, order.getRequest().getId());
 
             ps.executeUpdate();
 

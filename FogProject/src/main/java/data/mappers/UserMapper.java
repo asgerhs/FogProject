@@ -1,6 +1,5 @@
 package data.mappers;
 
-import data.DataSourceMySQL;
 import data.DatabaseConnector;
 import data.exceptions.UsersException;
 import data.interfaces.MapperInterface;
@@ -94,6 +93,7 @@ public class UserMapper implements MapperInterface<User, String> {
         }
     }
     
+    @Override
     public void add(User user) throws UsersException {
         try (Connection con = dbc.open()) {
             String qry = "INSERT INTO accounts "
@@ -175,12 +175,5 @@ public class UserMapper implements MapperInterface<User, String> {
             logger.log(Level.SEVERE, "Error in remove Method", new SQLException("Error: "));
             throw new UsersException("Error while removing request from database");
         }
-    }
-     
-    public static void main(String[] args) throws UsersException {
-        DataSourceMySQL ds = new DataSourceMySQL();
-        UserMapper um = new UserMapper(ds.getDataSource());
-        System.out.println(um.getAll());
-        
     }
 }
