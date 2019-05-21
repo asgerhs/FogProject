@@ -5,6 +5,7 @@ import data.exceptions.UsersException;
 import data.interfaces.MapperInterface;
 import data.models.RoleEnum;
 import data.models.User;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -12,6 +13,10 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.FileHandler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 import javax.sql.DataSource;
 
 /**
@@ -21,15 +26,21 @@ import javax.sql.DataSource;
 public class UserMapper implements MapperInterface<User, String> {
     
     DatabaseConnector dbc = new DatabaseConnector();
+    private static Logger logger = Logger.getLogger(UserMapper.class.getName());
     
     public UserMapper(DataSource ds) {
         dbc.setDataSource(ds);
+             try {
+            FileHandler handler = new FileHandler("Logs/UserMapper/MaterialMapper-log.%u.%g.txt",
+                    1024 * 1024, 10);
+            logger.addHandler(handler);
+            handler.setFormatter(new SimpleFormatter());
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            logger.log(Level.SEVERE, "Error in logger", new IOException("Error: "));
+        }
     }
-
-    UserMapper() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
+    
     @Override
     public List getAll() throws UsersException {
         try (Connection con = dbc.open()) {
@@ -50,12 +61,13 @@ public class UserMapper implements MapperInterface<User, String> {
             return users;
         } catch (SQLException ex) {
             ex.printStackTrace();
+            logger.log(Level.SEVERE, "Error in getAll Method", new SQLException("Error: "));
             throw new UsersException("Error occoured while getting data from database");
         }
     }
 
     @Override
-    public User geSingle(String email) throws UsersException {
+    public User getSingle(String email) throws UsersException {
         try (Connection con = dbc.open()) {
             String qry = "SELECT * FROM accounts WHERE email = ?;";
             PreparedStatement ps = con.prepareStatement(qry);
@@ -76,10 +88,12 @@ public class UserMapper implements MapperInterface<User, String> {
             return null;
         } catch (SQLException ex) {
             ex.printStackTrace();
+            logger.log(Level.SEVERE, "Error in getSingleMethod", new SQLException("Error: "));
             throw new UsersException("Error occoured while getting data from database");
         }
     }
     
+    @Override
     public void add(User user) throws UsersException {
         try (Connection con = dbc.open()) {
             String qry = "INSERT INTO accounts "
@@ -94,8 +108,8 @@ public class UserMapper implements MapperInterface<User, String> {
             ps.setString(7, user.getPhone());
             ps.executeUpdate();
         } catch (SQLException ex) {
-            // TODO: Add Logger
             ex.printStackTrace();
+            logger.log(Level.SEVERE, "Error in add Method", new SQLException("Error: "));
             throw new UsersException("Error occoured while adding data to database");
         }
     }
@@ -116,6 +130,7 @@ public class UserMapper implements MapperInterface<User, String> {
             return valid;
         } catch (SQLException ex) {
             ex.printStackTrace();
+            logger.log(Level.SEVERE, "Error in validateUser Method", new SQLException("Error: "));
             throw new UsersException("Error occoured while validating user");
         }
     }
@@ -126,10 +141,22 @@ public class UserMapper implements MapperInterface<User, String> {
             PreparedStatement ps = con.prepareStatement(qry);
             ps.setString(1, password);
             ps.setString(2, email);
-            con.setAutoCommit(false);
             int result = ps.executeUpdate();
-            con.commit();
             return result;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            logger.log(Level.SEVERE, "Error in changePassword", new SQLException("Error: "));
+            throw new UsersException("Error occoured while updating user");
+        }
+    }
+    
+    public int changeUserRole(String email, RoleEnum role) throws UsersException {
+        try(Connection con = dbc.open()){
+            String qry = "UPDATE accounts SET role = ? WHERE email = ?;";
+            PreparedStatement ps = con.prepareStatement(qry);
+            ps.setString(1, role.toString());
+            ps.setString(2, email);
+            return ps.executeUpdate();
         } catch (SQLException ex) {
             ex.printStackTrace();
             throw new UsersException("Error occoured while updating user");
@@ -145,6 +172,7 @@ public class UserMapper implements MapperInterface<User, String> {
 
         } catch (SQLException ex) {
             ex.printStackTrace();
+            logger.log(Level.SEVERE, "Error in remove Method", new SQLException("Error: "));
             throw new UsersException("Error while removing request from database");
         }
     }

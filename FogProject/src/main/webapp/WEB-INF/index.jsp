@@ -15,7 +15,7 @@
         <label>Password</label>
         <input type="password" class="form-control" id="exampleInputPassword1" name="password" placeholder="*********">
     </div>
-    <button type="submit" class="btn btn-dark" formaction="FrontController?command=login">Login</button>
+    <button type="submit" class="btn btn-dark" formaction="FrontController?command=login">Log ind</button>
     <button type="submit" class="btn btn-dark">Registrer</button>
     <br>
 
