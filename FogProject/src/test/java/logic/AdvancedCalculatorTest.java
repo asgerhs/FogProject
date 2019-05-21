@@ -123,12 +123,42 @@ public class AdvancedCalculatorTest {
      * The test checks if a material for said method is added to the partlist.
      */
     @Test
-    public void testLathsFalse() throws MaterialException {
+    public void testLathsFalse() {
         HashMap<String, ArrayList> woodHash = new HashMap<String, ArrayList>();
-        AdvancedCalculator instance = new AdvancedCalculator(7800, 6500, false, 0, 0, false);
+        AdvancedCalculator instance = new AdvancedCalculator(5400, 3000, false, 0, 0, false);
         for (int i = 0; i < instance.getParts().getWoodList().size(); i++) {
             woodHash.put(instance.getParts().getWoodList().get(i).getMaterial().getRef(), instance.getParts().getWoodList());
         }
         assertFalse(woodHash.containsKey("1015"));
+    }
+    
+    /**
+     * Test for shed, will return true if the carport contains a shed, meaning shed specifik methods will run.
+     *  Will return false if carport doesn't contain shed.
+     *  The test checks if a shed specific material is added to the partlist.
+     */
+    @Test
+    public void testShedTrue() {
+        HashMap<String, ArrayList> woodHash = new HashMap<String, ArrayList>();
+        AdvancedCalculator instance = new AdvancedCalculator(6800, 3500, true, 2400, 3000, false);
+        for (int i = 0; i < instance.getParts().getMiscList().size(); i++) {
+            woodHash.put(instance.getParts().getMiscList().get(i).getMaterial().getRef(), instance.getParts().getMiscList());
+        }
+        assertTrue(woodHash.containsKey("1040"));
+    }
+    
+    /**
+     * Test for shed, will return true if the carport doesn't contain a shed, meaning shed specific methods won't will run.
+     *  Will return false if carport contains shed.
+     *  The test checks if a shed specific material is added to the partlist.
+     */
+    @Test
+    public void testShedFalse() {
+        HashMap<String, ArrayList> woodHash = new HashMap<String, ArrayList>();
+        AdvancedCalculator instance = new AdvancedCalculator(4900, 3300, false, 0, 0, true);
+        for (int i = 0; i < instance.getParts().getMiscList().size(); i++) {
+            woodHash.put(instance.getParts().getMiscList().get(i).getMaterial().getRef(), instance.getParts().getMiscList());
+        }
+        assertFalse(woodHash.containsKey("1004"));
     }
 }
