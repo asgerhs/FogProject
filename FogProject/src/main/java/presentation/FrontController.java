@@ -1,8 +1,10 @@
 package presentation;
 
+import data.ExceptionLogger;
 import data.exceptions.CommandException;
 import data.mappers.MaterialMapper;
 import data.models.CommandTarget;
+import data.models.LoggerEnum;
 import java.io.IOException;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
@@ -22,25 +24,7 @@ import presentation.commands.CommandList;
  * @author Martin Frederiksen
  */
 @WebServlet(name = "FrontController", urlPatterns = {"/FrontController"})
-public class FrontController extends HttpServlet {
-    
-
-    private static Logger logger = Logger.getLogger(MaterialMapper.class.getName());
-     
-    public FrontController() {
-        try {
-
-            FileHandler handler = new FileHandler("Fog-frontController-log.%u.%g.txt",
-                    1024 * 1024, 10);
-            logger.addHandler(handler);
-
-            handler.setFormatter(new SimpleFormatter());
-        } catch (IOException ex) {
-            logger.log(Level.SEVERE, "Error in logger", new IOException("Error: "));
-
-        }
-    }    
-    
+public class FrontController extends HttpServlet {    
     
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -72,7 +56,7 @@ public class FrontController extends HttpServlet {
             response.setHeader("message", ex.getMessage());
             
             System.out.println(ex.getMessage());
-            logger.log(Level.SEVERE, "Error: ", ex.getMessage());
+            ExceptionLogger.log(LoggerEnum.FRONTCONTROLLER, "Error in FrontController Method: \n" + ex.getMessage(), ex.getStackTrace());
         }
     }
 

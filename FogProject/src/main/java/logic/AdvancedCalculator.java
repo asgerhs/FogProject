@@ -76,7 +76,7 @@ public class AdvancedCalculator {
             svg.generateRoof();
             }
         } catch (MaterialException ex) {
-            ExceptionLogger.log(LoggerEnum.USERMAPPER, "Error in AdvanceCalculator Method: \n" + ex.getMessage(), ex.getStackTrace());
+            ExceptionLogger.log(LoggerEnum.ADVANCECALCULATOR, "Error in AdvanceCalculator Method: \n" + ex.getMessage(), ex.getStackTrace());
         }
     }
 
