@@ -1,7 +1,6 @@
 package data;
 
 import data.interfaces.MapperInterface;
-import data.mappers.RequestMapper;
 import data.models.LoggerEnum;
 import java.io.IOException;
 import java.util.logging.FileHandler;
@@ -29,6 +28,7 @@ public class ExceptionLogger {
                 error += ste.toString() + "\n";
             logger.log(Level.SEVERE, error);
         } catch (IOException ex) {
+            ex.printStackTrace();
             logger.log(Level.SEVERE, "Error in logger", new IOException("Error: " + ex.getMessage()));
         }
     }
