@@ -2,7 +2,6 @@ package data.mappers;
 
 import data.DatabaseConnector;
 import data.exceptions.UsersException;
-import data.models.Request;
 import data.models.RoleEnum;
 import data.models.User;
 import java.io.BufferedReader;
@@ -143,7 +142,7 @@ public class UserMapperTest {
         System.out.println("remove");
         String email = "Remove@remove.dk";
         userMapper.remove(email);
-        User user = userMapper.getSingle("Remove@remove.dk");
+        User user = userMapper.getSingle(email);
         assertNull(user);
     }
     

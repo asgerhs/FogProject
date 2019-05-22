@@ -74,11 +74,14 @@ public class RequestMapperTest {
      * Test of getById method, of class RequestMapper.
      */
     @Test
-    public void testGetById() throws Exception {
-        System.out.println("getById");
+    public void testGetSingle() throws Exception {
+        System.out.println("getSingle");
         Integer id = 4;
         Request result = requestMapper.getSingle(id);
         assertNotNull(result);
+        id = 0;
+        result = requestMapper.getSingle(id);
+        assertNull(result);
     }
 
     /**
@@ -110,8 +113,35 @@ public class RequestMapperTest {
         try {
             Request request = new Request(100, 100, 100, 100, "1013", 0, "Test", new User("test@test.dk", "1234", RoleEnum.ADMIN, "", "", "", ""));
             requestMapper.add(request);
+            request = new Request(100, 100, 100, 100, "1013", 0, "Test", new User("test@test.dk", "1234", RoleEnum.ADMIN, null, "", "", ""));
+            requestMapper.add(request);
         } catch (RequestException ex) {
             fail(ex.getMessage());
         }
+    }
+
+    /**
+     * Test of update method, of class RequestMapper.
+     */
+    @Test
+    public void testUpdate() throws Exception {
+        System.out.println("update");
+        Request rqst = null;
+        RequestMapper instance = null;
+        instance.update(rqst);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of remove method, of class RequestMapper.
+     */
+    @Test
+    public void testRemove() throws Exception {
+        System.out.println("remove");
+        Integer id = 1;
+        requestMapper.remove(id);
+        Request request = requestMapper.getSingle(id);
+        assertNull(request);
     }
 }
