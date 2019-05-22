@@ -82,10 +82,7 @@ buildNumber.properties
 .mvn/timing.properties
 .mvn/wrapper/maven-wrapper.jar
 
-FogProject/logs/materialmapper/*.txt
-FogProject/logs/ordermapper/*.txt
-FogProject/logs/requestmapper/*.txt
-FogProject/logs/usermapper/*.txt
+FogProject/logs/*/*.txt
 
 ### NetBeans ###
 **/nbproject/private/

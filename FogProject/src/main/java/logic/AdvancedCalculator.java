@@ -6,13 +6,8 @@ import data.models.LoggerEnum;
 import data.models.Material;
 import data.models.Part;
 import data.models.PartList;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.logging.FileHandler;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import java.util.logging.SimpleFormatter;
 import logic.facades.MaterialFacade;
 
 /**
@@ -80,7 +75,7 @@ public class AdvancedCalculator {
             svg.generateRoof();
             }
         } catch (MaterialException ex) {
-            ExceptionLogger.log(LoggerEnum.USERMAPPER, "Error in AdvanceCalculator Method: \n" + ex.getMessage(), ex.getStackTrace());
+            ExceptionLogger.log(LoggerEnum.ADVANCECALCULATOR, "Error in AdvanceCalculator Method: \n" + ex.getMessage(), ex.getStackTrace());
         }
     }
 
