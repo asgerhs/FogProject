@@ -55,7 +55,10 @@ public class ShowPartsCommand implements Command {
                     (o.getRequest().getShedLength() > 0 && o.getRequest().getShedWidth() > 0),
                     o.getRequest().getShedLength() * 10,
                     o.getRequest().getShedWidth() * 10,
-                    o.getRequest().getAngle() > 0);
+                    o.getRequest().getAngle() > 0,
+                    o.getRequest().getAngle());
+            
+            
             } catch (OrderException ex) {
                 ex.printStackTrace();
             }

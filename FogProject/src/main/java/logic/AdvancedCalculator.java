@@ -6,13 +6,8 @@ import data.models.LoggerEnum;
 import data.models.Material;
 import data.models.Part;
 import data.models.PartList;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.logging.FileHandler;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import java.util.logging.SimpleFormatter;
 import logic.facades.MaterialFacade;
 
 /**
@@ -30,13 +25,14 @@ public class AdvancedCalculator {
     private MaterialFacade mf;
     private double angle;
 
-    public AdvancedCalculator(int length, int width, boolean shed, int shedLength, int shedWidth, boolean roof) {
+    public AdvancedCalculator(int length, int width, boolean shed, int shedLength, int shedWidth, boolean roof, double angle) {
         this.length = length;
         this.width = width;
         this.shed = shed;
         this.shedLength = shedLength;
         this.shedWidth = shedWidth;
         this.roof = roof;
+        this.angle = angle;
         pl = new PartList();
         svg = new GenerateSVG(length, width, shedLength, shedWidth, 1000, 200, 350);
         mf = new MaterialFacade();
@@ -337,7 +333,6 @@ public class AdvancedCalculator {
     private void calcLathsRoof() throws MaterialException {
         ArrayList<Material> lathType = mf.getAllByCategory(3);
         ArrayList<Material> lathHolder = mf.getAllByCategory(17);
-        angle = 20; // Remove when 
         double angleRad = Math.toRadians(angle);
         double triangle = Math.toRadians(180);
         double roofWidth = (width * Math.sin(angleRad)) / Math.sin(triangle - (angleRad * 2));
@@ -406,20 +401,6 @@ public class AdvancedCalculator {
 
     public int getRafters() {
         return rafters;
-    }
-
-    public static void main(String[] args) throws MaterialException {
-        AdvancedCalculator ac = new AdvancedCalculator(5300, 5000, false, 0, 0, false);
-//        ac.calcBand();
-//        ac.calcLathsRoof();
-//        ac.calcRoofBricks();
-//        for (Part p : ac.getParts().getWoodList()) {
-//            System.out.println(p);
-//        }
-//        for (Part p : ac.getParts().getMiscList()) {
-//            System.out.println(p);
-//        }
-        ac.calcLathsRoof();
     }
 
     private class MatSortHeighComparator implements Comparator<Material> {
