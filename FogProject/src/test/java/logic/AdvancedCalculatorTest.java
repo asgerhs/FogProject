@@ -1,10 +1,6 @@
 package logic;
 
-import data.exceptions.MaterialException;
-import data.mappers.MaterialMapper;
-import data.models.Material;
 import data.models.Part;
-import data.models.PartList;
 import java.util.ArrayList;
 import java.util.HashMap;
 import org.junit.BeforeClass;
@@ -34,7 +30,7 @@ public class AdvancedCalculatorTest {
     @Test
     public void testGetPrice() {
         System.out.println("Tests for price");
-        AdvancedCalculator instance = new AdvancedCalculator(7800, 6500, false, 0, 0, false);
+        AdvancedCalculator instance = new AdvancedCalculator(7800, 6500, false, 0, 0, false, 0);
         
         int price = 0;
         int expectedTotalPrice = 1906912;
@@ -59,7 +55,7 @@ public class AdvancedCalculatorTest {
     @Test
     public void testLathsTrue() {
         HashMap<String, ArrayList> miscHash = new HashMap<String, ArrayList>();
-        AdvancedCalculator instance = new AdvancedCalculator(7800, 6500, false, 0, 0, true);
+        AdvancedCalculator instance = new AdvancedCalculator(7800, 6500, false, 0, 0, true, 20);
         for (int i = 0; i < instance.getParts().getMiscList().size(); i++) {
             miscHash.put(instance.getParts().getMiscList().get(i).getMaterial().getRef(), instance.getParts().getMiscList());
         }
@@ -74,7 +70,7 @@ public class AdvancedCalculatorTest {
     @Test
     public void testLathsFalse() {
         HashMap<String, ArrayList> woodHash = new HashMap<String, ArrayList>();
-        AdvancedCalculator instance = new AdvancedCalculator(5400, 3000, false, 0, 0, false);
+        AdvancedCalculator instance = new AdvancedCalculator(5400, 3000, false, 0, 0, false, 0);
         for (Part p : instance.getParts().getWoodList()) {
             woodHash.put(p.getMaterial().getRef(), instance.getParts().getWoodList());
         }
@@ -89,7 +85,7 @@ public class AdvancedCalculatorTest {
     @Test
     public void testShedTrue() {
         HashMap<String, ArrayList> woodHash = new HashMap<String, ArrayList>();
-        AdvancedCalculator instance = new AdvancedCalculator(6800, 3500, true, 2400, 3000, false);
+        AdvancedCalculator instance = new AdvancedCalculator(6800, 3500, true, 2400, 3000, false, 0);
         for (int i = 0; i < instance.getParts().getMiscList().size(); i++) {
             woodHash.put(instance.getParts().getMiscList().get(i).getMaterial().getRef(), instance.getParts().getMiscList());
         }
@@ -104,7 +100,7 @@ public class AdvancedCalculatorTest {
     @Test
     public void testShedFalse() {
         HashMap<String, ArrayList> woodHash = new HashMap<String, ArrayList>();
-        AdvancedCalculator instance = new AdvancedCalculator(4900, 3300, false, 0, 0, true);
+        AdvancedCalculator instance = new AdvancedCalculator(4900, 3300, false, 0, 0, true, 30);
         for (int i = 0; i < instance.getParts().getMiscList().size(); i++) {
             woodHash.put(instance.getParts().getMiscList().get(i).getMaterial().getRef(), instance.getParts().getMiscList());
         }
@@ -113,7 +109,7 @@ public class AdvancedCalculatorTest {
     
     @Test
     public void calcRaftersTest() {
-        AdvancedCalculator instance = new AdvancedCalculator(5000, 3600, false, 0, 0, false);
+        AdvancedCalculator instance = new AdvancedCalculator(5000, 3600, false, 0, 0, false, 0);
         int count = 0;
         for (Part p : instance.getParts().getWoodList()) {
             if (p.getMaterial().getRef().equals("1007") || p.getMaterial().getRef().equals("1008"))
@@ -124,7 +120,7 @@ public class AdvancedCalculatorTest {
     
     @Test
     public void calcPostsTest() {
-        AdvancedCalculator instance = new AdvancedCalculator(5000, 3600, false, 0, 0, false);
+        AdvancedCalculator instance = new AdvancedCalculator(5000, 3600, false, 0, 0, false, 0);
         int count = 0;
         for (Part p : instance.getParts().getWoodList()) {
             if (p.getMaterial().getRef().equals("1009"))
@@ -132,7 +128,7 @@ public class AdvancedCalculatorTest {
         }
         assertEquals(4, count);
         
-        instance = new AdvancedCalculator(6300, 4000, false, 0, 0, false);
+        instance = new AdvancedCalculator(6300, 4000, false, 0, 0, false, 0);
         count = 0;
         for (Part p : instance.getParts().getWoodList()) {
             if (p.getMaterial().getRef().equals("1009"))
@@ -140,7 +136,7 @@ public class AdvancedCalculatorTest {
         }
         assertEquals(6, count);
         
-        instance = new AdvancedCalculator(4250, 2500, true, 2500, 2500, false);
+        instance = new AdvancedCalculator(4250, 2500, true, 2500, 2500, false, 0);
         count = 0;
         for (Part p : instance.getParts().getWoodList()) {
             if (p.getMaterial().getRef().equals("1009"))
@@ -151,7 +147,7 @@ public class AdvancedCalculatorTest {
     
     @Test
     public void calcBoltsTest() {
-        AdvancedCalculator instance = new AdvancedCalculator(5000, 3600, false, 0, 0, false);
+        AdvancedCalculator instance = new AdvancedCalculator(5000, 3600, false, 0, 0, false, 0);
         int count = 0;
         for (Part p : instance.getParts().getMiscList()) {
             if (p.getMaterial().getRef().equals("1036"))
@@ -159,7 +155,7 @@ public class AdvancedCalculatorTest {
         }
         assertEquals(8, count);
         
-        instance = new AdvancedCalculator(6300, 4000, false, 0, 0, false);
+        instance = new AdvancedCalculator(6300, 4000, false, 0, 0, false, 0);
         count = 0;
         for (Part p : instance.getParts().getMiscList()) {
             if (p.getMaterial().getRef().equals("1036"))
@@ -167,7 +163,7 @@ public class AdvancedCalculatorTest {
         }
         assertEquals(16, count);
         
-        instance = new AdvancedCalculator(4250, 2500, true, 2500, 2500, false);
+        instance = new AdvancedCalculator(4250, 2500, true, 2500, 2500, false, 0);
         count = 0;
         for (Part p : instance.getParts().getMiscList()) {
             if (p.getMaterial().getRef().equals("1036"))
