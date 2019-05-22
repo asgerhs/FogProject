@@ -24,13 +24,13 @@ import javax.sql.DataSource;
  * @author Martin Frederiksen
  */
 public class UserMapper implements MapperInterface<User, String> {
-    
+
     DatabaseConnector dbc = new DatabaseConnector();
     private static Logger logger = Logger.getLogger(UserMapper.class.getName());
-    
+
     public UserMapper(DataSource ds) {
         dbc.setDataSource(ds);
-             try {
+        try {
             FileHandler handler = new FileHandler("Logs/UserMapper/MaterialMapper-log.%u.%g.txt",
                     1024 * 1024, 10);
             logger.addHandler(handler);
@@ -40,7 +40,7 @@ public class UserMapper implements MapperInterface<User, String> {
             logger.log(Level.SEVERE, "Error in logger", new IOException("Error: "));
         }
     }
-    
+
     @Override
     public List getAll() throws UsersException {
         try (Connection con = dbc.open()) {
@@ -53,9 +53,9 @@ public class UserMapper implements MapperInterface<User, String> {
                 users.add(new User(rs.getString("email"),
                         rs.getString("password"),
                         RoleEnum.valueOf(rs.getString("role")),
-                        rs.getString("name"), 
-                        rs.getString("address"), 
-                        rs.getString("zipCity"), 
+                        rs.getString("name"),
+                        rs.getString("address"),
+                        rs.getString("zipCity"),
                         rs.getString("phone")));
             }
             return users;
@@ -75,15 +75,13 @@ public class UserMapper implements MapperInterface<User, String> {
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-                if(email.equalsIgnoreCase(rs.getString("email"))){
-                    return new User(rs.getString("email"),
+                return new User(rs.getString("email"),
                         rs.getString("password"),
                         RoleEnum.valueOf(rs.getString("role")),
-                        rs.getString("name"), 
-                        rs.getString("address"), 
-                        rs.getString("zipCity"), 
+                        rs.getString("name"),
+                        rs.getString("address"),
+                        rs.getString("zipCity"),
                         rs.getString("phone"));
-                }
             }
             return null;
         } catch (SQLException ex) {
@@ -92,7 +90,7 @@ public class UserMapper implements MapperInterface<User, String> {
             throw new UsersException("Error occoured while getting data from database");
         }
     }
-    
+
     @Override
     public void add(User user) throws UsersException {
         try (Connection con = dbc.open()) {
@@ -113,9 +111,9 @@ public class UserMapper implements MapperInterface<User, String> {
             throw new UsersException("Error occoured while adding data to database");
         }
     }
-    
+
     public boolean validateUser(String email, String password) throws UsersException {
-       try(Connection con = dbc.open()){
+        try (Connection con = dbc.open()) {
             String qry = "SELECT email FROM accounts WHERE (email = ?) AND password = ?;";
             PreparedStatement ps = con.prepareStatement(qry);
             ps.setString(1, email);
@@ -123,9 +121,7 @@ public class UserMapper implements MapperInterface<User, String> {
             ResultSet rs = ps.executeQuery();
             boolean valid = false;
             while (rs.next()) {
-                if (email.equalsIgnoreCase(rs.getString("email"))) {
                     valid = true;
-                }
             }
             return valid;
         } catch (SQLException ex) {
@@ -134,9 +130,9 @@ public class UserMapper implements MapperInterface<User, String> {
             throw new UsersException("Error occoured while validating user");
         }
     }
-    
+
     public int changePassword(String email, String password) throws UsersException {
-        try(Connection con = dbc.open()){
+        try (Connection con = dbc.open()) {
             String qry = "UPDATE accounts SET password = ? WHERE email = ?;";
             PreparedStatement ps = con.prepareStatement(qry);
             ps.setString(1, password);
@@ -149,9 +145,9 @@ public class UserMapper implements MapperInterface<User, String> {
             throw new UsersException("Error occoured while updating user");
         }
     }
-    
+
     public int changeUserRole(String email, RoleEnum role) throws UsersException {
-        try(Connection con = dbc.open()){
+        try (Connection con = dbc.open()) {
             String qry = "UPDATE accounts SET role = ? WHERE email = ?;";
             PreparedStatement ps = con.prepareStatement(qry);
             ps.setString(1, role.toString());
@@ -162,8 +158,8 @@ public class UserMapper implements MapperInterface<User, String> {
             throw new UsersException("Error occoured while updating user");
         }
     }
-    
-     public void remove(String email) throws UsersException {
+
+    public void remove(String email) throws UsersException {
         try (Connection con = dbc.open()) {
             String qry = "DELETE FROM accounts WHERE email = ?;";
             PreparedStatement ps = con.prepareStatement(qry);

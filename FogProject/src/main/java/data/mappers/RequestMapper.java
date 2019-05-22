@@ -45,6 +45,11 @@ public class RequestMapper implements MapperInterface<Request, Integer> {
         }
     }
 
+    /**
+     * 
+     * @return List of Request
+     * @throws RequestException 
+     */
     @Override
     public List<Request> getAll() throws RequestException {
         try (Connection con = dbc.open()) {
