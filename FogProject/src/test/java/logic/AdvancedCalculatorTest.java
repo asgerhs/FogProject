@@ -115,8 +115,66 @@ public class AdvancedCalculatorTest {
     @Test
     public void calcRaftersTest() {
         AdvancedCalculator instance = new AdvancedCalculator(5000, 3600, false, 0, 0, false);
-        assertEquals(10, instance.getRafters());
+        int count = 0;
+        for (Part p : instance.getParts().getWoodList()) {
+            if (p.getMaterial().getRef().equals("1007") || p.getMaterial().getRef().equals("1008"))
+                count += p.getQty();
+        }
+        assertEquals(14, count);
     }
     
+    @Test
+    public void calcPostsTest() {
+        AdvancedCalculator instance = new AdvancedCalculator(5000, 3600, false, 0, 0, false);
+        int count = 0;
+        for (Part p : instance.getParts().getWoodList()) {
+            if (p.getMaterial().getRef().equals("1009"))
+                count += p.getQty();
+        }
+        assertEquals(4, count);
+        
+        instance = new AdvancedCalculator(6300, 4000, false, 0, 0, false);
+        count = 0;
+        for (Part p : instance.getParts().getWoodList()) {
+            if (p.getMaterial().getRef().equals("1009"))
+                count += p.getQty();
+        }
+        assertEquals(6, count);
+        
+        instance = new AdvancedCalculator(4250, 2500, true, 2500, 2500, false);
+        count = 0;
+        for (Part p : instance.getParts().getWoodList()) {
+            if (p.getMaterial().getRef().equals("1009"))
+                count += p.getQty();
+        }
+        assertEquals(6, count);
+    }
+    
+    @Test
+    public void calcBoltsTest() {
+        AdvancedCalculator instance = new AdvancedCalculator(5000, 3600, false, 0, 0, false);
+        int count = 0;
+        for (Part p : instance.getParts().getMiscList()) {
+            if (p.getMaterial().getRef().equals("1036"))
+                count += p.getQty();
+        }
+        assertEquals(8, count);
+        
+        instance = new AdvancedCalculator(6300, 4000, false, 0, 0, false);
+        count = 0;
+        for (Part p : instance.getParts().getMiscList()) {
+            if (p.getMaterial().getRef().equals("1036"))
+                count += p.getQty();
+        }
+        assertEquals(16, count);
+        
+        instance = new AdvancedCalculator(4250, 2500, true, 2500, 2500, false);
+        count = 0;
+        for (Part p : instance.getParts().getMiscList()) {
+            if (p.getMaterial().getRef().equals("1036"))
+                count += p.getQty();
+        }
+        assertEquals(8, count);
+    }
     
 }
