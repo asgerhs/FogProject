@@ -14,7 +14,7 @@ function ajax(formObj) {
         data: $(formObj).serialize()
     }).done(function (data, textStatus, request) {
         if (request.getResponseHeader('error') !== null) {
-            $("#errorBox").prepend(request.getResponseHeader('message'));
+            $("#errorBox #message").html(request.getResponseHeader('message'));
             $("#errorBox").show();
             $("#successBox").hide();
         } else {

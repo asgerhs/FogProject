@@ -199,12 +199,12 @@ public class GenerateSQLDummyScript {
             Address address = faker.address();
             PhoneNumber phone = faker.phoneNumber();
             
-            sql += sqlStart + "'" + name + "@somewhere.dk', " + "'1234', 'CUSTOMER', '" + name + "', '" + address.streetAddress().replace("'", " ") + "', '" +
+            sql += sqlStart + "'" + name + "@somewhere.dk', " + "'81DC9BDB52D04DC20036DBD8313ED055', 'CUSTOMER', '" + name + "', '" + address.streetAddress().replace("'", " ") + "', '" +
                     address.zipCode() + " " + address.city().replace("'", " ") + "', '" + phone.phoneNumber() + "'" + sqlEnd;
         }
-        sql += sqlStart + "'bsm@e.dk', '1234', 'EMPLOYEE', 'BestSalesman', 'Salesman', '1234 By', '1234'" + sqlEnd;
-        sql += sqlStart + "'admin@a.dk', '1234', 'ADMIN', 'Admin', 'Admin', '1234 By', '1234'" + sqlEnd;
-        sql += sqlStart + "'Remove@remove.dk', '1234', 'Remove', 'Remove', 'Remove', '1234 By', '1234'" + sqlEnd;
+        sql += sqlStart + "'bsm@e.dk', '81DC9BDB52D04DC20036DBD8313ED055', 'EMPLOYEE', 'BestSalesman', 'Salesman', '1234 By', '1234'" + sqlEnd;
+        sql += sqlStart + "'admin@a.dk', '81DC9BDB52D04DC20036DBD8313ED055', 'ADMIN', 'Admin', 'Admin', '1234 By', '1234'" + sqlEnd;
+        sql += sqlStart + "'Remove@remove.dk', '81DC9BDB52D04DC20036DBD8313ED055', 'CUSTOMER', 'Remove', 'Remove', '1234 By', '1234'" + sqlEnd;
         
         f.format(sql);
     }
@@ -217,13 +217,15 @@ public class GenerateSQLDummyScript {
         String sqlStart = "INSERT INTO `requests`"
                 + "(width, length, shedWidth, shedLength, roof, angle, note, email) VALUES (";
         String sqlEnd = ");\n";
+        
+        sql += sqlStart + "600, 780, 600, 210, 'flat', 0, 'This is a test', 'admin@a.dk'" + sqlEnd;
 
         for (String str : names) {
             Faker faker = new Faker();
             int num = faker.number().numberBetween(500, 780);
             int shed = faker.number().numberBetween(100, 210);
             //String name = faker.name().firstName();
-
+            
             sql += sqlStart + num + ", " + num + ", " + shed + ", " + shed + ", " + "'not flat'" + ", " + 30
                     + ", '" + "This is a test for " + str + "', '"
                     + str + "@somewhere.dk'" +  sqlEnd;

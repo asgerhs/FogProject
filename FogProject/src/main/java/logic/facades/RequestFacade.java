@@ -2,11 +2,10 @@ package logic.facades;
 
 import data.DataSourceMySQL;
 import data.exceptions.RequestException;
-import data.exceptions.UsersException;
 import data.mappers.RequestMapper;
 import data.models.Request;
-import java.sql.SQLException;
 import java.util.List;
+import javax.sql.DataSource;
 import logic.interfaces.FacadeInterface;
 
 /**
@@ -14,7 +13,14 @@ import logic.interfaces.FacadeInterface;
  * @author Martin Frederiksen
  */
 public class RequestFacade implements FacadeInterface<Request, Integer>{
-    RequestMapper rm = new RequestMapper(new DataSourceMySQL().getDataSource());
+    RequestMapper rm;
+    
+    public RequestFacade() {
+        rm = new RequestMapper(new DataSourceMySQL().getDataSource());
+    }
+    public RequestFacade(DataSource ds) {
+        rm = new RequestMapper(ds);
+    }
     
     @Override
     public List<Request> getAll() throws RequestException {

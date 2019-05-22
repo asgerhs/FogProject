@@ -1,8 +1,7 @@
-package data.mappers;
+package logic.facades;
 
 import data.DatabaseConnector;
 import data.TestDataSourceMySQL;
-import data.exceptions.UsersException;
 import data.models.RoleEnum;
 import data.models.User;
 import java.io.BufferedReader;
@@ -18,106 +17,77 @@ import static org.junit.Assert.*;
  *
  * @author Andreas Vikke
  */
-public class UserMapperTest {
-    
-    private static UserMapper userMapper;
-    
+public class UserFacadeTest {
+
+    private static UserFacade userFacade;
+
     @BeforeClass
     public static void beforeClass() {
         System.out.println("Setup Test MySQL Database");
-        
+
         BufferedReader sqlScript;
-        try
-        {
+        try {
             sqlScript = new BufferedReader(new InputStreamReader(new FileInputStream("../Database/FogProject_Script.sql"), "UTF-8"));
-            
+
             String sqlStatements = "";
             String sqlStatement = "";
-            while ((sqlStatement = sqlScript.readLine()) != null)
-            {
+            while ((sqlStatement = sqlScript.readLine()) != null) {
                 sqlStatements += sqlStatement;
             }
-            
+
             sqlScript = new BufferedReader(new InputStreamReader(new FileInputStream("../Database/GeneratedDummyData.sql"), "UTF-8"));
-            while ((sqlStatement = sqlScript.readLine()) != null)
-            {
+            while ((sqlStatement = sqlScript.readLine()) != null) {
                 sqlStatements += sqlStatement;
             }
-                        
+
             DatabaseConnector dbc = new DatabaseConnector();
             dbc.setDataSource(new TestDataSourceMySQL().getDataSource());
             try (Connection con = dbc.open()) {
                 con.prepareStatement(sqlStatements).executeUpdate();
             }
-        }
-        catch (Exception ex)
-        {
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
-        
-        userMapper = new UserMapper(new TestDataSourceMySQL().getDataSource());
+
+        userFacade = new UserFacade(new TestDataSourceMySQL().getDataSource());
     }
-    
+
     /**
-     * Test of getAll method, of class UserMapper.
+     * Test of getAll method, of class UserFacade.
      */
     @Test
     public void testGetAll() throws Exception {
         System.out.println("getAll");
-        List result = userMapper.getAll();
+        List result = userFacade.getAll();
         assertNotNull(result);
         assertTrue(result.size() > 10);
     }
 
     /**
-     * Test of getSingle method, of class UserMapper.
+     * Test of getSingle method, of class UserFacade.
      */
     @Test
     public void testGetSingle() throws Exception {
-        System.out.println("getById");
+        System.out.println("getSingle");
         String email = "admin@a.dk";
-        User result = userMapper.getSingle(email);
+        User result = userFacade.getSingle(email);
         assertNotNull(result);
-        email = "admin@b.dk";
-        result = userMapper.getSingle(email);
-        assertNull(result);
     }
 
     /**
-     * Test of add method, of class UserMapper.
-     */
-    @Test
-    public void testAdd() throws Exception {
-        System.out.println("add");
-        try {
-            User user = new User("test@test.dk", "1234", RoleEnum.ADMIN, "", "", "", "");
-            userMapper.add(user);
-            
-            User result = userMapper.getSingle("test@test.dk");
-            assertNotNull(result);
-        } catch (UsersException ex) {
-            fail(ex.getMessage());
-        }
-    }
-
-    /**
-     * Test of validateUser method, of class UserMapper.
+     * Test of validateUser method, of class UserFacade.
      */
     @Test
     public void testValidateUser() throws Exception {
         System.out.println("validateUser");
         String email = "admin@a.dk";
-        String password = "81DC9BDB52D04DC20036DBD8313ED055";
-        boolean result = userMapper.validateUser(email, password);
+        String password = "1234";
+        boolean result = userFacade.validateUser(email, password);
         assertTrue(result);
-        email = "admin@b.dk";
-        password = "81DC9BDB52D04DC20036DBD8313ED055";
-        result = userMapper.validateUser(email, password);
-        assertFalse(result);
     }
 
     /**
-     * Test of changePassword method, of class UserMapper.
+     * Test of changePassword method, of class UserFacade.
      */
     @Test
     public void testChangePassword() throws Exception {
@@ -125,12 +95,12 @@ public class UserMapperTest {
         String email = "bsm@e.dk";
         String password = "4321";
         int expResult = 1;
-        int result = userMapper.changePassword(email, password);
+        int result = userFacade.changePassword(email, password);
         assertEquals(expResult, result);
     }
 
     /**
-     * Test of changeUserRole method, of class UserMapper.
+     * Test of changeUserRole method, of class UserFacade.
      */
     @Test
     public void testChangeUserRole() throws Exception {
@@ -138,20 +108,20 @@ public class UserMapperTest {
         String email = "bsm@e.dk";
         RoleEnum role = RoleEnum.CUSTOMER;
         int expResult = 1;
-        int result = userMapper.changeUserRole(email, role);
+        int result = userFacade.changeUserRole(email, role);
         assertEquals(expResult, result);
     }
 
     /**
-     * Test of remove method, of class UserMapper.
+     * Test of remove method, of class UserFacade.
      */
     @Test
     public void testRemove() throws Exception {
         System.out.println("remove");
         String email = "Remove@remove.dk";
-        userMapper.remove(email);
-        User user = userMapper.getSingle(email);
+        userFacade.remove(email);
+        User user = userFacade.getSingle("Remove@remove.dk");
         assertNull(user);
     }
-    
+
 }
