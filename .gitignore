@@ -82,6 +82,7 @@ buildNumber.properties
 .mvn/timing.properties
 .mvn/wrapper/maven-wrapper.jar
 
+
 ### NetBeans ###
 **/nbproject/private/
 **/nbproject/Makefile-*.mk

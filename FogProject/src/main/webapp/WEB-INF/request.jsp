@@ -30,7 +30,7 @@
 <form class="greyBox" method="POST" id="ajaxForm">
     <div id="errorBox" class="alert alert-danger" role="alert">
         <p id="message"></p>
-        <a class="btn btn-dark" href="FrontController?command=login">Goto Login</a>
+        <a class="btn btn-dark" href="FrontController?command=login">Gå til login</a>
     </div>
     <div id="successBox" class="alert alert-success" role="alert"></div>
 
@@ -121,7 +121,7 @@
     <% }%>
     <div class="form-group">
         <label>Note</label>
-        <input type="text" required="" class="form-control" name="note" value="test">
+        <input type="text" class="form-control" name="note" value="test">
         <%if (r != null) {%>
     </div>
     <input type="hidden" name="requestId" value="<%=r.getId()%>">
