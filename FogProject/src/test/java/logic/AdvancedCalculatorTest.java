@@ -7,7 +7,6 @@ import data.models.Part;
 import data.models.PartList;
 import java.util.ArrayList;
 import java.util.HashMap;
-import logic.facades.MaterialFacade;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -18,48 +17,10 @@ import static org.junit.Assert.*;
  */
 public class AdvancedCalculatorTest {
     
-    private static PartList pl;
-    private ArrayList<Part> wood;
-    private ArrayList<Part> misc;
-    private ArrayList<Material> materials;
-    private MaterialFacade mf;
-    private static MaterialMapper materialMapper;
     
     @BeforeClass
     public static void beforeClass() {
         System.out.println("Setup test for calculating PartList");
-//        System.out.println("Setup Test MySQL Database");
-//        
-//        BufferedReader sqlScript;
-//        try
-//        {
-//            sqlScript = new BufferedReader(new InputStreamReader(new FileInputStream("../Database/FogProject_Script.sql"), "UTF-8"));
-//            
-//            String sqlStatements = "";
-//            String sqlStatement = "";
-//            while ((sqlStatement = sqlScript.readLine()) != null)
-//            {
-//                sqlStatements += sqlStatement;
-//            }
-//            
-//            sqlScript = new BufferedReader(new InputStreamReader(new FileInputStream("../Database/GeneratedDummyData.sql"), "UTF-8"));
-//            while ((sqlStatement = sqlScript.readLine()) != null)
-//            {
-//                sqlStatements += sqlStatement;
-//            }
-//                        
-//            DatabaseConnector dbc = new DatabaseConnector();
-//            dbc.setDataSource(new TestDataSourceMySQL().getDataSource());
-//            try (Connection con = dbc.open()) {
-//                con.prepareStatement(sqlStatements).executeUpdate();
-//            }
-//        }
-//        catch (Exception ex)
-//        {
-//            ex.printStackTrace();
-//        }
-//        
-//        materialMapper = new MaterialMapper(new TestDataSourceMySQL().getDataSource());
     }
     
     
@@ -96,7 +57,7 @@ public class AdvancedCalculatorTest {
      * The test checks if a material for said method is added to the partlist.
      */
     @Test
-    public void testLathsTrue() throws MaterialException {
+    public void testLathsTrue() {
         HashMap<String, ArrayList> miscHash = new HashMap<String, ArrayList>();
         AdvancedCalculator instance = new AdvancedCalculator(7800, 6500, false, 0, 0, true);
         for (int i = 0; i < instance.getParts().getMiscList().size(); i++) {
@@ -114,8 +75,8 @@ public class AdvancedCalculatorTest {
     public void testLathsFalse() {
         HashMap<String, ArrayList> woodHash = new HashMap<String, ArrayList>();
         AdvancedCalculator instance = new AdvancedCalculator(5400, 3000, false, 0, 0, false);
-        for (int i = 0; i < instance.getParts().getWoodList().size(); i++) {
-            woodHash.put(instance.getParts().getWoodList().get(i).getMaterial().getRef(), instance.getParts().getWoodList());
+        for (Part p : instance.getParts().getWoodList()) {
+            woodHash.put(p.getMaterial().getRef(), instance.getParts().getWoodList());
         }
         assertFalse(woodHash.containsKey("1015"));
     }
@@ -155,4 +116,6 @@ public class AdvancedCalculatorTest {
         AdvancedCalculator instance = new AdvancedCalculator(5500, 3600, false, 0, 0, false);
         assertEquals(11, instance.getRafters());
     }
+    
+    
 }
