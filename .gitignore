@@ -81,10 +81,11 @@ dependency-reduced-pom.xml
 buildNumber.properties
 .mvn/timing.properties
 .mvn/wrapper/maven-wrapper.jar
-logs/materialmapper/*
-logs/ordermapper/*
-logs/requestmapper/*
-logs/usermapper/*
+
+FogProject/logs/materialmapper/*.txt
+FogProject/logs/ordermapper/*.txt
+FogProject/logs/requestmapper/*.txt
+FogProject/logs/usermapper/*.txt
 
 ### NetBeans ###
 **/nbproject/private/

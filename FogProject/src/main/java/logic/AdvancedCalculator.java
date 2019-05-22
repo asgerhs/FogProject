@@ -335,7 +335,7 @@ public class AdvancedCalculator {
         ArrayList<Material> lathHolder = mf.getAllByCategory(17);
         double angleRad = Math.toRadians(angle);
         double triangle = Math.toRadians(180);
-        double roofWidth = (width * Math.sin(angleRad)) / Math.sin(triangle - (angleRad * 2));
+        double roofWidth = (width * Math.sin(angle)) / Math.sin(triangle - (angle * 2));
         laths = (int) (roofWidth - 380) % 307 == 0 ? (int) ((roofWidth - 380) / 307) + 2 : (int) ((roofWidth - 380) / 307) + 3;
         pl.addWoodPart(new Part(lathType.get(1), (int) laths * 2, "Til montering på tag", lathType.get(1).getPrice() * ((int)laths * 2)));
         pl.addMiscPart(new Part(lathHolder.get(2), length/1000 + 1, "monteres på toppen af spæret (til toplægte)", lathHolder.get(2).getPrice() * (length/1000 + 1)));
@@ -402,6 +402,7 @@ public class AdvancedCalculator {
     public int getRafters() {
         return rafters;
     }
+
 
     private class MatSortHeighComparator implements Comparator<Material> {
 
