@@ -1,17 +1,15 @@
-May 22, 2019 4:14:28 PM data.ExceptionLogger log
+May 22, 2019 3:11:50 PM data.ExceptionLogger log
 SEVERE: Error in getAll Method: 
-Error in add Method: 
-Table 'fogprojectTest.accounts' doesn't exist
+Error in getSingle Method: 
+Table 'fogprojectTest.orders' doesn't exist
 com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:120)
 com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97)
 com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
 com.mysql.cj.jdbc.ClientPreparedStatement.executeInternal(ClientPreparedStatement.java:970)
-com.mysql.cj.jdbc.ClientPreparedStatement.executeUpdateInternal(ClientPreparedStatement.java:1109)
-com.mysql.cj.jdbc.ClientPreparedStatement.executeUpdateInternal(ClientPreparedStatement.java:1057)
-com.mysql.cj.jdbc.ClientPreparedStatement.executeLargeUpdate(ClientPreparedStatement.java:1377)
-com.mysql.cj.jdbc.ClientPreparedStatement.executeUpdate(ClientPreparedStatement.java:1042)
-data.mappers.UserMapper.add(UserMapper.java:99)
-data.mappers.UserMapperTest.testAdd(UserMapperTest.java:94)
+com.mysql.cj.jdbc.ClientPreparedStatement.executeQuery(ClientPreparedStatement.java:1020)
+data.mappers.OrderMapper.getSingle(OrderMapper.java:76)
+logic.facades.OrderFacade.getSingle(OrderFacade.java:33)
+logic.facades.OrderFacadeTest.testGetSingle(OrderFacadeTest.java:76)
 sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -43,7 +41,53 @@ org.apache.maven.surefire.booter.SurefireStarter.invokeProvider(SurefireStarter.
 org.apache.maven.surefire.booter.SurefireStarter.runSuitesInProcessWhenForked(SurefireStarter.java:107)
 org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:68)
 
-May 22, 2019 4:14:28 PM data.ExceptionLogger log
+May 22, 2019 3:11:52 PM data.ExceptionLogger log
+SEVERE: Error in getAll Method: 
+Error in changeUserRole Method: 
+Table 'fogprojectTest.accounts' doesn't exist
+com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:120)
+com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97)
+com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+com.mysql.cj.jdbc.ClientPreparedStatement.executeInternal(ClientPreparedStatement.java:970)
+com.mysql.cj.jdbc.ClientPreparedStatement.executeUpdateInternal(ClientPreparedStatement.java:1109)
+com.mysql.cj.jdbc.ClientPreparedStatement.executeUpdateInternal(ClientPreparedStatement.java:1057)
+com.mysql.cj.jdbc.ClientPreparedStatement.executeLargeUpdate(ClientPreparedStatement.java:1377)
+com.mysql.cj.jdbc.ClientPreparedStatement.executeUpdate(ClientPreparedStatement.java:1042)
+data.mappers.UserMapper.changeUserRole(UserMapper.java:147)
+logic.facades.UserFacade.changeUserRole(UserFacade.java:48)
+logic.facades.UserFacadeTest.testChangeUserRole(UserFacadeTest.java:111)
+sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+java.lang.reflect.Method.invoke(Method.java:498)
+org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
+org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
+org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
+org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78)
+org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:57)
+org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+org.apache.maven.surefire.junit4.JUnit4TestSet.execute(JUnit4TestSet.java:53)
+org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:123)
+org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:104)
+sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+java.lang.reflect.Method.invoke(Method.java:498)
+org.apache.maven.surefire.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:164)
+org.apache.maven.surefire.booter.ProviderFactory$ProviderProxy.invoke(ProviderFactory.java:110)
+org.apache.maven.surefire.booter.SurefireStarter.invokeProvider(SurefireStarter.java:175)
+org.apache.maven.surefire.booter.SurefireStarter.runSuitesInProcessWhenForked(SurefireStarter.java:107)
+org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:68)
+
+May 22, 2019 3:11:52 PM data.ExceptionLogger log
 SEVERE: Error in getAll Method: 
 Error in changePassword Method: 
 Table 'fogprojectTest.accounts' doesn't exist
@@ -56,7 +100,8 @@ com.mysql.cj.jdbc.ClientPreparedStatement.executeUpdateInternal(ClientPreparedSt
 com.mysql.cj.jdbc.ClientPreparedStatement.executeLargeUpdate(ClientPreparedStatement.java:1377)
 com.mysql.cj.jdbc.ClientPreparedStatement.executeUpdate(ClientPreparedStatement.java:1042)
 data.mappers.UserMapper.changePassword(UserMapper.java:132)
-data.mappers.UserMapperTest.testChangePassword(UserMapperTest.java:128)
+logic.facades.UserFacade.changePassword(UserFacade.java:44)
+logic.facades.UserFacadeTest.testChangePassword(UserFacadeTest.java:98)
 sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -88,7 +133,7 @@ org.apache.maven.surefire.booter.SurefireStarter.invokeProvider(SurefireStarter.
 org.apache.maven.surefire.booter.SurefireStarter.runSuitesInProcessWhenForked(SurefireStarter.java:107)
 org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:68)
 
-May 22, 2019 4:14:28 PM data.ExceptionLogger log
+May 22, 2019 3:11:52 PM data.ExceptionLogger log
 SEVERE: Error in getAll Method: 
 Error in getAll Method: 
 Table 'fogprojectTest.accounts' doesn't exist
@@ -97,7 +142,8 @@ com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97)
 com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
 com.mysql.cj.jdbc.StatementImpl.executeQuery(StatementImpl.java:1218)
 data.mappers.UserMapper.getAll(UserMapper.java:42)
-data.mappers.UserMapperTest.testGetAll(UserMapperTest.java:67)
+logic.facades.UserFacade.getAll(UserFacade.java:31)
+logic.facades.UserFacadeTest.testGetAll(UserFacadeTest.java:61)
 sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -129,7 +175,7 @@ org.apache.maven.surefire.booter.SurefireStarter.invokeProvider(SurefireStarter.
 org.apache.maven.surefire.booter.SurefireStarter.runSuitesInProcessWhenForked(SurefireStarter.java:107)
 org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:68)
 
-May 22, 2019 4:14:28 PM data.ExceptionLogger log
+May 22, 2019 3:11:52 PM data.ExceptionLogger log
 SEVERE: Error in getAll Method: 
 Error in getSingle Method: 
 Table 'fogprojectTest.accounts' doesn't exist
@@ -139,7 +185,8 @@ com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptio
 com.mysql.cj.jdbc.ClientPreparedStatement.executeInternal(ClientPreparedStatement.java:970)
 com.mysql.cj.jdbc.ClientPreparedStatement.executeQuery(ClientPreparedStatement.java:1020)
 data.mappers.UserMapper.getSingle(UserMapper.java:67)
-data.mappers.UserMapperTest.testGetSingle(UserMapperTest.java:79)
+logic.facades.UserFacade.getSingle(UserFacade.java:36)
+logic.facades.UserFacadeTest.testGetSingle(UserFacadeTest.java:73)
 sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -171,7 +218,7 @@ org.apache.maven.surefire.booter.SurefireStarter.invokeProvider(SurefireStarter.
 org.apache.maven.surefire.booter.SurefireStarter.runSuitesInProcessWhenForked(SurefireStarter.java:107)
 org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:68)
 
-May 22, 2019 4:14:28 PM data.ExceptionLogger log
+May 22, 2019 3:11:52 PM data.ExceptionLogger log
 SEVERE: Error in getAll Method: 
 Error in remove Method: 
 Table 'fogprojectTest.accounts' doesn't exist
@@ -184,7 +231,8 @@ com.mysql.cj.jdbc.ClientPreparedStatement.executeUpdateInternal(ClientPreparedSt
 com.mysql.cj.jdbc.ClientPreparedStatement.executeLargeUpdate(ClientPreparedStatement.java:1377)
 com.mysql.cj.jdbc.ClientPreparedStatement.executeUpdate(ClientPreparedStatement.java:1042)
 data.mappers.UserMapper.remove(UserMapper.java:160)
-data.mappers.UserMapperTest.testRemove(UserMapperTest.java:152)
+logic.facades.UserFacade.remove(UserFacade.java:57)
+logic.facades.UserFacadeTest.testRemove(UserFacadeTest.java:122)
 sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -216,7 +264,7 @@ org.apache.maven.surefire.booter.SurefireStarter.invokeProvider(SurefireStarter.
 org.apache.maven.surefire.booter.SurefireStarter.runSuitesInProcessWhenForked(SurefireStarter.java:107)
 org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:68)
 
-May 22, 2019 4:14:28 PM data.ExceptionLogger log
+May 22, 2019 3:11:52 PM data.ExceptionLogger log
 SEVERE: Error in getAll Method: 
 Error in validateUser Method: 
 Table 'fogprojectTest.accounts' doesn't exist
@@ -226,7 +274,8 @@ com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptio
 com.mysql.cj.jdbc.ClientPreparedStatement.executeInternal(ClientPreparedStatement.java:970)
 com.mysql.cj.jdbc.ClientPreparedStatement.executeQuery(ClientPreparedStatement.java:1020)
 data.mappers.UserMapper.validateUser(UserMapper.java:113)
-data.mappers.UserMapperTest.testValidateUser(UserMapperTest.java:111)
+logic.facades.UserFacade.validateUser(UserFacade.java:40)
+logic.facades.UserFacadeTest.testValidateUser(UserFacadeTest.java:85)
 sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -258,7 +307,7 @@ org.apache.maven.surefire.booter.SurefireStarter.invokeProvider(SurefireStarter.
 org.apache.maven.surefire.booter.SurefireStarter.runSuitesInProcessWhenForked(SurefireStarter.java:107)
 org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:68)
 
-May 22, 2019 4:14:29 PM data.ExceptionLogger log
+May 22, 2019 3:11:52 PM data.ExceptionLogger log
 SEVERE: Error in getAll Method: 
 Error in add Method: 
 Table 'fogprojectTest.accounts' doesn't exist
@@ -272,7 +321,8 @@ com.mysql.cj.jdbc.ClientPreparedStatement.executeLargeUpdate(ClientPreparedState
 com.mysql.cj.jdbc.ClientPreparedStatement.executeUpdate(ClientPreparedStatement.java:1042)
 data.mappers.UserMapper.add(UserMapper.java:99)
 data.mappers.RequestMapper.add(RequestMapper.java:131)
-data.mappers.RequestMapperTest.testAdd(RequestMapperTest.java:131)
+logic.facades.RequestFacade.add(RequestFacade.java:40)
+logic.facades.RequestFacadeTest.testAdd(RequestFacadeTest.java:108)
 sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -281,8 +331,6 @@ org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java
 org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
 org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
 org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
-org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
-org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
 org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
 org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78)
 org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:57)
@@ -292,7 +340,6 @@ org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
 org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
 org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
 org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
-org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
 org.junit.runners.ParentRunner.run(ParentRunner.java:363)
 org.apache.maven.surefire.junit4.JUnit4TestSet.execute(JUnit4TestSet.java:53)
 org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:123)
@@ -307,13 +354,14 @@ org.apache.maven.surefire.booter.SurefireStarter.invokeProvider(SurefireStarter.
 org.apache.maven.surefire.booter.SurefireStarter.runSuitesInProcessWhenForked(SurefireStarter.java:107)
 org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:68)
 
-May 22, 2019 4:14:29 PM data.ExceptionLogger log
+May 22, 2019 3:11:52 PM data.ExceptionLogger log
 SEVERE: Error in getAll Method: 
 Error in addUser Method: 
 Error occoured while adding data to database
 data.mappers.UserMapper.add(UserMapper.java:103)
 data.mappers.RequestMapper.add(RequestMapper.java:131)
-data.mappers.RequestMapperTest.testAdd(RequestMapperTest.java:131)
+logic.facades.RequestFacade.add(RequestFacade.java:40)
+logic.facades.RequestFacadeTest.testAdd(RequestFacadeTest.java:108)
 sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -322,8 +370,6 @@ org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java
 org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
 org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
 org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
-org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
-org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
 org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
 org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78)
 org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:57)
@@ -333,7 +379,6 @@ org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
 org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
 org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
 org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
-org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
 org.junit.runners.ParentRunner.run(ParentRunner.java:363)
 org.apache.maven.surefire.junit4.JUnit4TestSet.execute(JUnit4TestSet.java:53)
 org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:123)
@@ -348,7 +393,7 @@ org.apache.maven.surefire.booter.SurefireStarter.invokeProvider(SurefireStarter.
 org.apache.maven.surefire.booter.SurefireStarter.runSuitesInProcessWhenForked(SurefireStarter.java:107)
 org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:68)
 
-May 22, 2019 4:14:29 PM data.ExceptionLogger log
+May 22, 2019 3:11:52 PM data.ExceptionLogger log
 SEVERE: Error in getAll Method: 
 Error in getAll Method: 
 Table 'fogprojectTest.requests' doesn't exist
@@ -357,7 +402,8 @@ com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97)
 com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
 com.mysql.cj.jdbc.StatementImpl.executeQuery(StatementImpl.java:1218)
 data.mappers.RequestMapper.getAll(RequestMapper.java:46)
-data.mappers.RequestMapperTest.testGetAll(RequestMapperTest.java:84)
+logic.facades.RequestFacade.getAll(RequestFacade.java:27)
+logic.facades.RequestFacadeTest.testGetAll(RequestFacadeTest.java:64)
 sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -366,8 +412,6 @@ org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java
 org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
 org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
 org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
-org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
-org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
 org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
 org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78)
 org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:57)
@@ -377,7 +421,6 @@ org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
 org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
 org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
 org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
-org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
 org.junit.runners.ParentRunner.run(ParentRunner.java:363)
 org.apache.maven.surefire.junit4.JUnit4TestSet.execute(JUnit4TestSet.java:53)
 org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:123)
@@ -392,7 +435,7 @@ org.apache.maven.surefire.booter.SurefireStarter.invokeProvider(SurefireStarter.
 org.apache.maven.surefire.booter.SurefireStarter.runSuitesInProcessWhenForked(SurefireStarter.java:107)
 org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:68)
 
-May 22, 2019 4:14:29 PM data.ExceptionLogger log
+May 22, 2019 3:11:52 PM data.ExceptionLogger log
 SEVERE: Error in getAll Method: 
 Error in getSingle Method: 
 Table 'fogprojectTest.requests' doesn't exist
@@ -402,7 +445,8 @@ com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptio
 com.mysql.cj.jdbc.ClientPreparedStatement.executeInternal(ClientPreparedStatement.java:970)
 com.mysql.cj.jdbc.ClientPreparedStatement.executeQuery(ClientPreparedStatement.java:1020)
 data.mappers.RequestMapper.getSingle(RequestMapper.java:77)
-data.mappers.RequestMapperTest.testGetSingle(RequestMapperTest.java:96)
+logic.facades.RequestFacade.getSingle(RequestFacade.java:32)
+logic.facades.RequestFacadeTest.testGetSingle(RequestFacadeTest.java:76)
 sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -411,8 +455,6 @@ org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java
 org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
 org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
 org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
-org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
-org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
 org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
 org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78)
 org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:57)
@@ -422,7 +464,6 @@ org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
 org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
 org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
 org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
-org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
 org.junit.runners.ParentRunner.run(ParentRunner.java:363)
 org.apache.maven.surefire.junit4.JUnit4TestSet.execute(JUnit4TestSet.java:53)
 org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:123)
@@ -437,7 +478,7 @@ org.apache.maven.surefire.booter.SurefireStarter.invokeProvider(SurefireStarter.
 org.apache.maven.surefire.booter.SurefireStarter.runSuitesInProcessWhenForked(SurefireStarter.java:107)
 org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:68)
 
-May 22, 2019 4:14:29 PM data.ExceptionLogger log
+May 22, 2019 3:11:52 PM data.ExceptionLogger log
 SEVERE: Error in getAll Method: 
 Error in remove Method: 
 Table 'fogprojectTest.requests' doesn't exist
@@ -450,7 +491,8 @@ com.mysql.cj.jdbc.ClientPreparedStatement.executeUpdateInternal(ClientPreparedSt
 com.mysql.cj.jdbc.ClientPreparedStatement.executeLargeUpdate(ClientPreparedStatement.java:1377)
 com.mysql.cj.jdbc.ClientPreparedStatement.executeUpdate(ClientPreparedStatement.java:1042)
 data.mappers.RequestMapper.remove(RequestMapper.java:167)
-data.mappers.RequestMapperTest.testRemove(RequestMapperTest.java:146)
+logic.facades.RequestFacade.remove(RequestFacade.java:44)
+logic.facades.RequestFacadeTest.testRemove(RequestFacadeTest.java:121)
 sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -459,8 +501,6 @@ org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java
 org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
 org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
 org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
-org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
-org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
 org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
 org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78)
 org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:57)
@@ -470,7 +510,6 @@ org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
 org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
 org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
 org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
-org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
 org.junit.runners.ParentRunner.run(ParentRunner.java:363)
 org.apache.maven.surefire.junit4.JUnit4TestSet.execute(JUnit4TestSet.java:53)
 org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:123)
@@ -485,17 +524,20 @@ org.apache.maven.surefire.booter.SurefireStarter.invokeProvider(SurefireStarter.
 org.apache.maven.surefire.booter.SurefireStarter.runSuitesInProcessWhenForked(SurefireStarter.java:107)
 org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:68)
 
-May 22, 2019 4:14:30 PM data.ExceptionLogger log
+May 22, 2019 3:11:53 PM data.ExceptionLogger log
 SEVERE: Error in getAll Method: 
-Error in getSingle Method: 
-Table 'fogprojectTest.requests' doesn't exist
+Error in add Method: 
+Table 'fogprojectTest.orders' doesn't exist
 com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:120)
 com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97)
 com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
 com.mysql.cj.jdbc.ClientPreparedStatement.executeInternal(ClientPreparedStatement.java:970)
-com.mysql.cj.jdbc.ClientPreparedStatement.executeQuery(ClientPreparedStatement.java:1020)
-data.mappers.RequestMapper.getSingle(RequestMapper.java:77)
-data.mappers.RequestMapperTest.testUpdate(RequestMapperTest.java:111)
+com.mysql.cj.jdbc.ClientPreparedStatement.executeUpdateInternal(ClientPreparedStatement.java:1109)
+com.mysql.cj.jdbc.ClientPreparedStatement.executeUpdateInternal(ClientPreparedStatement.java:1057)
+com.mysql.cj.jdbc.ClientPreparedStatement.executeLargeUpdate(ClientPreparedStatement.java:1377)
+com.mysql.cj.jdbc.ClientPreparedStatement.executeUpdate(ClientPreparedStatement.java:1042)
+data.mappers.OrderMapper.add(OrderMapper.java:104)
+data.mappers.OrderMapperTest.testAdd(OrderMapperTest.java:98)
 sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -504,8 +546,6 @@ org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java
 org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
 org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
 org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
-org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
-org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
 org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
 org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78)
 org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:57)
@@ -515,7 +555,131 @@ org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
 org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
 org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
 org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
-org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+org.apache.maven.surefire.junit4.JUnit4TestSet.execute(JUnit4TestSet.java:53)
+org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:123)
+org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:104)
+sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+java.lang.reflect.Method.invoke(Method.java:498)
+org.apache.maven.surefire.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:164)
+org.apache.maven.surefire.booter.ProviderFactory$ProviderProxy.invoke(ProviderFactory.java:110)
+org.apache.maven.surefire.booter.SurefireStarter.invokeProvider(SurefireStarter.java:175)
+org.apache.maven.surefire.booter.SurefireStarter.runSuitesInProcessWhenForked(SurefireStarter.java:107)
+org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:68)
+
+May 22, 2019 3:11:53 PM data.ExceptionLogger log
+SEVERE: Error in getAll Method: 
+Error in getAllByUser Method: 
+Table 'fogprojectTest.orders' doesn't exist
+com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:120)
+com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97)
+com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+com.mysql.cj.jdbc.ClientPreparedStatement.executeInternal(ClientPreparedStatement.java:970)
+com.mysql.cj.jdbc.ClientPreparedStatement.executeQuery(ClientPreparedStatement.java:1020)
+data.mappers.OrderMapper.getAllByUser(OrderMapper.java:125)
+data.mappers.OrderMapperTest.testGetAllByUser(OrderMapperTest.java:110)
+sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+java.lang.reflect.Method.invoke(Method.java:498)
+org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
+org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
+org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
+org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78)
+org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:57)
+org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+org.apache.maven.surefire.junit4.JUnit4TestSet.execute(JUnit4TestSet.java:53)
+org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:123)
+org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:104)
+sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+java.lang.reflect.Method.invoke(Method.java:498)
+org.apache.maven.surefire.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:164)
+org.apache.maven.surefire.booter.ProviderFactory$ProviderProxy.invoke(ProviderFactory.java:110)
+org.apache.maven.surefire.booter.SurefireStarter.invokeProvider(SurefireStarter.java:175)
+org.apache.maven.surefire.booter.SurefireStarter.runSuitesInProcessWhenForked(SurefireStarter.java:107)
+org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:68)
+
+May 22, 2019 3:11:53 PM data.ExceptionLogger log
+SEVERE: Error in getAll Method: 
+Error in getAll Method: 
+Table 'fogprojectTest.orders' doesn't exist
+com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:120)
+com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97)
+com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+com.mysql.cj.jdbc.StatementImpl.executeQuery(StatementImpl.java:1218)
+data.mappers.OrderMapper.getAll(OrderMapper.java:50)
+data.mappers.OrderMapperTest.testGetAll(OrderMapperTest.java:69)
+sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+java.lang.reflect.Method.invoke(Method.java:498)
+org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
+org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
+org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
+org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78)
+org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:57)
+org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+org.apache.maven.surefire.junit4.JUnit4TestSet.execute(JUnit4TestSet.java:53)
+org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:123)
+org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:104)
+sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+java.lang.reflect.Method.invoke(Method.java:498)
+org.apache.maven.surefire.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:164)
+org.apache.maven.surefire.booter.ProviderFactory$ProviderProxy.invoke(ProviderFactory.java:110)
+org.apache.maven.surefire.booter.SurefireStarter.invokeProvider(SurefireStarter.java:175)
+org.apache.maven.surefire.booter.SurefireStarter.runSuitesInProcessWhenForked(SurefireStarter.java:107)
+org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:68)
+
+May 22, 2019 3:11:53 PM data.ExceptionLogger log
+SEVERE: Error in getAll Method: 
+Error in getSingle Method: 
+Table 'fogprojectTest.orders' doesn't exist
+com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:120)
+com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97)
+com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+com.mysql.cj.jdbc.ClientPreparedStatement.executeInternal(ClientPreparedStatement.java:970)
+com.mysql.cj.jdbc.ClientPreparedStatement.executeQuery(ClientPreparedStatement.java:1020)
+data.mappers.OrderMapper.getSingle(OrderMapper.java:76)
+data.mappers.OrderMapperTest.testGetSingle(OrderMapperTest.java:81)
+sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+java.lang.reflect.Method.invoke(Method.java:498)
+org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
+org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
+org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
+org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78)
+org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:57)
+org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
 org.junit.runners.ParentRunner.run(ParentRunner.java:363)
 org.apache.maven.surefire.junit4.JUnit4TestSet.execute(JUnit4TestSet.java:53)
 org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:123)

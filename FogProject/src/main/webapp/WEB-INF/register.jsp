@@ -45,7 +45,7 @@
         <label>Note</label>
         <input type="text" class="form-control" name="note">
     </div>
-    <button type="submit" class="btn btn-dark" formaction="FrontController?command=register&submit=true">Opret bruger</button>
+    <button type="submit" class="btn btn-dark" formaction="FrontController?command=register">Opret bruger</button>
 </form>
 
 

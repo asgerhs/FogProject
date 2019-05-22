@@ -12,8 +12,7 @@ function ajax(formObj) {
         data: $(formObj).serialize()
     }).done(function (data, textStatus, request) {
         if (request.getResponseHeader('redirect') !== null) {
-            alert("T");
-            //window.location = request.getResponseHeader('redirect');
+            window.location = request.getResponseHeader('redirect');
         }
         else if (request.getResponseHeader('error') !== null) {
             $("#errorBox #message").html(request.getResponseHeader('message'));

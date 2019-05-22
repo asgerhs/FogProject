@@ -32,7 +32,7 @@ public class RegisterCommand implements Command {
             String pName = paramNames.nextElement();
             params.put(pName, request.getParameter(pName));
         }
-        if (params.get("submit") != null) {
+        if (params.get("name") != null) {
             try {
                 User u = new User(
                         params.get("email"),
