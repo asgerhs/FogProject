@@ -1,13 +1,14 @@
-May 22, 2019 3:06:06 PM data.ExceptionLogger log
+May 22, 2019 3:11:54 PM data.ExceptionLogger log
 SEVERE: Error in getAll Method: 
-Error in getAll Method: 
-You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'FRO `requests` LEFT JOIN `orders` ON `orders`.requestId = `requests`.id WHERE `o' at line 1
+Error in getSingle Method: 
+Table 'fogprojectTest.requests' doesn't exist
 com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:120)
 com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97)
 com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
-com.mysql.cj.jdbc.StatementImpl.executeQuery(StatementImpl.java:1218)
-data.mappers.RequestMapper.getAll(RequestMapper.java:46)
-data.mappers.RequestMapperTest.testGetAll(RequestMapperTest.java:84)
+com.mysql.cj.jdbc.ClientPreparedStatement.executeInternal(ClientPreparedStatement.java:970)
+com.mysql.cj.jdbc.ClientPreparedStatement.executeQuery(ClientPreparedStatement.java:1020)
+data.mappers.RequestMapper.getSingle(RequestMapper.java:77)
+data.mappers.RequestMapperTest.testUpdate(RequestMapperTest.java:111)
 sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
