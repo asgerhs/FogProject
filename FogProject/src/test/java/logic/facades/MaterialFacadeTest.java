@@ -1,8 +1,7 @@
-package data.mappers;
+package logic.facades;
 
-import data.TestDataSourceMySQL;
 import data.DatabaseConnector;
-import data.exceptions.MaterialException;
+import data.TestDataSourceMySQL;
 import data.exceptions.RequestException;
 import data.models.Material;
 import data.models.Request;
@@ -22,29 +21,29 @@ import static org.junit.Assert.*;
  *
  * @author Andreas Vikke
  */
-public class MaterialMapperTest {
-    
-    private static MaterialMapper materialMapper;
-    
+public class MaterialFacadeTest {
+
+    private static MaterialFacade materialFacade;
+
     @BeforeClass
     public static void beforeClass() {
         System.out.println("Setup Test MySQL Database");
-        
+
         BufferedReader sqlScript;
         try {
             sqlScript = new BufferedReader(new InputStreamReader(new FileInputStream("../Database/FogProject_Script.sql"), "UTF-8"));
-            
+
             String sqlStatements = "";
             String sqlStatement = "";
             while ((sqlStatement = sqlScript.readLine()) != null) {
                 sqlStatements += sqlStatement;
             }
-            
+
             sqlScript = new BufferedReader(new InputStreamReader(new FileInputStream("../Database/GeneratedDummyData.sql"), "UTF-8"));
             while ((sqlStatement = sqlScript.readLine()) != null) {
                 sqlStatements += sqlStatement;
             }
-            
+
             DatabaseConnector dbc = new DatabaseConnector();
             dbc.setDataSource(new TestDataSourceMySQL().getDataSource());
             try (Connection con = dbc.open()) {
@@ -53,57 +52,40 @@ public class MaterialMapperTest {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        
-        materialMapper = new MaterialMapper(new TestDataSourceMySQL().getDataSource());
+
+        materialFacade = new MaterialFacade(new TestDataSourceMySQL().getDataSource());
     }
 
     /**
-     * Test of getAll method, of class MaterialMapper.
+     * Test of getAll method, of class MaterialFacade.
      */
     @Test
     public void testGetAll() throws Exception {
         System.out.println("getAll");
-        List<Material> result = materialMapper.getAll();
+        List<Material> result = materialFacade.getAll();
         assertNotNull(result);
         assertTrue(result.size() > 10);
     }
 
     /**
-     * Test of getById method, of class MaterialMapper.
+     * Test of getSingle method, of class MaterialFacade.
      */
     @Test
     public void testGetSingle() throws Exception {
         System.out.println("getSingle");
         String ref = "1005";
-        Material result = materialMapper.getSingle(ref);
+        Material result = materialFacade.getSingle(ref);
         assertEquals("45x95 mm. Reglar ub.", result.getName());
-        ref = "0000";
-        result = materialMapper.getSingle(ref);
-        assertNull(result);
     }
 
     /**
-     * Test of getAllByCategory method, of class MaterialMapper.
+     * Test of getAllByCategory method, of class MaterialFacade.
      */
     @Test
     public void testGetAllByCategory() throws Exception {
         System.out.println("getAllByCategory");
         int id = 11;
-        ArrayList<Material> result = materialMapper.getAllByCategory(id);
+        ArrayList<Material> result = materialFacade.getAllByCategory(id);
         assertTrue(result.size() > 3);
-    }
-    
-    /**
-     * Test of add method, of class RequestFacade.
-     */
-    @Test
-    public void testAdd() throws Exception {
-        System.out.println("add");
-        try {
-            Material material = new Material("9999", "Test", 100, 1, "stk", 1000);
-            materialMapper.add(material);
-        } catch (MaterialException ex) {
-            fail(ex.getMessage());
-        }
     }
 }

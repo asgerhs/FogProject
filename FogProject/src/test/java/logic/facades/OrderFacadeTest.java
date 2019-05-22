@@ -1,10 +1,9 @@
-package data.mappers;
+package logic.facades;
 
-import data.TestDataSourceMySQL;
 import data.DatabaseConnector;
-import data.exceptions.MaterialException;
-import data.exceptions.RequestException;
-import data.models.Material;
+import data.TestDataSourceMySQL;
+import data.exceptions.OrderException;
+import data.models.Order;
 import data.models.Request;
 import data.models.RoleEnum;
 import data.models.User;
@@ -12,7 +11,6 @@ import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.sql.Connection;
-import java.util.ArrayList;
 import java.util.List;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -22,29 +20,29 @@ import static org.junit.Assert.*;
  *
  * @author Andreas Vikke
  */
-public class MaterialMapperTest {
-    
-    private static MaterialMapper materialMapper;
-    
+public class OrderFacadeTest {
+
+    private static OrderFacade orderFacade;
+
     @BeforeClass
     public static void beforeClass() {
         System.out.println("Setup Test MySQL Database");
-        
+
         BufferedReader sqlScript;
         try {
             sqlScript = new BufferedReader(new InputStreamReader(new FileInputStream("../Database/FogProject_Script.sql"), "UTF-8"));
-            
+
             String sqlStatements = "";
             String sqlStatement = "";
             while ((sqlStatement = sqlScript.readLine()) != null) {
                 sqlStatements += sqlStatement;
             }
-            
+
             sqlScript = new BufferedReader(new InputStreamReader(new FileInputStream("../Database/GeneratedDummyData.sql"), "UTF-8"));
             while ((sqlStatement = sqlScript.readLine()) != null) {
                 sqlStatements += sqlStatement;
             }
-            
+
             DatabaseConnector dbc = new DatabaseConnector();
             dbc.setDataSource(new TestDataSourceMySQL().getDataSource());
             try (Connection con = dbc.open()) {
@@ -53,57 +51,56 @@ public class MaterialMapperTest {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        
-        materialMapper = new MaterialMapper(new TestDataSourceMySQL().getDataSource());
+
+        orderFacade = new OrderFacade(new TestDataSourceMySQL().getDataSource());
     }
 
     /**
-     * Test of getAll method, of class MaterialMapper.
+     * Test of getAll method, of class OrderFacade.
      */
     @Test
     public void testGetAll() throws Exception {
         System.out.println("getAll");
-        List<Material> result = materialMapper.getAll();
+        List<Order> result = orderFacade.getAll();
         assertNotNull(result);
         assertTrue(result.size() > 10);
     }
 
     /**
-     * Test of getById method, of class MaterialMapper.
+     * Test of getSingle method, of class OrderFacade.
      */
     @Test
     public void testGetSingle() throws Exception {
         System.out.println("getSingle");
-        String ref = "1005";
-        Material result = materialMapper.getSingle(ref);
-        assertEquals("45x95 mm. Reglar ub.", result.getName());
-        ref = "0000";
-        result = materialMapper.getSingle(ref);
-        assertNull(result);
+        Integer id = 2;
+        Order result = orderFacade.getSingle(id);
+        assertNotNull(result);
     }
 
     /**
-     * Test of getAllByCategory method, of class MaterialMapper.
+     * Test of createOrder method, of class OrderFacade.
      */
     @Test
-    public void testGetAllByCategory() throws Exception {
-        System.out.println("getAllByCategory");
-        int id = 11;
-        ArrayList<Material> result = materialMapper.getAllByCategory(id);
-        assertTrue(result.size() > 3);
-    }
-    
-    /**
-     * Test of add method, of class RequestFacade.
-     */
-    @Test
-    public void testAdd() throws Exception {
-        System.out.println("add");
+    public void testAddOrder() throws Exception {
+        System.out.println("createOrder");
         try {
-            Material material = new Material("9999", "Test", 100, 1, "stk", 1000);
-            materialMapper.add(material);
-        } catch (MaterialException ex) {
+            int requestId = 18;
+            Request request = new Request(0, 0, 0, 0, null, 0, null, null);
+            request.setId(requestId);
+            orderFacade.add(new Order(0, request));
+        } catch (OrderException ex) {
             fail(ex.getMessage());
         }
+    }
+
+    /**
+     * Test of getAllByUser method, of class OrderFacade.
+     */
+    @Test
+    public void testGetAllByUser() throws Exception {
+        System.out.println("getAllByUser");
+        List<Order> result = orderFacade.getAllByUser(new User("admin@a.dk", "", RoleEnum.ADMIN, "", "", "", ""));
+        assertNotNull(result);
+        assertTrue(result.size() > 0);
     }
 }

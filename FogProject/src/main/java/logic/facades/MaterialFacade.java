@@ -6,6 +6,7 @@ import data.mappers.MaterialMapper;
 import data.models.Material;
 import java.util.ArrayList;
 import java.util.List;
+import javax.sql.DataSource;
 import logic.interfaces.FacadeInterface;
 
 /**
@@ -13,7 +14,14 @@ import logic.interfaces.FacadeInterface;
  * @author Martin Frederiksen
  */
 public class MaterialFacade implements FacadeInterface<Material, String>{
-    MaterialMapper mm = new MaterialMapper(new DataSourceMySQL().getDataSource());
+    MaterialMapper mm;
+    
+    public MaterialFacade() {
+        mm = new MaterialMapper(new DataSourceMySQL().getDataSource());
+    }
+    public MaterialFacade(DataSource ds) {
+        mm = new MaterialMapper(ds);
+    }
     
     @Override
     public List<Material> getAll() throws MaterialException {
@@ -22,7 +30,7 @@ public class MaterialFacade implements FacadeInterface<Material, String>{
 
     @Override
     public Material getSingle(String ref) throws MaterialException {
-        return mm.geSingle(ref);
+        return mm.getSingle(ref);
     }
 
     public ArrayList<Material> getAllByCategory(int id) throws MaterialException {

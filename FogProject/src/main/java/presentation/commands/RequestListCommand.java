@@ -4,13 +4,13 @@ import data.exceptions.CommandException;
 import data.exceptions.OrderException;
 import data.exceptions.RequestException;
 import data.models.CommandTarget;
+import data.models.Order;
 import data.models.Request;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import logic.facades.OrderFacade;
 import logic.facades.RequestFacade;
-import logic.facades.UserFacade;
 
 /**
  *
@@ -35,7 +35,7 @@ public class RequestListCommand implements Command {
         if (request.getParameter("orderId") != null) {
             try {
                 Request r = rf.getSingle(Integer.parseInt(request.getParameter("orderId")));
-                of.createOrder(r.getId());
+                of.add(new Order(0, r));
                 //rf.remove(Integer.parseInt(request.getParameter("orderId")));
                 requests = rf.getAll();
                 session.setAttribute("requestList", requests);
