@@ -355,10 +355,13 @@ public class AdvancedCalculator {
         double triangle = Math.toRadians(180);
         double roofWidth = (width * Math.sin(angleRad)) / Math.sin(triangle - (angleRad * 2));
         laths = (int) (roofWidth - 380) % 307 == 0 ? (int) ((roofWidth - 380) / 307) + 2 : (int) ((roofWidth - 380) / 307) + 3;
-        pl.addWoodPart(new Part(lathType.get(1), (int) laths * 2, "Til montering på tag", lathType.get(1).getPrice() * ((int) laths * 2)));
-        pl.addMiscPart(new Part(lathHolder.get(2), length / 1000 + 1, "monteres på toppen af spæret (til toplægte)", lathHolder.get(2).getPrice() * (length / 1000 + 1)));
-        svg.generateRoofWithAngle(laths);
+        pl.addWoodPart(new Part(lathType.get(1), (int) laths * 2, "Til montering på tag", lathType.get(1).getPrice() * ((int)laths * 2)));
+        pl.addMiscPart(new Part(lathHolder.get(2), length/1000 + 1, "monteres på toppen af spæret (til toplægte)", lathHolder.get(2).getPrice() * (length/1000 + 1)));
+        svg.generateRoofWithAngle(laths, (int)roofWidth);
         System.out.println(laths);
+        System.out.println(roofWidth);
+        System.out.println(angle);
+        System.out.println(triangle);
     }
 
     private void calcRoofBricks() throws MaterialException {
@@ -424,17 +427,17 @@ public class AdvancedCalculator {
     }
 
     public static void main(String[] args) throws MaterialException {
-        AdvancedCalculator ac = new AdvancedCalculator(7800, 6500, true, 1000, 1000, true);
+        AdvancedCalculator ac = new AdvancedCalculator(5300, 5000, false, 0, 0, false);
 //        ac.calcBand();
 //        ac.calcLathsRoof();
 //        ac.calcRoofBricks();
-        for (Part p : ac.getParts().getWoodList()) {
-            System.out.println(p);
-        }
-        for (Part p : ac.getParts().getMiscList()) {
-            System.out.println(p);
-
-        }
+//        for (Part p : ac.getParts().getWoodList()) {
+//            System.out.println(p);
+//        }
+//        for (Part p : ac.getParts().getMiscList()) {
+//            System.out.println(p);
+//        }
+        ac.calcLathsRoof();
     }
 
     private class MatSortHeighComparator implements Comparator<Material> {

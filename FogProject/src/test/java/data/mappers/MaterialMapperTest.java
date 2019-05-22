@@ -2,7 +2,12 @@ package data.mappers;
 
 import data.TestDataSourceMySQL;
 import data.DatabaseConnector;
+import data.exceptions.MaterialException;
+import data.exceptions.RequestException;
 import data.models.Material;
+import data.models.Request;
+import data.models.RoleEnum;
+import data.models.User;
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
@@ -67,11 +72,14 @@ public class MaterialMapperTest {
      * Test of getById method, of class MaterialMapper.
      */
     @Test
-    public void testGetById() throws Exception {
-        System.out.println("getById");
+    public void testGetSingle() throws Exception {
+        System.out.println("getSingle");
         String ref = "1005";
         Material result = materialMapper.getSingle(ref);
         assertEquals("45x95 mm. Reglar ub.", result.getName());
+        ref = "0000";
+        result = materialMapper.getSingle(ref);
+        assertNull(result);
     }
 
     /**
@@ -83,5 +91,19 @@ public class MaterialMapperTest {
         int id = 11;
         ArrayList<Material> result = materialMapper.getAllByCategory(id);
         assertTrue(result.size() > 3);
-    }    
+    }
+    
+    /**
+     * Test of add method, of class RequestFacade.
+     */
+    @Test
+    public void testAdd() throws Exception {
+        System.out.println("add");
+        try {
+            Material material = new Material("9999", "Test", 100, 1, "stk", 1000);
+            materialMapper.add(material);
+        } catch (MaterialException ex) {
+            fail(ex.getMessage());
+        }
+    }
 }

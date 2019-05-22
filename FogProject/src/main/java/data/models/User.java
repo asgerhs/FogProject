@@ -45,4 +45,8 @@ public class User {
     public RoleEnum getRole() {
         return role;
     }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 }
