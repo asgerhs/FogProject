@@ -176,7 +176,7 @@ public class GenerateSVG {
         }
     }
 
-    public void generateRoofWithAngle(int laths, int roofWidth, int angle) {
+    public void generateRoofWithAngle(int laths, int roofWidth) {
         int remain = ((roofWidth - 380) / (laths - 2)) / 10;
 
         topViewSVG += generateRect(0, 0, 5, width, false);
@@ -195,7 +195,7 @@ public class GenerateSVG {
         topViewSVG += generateRect(0, height - 5, 5, width, false);
         
         for (int i = width; i > 0; i -= 15) {
-            sideViewSVG += generateRect(width - i, 10, angle * 10, 5, false);
+            sideViewSVG += generateRect(width - i, 10, 40, 5, false);
         }
         
         sideViewSVG += generateRect(5, 0, 10, width - 5, true);
@@ -235,7 +235,7 @@ public class GenerateSVG {
     public static void main(String[] args) {
         GenerateSVG svg = new GenerateSVG(5300, 5000, 0, 0, 100, 30, 60);
 
-        svg.generateRoofWithAngle(7, 1915, 20);
+        svg.generateRoofWithAngle(7, 1915);
 
     }
 }
