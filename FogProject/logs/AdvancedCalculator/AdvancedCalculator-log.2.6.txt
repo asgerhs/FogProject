@@ -1,11 +1,7 @@
-May 21, 2019 1:49:07 PM data.mappers.MaterialMapper getAllByCategory
-SEVERE: Error in getAllByCategory Method.
-java.sql.SQLException: Error: 
-	at data.mappers.MaterialMapper.getAllByCategory(MaterialMapper.java:131)
-	at logic.facades.MaterialFacade.getAllByCategory(MaterialFacade.java:29)
-	at logic.AdvancedCalculator.addParts(AdvancedCalculator.java:377)
-	at logic.AdvancedCalculator.calcBottomFasciasFB(AdvancedCalculator.java:242)
-	at logic.AdvancedCalculator.<init>(AdvancedCalculator.java:57)
+May 21, 2019 1:49:07 PM logic.AdvancedCalculator <init>
+SEVERE: Error in AdvancedCalculator: 
+data.exceptions.MaterialException: Error: 
+	at logic.AdvancedCalculator.<init>(AdvancedCalculator.java:94)
 	at logic.AdvancedCalculatorTest.testLathsFalse(AdvancedCalculatorTest.java:128)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)

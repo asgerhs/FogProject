@@ -39,38 +39,38 @@ public class AdvancedCalculatorTest {
     @BeforeClass
     public static void beforeClass() {
         System.out.println("Setup test for calculating PartList");
-        System.out.println("Setup Test MySQL Database");
-        
-        BufferedReader sqlScript;
-        try
-        {
-            sqlScript = new BufferedReader(new InputStreamReader(new FileInputStream("../Database/FogProject_Script.sql"), "UTF-8"));
-            
-            String sqlStatements = "";
-            String sqlStatement = "";
-            while ((sqlStatement = sqlScript.readLine()) != null)
-            {
-                sqlStatements += sqlStatement;
-            }
-            
-            sqlScript = new BufferedReader(new InputStreamReader(new FileInputStream("../Database/GeneratedDummyData.sql"), "UTF-8"));
-            while ((sqlStatement = sqlScript.readLine()) != null)
-            {
-                sqlStatements += sqlStatement;
-            }
-                        
-            DatabaseConnector dbc = new DatabaseConnector();
-            dbc.setDataSource(new TestDataSourceMySQL().getDataSource());
-            try (Connection con = dbc.open()) {
-                con.prepareStatement(sqlStatements).executeUpdate();
-            }
-        }
-        catch (Exception ex)
-        {
-            ex.printStackTrace();
-        }
-        
-        materialMapper = new MaterialMapper(new TestDataSourceMySQL().getDataSource());
+//        System.out.println("Setup Test MySQL Database");
+//        
+//        BufferedReader sqlScript;
+//        try
+//        {
+//            sqlScript = new BufferedReader(new InputStreamReader(new FileInputStream("../Database/FogProject_Script.sql"), "UTF-8"));
+//            
+//            String sqlStatements = "";
+//            String sqlStatement = "";
+//            while ((sqlStatement = sqlScript.readLine()) != null)
+//            {
+//                sqlStatements += sqlStatement;
+//            }
+//            
+//            sqlScript = new BufferedReader(new InputStreamReader(new FileInputStream("../Database/GeneratedDummyData.sql"), "UTF-8"));
+//            while ((sqlStatement = sqlScript.readLine()) != null)
+//            {
+//                sqlStatements += sqlStatement;
+//            }
+//                        
+//            DatabaseConnector dbc = new DatabaseConnector();
+//            dbc.setDataSource(new TestDataSourceMySQL().getDataSource());
+//            try (Connection con = dbc.open()) {
+//                con.prepareStatement(sqlStatements).executeUpdate();
+//            }
+//        }
+//        catch (Exception ex)
+//        {
+//            ex.printStackTrace();
+//        }
+//        
+//        materialMapper = new MaterialMapper(new TestDataSourceMySQL().getDataSource());
     }
     
     
@@ -159,5 +159,11 @@ public class AdvancedCalculatorTest {
             woodHash.put(instance.getParts().getMiscList().get(i).getMaterial().getRef(), instance.getParts().getMiscList());
         }
         assertFalse(woodHash.containsKey("1004"));
+    }
+    
+    @Test
+    public void calcRaftersTest() {
+        AdvancedCalculator instance = new AdvancedCalculator(5500, 3600, false, 0, 0, false);
+        assertEquals(10, instance.getRafters());
     }
 }

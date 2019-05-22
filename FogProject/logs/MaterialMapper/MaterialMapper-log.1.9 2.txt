@@ -1,8 +1,8 @@
-May 21, 2019 1:49:07 PM logic.AdvancedCalculator <init>
-SEVERE: Error in AdvancedCalculator: 
-data.exceptions.MaterialException: Error: 
-	at logic.AdvancedCalculator.<init>(AdvancedCalculator.java:94)
-	at logic.AdvancedCalculatorTest.testGetPrice(AdvancedCalculatorTest.java:88)
+May 20, 2019 11:30:36 AM data.mappers.MaterialMapper getSingle
+SEVERE: Error in getByID Method.
+java.sql.SQLException: Error: 
+	at data.mappers.MaterialMapper.getSingle(MaterialMapper.java:105)
+	at data.mappers.MaterialMapperTest.testGetById(MaterialMapperTest.java:76)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -34,11 +34,11 @@ data.exceptions.MaterialException: Error:
 	at org.apache.maven.surefire.booter.SurefireStarter.runSuitesInProcessWhenForked(SurefireStarter.java:107)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:68)
 
-May 21, 2019 1:49:07 PM logic.AdvancedCalculator <init>
-SEVERE: Error in AdvancedCalculator: 
-data.exceptions.MaterialException: Error: 
-	at logic.AdvancedCalculator.<init>(AdvancedCalculator.java:94)
-	at logic.AdvancedCalculatorTest.testLathsTrue(AdvancedCalculatorTest.java:113)
+May 20, 2019 11:30:36 AM data.mappers.MaterialMapper getAllByCategory
+SEVERE: Error in getAllByCategory Method.
+java.sql.SQLException: Error: 
+	at data.mappers.MaterialMapper.getAllByCategory(MaterialMapper.java:131)
+	at data.mappers.MaterialMapperTest.testGetAllByCategory(MaterialMapperTest.java:87)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -70,11 +70,11 @@ data.exceptions.MaterialException: Error:
 	at org.apache.maven.surefire.booter.SurefireStarter.runSuitesInProcessWhenForked(SurefireStarter.java:107)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:68)
 
-May 21, 2019 1:49:07 PM logic.AdvancedCalculator <init>
-SEVERE: Error in AdvancedCalculator: 
-data.exceptions.MaterialException: Error: 
-	at logic.AdvancedCalculator.<init>(AdvancedCalculator.java:94)
-	at logic.AdvancedCalculatorTest.testLathsFalse(AdvancedCalculatorTest.java:128)
+May 20, 2019 11:30:36 AM data.mappers.MaterialMapper getAll
+SEVERE: Error in getAll Method.
+java.sql.SQLException: Error: 
+	at data.mappers.MaterialMapper.getAll(MaterialMapper.java:72)
+	at data.mappers.MaterialMapperTest.testGetAll(MaterialMapperTest.java:65)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
