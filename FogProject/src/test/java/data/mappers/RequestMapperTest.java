@@ -1,5 +1,6 @@
 package data.mappers;
 
+import data.TestDataSourceMySQL;
 import com.github.javafaker.Faker;
 import data.DatabaseConnector;
 import data.exceptions.RequestException;
@@ -11,9 +12,12 @@ import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.sql.Connection;
 import java.util.List;
+import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.Before;
 
 /**
  *
@@ -58,6 +62,18 @@ public class RequestMapperTest {
         
         requestMapper = new RequestMapper(new TestDataSourceMySQL().getDataSource());
     }
+
+    @AfterClass
+    public static void tearDownClass() throws Exception {
+    }
+
+    @Before
+    public void setUp() throws Exception {
+    }
+
+    @After
+    public void tearDown() throws Exception {
+    }
     
     /**
      * Test of getAll method, of class RequestMapper.
@@ -88,18 +104,18 @@ public class RequestMapperTest {
      * Test of updateRequest method, of class RequestMapper.
      */
     @Test
-    public void testUpdateRequest() throws Exception {
+    public void testUpdate() throws Exception {
         System.out.println("updateRequest");
         Faker faker = new Faker();
         
-        Request result = requestMapper.getSingle(1);
+        Request result = requestMapper.getSingle(4);
         int width = faker.number().numberBetween(500, 780);
         int length = faker.number().numberBetween(100, 210);
         result.setWidth(width);
         result.setLength(length);
         requestMapper.update(result);
         
-        Request result2 = requestMapper.getSingle(1);
+        Request result2 = requestMapper.getSingle(4);
         assertEquals(result2.getWidth(), width);
         assertEquals(result2.getLength(), length);
     }
@@ -121,25 +137,12 @@ public class RequestMapperTest {
     }
 
     /**
-     * Test of update method, of class RequestMapper.
-     */
-    @Test
-    public void testUpdate() throws Exception {
-        System.out.println("update");
-        Request rqst = null;
-        RequestMapper instance = null;
-        instance.update(rqst);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
      * Test of remove method, of class RequestMapper.
      */
     @Test
     public void testRemove() throws Exception {
         System.out.println("remove");
-        Integer id = 1;
+        int id = 1;
         requestMapper.remove(id);
         Request request = requestMapper.getSingle(id);
         assertNull(request);

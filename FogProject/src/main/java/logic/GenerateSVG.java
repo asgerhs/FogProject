@@ -179,7 +179,7 @@ public class GenerateSVG {
     
     public void generateRoofWithAngle(int laths){
         int lathSpace = width / laths * 2;
-        for(int i = 0; i < laths * 2; i++){
+        for(int i = 0; i < laths ; i++){
             topViewSVG +=generateRect(0, i*lathSpace, 10, width, true);
         }
     }

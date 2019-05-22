@@ -1,4 +1,4 @@
-package data.mappers;
+package data;
 
 import com.mysql.cj.jdbc.MysqlDataSource;
 
@@ -21,6 +21,7 @@ public class TestDataSourceMySQL {
             dataSource.setUseSSL(false);
             dataSource.setAllowMultiQueries(true);
             dataSource.setServerTimezone("UTC");
+            dataSource.setAllowPublicKeyRetrieval(true);
         }
         catch(Exception e)
         {

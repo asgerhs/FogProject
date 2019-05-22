@@ -1,7 +1,11 @@
 package data.mappers;
 
 import data.DatabaseConnector;
+import data.DatabaseConnector;
+import data.TestDataSourceMySQL;
 import data.exceptions.UsersException;
+import data.mappers.UserMapper;
+import data.models.Request;
 import data.models.RoleEnum;
 import data.models.User;
 import java.io.BufferedReader;

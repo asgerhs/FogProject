@@ -1,8 +1,10 @@
 package data.mappers;
 
+import data.TestDataSourceMySQL;
 import data.DatabaseConnector;
 import data.exceptions.OrderException;
 import data.models.Order;
+import data.models.Request;
 import data.models.RoleEnum;
 import data.models.User;
 import java.io.BufferedReader;
@@ -84,11 +86,13 @@ public class OrderMapperTest {
      * Test of createOrder method, of class OrderMapper.
      */
     @Test
-    public void testCreateOrder() throws Exception {
+    public void testAdd() throws Exception {
         System.out.println("createOrder");
         try {
             int requestId = 18;
-            orderMapper.createOrder(requestId);
+            Request request = new Request(0, 0, 0, 0, null, 0, null, null);
+            request.setId(requestId);
+            orderMapper.add(new Order(0, request));
         } catch (OrderException ex) {
             fail(ex.getMessage());
         }
@@ -103,7 +107,6 @@ public class OrderMapperTest {
         List<Order> result = orderMapper.getAllByUser(new User("admin@a.dk", "", RoleEnum.ADMIN, "", "", "", ""));
         assertNotNull(result);
         assertTrue(result.size() > 0);
-        
     }
     
 }
