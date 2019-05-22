@@ -1,0 +1,4 @@
+May 22, 2019 2:50:00 PM data.mappers.RequestMapper getAll
+SEVERE: Error in getAll Method: 
+You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'FRO `requests` LEFT JOIN `orders` ON `orders`.requestId = `requests`.id WHERE `o' at line 1
+null

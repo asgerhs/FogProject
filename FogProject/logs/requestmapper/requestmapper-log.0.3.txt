@@ -1,0 +1,11 @@
+May 22, 2019 2:58:38 PM data.ExceptionLogger log
+SEVERE: Error in getAll Method: 
+Error in getAll Method: 
+You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'FRO `requests` LEFT JOIN `orders` ON `orders`.requestId = `requests`.id WHERE `o' at line 1
+com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:120)
+com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97)
+com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+com.mysql.cj.jdbc.StatementImpl.executeQuery(StatementImpl.java:1218)
+data.mappers.RequestMapper.getAll(RequestMapper.java:46)
+data.mappers.RequestMapper.main(RequestMapper.java:178)
+

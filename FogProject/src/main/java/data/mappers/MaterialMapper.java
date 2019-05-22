@@ -1,8 +1,10 @@
 package data.mappers;
 
 import data.DatabaseConnector;
+import data.ExceptionLogger;
 import data.exceptions.MaterialException;
 import data.interfaces.MapperInterface;
+import data.models.LoggerEnum;
 import data.models.Material;
 import java.io.IOException;
 import java.sql.Connection;
@@ -26,29 +28,14 @@ public class MaterialMapper implements MapperInterface<Material, String> {
 
     DatabaseConnector dbc = new DatabaseConnector();
 
-    private static Logger logger = Logger.getLogger(MaterialMapper.class.getName());
-
     public MaterialMapper(DataSource ds) {
         dbc.setDataSource(ds);
-        try {
-
-            FileHandler handler = new FileHandler("logs/MaterialMapper/MaterialMapper-log.%u.%g.txt",
-                    1024 * 1024, 10);
-            logger.addHandler(handler);
-
-            handler.setFormatter(new SimpleFormatter());
-        } catch (IOException ex) {
-            ex.printStackTrace();
-            logger.log(Level.SEVERE, "Error in logger", new IOException("Error: "));
-
-        }
     }
 
     /**
-     * Returns all materials in database
-     *
-     * @return all materials
-     * @throws data.exceptions.MaterialException
+     * Returns all materials from the database
+     * @return List of Materials
+     * @throws MaterialException
      */
     @Override
     public List<Material> getAll() throws MaterialException {
@@ -69,17 +56,16 @@ public class MaterialMapper implements MapperInterface<Material, String> {
             return materials;
         } catch (SQLException ex) {
             ex.printStackTrace();
-            logger.log(Level.SEVERE, "Error in getAll Method.", new SQLException("Error: "));
+            ExceptionLogger.log(LoggerEnum.MATERIALMAPPER, "Error in getAll Method: \n" + ex.getMessage(), ex.getStackTrace());
             throw new MaterialException("Error occoured while getting data from database");
 
         }
     }
 
     /**
-     * Returns specific material based on id
-     *
-     * @param id, specific material with said id
-     * @return material matching id in param
+     * Returns specific material based on id from Database
+     * @param id, specific material id
+     * @return Single Material
      */
     @Override
     public Material getSingle(String ref) throws MaterialException {
@@ -102,18 +88,24 @@ public class MaterialMapper implements MapperInterface<Material, String> {
             return null;
         } catch (SQLException ex) {
             ex.printStackTrace();
-            logger.log(Level.SEVERE, "Error in getByID Method.", new SQLException("Error: "));
+            ExceptionLogger.log(LoggerEnum.MATERIALMAPPER, "Error in getSingle Method: \n" + ex.getMessage(), ex.getStackTrace());
             throw new MaterialException("Error occoured while getting data from database");
         }
     }
 
-    public ArrayList<Material> getAllByCategory(int id) throws MaterialException {
+    /**
+     * Returns List of all Materials in specific category from Database
+     * @param categoryId  specific id of category
+     * @return List of Materials
+     * @throws MaterialException 
+     */
+    public ArrayList<Material> getAllByCategory(int categoryId)throws MaterialException {
         try (Connection con = dbc.open()) {
             ArrayList<Material> materials = new ArrayList();
             String qry = "SELECT * FROM stock JOIN stockToCategory ON ref = stockRef WHERE categoryId = ?";
 
             PreparedStatement ps = con.prepareStatement(qry);
-            ps.setInt(1, id);
+            ps.setInt(1, categoryId);
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
@@ -128,11 +120,16 @@ public class MaterialMapper implements MapperInterface<Material, String> {
             return materials;
         } catch (SQLException ex) {
             ex.printStackTrace();
-            logger.log(Level.SEVERE, "Error in getAllByCategory Method.", new SQLException("Error: "));
+            ExceptionLogger.log(LoggerEnum.MATERIALMAPPER, "Error in getAllByCategory Method: \n" + ex.getMessage(), ex.getStackTrace());
             throw new MaterialException("Error occoured while getting data from database");
         }
     }
 
+    /**
+     * Adds a new Material to the Database
+     * @param material Material to be added
+     * @throws MaterialException 
+     */
     @Override
     public void add(Material material) throws MaterialException {
         try (Connection con = dbc.open()) {
@@ -148,7 +145,7 @@ public class MaterialMapper implements MapperInterface<Material, String> {
             ps.executeUpdate();
         } catch (SQLException ex) {
             ex.printStackTrace();
-            logger.log(Level.SEVERE, "Error in add Method", new SQLException("Error: "));
+            ExceptionLogger.log(LoggerEnum.MATERIALMAPPER, "Error in add Method: \n" + ex.getMessage(), ex.getStackTrace());
             throw new MaterialException("Error occoured while adding data to database");
         }
     }

@@ -1,11 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package logic;
 
+import data.exceptions.MaterialException;
+import data.mappers.MaterialMapper;
+import data.models.Material;
 import data.models.Part;
+import data.models.PartList;
 import java.util.ArrayList;
 import java.util.HashMap;
 import org.junit.BeforeClass;
@@ -114,8 +113,8 @@ public class AdvancedCalculatorTest {
     
     @Test
     public void calcRaftersTest() {
-        AdvancedCalculator instance = new AdvancedCalculator(5000, 3600, false, 0, 0, false);
-        assertEquals(10, instance.getRafters());
+        AdvancedCalculator instance = new AdvancedCalculator(5500, 3600, false, 0, 0, false);
+        assertEquals(11, instance.getRafters());
     }
     
     
