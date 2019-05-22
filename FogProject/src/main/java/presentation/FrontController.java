@@ -60,7 +60,10 @@ public class FrontController extends HttpServlet {
             
             CommandTarget commandTarget = command.execute(request);
             
-            response.setHeader("message", "" + commandTarget.getMessage());
+            response.setHeader("message", commandTarget.getMessage());
+            System.out.println(request.getContextPath() + " - " + commandTarget.getTarget());
+            if(commandTarget.getRedirect())
+                response.setHeader("redirect", commandTarget.getTarget());
             
             RequestDispatcher dispatcher = request.getRequestDispatcher(commandTarget.getTarget());
             dispatcher.forward(request, response);

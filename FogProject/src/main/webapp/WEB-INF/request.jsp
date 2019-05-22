@@ -121,7 +121,7 @@
     <% }%>
     <div class="form-group">
         <label>Note</label>
-        <input type="text" required="" class="form-control" name="note" value="test">
+        <input type="text" class="form-control" name="note" value="test">
         <%if (r != null) {%>
     </div>
     <input type="hidden" name="requestId" value="<%=r.getId()%>">
