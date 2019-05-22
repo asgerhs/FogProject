@@ -357,7 +357,7 @@ public class AdvancedCalculator {
         laths = (int) (roofWidth - 380) % 307 == 0 ? (int) ((roofWidth - 380) / 307) + 2 : (int) ((roofWidth - 380) / 307) + 3;
         pl.addWoodPart(new Part(lathType.get(1), (int) laths * 2, "Til montering på tag", lathType.get(1).getPrice() * ((int)laths * 2)));
         pl.addMiscPart(new Part(lathHolder.get(2), length/1000 + 1, "monteres på toppen af spæret (til toplægte)", lathHolder.get(2).getPrice() * (length/1000 + 1)));
-        svg.generateRoofWithAngle(laths, (int)roofWidth, (int)angle);
+        svg.generateRoofWithAngle(laths, (int)roofWidth);
         System.out.println(laths);
         System.out.println(roofWidth);
         System.out.println(angle);
