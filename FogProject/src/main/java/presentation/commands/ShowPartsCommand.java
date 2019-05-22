@@ -72,14 +72,6 @@ public class ShowPartsCommand implements Command {
         session.setAttribute("topViewSVG", calc.getTopViewSVG().getTopViewSVG());
         session.setAttribute("sideViewSVG", calc.getTopViewSVG().getSideViewSVG());
 
-        session.setAttribute("length", calc.getLength());
-        session.setAttribute("width", calc.getWidth());
-        session.setAttribute("shedLength", calc.getShedLength());
-        System.out.println(calc.getShedLength());
-        session.setAttribute("shedWidth", calc.getShedWidth());
-        session.setAttribute("rafters", calc.getRafters());
-        session.setAttribute("posts", calc.getPosts());
-
         return new CommandTarget(target, "PartList Loaded Successfully");
     }
 }

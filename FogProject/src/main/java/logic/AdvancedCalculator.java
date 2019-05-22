@@ -16,7 +16,7 @@ import logic.facades.MaterialFacade;
  */
 public class AdvancedCalculator {
 
-    private int length, width, posts, rafters, rafterSpace, shedLength, shedWidth, shedPostsWidth, shedPostsLength, shedReglar, shedCladdings, laths, price;
+    private int length, width, posts, rafters, rafterSpace, shedLength, shedWidth, shedPostsWidth, shedPostsLength, shedReglar, shedCladdings, laths;
     private boolean shed;
     private boolean roof;
     private PartList pl;
@@ -378,23 +378,7 @@ public class AdvancedCalculator {
     public GenerateSVG getTopViewSVG() {
         return svg;
     }
-
-    public int getLength() {
-        return length;
-    }
-
-    public int getWidth() {
-        return width;
-    }
-
-    public int getShedLength() {
-        return shedLength;
-    }
-
-    public int getShedWidth() {
-        return shedWidth;
-    }
-
+    
     public int getPosts() {
         return posts;
     }
