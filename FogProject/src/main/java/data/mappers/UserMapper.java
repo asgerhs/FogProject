@@ -1,8 +1,10 @@
 package data.mappers;
 
 import data.DatabaseConnector;
+import data.ExceptionLogger;
 import data.exceptions.UsersException;
 import data.interfaces.MapperInterface;
+import data.models.LoggerEnum;
 import data.models.RoleEnum;
 import data.models.User;
 import java.io.IOException;
@@ -26,19 +28,9 @@ import javax.sql.DataSource;
 public class UserMapper implements MapperInterface<User, String> {
 
     DatabaseConnector dbc = new DatabaseConnector();
-    private static Logger logger = Logger.getLogger(UserMapper.class.getName());
-
+    
     public UserMapper(DataSource ds) {
         dbc.setDataSource(ds);
-        try {
-            FileHandler handler = new FileHandler("Logs/UserMapper/MaterialMapper-log.%u.%g.txt",
-                    1024 * 1024, 10);
-            logger.addHandler(handler);
-            handler.setFormatter(new SimpleFormatter());
-        } catch (IOException ex) {
-            ex.printStackTrace();
-            logger.log(Level.SEVERE, "Error in logger", new IOException("Error: "));
-        }
     }
 
     @Override
@@ -61,7 +53,7 @@ public class UserMapper implements MapperInterface<User, String> {
             return users;
         } catch (SQLException ex) {
             ex.printStackTrace();
-            logger.log(Level.SEVERE, "Error in getAll Method", new SQLException("Error: "));
+            ExceptionLogger.log(LoggerEnum.USERMAPPER, "Error in getAll Method: \n" + ex.getMessage(), ex.getStackTrace());
             throw new UsersException("Error occoured while getting data from database");
         }
     }
@@ -86,7 +78,7 @@ public class UserMapper implements MapperInterface<User, String> {
             return null;
         } catch (SQLException ex) {
             ex.printStackTrace();
-            logger.log(Level.SEVERE, "Error in getSingleMethod", new SQLException("Error: "));
+            ExceptionLogger.log(LoggerEnum.USERMAPPER, "Error in getSingle Method: \n" + ex.getMessage(), ex.getStackTrace());
             throw new UsersException("Error occoured while getting data from database");
         }
     }
@@ -107,7 +99,7 @@ public class UserMapper implements MapperInterface<User, String> {
             ps.executeUpdate();
         } catch (SQLException ex) {
             ex.printStackTrace();
-            logger.log(Level.SEVERE, "Error in add Method", new SQLException("Error: "));
+            ExceptionLogger.log(LoggerEnum.USERMAPPER, "Error in add Method: \n" + ex.getMessage(), ex.getStackTrace());
             throw new UsersException("Error occoured while adding data to database");
         }
     }
@@ -126,7 +118,7 @@ public class UserMapper implements MapperInterface<User, String> {
             return valid;
         } catch (SQLException ex) {
             ex.printStackTrace();
-            logger.log(Level.SEVERE, "Error in validateUser Method", new SQLException("Error: "));
+            ExceptionLogger.log(LoggerEnum.USERMAPPER, "Error in validateUser Method: \n" + ex.getMessage(), ex.getStackTrace());
             throw new UsersException("Error occoured while validating user");
         }
     }
@@ -141,7 +133,7 @@ public class UserMapper implements MapperInterface<User, String> {
             return result;
         } catch (SQLException ex) {
             ex.printStackTrace();
-            logger.log(Level.SEVERE, "Error in changePassword", new SQLException("Error: "));
+            ExceptionLogger.log(LoggerEnum.USERMAPPER, "Error in changePassword Method: \n" + ex.getMessage(), ex.getStackTrace());
             throw new UsersException("Error occoured while updating user");
         }
     }
@@ -155,6 +147,7 @@ public class UserMapper implements MapperInterface<User, String> {
             return ps.executeUpdate();
         } catch (SQLException ex) {
             ex.printStackTrace();
+            ExceptionLogger.log(LoggerEnum.USERMAPPER, "Error in changeUserRole Method: \n" + ex.getMessage(), ex.getStackTrace());
             throw new UsersException("Error occoured while updating user");
         }
     }
@@ -168,7 +161,7 @@ public class UserMapper implements MapperInterface<User, String> {
 
         } catch (SQLException ex) {
             ex.printStackTrace();
-            logger.log(Level.SEVERE, "Error in remove Method", new SQLException("Error: "));
+            ExceptionLogger.log(LoggerEnum.USERMAPPER, "Error in remove Method: \n" + ex.getMessage(), ex.getStackTrace());
             throw new UsersException("Error while removing request from database");
         }
     }

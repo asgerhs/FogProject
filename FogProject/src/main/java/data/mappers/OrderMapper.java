@@ -1,9 +1,11 @@
 package data.mappers;
 
 import data.DatabaseConnector;
+import data.ExceptionLogger;
 import data.exceptions.OrderException;
 import data.exceptions.RequestException;
 import data.interfaces.MapperInterface;
+import data.models.LoggerEnum;
 import data.models.Order;
 import data.models.User;
 import java.io.IOException;
@@ -29,25 +31,16 @@ public class OrderMapper implements MapperInterface<Order, Integer> {
     DatabaseConnector dbc = new DatabaseConnector();
     RequestMapper requestMapper;
 
-    private static Logger logger = Logger.getLogger(OrderMapper.class.getName());
-
     public OrderMapper(DataSource ds) {
         requestMapper = new RequestMapper(ds);
         dbc.setDataSource(ds);
-        try {
-
-            FileHandler handler = new FileHandler("logs/OrderMapper/OrderMapper-log.%u.%g.txt",
-                    1024 * 1024, 10);
-            logger.addHandler(handler);
-
-            handler.setFormatter(new SimpleFormatter());
-        } catch (IOException ex) {
-            ex.printStackTrace();
-            logger.log(Level.SEVERE, "Error in logger", new IOException("Error: "));
-
-        }
     }
 
+    /**
+     * Returns all materials from the database
+     * @return List of Orders
+     * @throws OrderException 
+     */
     @Override
     public List<Order> getAll() throws OrderException {
         try (Connection con = dbc.open()) {
@@ -63,11 +56,17 @@ public class OrderMapper implements MapperInterface<Order, Integer> {
             return order;
         } catch (SQLException | RequestException ex) {
             ex.printStackTrace();
-            logger.log(Level.SEVERE, "Error in getAllOrders method", new SQLException("Error: "));
+            ExceptionLogger.log(LoggerEnum.ORDERMAPPER, "Error in getAll Method: \n" + ex.getMessage(), ex.getStackTrace());
             throw new OrderException("Couldn't access orders from Database");
         }
     }
 
+    /**
+     * Returns specific material based on id from Database
+     * @param id, specific order id
+     * @return Single Order
+     * @throws OrderException 
+     */
     @Override
     public Order getSingle(Integer id) throws OrderException {
         try (Connection con = dbc.open()) {
@@ -82,12 +81,17 @@ public class OrderMapper implements MapperInterface<Order, Integer> {
             }
         } catch (SQLException | RequestException ex) {
             ex.printStackTrace();
-            logger.log(Level.SEVERE, "Error in getById method", new SQLException("Error: "));
+            ExceptionLogger.log(LoggerEnum.ORDERMAPPER, "Error in getSingle Method: \n" + ex.getMessage(), ex.getStackTrace());
             throw new OrderException("Something went wrong with retrieving the specific order from the database");
         }
         return null;
     }
 
+    /**
+     * Adds new order to Database
+     * @param order, Order to be added
+     * @throws OrderException 
+     */
     @Override
     public void add(Order order) throws OrderException {
         try (Connection con = dbc.open()) {
@@ -101,11 +105,17 @@ public class OrderMapper implements MapperInterface<Order, Integer> {
 
         } catch (SQLException ex) {
             ex.printStackTrace();
-            logger.log(Level.SEVERE, "Error in createOrder method", new SQLException("Error: "));
+            ExceptionLogger.log(LoggerEnum.ORDERMAPPER, "Error in add Method: \n" + ex.getMessage(), ex.getStackTrace());
             throw new OrderException("Couldn't create Order");
         }
     }
 
+    /**
+     * Gets all 
+     * @param user
+     * @return
+     * @throws OrderException 
+     */
     public List<Order> getAllByUser(User user) throws OrderException {
         try (Connection con = dbc.open()) {
             List<Order> orders = new ArrayList();
@@ -121,7 +131,7 @@ public class OrderMapper implements MapperInterface<Order, Integer> {
             return orders;
         } catch (SQLException | RequestException ex) {
             ex.printStackTrace();
-            logger.log(Level.SEVERE, "Error in getAllByUser method", ex.getCause());
+            ExceptionLogger.log(LoggerEnum.ORDERMAPPER, "Error in getAllByUser Method: \n" + ex.getMessage(), ex.getStackTrace());
             throw new OrderException("Couldn't access orders from Database");
         }
     }

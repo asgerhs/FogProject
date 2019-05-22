@@ -1,21 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package logic;
 
-import data.DatabaseConnector;
 import data.exceptions.MaterialException;
 import data.mappers.MaterialMapper;
-import data.TestDataSourceMySQL;
 import data.models.Material;
 import data.models.Part;
 import data.models.PartList;
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.InputStreamReader;
-import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.HashMap;
 import logic.facades.MaterialFacade;
@@ -164,6 +153,6 @@ public class AdvancedCalculatorTest {
     @Test
     public void calcRaftersTest() {
         AdvancedCalculator instance = new AdvancedCalculator(5500, 3600, false, 0, 0, false);
-        assertEquals(10, instance.getRafters());
+        assertEquals(11, instance.getRafters());
     }
 }

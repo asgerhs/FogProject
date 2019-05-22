@@ -40,10 +40,10 @@ public class LoginCommand implements Command {
 
                     return new CommandTarget(target, "Logged in as Customer Successfully");
                 } else {
-                    return new CommandTarget("index.jsp", "Wrong email or password");
+                    return new CommandTarget("WEB-INF/index.jsp", "Wrong email or password");
                 }
             } else {
-                    return new CommandTarget("index.jsp", "Redirect to login");
+                    return new CommandTarget("WEB-INF/index.jsp", "Redirect to login");
             }
 
         } catch (UsersException ex) {

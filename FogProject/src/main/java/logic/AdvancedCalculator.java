@@ -1,6 +1,8 @@
 package logic;
 
+import data.ExceptionLogger;
 import data.exceptions.MaterialException;
+import data.models.LoggerEnum;
 import data.models.Material;
 import data.models.Part;
 import data.models.PartList;
@@ -28,8 +30,6 @@ public class AdvancedCalculator {
     private MaterialFacade mf;
     private double angle;
 
-    private static Logger logger = Logger.getLogger(AdvancedCalculator.class.getName());
-
     public AdvancedCalculator(int length, int width, boolean shed, int shedLength, int shedWidth, boolean roof) {
         this.length = length;
         this.width = width;
@@ -40,17 +40,6 @@ public class AdvancedCalculator {
         pl = new PartList();
         svg = new GenerateSVG(length, width, shedLength, shedWidth, 1000, 200, 350);
         mf = new MaterialFacade();
-
-        try {
-            FileHandler handler = new FileHandler("Logs/AdvancedCalculator/AdvancedCalculator-log.%u.%g.txt",
-                    1024 * 1024, 10);
-            logger.addHandler(handler);
-
-            handler.setFormatter(new SimpleFormatter());
-        } catch (IOException ex) {
-            logger.log(Level.SEVERE, "Error in logger", new IOException("Error: "));
-
-        }
 
         try {
 
@@ -91,7 +80,7 @@ public class AdvancedCalculator {
             svg.generateRoof();
             }
         } catch (MaterialException ex) {
-            logger.log(Level.SEVERE, "Error in AdvancedCalculator: ", new MaterialException("Error: "));
+            ExceptionLogger.log(LoggerEnum.USERMAPPER, "Error in AdvanceCalculator Method: \n" + ex.getMessage(), ex.getStackTrace());
         }
     }
 
@@ -319,8 +308,6 @@ public class AdvancedCalculator {
         int bandCount = (bandLength % 10000.0 == 0) ? (int) (bandLength / 10000.0) : (int) (bandLength / 10000.0 + 1.0);
         pl.addMiscPart(new Part(materials.get(0), bandCount, "Til vindkryds på spær", materials.get(0).getPrice() * bandCount));
         svg.generateBand(rafters, rafterSpace, 10);
-        System.out.println(bandCount);
-        System.out.println(materials.get(0).getPrice());
     }
 
     private void calcFasciasScrews() throws MaterialException {
@@ -358,10 +345,6 @@ public class AdvancedCalculator {
         pl.addWoodPart(new Part(lathType.get(1), (int) laths * 2, "Til montering på tag", lathType.get(1).getPrice() * ((int)laths * 2)));
         pl.addMiscPart(new Part(lathHolder.get(2), length/1000 + 1, "monteres på toppen af spæret (til toplægte)", lathHolder.get(2).getPrice() * (length/1000 + 1)));
         svg.generateRoofWithAngle(laths, (int)roofWidth);
-        System.out.println(laths);
-        System.out.println(roofWidth);
-        System.out.println(angle);
-        System.out.println(triangle);
     }
 
     private void calcRoofBricks() throws MaterialException {
@@ -373,7 +356,6 @@ public class AdvancedCalculator {
         pl.addMiscPart(new Part(bricks.get(1), topBricks, "monteres på toplægte med medfølgende beslag se tagstens vejledning", bricks.get(1).getPrice() * topBricks));
         pl.addMiscPart(new Part(bricks.get(3), topBricks, "Til montering af rygsten", bricks.get(3).getPrice() * topBricks));
         pl.addMiscPart(new Part(bricks.get(4), 2, "til montering af tagsten, alle ydersten + hver anden fastgøres", bricks.get(4).getPrice() * 2));
-        System.out.println(sideBricks + "SB");
     }
 
     public void addParts(int lengthWidth, int categoryId, int multiplier, String description, Comparator<Material> comparator) throws MaterialException {
