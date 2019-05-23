@@ -2,14 +2,9 @@ package presentation;
 
 import data.ExceptionLogger;
 import data.exceptions.CommandException;
-import data.mappers.MaterialMapper;
 import data.models.CommandTarget;
 import data.models.LoggerEnum;
 import java.io.IOException;
-import java.util.logging.FileHandler;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import java.util.logging.SimpleFormatter;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -35,8 +30,6 @@ public class FrontController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-
-
     protected void service(HttpServletRequest request, HttpServletResponse response) {
         try {
             String commandKey = request.getParameter("command");
@@ -45,7 +38,6 @@ public class FrontController extends HttpServlet {
             CommandTarget commandTarget = command.execute(request);
             
             response.setHeader("message", commandTarget.getMessage());
-            System.out.println(request.getContextPath() + " - " + commandTarget.getTarget());
             if(commandTarget.getRedirect())
                 response.setHeader("redirect", commandTarget.getTarget());
             

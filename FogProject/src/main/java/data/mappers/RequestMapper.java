@@ -101,7 +101,7 @@ public class RequestMapper implements MapperInterface<Request, Integer> {
         try (Connection con = dbc.open()) {
 
             String qry = "UPDATE requests SET width = ?, length = ?, shedWidth = ?, shedLength = ?,"
-                    + " roof = ?, angle = ? where id = ?;";
+                    + " roof = ?, angle = ?, note = ? WHERE id = ?;";
 
             PreparedStatement ps = con.prepareStatement(qry);
             ps.setInt(1, rqst.getWidth());
@@ -110,7 +110,8 @@ public class RequestMapper implements MapperInterface<Request, Integer> {
             ps.setInt(4, rqst.getShedLength());
             ps.setString(5, rqst.getRoof());
             ps.setInt(6, rqst.getAngle());
-            ps.setInt(7, rqst.getId());
+            ps.setString(7, rqst.getNote());
+            ps.setInt(8, rqst.getId());
 
             ps.executeUpdate();
 

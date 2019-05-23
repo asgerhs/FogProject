@@ -41,11 +41,7 @@
         <label>Password</label>
         <input type="password" required="" class="form-control" name="password">
     </div>
-    <div class="form-group">
-        <label>Note</label>
-        <input type="text" class="form-control" name="note">
-    </div>
-    <button type="submit" class="btn btn-dark" formaction="FrontController?command=register">Opret bruger</button>
+    <button type="submit" class="btn btn-dark" formaction="FrontController?command=addUser">Opret bruger</button>
 </form>
 
 

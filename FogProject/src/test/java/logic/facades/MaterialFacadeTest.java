@@ -2,11 +2,7 @@ package logic.facades;
 
 import data.DatabaseConnector;
 import data.TestDataSourceMySQL;
-import data.exceptions.RequestException;
 import data.models.Material;
-import data.models.Request;
-import data.models.RoleEnum;
-import data.models.User;
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;

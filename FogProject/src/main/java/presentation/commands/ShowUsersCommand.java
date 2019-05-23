@@ -21,8 +21,6 @@ public class ShowUsersCommand implements Command{
         this.target = target;
         uf = new UserFacade();
     }
-    
-    
 
     @Override
     public CommandTarget execute(HttpServletRequest request) throws CommandException {

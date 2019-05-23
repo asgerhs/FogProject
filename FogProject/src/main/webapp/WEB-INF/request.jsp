@@ -16,6 +16,7 @@
     int angle = 0;
     int shedLength = 0;
     int shedWidth = 0;
+    String note = "";
     if ((Request) session.getAttribute("request") != null) {
         r = (Request) session.getAttribute("request");
         length = r.getLength();
@@ -23,6 +24,7 @@
         angle = r.getAngle();
         shedLength = r.getShedLength();
         shedWidth = r.getShedWidth();
+        note = r.getNote();
     }
     User user = (User) session.getAttribute("user");
 %>
@@ -121,7 +123,7 @@
     <% }%>
     <div class="form-group">
         <label>Note</label>
-        <input type="text" class="form-control" name="note" value="test">
+        <input type="text" class="form-control" name="note" value="<%=note%>">
         <%if (r != null) {%>
     </div>
     <input type="hidden" name="requestId" value="<%=r.getId()%>">

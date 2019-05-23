@@ -21,16 +21,12 @@ import logic.facades.RequestFacade;
 public class ShowPartsCommand implements Command {
 
     private String target;
-    private MaterialFacade mf;
-    private RequestFacade rf;
     private OrderFacade of;
     private AdvancedCalculator calc;
 
     public ShowPartsCommand(String target) {
         this.target = target;
 
-        mf = new MaterialFacade();
-        rf = new RequestFacade();
         of = new OrderFacade();
         
     }

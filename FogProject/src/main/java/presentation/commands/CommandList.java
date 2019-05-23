@@ -21,7 +21,8 @@ public class CommandList {
         commands.put("orders", new OrderCommand("WEB-INF/order.jsp"));
         commands.put("showUsers", new ShowUsersCommand("WEB-INF/showUsers.jsp"));
         commands.put("updateRole", new UpdateUserCommand("FrontController?command=showUsers"));
-        commands.put("register", new RegisterCommand("FrontController?command=request"));
+        commands.put("register", new RegisterCommand("WEB-INF/register.jsp"));
+        commands.put("addUser", new AddUserCommand("FrontController?command=request"));
     }
     
     public static synchronized Command commandForm(String key){
