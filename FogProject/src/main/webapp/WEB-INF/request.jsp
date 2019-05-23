@@ -125,10 +125,10 @@
         <%if (r != null) {%>
     </div>
     <input type="hidden" name="requestId" value="<%=r.getId()%>">
-    <button type="submit" class="btn btn-dark" formaction="FrontController?command=request&submit=true">Updates request</button>
+    <button type="submit" class="btn btn-dark" formaction="FrontController?command=addRequest">Updates request</button>
     <%} else {%>
 </div>
-<button type="submit" class="btn btn-dark" formaction="FrontController?command=request&submit=true">Send request</button>
+<button type="submit" class="btn btn-dark" formaction="FrontController?command=addRequest">Send request</button>
 <%}%>
 </form>
 

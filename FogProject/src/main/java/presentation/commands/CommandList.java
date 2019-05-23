@@ -14,6 +14,7 @@ public class CommandList {
     private CommandList(){
         commands.put("showParts", new ShowPartsCommand("WEB-INF/showParts.jsp"));
         commands.put("request", new RequestCommand("WEB-INF/request.jsp"));
+        commands.put("addRequest", new AddRequestCommand(""));
         commands.put("requestList", new RequestListCommand("WEB-INF/requestList.jsp"));
         commands.put("login", new LoginCommand("FrontController?command=request"));
         commands.put("logout", new LogoutCommand("WEB-INF/index.jsp"));
