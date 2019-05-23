@@ -177,26 +177,45 @@ public class GenerateSVG {
     }
 
     public void generateRoofWithAngle(int laths, int roofWidth) {
-        int remain = ((roofWidth - 380) / (laths - 2)) / 10;
-
+        double calcStart = ((double)roofWidth / 100) * 19.843342036553525;
+        int start = (int) calcStart;
+        int remain = ((roofWidth - start) / (laths - 2)) / 10;
+        
+        //first lath
         topViewSVG += generateRect(0, 0, 5, width, false);
+        //second lath
         topViewSVG += generateRect(0, 35, 5, width, false);
-        topViewSVG += generateRect(0, height / 2 - 5, 5, width, false);
+        //middle lath
+        topViewSVG += generateRect(0, (height / 2) , 5, width, true);
 
+        //generates all laths top side
         for (int i = 1; i < laths - 1; i++) {
-            topViewSVG += generateRect(0, (35 + (i * remain)), 5, width, false);
+            topViewSVG += generateRect(0,  i * remain + 10, 5, width, false);
         }
-
-        topViewSVG += generateRect(0, height / 2 + 3, 5, width, false);
-        for (int i = 1; i < laths - 1; i++) {
-            topViewSVG += generateRect(0, ((height / 2 + 3) + i * remain), 5, width, false);
-        }
-
+        
+        //bottom lath
         topViewSVG += generateRect(0, height - 5, 5, width, false);
         
+        //last placed lath on top -- next to middle lath
+        topViewSVG += generateRect(0, (height / 2) - 10, 5, width, false);
+        //last placed lath on bottom -- next to middle lath
+        topViewSVG += generateRect(0, (height / 2) +10, 5, width, false);
+        
+        //generates all laths bottom side
+        
+        for(int i = (laths * 2 ) - 2; i >= laths + 1; i--){
+            topViewSVG += generateRect(0, i*remain + 10, 5, width, false);
+        }
+//        for (int i = 1; i < laths - 1; i++) {
+//            topViewSVG += generateRect(0, (((height / 2) ) + i * remain + 10), 5, width, false);
+//        }
+
+        
+        //Side view
         for (int i = width; i > 0; i -= 15) {
             sideViewSVG += generateRect(width - i, 10, 40, 5, false);
         }
+        
         
         sideViewSVG += generateRect(5, 0, 10, width - 5, true);
         sideViewSVG += generateRect(0, 0, 50, 5, true);
@@ -233,9 +252,9 @@ public class GenerateSVG {
     }
 
     public static void main(String[] args) {
-        GenerateSVG svg = new GenerateSVG(5300, 5000, 0, 0, 100, 30, 60);
+        GenerateSVG svg = new GenerateSVG(5800, 5300, 0, 0, 100, 30, 60);
 
-        svg.generateRoofWithAngle(7, 1915);
+        svg.generateRoofWithAngle(7, 1950);
 
     }
 }

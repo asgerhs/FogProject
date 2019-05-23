@@ -318,7 +318,9 @@ public class AdvancedCalculator {
         double bandLength = Math.sqrt(Math.pow(fullSpace, 2) + Math.pow(width, 2)) * 2;
         int bandCount = (bandLength % 10000.0 == 0) ? (int) (bandLength / 10000.0) : (int) (bandLength / 10000.0 + 1.0);
         pl.addMiscPart(new Part(materials.get(0), bandCount, "Til vindkryds på spær", materials.get(0).getPrice() * bandCount));
+        if(!roof){
         svg.generateBand(rafters, rafterSpace, 10);
+        }
         System.out.println(bandCount);
         System.out.println(materials.get(0).getPrice());
     }
