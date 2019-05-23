@@ -1,16 +1,13 @@
 package logic;
 
+import data.ExceptionLogger;
 import data.exceptions.MaterialException;
+import data.models.LoggerEnum;
 import data.models.Material;
 import data.models.Part;
 import data.models.PartList;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.logging.FileHandler;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import java.util.logging.SimpleFormatter;
 import logic.facades.MaterialFacade;
 
 /**
@@ -19,7 +16,7 @@ import logic.facades.MaterialFacade;
  */
 public class AdvancedCalculator {
 
-    private int length, width, posts, rafters, rafterSpace, shedLength, shedWidth, shedPostsWidth, shedPostsLength, shedReglar, shedCladdings, laths, price;
+    private int length, width, posts, rafters, rafterSpace, shedLength, shedWidth, shedPostsWidth, shedPostsLength, shedReglar, shedCladdings, laths;
     private boolean shed;
     private boolean roof;
     private PartList pl;
@@ -28,29 +25,17 @@ public class AdvancedCalculator {
     private MaterialFacade mf;
     private double angle;
 
-    private static Logger logger = Logger.getLogger(AdvancedCalculator.class.getName());
-
-    public AdvancedCalculator(int length, int width, boolean shed, int shedLength, int shedWidth, boolean roof) {
+    public AdvancedCalculator(int length, int width, boolean shed, int shedLength, int shedWidth, boolean roof, double angle) {
         this.length = length;
         this.width = width;
         this.shed = shed;
         this.shedLength = shedLength;
         this.shedWidth = shedWidth;
         this.roof = roof;
+        this.angle = angle;
         pl = new PartList();
         svg = new GenerateSVG(length, width, shedLength, shedWidth, 1000, 200, 350);
         mf = new MaterialFacade();
-
-        try {
-            FileHandler handler = new FileHandler("Logs/AdvancedCalculator/AdvancedCalculator-log.%u.%g.txt",
-                    1024 * 1024, 10);
-            logger.addHandler(handler);
-
-            handler.setFormatter(new SimpleFormatter());
-        } catch (IOException ex) {
-            logger.log(Level.SEVERE, "Error in logger", new IOException("Error: "));
-
-        }
 
         try {
 
@@ -91,7 +76,7 @@ public class AdvancedCalculator {
             svg.generateRoof();
             }
         } catch (MaterialException ex) {
-            logger.log(Level.SEVERE, "Error in AdvancedCalculator: ", new MaterialException("Error: "));
+            ExceptionLogger.log(LoggerEnum.ADVANCECALCULATOR, "Error in AdvanceCalculator Method: \n" + ex.getMessage(), ex.getStackTrace());
         }
     }
 
@@ -319,8 +304,6 @@ public class AdvancedCalculator {
         int bandCount = (bandLength % 10000.0 == 0) ? (int) (bandLength / 10000.0) : (int) (bandLength / 10000.0 + 1.0);
         pl.addMiscPart(new Part(materials.get(0), bandCount, "Til vindkryds på spær", materials.get(0).getPrice() * bandCount));
         svg.generateBand(rafters, rafterSpace, 10);
-        System.out.println(bandCount);
-        System.out.println(materials.get(0).getPrice());
     }
 
     private void calcFasciasScrews() throws MaterialException {
@@ -350,15 +333,13 @@ public class AdvancedCalculator {
     private void calcLathsRoof() throws MaterialException {
         ArrayList<Material> lathType = mf.getAllByCategory(3);
         ArrayList<Material> lathHolder = mf.getAllByCategory(17);
-        angle = 20; // Remove when 
         double angleRad = Math.toRadians(angle);
         double triangle = Math.toRadians(180);
-        double roofWidth = (width * Math.sin(angleRad)) / Math.sin(triangle - (angleRad * 2));
+        double roofWidth = (width * Math.sin(angle)) / Math.sin(triangle - (angle * 2));
         laths = (int) (roofWidth - 380) % 307 == 0 ? (int) ((roofWidth - 380) / 307) + 2 : (int) ((roofWidth - 380) / 307) + 3;
-        pl.addWoodPart(new Part(lathType.get(1), (int) laths * 2, "Til montering på tag", lathType.get(1).getPrice() * ((int) laths * 2)));
-        pl.addMiscPart(new Part(lathHolder.get(2), length / 1000 + 1, "monteres på toppen af spæret (til toplægte)", lathHolder.get(2).getPrice() * (length / 1000 + 1)));
-        svg.generateRoofWithAngle(laths);
-        System.out.println(laths);
+        pl.addWoodPart(new Part(lathType.get(1), (int) laths * 2, "Til montering på tag", lathType.get(1).getPrice() * ((int)laths * 2)));
+        pl.addMiscPart(new Part(lathHolder.get(2), length/1000 + 1, "monteres på toppen af spæret (til toplægte)", lathHolder.get(2).getPrice() * (length/1000 + 1)));
+        svg.generateRoofWithAngle(laths, (int)roofWidth);
     }
 
     private void calcRoofBricks() throws MaterialException {
@@ -370,7 +351,6 @@ public class AdvancedCalculator {
         pl.addMiscPart(new Part(bricks.get(1), topBricks, "monteres på toplægte med medfølgende beslag se tagstens vejledning", bricks.get(1).getPrice() * topBricks));
         pl.addMiscPart(new Part(bricks.get(3), topBricks, "Til montering af rygsten", bricks.get(3).getPrice() * topBricks));
         pl.addMiscPart(new Part(bricks.get(4), 2, "til montering af tagsten, alle ydersten + hver anden fastgøres", bricks.get(4).getPrice() * 2));
-        System.out.println(sideBricks + "SB");
     }
 
     public void addParts(int lengthWidth, int categoryId, int multiplier, String description, Comparator<Material> comparator) throws MaterialException {
@@ -398,23 +378,7 @@ public class AdvancedCalculator {
     public GenerateSVG getTopViewSVG() {
         return svg;
     }
-
-    public int getLength() {
-        return length;
-    }
-
-    public int getWidth() {
-        return width;
-    }
-
-    public int getShedLength() {
-        return shedLength;
-    }
-
-    public int getShedWidth() {
-        return shedWidth;
-    }
-
+    
     public int getPosts() {
         return posts;
     }
@@ -423,19 +387,6 @@ public class AdvancedCalculator {
         return rafters;
     }
 
-    public static void main(String[] args) throws MaterialException {
-        AdvancedCalculator ac = new AdvancedCalculator(7800, 6500, true, 1000, 1000, true);
-//        ac.calcBand();
-//        ac.calcLathsRoof();
-//        ac.calcRoofBricks();
-        for (Part p : ac.getParts().getWoodList()) {
-            System.out.println(p);
-        }
-        for (Part p : ac.getParts().getMiscList()) {
-            System.out.println(p);
-
-        }
-    }
 
     private class MatSortHeighComparator implements Comparator<Material> {
 

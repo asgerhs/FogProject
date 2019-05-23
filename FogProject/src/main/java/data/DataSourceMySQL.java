@@ -9,6 +9,9 @@ import com.mysql.cj.jdbc.MysqlDataSource;
 public class DataSourceMySQL {
     private MysqlDataSource dataSource = new MysqlDataSource();
     
+    /**
+     * Generates a new MySQL Datasource
+     */
     public DataSourceMySQL()
     {
         try
@@ -27,6 +30,10 @@ public class DataSourceMySQL {
         }
     }
     
+    /**
+     * 
+     * @return the generated Java DataSource
+     */
     public MysqlDataSource getDataSource()
     {
         return dataSource;

@@ -94,8 +94,8 @@
                 <td><%=miscPrice/100 + " DKK"%></td>
             </tr>
             <tr>
-                <td>I alt</td>
-                <td><%=(woodPrice + miscPrice)/100 + " DKK"%>
+                <td><b>I alt</b></td>
+                <td><b><%=(woodPrice + miscPrice)/100 + " DKK"%></b></td>
             </tr>
         </tbody>
     </table>

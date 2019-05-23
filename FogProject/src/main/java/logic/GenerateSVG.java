@@ -19,28 +19,27 @@ public class GenerateSVG {
         this.outhangFront = outhangFront / 10;
         this.outhangBack = outhangBack / 10;
         this.outhangSites = outhangSites / 10;
-        
+
         topViewSVG = "<svg height='" + (this.height + offset * 2) + "' width='" + (this.width + offset) + "'>";
         topViewSVG += generateArrows();
         topViewSVG += generateRect(0, 0, this.height, this.width, false);
-        
+
         sideViewSVG = "<svg height='" + (this.height) + "' width='" + (this.width + offset * 2) + "'>";
         sideViewSVG += generateArrows();
     }
-    
+
     public void generateRoof() {
         sideViewSVG += generateLine(0, 0, width, 10, false);
         sideViewSVG += generateLine(0, 40, width, 50, false);
         sideViewSVG += generateLine(0, 0, 0, 40, false);
         sideViewSVG += generateLine(width, 10, width, 50, false);
     }
-    
+
     public void generateShed() {
-        for(int i = shedWidth; i >= 0; i -= 5) {
+        for (int i = shedWidth; i >= 0; i -= 5) {
             sideViewSVG += generateRect(width - outhangBack - i, 50, 250, 5, false);
         }
     }
-
 
     public void generatePosts(int count, int postWidth) {
         postSpace = (width - outhangFront - outhangBack - postWidth) / (count - 1);
@@ -133,55 +132,80 @@ public class GenerateSVG {
 
         for (int i = 0; i < rafterCount; i++) {
             topViewSVG += generateMeasLine(offset + rafterSpace * i, 50, offset + rafterSpace * i, 90, false);
-            if(i < rafterCount - 1) {
+            if (i < rafterCount - 1) {
                 topViewSVG += generateMeasLine(offset + rafterSpace * i + 5, 50, offset + rafterSpace * i + rafterSpace - 5, 50, true);
                 topViewSVG += generateText(rafterSpace * i + rafterSpace / 2 - 10, 45 - 100, "" + rafterSpace, true);
             }
         }
-        
+
         // Side-View Measurement
         // Front Outhang Lines & Text
         sideViewSVG += generateMeasLine(offset, 425, offset + outhangFront, 425, true);
         sideViewSVG += generateMeasLine(offset + outhangFront, 430, offset + outhangFront, 400, false);
         sideViewSVG += generateMeasLine(offset, 430, offset, offset + 45, false);
         sideViewSVG += generateText(outhangFront / 2 - 15, 340, "" + outhangFront, true);
-        
+
         // Front height Line & Text
         sideViewSVG += generateMeasLine(75, 105, 75, 390, true);
         sideViewSVG += generateText(40, 240, "230", false);
-        
+
         // Back height Line & Text
         sideViewSVG += generateMeasLine(offset + width + 25, 115, offset + width + 25, 390, true);
         sideViewSVG += generateText(offset + width + 40, 250, "210", false);
-        
+
         // Back Outhang (with last post) Lines & Text
         sideViewSVG += generateMeasLine(offset + width - outhangBack - 10, 425, offset + width, 425, true);
         sideViewSVG += generateMeasLine(offset + width, 430, offset + width, 155, false);
         sideViewSVG += generateText(width + 10, 340, "" + (outhangBack + 10), true);
-        
+
         for (int i = 0; i < postCount - (shedHeight > 0 && shedWidth > 0 ? 2 : 1); i++) {
-            sideViewSVG += generateMeasLine(offset + outhangFront +postSpace * i, 425, offset + outhangFront + postSpace * i + postSpace, 425, true);
+            sideViewSVG += generateMeasLine(offset + outhangFront + postSpace * i, 425, offset + outhangFront + postSpace * i + postSpace, 425, true);
             sideViewSVG += generateMeasLine(offset + outhangFront + postSpace * i + postSpace, 430, offset + outhangFront + postSpace * i + postSpace, 400, false);
             sideViewSVG += generateText(outhangFront + postSpace / 2 + postSpace * i, 340, "" + postSpace, true);
         }
 
-        if(shedHeight > 0 && shedWidth > 0) {
+        if (shedHeight > 0 && shedWidth > 0) {
             sideViewSVG += generateMeasLine(offset + width - outhangBack - 10, 425, offset + width - outhangBack - shedWidth, 425, true);
             sideViewSVG += generateMeasLine(offset + width - outhangBack - shedWidth, 430, offset + width - outhangBack - shedWidth, 405, false);
             sideViewSVG += generateText(width - outhangBack - shedWidth / 2, 340, "" + shedWidth, true);
-        
+
             sideViewSVG += generateMeasLine(offset + width - outhangBack - 10, 430, offset + width - outhangBack - 10, 405, false);
-            
+
             sideViewSVG += generateMeasLine(offset + outhangFront + postSpace, 425, offset + outhangFront + postSpace + postSpace - shedWidth + 10, 425, true);
             sideViewSVG += generateText(outhangFront + postSpace + (postSpace - shedWidth) / 2, 340, "" + (postSpace - shedWidth), true);
         }
     }
-    
-    public void generateRoofWithAngle(int laths){
-        int lathSpace = width / laths * 2;
-        for(int i = 0; i < laths ; i++){
-            topViewSVG +=generateRect(0, i*lathSpace, 10, width, true);
+
+    public void generateRoofWithAngle(int laths, int roofWidth) {
+        int remain = ((roofWidth - 380) / (laths - 2)) / 10;
+
+        topViewSVG += generateRect(0, 0, 5, width, false);
+        topViewSVG += generateRect(0, 35, 5, width, false);
+        topViewSVG += generateRect(0, height / 2 - 5, 5, width, false);
+
+        for (int i = 1; i < laths - 1; i++) {
+            topViewSVG += generateRect(0, (35 + (i * remain)), 5, width, false);
         }
+
+        topViewSVG += generateRect(0, height / 2 + 3, 5, width, false);
+        for (int i = 1; i < laths - 1; i++) {
+            topViewSVG += generateRect(0, ((height / 2 + 3) + i * remain), 5, width, false);
+        }
+
+        topViewSVG += generateRect(0, height - 5, 5, width, false);
+        
+        for (int i = width; i > 0; i -= 15) {
+            sideViewSVG += generateRect(width - i, 10, 40, 5, false);
+        }
+        
+        sideViewSVG += generateRect(5, 0, 10, width - 5, true);
+        sideViewSVG += generateRect(0, 0, 50, 5, true);
+        sideViewSVG += generateRect(width, 0, 50, 5, true);
+        sideViewSVG += generateRect(0, 45, 5, width, true);
+        
+        
+        System.out.println(remain);
+        System.out.println(laths);
     }
 
     private String generateRect(int x, int y, int height, int width, boolean bold) {
@@ -191,7 +215,7 @@ public class GenerateSVG {
     private String generateLine(int x1, int y1, int x2, int y2, boolean dashed) {
         return "<line class='" + (dashed ? "svgDashed' stroke-dasharray='5,5'" : "svgThin'") + " x1='" + (x1 + offset) + "' y1='" + (y1 + offset) + "' x2='" + (x2 + offset) + "' y2='" + (y2 + offset) + "'/>";
     }
-    
+
     private String generateMeasLine(int x1, int y1, int x2, int y2, boolean arrows) {
         return "<line class='" + (arrows ? "measure" : "") + "' x1='" + (x1) + "' y1='" + (y1) + "' x2='" + (x2) + "' y2='" + (y2) + "'/>";
     }
@@ -206,5 +230,12 @@ public class GenerateSVG {
 
     public String getSideViewSVG() {
         return sideViewSVG;
+    }
+
+    public static void main(String[] args) {
+        GenerateSVG svg = new GenerateSVG(5300, 5000, 0, 0, 100, 30, 60);
+
+        svg.generateRoofWithAngle(7, 1915);
+
     }
 }

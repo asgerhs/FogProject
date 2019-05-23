@@ -1,0 +1,149 @@
+\documentclass[11pt]{report}
+\usepackage[utf8]{inputenc}
+\usepackage[danish]{babel}
+\usepackage [T1]{fontenc}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage[hidelinks]{hyperref}
+\usepackage{graphicx}
+\graphicspath{{figures/}{Billeder/}}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{adjustbox}
+\usepackage{tocloft}
+
+\definecolor{bluekeywords}{rgb}{0.13,0.13,1}
+\definecolor{greencomments}{rgb}{0,0.5,0}
+\definecolor{turqusnumbers}{rgb}{0.17,0.57,0.69}
+\definecolor{redstrings}{rgb}{0.5,0,0}
+
+\lstdefinelanguage{FSharp}
+                {morekeywords={let, new, match, with, rec, open, module, namespace, type, of, member, and, for, in, do, begin, end, fun, function, try, mutable, if, then, else},
+    keywordstyle=\color{bluekeywords},
+    sensitive=false,
+    morecomment=[l][\color{greencomments}]{///},
+    morecomment=[l][\color{greencomments}]{//},
+    morecomment=[s][\color{greencomments}]{{(*}{*)}},
+    morestring=[b]",
+    stringstyle=\color{redstrings}
+    }
+\usepackage{amsmath}
+\title{Cupcake}
+
+\author{
+    Asger Hermind Sørensen\\
+    cph-as466@cphbusiness.dk\\
+    asgerhs\\
+    A klassen\\
+  &
+    William Sehested Huusfeldt\\
+    cph-wh106@cphbusiness.dk\\
+    WSHuusfeldt\\
+    A klassen
+  \and
+    Andreas Vikke\\
+    cph-av105@cphbusiness.dk\\
+    AndreasVikke\\
+    A klassen\\
+  &
+    Martin Eli Frederiksen\\
+    cph-mf237@cphbusiness.dk\\
+    Krigermus\\
+    A klassen
+}
+
+
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\renewcommand{\cftchapleader}{\cftdotfill{\cftdotsep}}
+\tableofcontents
+\newpage
+
+\chapter*{1. Indledning}
+\addcontentsline{toc}{chapter}{1. Indledning}
+\newpage
+
+\chapter*{2. Baggrund}
+\addcontentsline{toc}{chapter}{2. Baggrund}
+\section*{2.1. Virksomheden}
+\addcontentsline{toc}{section}{2.1. Virksomheden}
+
+\section*{2.2. Virksomhedens krav}
+\addcontentsline{toc}{section}{2.2. Virksomhedens krav}
+
+\section*{2.3. Virksomhedens vision}
+\addcontentsline{toc}{section}{2.3. Virksomhedens vision}
+
+\newpage
+
+\chapter*{3. Sprog og programmer}
+\addcontentsline{toc}{chapter}{3. Sprog og programmer}
+\textbf{Loaklt:}
+\begin{itemize}
+  \item Windows - Linux - MacOS.
+  \item Java v. 8.
+  \item Mysql v. 8.0.14.
+  \item MySQL Workbench v. 8.0.15.
+  \item Github / Github Desktop.
+  \item Netbeans v. 8.2.
+  \item Maven v. 3.5.2.
+\end{itemize}
+\textbf{Server:}
+\begin{itemize}
+  \item Linux - Ubuntu 18.10.
+  \item Java Openjdk 11.
+  \item Mysql v. 8.0.14.
+  \item Maven v. 3.5.2.
+\end{itemize}
+\newpage
+
+\chapter*{4. ER Diagram}
+\addcontentsline{toc}{chapter}{4. Baggrund}
+
+\newpage
+
+\chapter*{5. Navigationsdiagram}
+\addcontentsline{toc}{chapter}{5. Navigationsdiagram}
+
+\newpage
+
+\chapter*{6. Sekvens diagrammer}
+\addcontentsline{toc}{chapter}{6. Sekvens diagrammer}
+
+\newpage
+
+\chapter*{7. Struktur}
+\addcontentsline{toc}{chapter}{7. Struktur}
+
+\newpage
+
+\chapter*{8. Særlige forhold}
+\addcontentsline{toc}{chapter}{8. Særlige forhold}
+
+
+\newpage
+
+\begingroup
+\renewcommand{\cleardoublepage}{}
+\renewcommand{\clearpage}{}
+\chapter*{9. Manglende implementer}
+\addcontentsline{toc}{chapter}{9. Manglende implementer}
+\endgroup
+\noindent
+
+\newpage
+
+\begingroup
+\renewcommand{\cleardoublepage}{}
+\renewcommand{\clearpage}{}
+\chapter*{10. Links og referencer}
+\addcontentsline{toc}{chapter}{10. Links og referencer}
+\endgroup
+
+
+ \newpage
+
+\end{document}
+

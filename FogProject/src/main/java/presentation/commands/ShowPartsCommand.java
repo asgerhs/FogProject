@@ -55,7 +55,10 @@ public class ShowPartsCommand implements Command {
                     (o.getRequest().getShedLength() > 0 && o.getRequest().getShedWidth() > 0),
                     o.getRequest().getShedLength() * 10,
                     o.getRequest().getShedWidth() * 10,
-                    o.getRequest().getAngle() > 0);
+                    o.getRequest().getAngle() > 0,
+                    o.getRequest().getAngle());
+            
+            
             } catch (OrderException ex) {
                 ex.printStackTrace();
             }
@@ -68,14 +71,6 @@ public class ShowPartsCommand implements Command {
         session.setAttribute("miscParts", misc);
         session.setAttribute("topViewSVG", calc.getTopViewSVG().getTopViewSVG());
         session.setAttribute("sideViewSVG", calc.getTopViewSVG().getSideViewSVG());
-
-        session.setAttribute("length", calc.getLength());
-        session.setAttribute("width", calc.getWidth());
-        session.setAttribute("shedLength", calc.getShedLength());
-        System.out.println(calc.getShedLength());
-        session.setAttribute("shedWidth", calc.getShedWidth());
-        session.setAttribute("rafters", calc.getRafters());
-        session.setAttribute("posts", calc.getPosts());
 
         return new CommandTarget(target, "PartList Loaded Successfully");
     }
