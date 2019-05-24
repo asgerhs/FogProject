@@ -1,0 +1,18 @@
+@startuml
+Admin --> database : attempts to log in, awaiting validation.
+database --> Admin : validated.
+Admin --> requestList : Can now see all request\nmade by customers.
+note over requestList: index.jsp to requestList.jsp through loginCommand.
+
+hnote over Admin : Admin has to change\na user to employee/admin.
+Admin --> Users : selects the user that is going to be\nthe new employee(s), and changes the\nrole to Employee/admin.
+Users --> database : updates users role.
+
+hnote over Admin: Admin has to close a deal on a carport
+Admin --> requestList : chooses a customer and \ncontacts them through their displayed info.
+hnote over requestList : The customer has changes to their carport.
+
+Admin --> requestList : chooses the edit button\nto change the request
+Admin --> request : makes the changes the\ncustomer wants and submits. 
+note over request : requesetList.jsp to request.jsp through requestCommand
+@enduml
