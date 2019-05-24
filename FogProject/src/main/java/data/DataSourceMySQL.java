@@ -23,6 +23,7 @@ public class DataSourceMySQL {
             dataSource.setPassword("root");
             dataSource.setUseSSL(false);
             dataSource.setServerTimezone("UTC");
+            dataSource.setAllowPublicKeyRetrieval(true);
         }
         catch(Exception e)
         {

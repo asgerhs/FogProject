@@ -89,7 +89,7 @@
     <br /><br />
     <h2>Customer Information</h2>
     <hr />
-    <% if (user == null) { %>
+    <% if (user == null || user.getRole() != RoleEnum.CUSTOMER) { %>
     <div class="form-group">
         <label>Name</label>
         <input type="text" required="" class="form-control" name="name" value="test">

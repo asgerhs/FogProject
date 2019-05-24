@@ -14,7 +14,7 @@ import logic.facades.RequestFacade;
 
 /**
  *
- * @author Martin Frederiksen
+ * @author Andreas Vikke
  */
 public class RequestCommand implements Command {
 
@@ -24,7 +24,7 @@ public class RequestCommand implements Command {
 
     public RequestCommand(String target) {
         this.target = target;
-        
+
         mf = new MaterialFacade();
         rf = new RequestFacade();
     }
@@ -32,25 +32,20 @@ public class RequestCommand implements Command {
     @Override
     public CommandTarget execute(HttpServletRequest request) throws CommandException {
         HttpSession session = request.getSession();
-        
-        if(request.getParameter("requestId") != null) {
-            try {
+
+        try {
+            if (request.getParameter("requestId") != null) {
                 Request r = rf.getSingle(Integer.parseInt(request.getParameter("requestId")));
                 session.setAttribute("request", r);
-            } catch (RequestException ex) {
-                ex.printStackTrace();
-                throw new CommandException("Can't find request");
             }
-        }
-        
-        try {
+
             ArrayList<Material> mats;
             mats = mf.getAllByCategory(10);
 
             session.setAttribute("mats", mats);
 
             return new CommandTarget(target, "Request loaded successfully");
-        } catch (MaterialException ex) {
+        } catch (MaterialException | RequestException ex) {
             ex.printStackTrace();
             throw new CommandException(ex.getMessage());
         }

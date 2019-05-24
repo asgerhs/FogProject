@@ -1,6 +1,5 @@
 package data.mappers;
 
-import data.DataSourceMySQL;
 import data.DatabaseConnector;
 import data.ExceptionLogger;
 import data.exceptions.RequestException;
@@ -15,8 +14,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
 import javax.sql.DataSource;
+import logic.facades.UserFacade;
 
 /**
  *
@@ -129,6 +128,7 @@ public class RequestMapper implements MapperInterface<Request, Integer> {
             try {
                 con.setAutoCommit(false);
                 if (request.getUser().getName() != null) {
+                    request.getUser().setPassword(UserFacade.encryptPassword(request.getUser().getPassword()));
                     userMapper.add(request.getUser());
                 }
 

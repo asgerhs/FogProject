@@ -57,7 +57,7 @@ public class UserFacade implements FacadeInterface<User, String> {
         um.remove(email);
     }
     
-    private static String encryptPassword(String password) throws UsersException {
+    public static String encryptPassword(String password) throws UsersException {
         try {
             MessageDigest md = MessageDigest.getInstance("MD5");
             md.update(password.getBytes());
