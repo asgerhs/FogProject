@@ -41,9 +41,8 @@ public class RequestCommand implements Command {
 
             ArrayList<Material> mats;
             mats = mf.getAllByCategory(10);
-
             session.setAttribute("mats", mats);
-
+            
             return new CommandTarget(target, "Request loaded successfully");
         } catch (MaterialException | RequestException ex) {
             ex.printStackTrace();

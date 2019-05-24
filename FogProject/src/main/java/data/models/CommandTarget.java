@@ -12,6 +12,7 @@ public class CommandTarget {
     public CommandTarget(String target, String message) {
         this.target = target;
         this.message = message;
+        this.ajaxRedirect = false;
     }
 
     public String getTarget() {
@@ -22,7 +23,7 @@ public class CommandTarget {
         return message;
     }
     
-    public boolean getRedirect() {
+    public boolean getAjaxRedirect() {
         return ajaxRedirect;
     }
     

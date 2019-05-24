@@ -38,11 +38,12 @@ public class FrontController extends HttpServlet {
             CommandTarget commandTarget = command.execute(request);
             
             response.setHeader("message", commandTarget.getMessage());
-            if(commandTarget.getRedirect())
+            if(commandTarget.getAjaxRedirect())
                 response.setHeader("redirect", commandTarget.getTarget());
-            
-            RequestDispatcher dispatcher = request.getRequestDispatcher(commandTarget.getTarget());
-            dispatcher.forward(request, response);
+            else {
+                RequestDispatcher dispatcher = request.getRequestDispatcher(commandTarget.getTarget());
+                dispatcher.forward(request, response);
+            }
         } catch (CommandException | ServletException | IOException ex) {
             response.setHeader("error", "true");
             response.setHeader("message", ex.getMessage());
