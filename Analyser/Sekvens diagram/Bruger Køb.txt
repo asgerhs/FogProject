@@ -1,0 +1,17 @@
+@startuml
+User --> request : fills out information and sumbits
+note over User: from index.jsp to request.jsp through requestCommand.
+
+request --> request : validates form
+request --> database : saves request
+note right: RequestMapper @ add()
+
+User --> User : User called by employee,\nand carport has been confirmed.
+User --> database : attempts to login, validates information
+database --> User : validated
+User --> request : User logs in on account created opon request
+note over User : Index.jsp to request.jsp through loginCommand
+
+request --> Order : User can now see it's order
+note over Order: request.jsp to order.jsp through orderCommand
+@enduml

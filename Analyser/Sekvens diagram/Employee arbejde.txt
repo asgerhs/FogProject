@@ -1,0 +1,17 @@
+@startuml
+Employee --> database : attempts to log in, awaiting validation
+database --> Employee : validated
+Employee --> requestList : Can now see all requests made by customers.
+note right: index.jsp to requestList.jsp through requestListCommand
+
+Employee --> requestList : chooses a customer and \ncontacts them through their displayed info.
+hnote over requestList : The customer has changes to their carport.
+employee --> requestList : chooses the edit button\nto change the request
+employee --> request : makes the changes the\ncustomer wants and submits. 
+note over request : requesetList.jsp to request.jsp through requestCommand
+
+request --> database : saves changes 
+
+hnote over requestList: request now ready for approval
+Employee --> requestList : approves request
+@enduml
