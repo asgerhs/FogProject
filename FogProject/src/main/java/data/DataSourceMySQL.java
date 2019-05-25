@@ -8,6 +8,7 @@ import com.mysql.cj.jdbc.MysqlDataSource;
  */
 public class DataSourceMySQL {
     private MysqlDataSource dataSource = new MysqlDataSource();
+    private MysqlDataSource dataSourceLive = new MysqlDataSource();
     
     /**
      * Generates a new MySQL Datasource
@@ -24,6 +25,15 @@ public class DataSourceMySQL {
             dataSource.setUseSSL(false);
             dataSource.setServerTimezone("UTC");
             dataSource.setAllowPublicKeyRetrieval(true);
+            
+            dataSourceLive.setServerName("andreasvikke.dk");
+            dataSourceLive.setPort(3306);
+            dataSourceLive.setDatabaseName("fogproject");
+            dataSourceLive.setUser("transformer");
+            dataSourceLive.setPassword("f7qGtArm");
+            dataSourceLive.setUseSSL(false);
+            dataSourceLive.setServerTimezone("UTC");
+            dataSourceLive.setAllowPublicKeyRetrieval(true);
         }
         catch(Exception e)
         {
