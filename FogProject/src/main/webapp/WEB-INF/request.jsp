@@ -92,23 +92,23 @@
     <% if (user == null || user.getRole() != RoleEnum.CUSTOMER) { %>
     <div class="form-group">
         <label>Name</label>
-        <input type="text" required="" class="form-control" name="name" value="test">
+        <input type="text" required="" class="form-control" name="name">
     </div>
     <div class="form-group">
         <label>Address</label>
-        <input type="text" required="" class="form-control" name="address" value="test">
+        <input type="text" required="" class="form-control" name="address">
     </div>
     <div class="form-group">
         <label>ZIP & City</label>
-        <input type="text" required="" class="form-control" name="zipCity" value="test">
+        <input type="text" required="" class="form-control" name="zipCity">
     </div>
     <div class="form-group">
         <label>Phone</label>
-        <input type="phone" required="" class="form-control" name="phone" value="test">
+        <input type="phone" required="" class="form-control" name="phone">
     </div>
     <div class="form-group">
         <label>Email</label>
-        <input type="email" required="" class="form-control" name="email" value="test@test">
+        <input type="email" required="" class="form-control" name="email">
     </div>
     <div class="form-group">
         <label>Password</label>
