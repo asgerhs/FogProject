@@ -10,9 +10,7 @@ import java.util.HashMap;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import logic.AdvancedCalculator;
-import logic.facades.MaterialFacade;
 import logic.facades.OrderFacade;
-import logic.facades.RequestFacade;
 
 /**
  *
