@@ -80,6 +80,9 @@ public class OrderMapperTest {
         Integer id = 1;
         Order result = orderMapper.getSingle(id);
         assertNotNull(result);
+        id = 0;
+        result = orderMapper.getSingle(id);
+        assertNull(result);
     }
 
     /**

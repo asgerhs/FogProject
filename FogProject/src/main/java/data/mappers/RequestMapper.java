@@ -1,11 +1,12 @@
 package data.mappers;
 
 import data.DatabaseConnector;
+import data.ExceptionLogger;
 import data.exceptions.RequestException;
 import data.exceptions.UsersException;
 import data.interfaces.MapperInterface;
+import data.models.LoggerEnum;
 import data.models.Request;
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -13,11 +14,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.FileHandler;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import java.util.logging.SimpleFormatter;
 import javax.sql.DataSource;
+import logic.facades.UserFacade;
 
 /**
  *
@@ -28,23 +26,16 @@ public class RequestMapper implements MapperInterface<Request, Integer> {
     DatabaseConnector dbc = new DatabaseConnector();
     UserMapper userMapper;
 
-    
-
-    private static Logger logger = Logger.getLogger(RequestMapper.class.getName());
-
     public RequestMapper(DataSource ds) {
         this.userMapper = new UserMapper(ds);
         dbc.setDataSource(ds);
-        try {
-            FileHandler handler = new FileHandler("Logs/RequestMapper/MaterialMapper-log.%u.%g.txt",
-                    1024 * 1024, 10);
-            logger.addHandler(handler);
-            handler.setFormatter(new SimpleFormatter());
-        } catch (IOException ex) {
-            logger.log(Level.SEVERE, "Error in logger", new IOException("Error: "));
-        }
     }
 
+    /**
+     *
+     * @return List of Request
+     * @throws RequestException
+     */
     @Override
     public List<Request> getAll() throws RequestException {
         try (Connection con = dbc.open()) {
@@ -71,7 +62,7 @@ public class RequestMapper implements MapperInterface<Request, Integer> {
             return requests;
         } catch (SQLException | UsersException ex) {
             ex.printStackTrace();
-            logger.log(Level.SEVERE, "Error in getAll Method:", new SQLException("Error: "));
+            ExceptionLogger.log(LoggerEnum.REQUESTMAPPER, "Error in getAll Method: \n" + ex.getMessage(), ex.getStackTrace());
             throw new RequestException("Error occoured while getting data from database");
         }
     }
@@ -100,7 +91,7 @@ public class RequestMapper implements MapperInterface<Request, Integer> {
             return null;
         } catch (SQLException | UsersException ex) {
             ex.printStackTrace();
-            logger.log(Level.SEVERE, "Error in getById Method:", new SQLException("Error: "));
+            ExceptionLogger.log(LoggerEnum.REQUESTMAPPER, "Error in getSingle Method: \n" + ex.getMessage(), ex.getStackTrace());
             throw new RequestException("Error occoured while getting data from database");
         }
     }
@@ -109,7 +100,7 @@ public class RequestMapper implements MapperInterface<Request, Integer> {
         try (Connection con = dbc.open()) {
 
             String qry = "UPDATE requests SET width = ?, length = ?, shedWidth = ?, shedLength = ?,"
-                    + " roof = ?, angle = ? where id = ?;";
+                    + " roof = ?, angle = ?, note = ? WHERE id = ?;";
 
             PreparedStatement ps = con.prepareStatement(qry);
             ps.setInt(1, rqst.getWidth());
@@ -118,13 +109,14 @@ public class RequestMapper implements MapperInterface<Request, Integer> {
             ps.setInt(4, rqst.getShedLength());
             ps.setString(5, rqst.getRoof());
             ps.setInt(6, rqst.getAngle());
-            ps.setInt(7, rqst.getId());
+            ps.setString(7, rqst.getNote());
+            ps.setInt(8, rqst.getId());
 
             ps.executeUpdate();
 
         } catch (SQLException ex) {
             ex.printStackTrace();
-            logger.log(Level.SEVERE, "Error in updateRequest Method:", new SQLException("Error: "));
+            ExceptionLogger.log(LoggerEnum.REQUESTMAPPER, "Error in update Method: \n" + ex.getMessage(), ex.getStackTrace());
             throw new RequestException("Error occoured while updating data in database");
         }
     }
@@ -135,7 +127,8 @@ public class RequestMapper implements MapperInterface<Request, Integer> {
 
             try {
                 con.setAutoCommit(false);
-                if(request.getUser().getName() != null){
+                if (request.getUser().getName() != null) {
+                    request.getUser().setPassword(UserFacade.encryptPassword(request.getUser().getPassword()));
                     userMapper.add(request.getUser());
                 }
 
@@ -155,15 +148,14 @@ public class RequestMapper implements MapperInterface<Request, Integer> {
             } catch (UsersException ex) {
                 con.rollback();
                 con.setAutoCommit(true);
-                
-                
-                logger.log(Level.SEVERE, "Error in add Method:", new SQLException("Error: "));
+
+                ExceptionLogger.log(LoggerEnum.REQUESTMAPPER, "Error in addUser Method: \n" + ex.getMessage(), ex.getStackTrace());
                 throw new RequestException("Error occoured while adding user to database - Email already in use");
             }
             con.setAutoCommit(true);
         } catch (SQLException ex) {
             ex.printStackTrace();
-            logger.log(Level.SEVERE, "Error in add Method:", new SQLException("Error: "));
+            ExceptionLogger.log(LoggerEnum.REQUESTMAPPER, "Error in add Method: \n" + ex.getMessage(), ex.getStackTrace());
             throw new RequestException("Error occoured while adding request to database");
         }
     }
@@ -177,7 +169,7 @@ public class RequestMapper implements MapperInterface<Request, Integer> {
 
         } catch (SQLException ex) {
             ex.printStackTrace();
-            logger.log(Level.SEVERE, "Error in remove Method", new SQLException("Error: "));
+            ExceptionLogger.log(LoggerEnum.REQUESTMAPPER, "Error in remove Method: \n" + ex.getMessage(), ex.getStackTrace());
             throw new RequestException("Error while removing request from database");
         }
     }

@@ -91,10 +91,13 @@ public class RequestMapperTest {
      */
     @Test
     public void testGetSingle() throws Exception {
-        System.out.println("getById");
+        System.out.println("getSingle");
         Integer id = 4;
         Request result = requestMapper.getSingle(id);
         assertNotNull(result);
+        id = 0;
+        result = requestMapper.getSingle(id);
+        assertNull(result);
     }
 
     /**
@@ -125,6 +128,8 @@ public class RequestMapperTest {
         System.out.println("add");
         try {
             Request request = new Request(100, 100, 100, 100, "1013", 0, "Test", new User("test@test.dk", "1234", RoleEnum.ADMIN, "", "", "", ""));
+            requestMapper.add(request);
+            request = new Request(100, 100, 100, 100, "1013", 0, "Test", new User("test@test.dk", "1234", RoleEnum.ADMIN, null, "", "", ""));
             requestMapper.add(request);
         } catch (RequestException ex) {
             fail(ex.getMessage());

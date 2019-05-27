@@ -1,13 +1,10 @@
 package presentation;
 
+import data.ExceptionLogger;
 import data.exceptions.CommandException;
-import data.mappers.MaterialMapper;
 import data.models.CommandTarget;
+import data.models.LoggerEnum;
 import java.io.IOException;
-import java.util.logging.FileHandler;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import java.util.logging.SimpleFormatter;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -22,25 +19,7 @@ import presentation.commands.CommandList;
  * @author Martin Frederiksen
  */
 @WebServlet(name = "FrontController", urlPatterns = {"/FrontController"})
-public class FrontController extends HttpServlet {
-    
-
-    private static Logger logger = Logger.getLogger(MaterialMapper.class.getName());
-     
-    public FrontController() {
-        try {
-
-            FileHandler handler = new FileHandler("Fog-frontController-log.%u.%g.txt",
-                    1024 * 1024, 10);
-            logger.addHandler(handler);
-
-            handler.setFormatter(new SimpleFormatter());
-        } catch (IOException ex) {
-            logger.log(Level.SEVERE, "Error in logger", new IOException("Error: "));
-
-        }
-    }    
-    
+public class FrontController extends HttpServlet {    
     
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -51,8 +30,6 @@ public class FrontController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-
-
     protected void service(HttpServletRequest request, HttpServletResponse response) {
         try {
             String commandKey = request.getParameter("command");
@@ -60,16 +37,19 @@ public class FrontController extends HttpServlet {
             
             CommandTarget commandTarget = command.execute(request);
             
-            response.setHeader("message", "" + commandTarget.getMessage());
-            
-            RequestDispatcher dispatcher = request.getRequestDispatcher(commandTarget.getTarget());
-            dispatcher.forward(request, response);
+            response.setHeader("message", commandTarget.getMessage());
+            if(commandTarget.getAjaxRedirect())
+                response.setHeader("redirect", commandTarget.getTarget());
+            else {
+                RequestDispatcher dispatcher = request.getRequestDispatcher(commandTarget.getTarget());
+                dispatcher.forward(request, response);
+            }
         } catch (CommandException | ServletException | IOException ex) {
             response.setHeader("error", "true");
             response.setHeader("message", ex.getMessage());
             
             System.out.println(ex.getMessage());
-            logger.log(Level.SEVERE, "Error: ", ex.getMessage());
+            ExceptionLogger.log(LoggerEnum.FRONTCONTROLLER, "Error in FrontController Method: \n" + ex.getMessage(), ex.getStackTrace());
         }
     }
 

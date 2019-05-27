@@ -1,11 +1,8 @@
 package data.mappers;
 
 import data.DatabaseConnector;
-import data.DatabaseConnector;
 import data.TestDataSourceMySQL;
 import data.exceptions.UsersException;
-import data.mappers.UserMapper;
-import data.models.Request;
 import data.models.RoleEnum;
 import data.models.User;
 import java.io.BufferedReader;
@@ -81,6 +78,9 @@ public class UserMapperTest {
         String email = "admin@a.dk";
         User result = userMapper.getSingle(email);
         assertNotNull(result);
+        email = "admin@b.dk";
+        result = userMapper.getSingle(email);
+        assertNull(result);
     }
 
     /**
@@ -107,9 +107,13 @@ public class UserMapperTest {
     public void testValidateUser() throws Exception {
         System.out.println("validateUser");
         String email = "admin@a.dk";
-        String password = "1234";
+        String password = "81DC9BDB52D04DC20036DBD8313ED055";
         boolean result = userMapper.validateUser(email, password);
         assertTrue(result);
+        email = "admin@b.dk";
+        password = "81DC9BDB52D04DC20036DBD8313ED055";
+        result = userMapper.validateUser(email, password);
+        assertFalse(result);
     }
 
     /**
@@ -146,7 +150,7 @@ public class UserMapperTest {
         System.out.println("remove");
         String email = "Remove@remove.dk";
         userMapper.remove(email);
-        User user = userMapper.getSingle("Remove@remove.dk");
+        User user = userMapper.getSingle(email);
         assertNull(user);
     }
     

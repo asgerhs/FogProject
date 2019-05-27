@@ -6,7 +6,6 @@ import data.models.CommandTarget;
 import data.models.RoleEnum;
 import data.models.User;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import logic.facades.UserFacade;
 
 /**

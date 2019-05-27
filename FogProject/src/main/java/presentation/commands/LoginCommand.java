@@ -30,20 +30,24 @@ public class LoginCommand implements Command {
         HttpSession session = request.getSession();
 
         try {
-            if(email != null) {
+            if (email != null) {
                 boolean valid = uf.validateUser(email, password);
                 if (valid) {
                     User user = uf.getSingle(email);
                     session.setAttribute("user", user);
-                    if(user.getRole().equals(RoleEnum.ADMIN) || user.getRole().equals(RoleEnum.EMPLOYEE)) 
-                        return new CommandTarget("FrontController?command=requestList", "Logged in as Admin/Employee Successfully");
-
-                    return new CommandTarget(target, "Logged in as Customer Successfully");
+                    if (user.getRole().equals(RoleEnum.ADMIN) || user.getRole().equals(RoleEnum.EMPLOYEE)) {
+                        CommandTarget ct = new CommandTarget("FrontController?command=requestList", "Logged in as Admin/Employee Successfully");
+                        ct.setAjaxRedirect();
+                        return ct;
+                    }
+                    CommandTarget ct = new CommandTarget(target, "Logged in as Customer Successfully");
+                    ct.setAjaxRedirect();
+                    return ct;
                 } else {
-                    return new CommandTarget("index.jsp", "Wrong email or password");
+                    throw new CommandException("Wrong email or password");
                 }
             } else {
-                    return new CommandTarget("index.jsp", "Redirect to login");
+                return new CommandTarget("WEB-INF/index.jsp", "Redirect to login");
             }
 
         } catch (UsersException ex) {

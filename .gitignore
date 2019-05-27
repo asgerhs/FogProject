@@ -82,6 +82,8 @@ buildNumber.properties
 .mvn/timing.properties
 .mvn/wrapper/maven-wrapper.jar
 
+FogProject/logs/*/*.txt
+
 ### NetBeans ###
 **/nbproject/private/
 **/nbproject/Makefile-*.mk

@@ -16,6 +16,7 @@
     int angle = 0;
     int shedLength = 0;
     int shedWidth = 0;
+    String note = "";
     if ((Request) session.getAttribute("request") != null) {
         r = (Request) session.getAttribute("request");
         length = r.getLength();
@@ -23,6 +24,7 @@
         angle = r.getAngle();
         shedLength = r.getShedLength();
         shedWidth = r.getShedWidth();
+        note = r.getNote();
     }
     User user = (User) session.getAttribute("user");
 %>
@@ -30,7 +32,7 @@
 <form class="greyBox" method="POST" id="ajaxForm">
     <div id="errorBox" class="alert alert-danger" role="alert">
         <p id="message"></p>
-        <a class="btn btn-dark" href="FrontController?command=login">Goto Login</a>
+        <a class="btn btn-dark" href="FrontController?command=login">Gå til login</a>
     </div>
     <div id="successBox" class="alert alert-success" role="alert"></div>
 
@@ -87,7 +89,7 @@
     <br /><br />
     <h2>Customer Information</h2>
     <hr />
-    <% if (user == null) { %>
+    <% if (user == null || user.getRole() != RoleEnum.CUSTOMER) { %>
     <div class="form-group">
         <label>Name</label>
         <input type="text" required="" class="form-control" name="name" value="test">
@@ -121,14 +123,14 @@
     <% }%>
     <div class="form-group">
         <label>Note</label>
-        <input type="text" required="" class="form-control" name="note" value="test">
+        <input type="text" class="form-control" name="note" value="<%=note%>">
         <%if (r != null) {%>
     </div>
     <input type="hidden" name="requestId" value="<%=r.getId()%>">
-    <button type="submit" class="btn btn-dark" formaction="FrontController?command=request&submit=true">Updates request</button>
+    <button type="submit" class="btn btn-dark" formaction="FrontController?command=addRequest">Updates request</button>
     <%} else {%>
 </div>
-<button type="submit" class="btn btn-dark" formaction="FrontController?command=request&submit=true">Send request</button>
+<button type="submit" class="btn btn-dark" formaction="FrontController?command=addRequest">Send request</button>
 <%}%>
 </form>
 
