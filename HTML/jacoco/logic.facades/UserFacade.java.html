@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>UserFacade.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">FogProject</a> &gt; <a href="index.source.html" class="el_package">logic.facades</a> &gt; <span class="el_source">UserFacade.java</span></div><h1>UserFacade.java</h1><pre class="source lang-java linenums">package logic.facades;
+
+import data.DataSourceMySQL;
+import data.exceptions.UsersException;
+import data.mappers.UserMapper;
+import data.models.RoleEnum;
+import data.models.User;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.List;
+import javax.sql.DataSource;
+import javax.xml.bind.DatatypeConverter;
+import logic.interfaces.FacadeInterface;
+
+/**
+ *
+ * @author Martin Frederiksen
+ */
+public class UserFacade implements FacadeInterface&lt;User, String&gt; {
+    UserMapper um;
+    
+<span class="nc" id="L22">    public UserFacade() {</span>
+<span class="nc" id="L23">        um = new UserMapper(new DataSourceMySQL().getDataSource());</span>
+<span class="nc" id="L24">    }</span>
+<span class="fc" id="L25">    public UserFacade(DataSource ds) {</span>
+<span class="fc" id="L26">        um = new UserMapper(ds);</span>
+<span class="fc" id="L27">    }</span>
+
+    @Override
+    public List getAll() throws UsersException {
+<span class="fc" id="L31">        return um.getAll();</span>
+    }
+
+    @Override
+    public User getSingle(String email) throws UsersException {
+<span class="fc" id="L36">        return um.getSingle(email);</span>
+    }
+
+    public boolean validateUser(String email, String password) throws UsersException {
+<span class="fc" id="L40">        return um.validateUser(email, encryptPassword(password));</span>
+    }
+
+    public int changePassword(String email, String password) throws UsersException {
+<span class="fc" id="L44">        return um.changePassword(email, encryptPassword(password));</span>
+    }
+    
+    public int changeUserRole(String email, RoleEnum role) throws UsersException {
+<span class="fc" id="L48">        return um.changeUserRole(email, role);</span>
+    }
+    
+    public void add(User user) throws UsersException {
+<span class="nc" id="L52">        user.setPassword(encryptPassword(user.getPassword()));</span>
+<span class="nc" id="L53">        um.add(user);</span>
+<span class="nc" id="L54">    }</span>
+
+    public void remove(String email) throws UsersException {
+<span class="fc" id="L57">        um.remove(email);</span>
+<span class="fc" id="L58">    }</span>
+    
+    public static String encryptPassword(String password) throws UsersException {
+        try {
+<span class="fc" id="L62">            MessageDigest md = MessageDigest.getInstance(&quot;MD5&quot;);</span>
+<span class="fc" id="L63">            md.update(password.getBytes());</span>
+<span class="fc" id="L64">            byte[] digest = md.digest();</span>
+<span class="fc" id="L65">            return DatatypeConverter.printHexBinary(digest).toUpperCase();</span>
+<span class="nc" id="L66">        } catch (NoSuchAlgorithmException ex) {</span>
+<span class="nc" id="L67">            ex.printStackTrace();</span>
+<span class="nc" id="L68">            throw new UsersException(&quot;Encryption failed&quot;);</span>
+        }
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span></div></body></html>

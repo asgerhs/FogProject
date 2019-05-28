@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>RequestCommand.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">FogProject</a> &gt; <a href="index.source.html" class="el_package">presentation.commands</a> &gt; <span class="el_source">RequestCommand.java</span></div><h1>RequestCommand.java</h1><pre class="source lang-java linenums">package presentation.commands;
+
+import data.exceptions.CommandException;
+import data.exceptions.MaterialException;
+import data.exceptions.RequestException;
+import data.models.CommandTarget;
+import data.models.Material;
+import data.models.Request;
+import java.util.ArrayList;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import logic.facades.MaterialFacade;
+import logic.facades.RequestFacade;
+
+/**
+ *
+ * @author Andreas Vikke
+ */
+public class RequestCommand implements Command {
+
+    private String target;
+    private MaterialFacade mf;
+    private RequestFacade rf;
+
+<span class="nc" id="L25">    public RequestCommand(String target) {</span>
+<span class="nc" id="L26">        this.target = target;</span>
+
+<span class="nc" id="L28">        mf = new MaterialFacade();</span>
+<span class="nc" id="L29">        rf = new RequestFacade();</span>
+<span class="nc" id="L30">    }</span>
+
+    @Override
+    public CommandTarget execute(HttpServletRequest request) throws CommandException {
+<span class="nc" id="L34">        HttpSession session = request.getSession();</span>
+
+        try {
+<span class="nc bnc" id="L37" title="All 2 branches missed.">            if (request.getParameter(&quot;requestId&quot;) != null) {</span>
+<span class="nc" id="L38">                Request r = rf.getSingle(Integer.parseInt(request.getParameter(&quot;requestId&quot;)));</span>
+<span class="nc" id="L39">                session.setAttribute(&quot;request&quot;, r);</span>
+            }
+
+            ArrayList&lt;Material&gt; mats;
+<span class="nc" id="L43">            mats = mf.getAllByCategory(10);</span>
+<span class="nc" id="L44">            session.setAttribute(&quot;mats&quot;, mats);</span>
+            
+<span class="nc" id="L46">            return new CommandTarget(target, &quot;Request loaded successfully&quot;);</span>
+<span class="nc" id="L47">        } catch (MaterialException | RequestException ex) {</span>
+<span class="nc" id="L48">            ex.printStackTrace();</span>
+<span class="nc" id="L49">            throw new CommandException(ex.getMessage());</span>
+        }
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span></div></body></html>

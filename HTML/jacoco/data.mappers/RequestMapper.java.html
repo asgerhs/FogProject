@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>RequestMapper.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">FogProject</a> &gt; <a href="index.source.html" class="el_package">data.mappers</a> &gt; <span class="el_source">RequestMapper.java</span></div><h1>RequestMapper.java</h1><pre class="source lang-java linenums">package data.mappers;
+
+import data.DatabaseConnector;
+import data.ExceptionLogger;
+import data.exceptions.RequestException;
+import data.exceptions.UsersException;
+import data.interfaces.MapperInterface;
+import data.models.LoggerEnum;
+import data.models.Request;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+import javax.sql.DataSource;
+import logic.facades.UserFacade;
+
+/**
+ *
+ * @author William Sehested Huusfeldt &amp; Martin Frederiksen
+ */
+public class RequestMapper implements MapperInterface&lt;Request, Integer&gt; {
+
+<span class="fc" id="L26">    DatabaseConnector dbc = new DatabaseConnector();</span>
+    UserMapper userMapper;
+
+<span class="fc" id="L29">    public RequestMapper(DataSource ds) {</span>
+<span class="fc" id="L30">        this.userMapper = new UserMapper(ds);</span>
+<span class="fc" id="L31">        dbc.setDataSource(ds);</span>
+<span class="fc" id="L32">    }</span>
+
+    /**
+     *
+     * @return List of Request
+     * @throws RequestException
+     */
+    @Override
+    public List&lt;Request&gt; getAll() throws RequestException {
+<span class="fc" id="L41">        try (Connection con = dbc.open()) {</span>
+<span class="fc" id="L42">            List&lt;Request&gt; requests = new ArrayList();</span>
+<span class="fc" id="L43">            String qry = &quot;SELECT * FROM `requests` LEFT JOIN `orders` ON `orders`.requestId = `requests`.id WHERE `orders`.id IS NULL;&quot;;</span>
+<span class="fc" id="L44">            Statement stmt = con.createStatement();</span>
+<span class="fc" id="L45">            ResultSet rs = stmt.executeQuery(qry);</span>
+
+<span class="fc bfc" id="L47" title="All 2 branches covered.">            while (rs.next()) {</span>
+<span class="fc" id="L48">                Request r = new Request(</span>
+<span class="fc" id="L49">                        rs.getInt(&quot;width&quot;),</span>
+<span class="fc" id="L50">                        rs.getInt(&quot;length&quot;),</span>
+<span class="fc" id="L51">                        rs.getInt(&quot;shedWidth&quot;),</span>
+<span class="fc" id="L52">                        rs.getInt(&quot;shedLength&quot;),</span>
+<span class="fc" id="L53">                        rs.getString(&quot;roof&quot;),</span>
+<span class="fc" id="L54">                        rs.getInt(&quot;angle&quot;),</span>
+<span class="fc" id="L55">                        rs.getString(&quot;note&quot;),</span>
+<span class="fc" id="L56">                        userMapper.getSingle(rs.getString(&quot;email&quot;)));</span>
+<span class="fc" id="L57">                r.setId(rs.getInt(&quot;id&quot;));</span>
+<span class="fc" id="L58">                requests.add(r);</span>
+
+<span class="fc" id="L60">            }</span>
+
+<span class="fc" id="L62">            return requests;</span>
+<span class="nc" id="L63">        } catch (SQLException | UsersException ex) {</span>
+<span class="nc" id="L64">            ex.printStackTrace();</span>
+<span class="nc" id="L65">            ExceptionLogger.log(LoggerEnum.REQUESTMAPPER, &quot;Error in getAll Method: \n&quot; + ex.getMessage(), ex.getStackTrace());</span>
+<span class="nc" id="L66">            throw new RequestException(&quot;Error occoured while getting data from database&quot;);</span>
+        }
+    }
+
+    @Override
+    public Request getSingle(Integer id) throws RequestException {
+<span class="fc" id="L72">        try (Connection con = dbc.open()) {</span>
+<span class="fc" id="L73">            String qry = &quot;SELECT * FROM requests WHERE id = ?&quot;;</span>
+<span class="fc" id="L74">            PreparedStatement ps = con.prepareStatement(qry);</span>
+<span class="fc" id="L75">            ps.setInt(1, id);</span>
+<span class="fc" id="L76">            ResultSet rs = ps.executeQuery();</span>
+
+<span class="fc bfc" id="L78" title="All 2 branches covered.">            while (rs.next()) {</span>
+<span class="fc" id="L79">                Request r = new Request(</span>
+<span class="fc" id="L80">                        rs.getInt(&quot;width&quot;),</span>
+<span class="fc" id="L81">                        rs.getInt(&quot;length&quot;),</span>
+<span class="fc" id="L82">                        rs.getInt(&quot;shedWidth&quot;),</span>
+<span class="fc" id="L83">                        rs.getInt(&quot;shedLength&quot;),</span>
+<span class="fc" id="L84">                        rs.getString(&quot;roof&quot;),</span>
+<span class="fc" id="L85">                        rs.getInt(&quot;angle&quot;),</span>
+<span class="fc" id="L86">                        rs.getString(&quot;note&quot;),</span>
+<span class="fc" id="L87">                        userMapper.getSingle(rs.getString(&quot;email&quot;)));</span>
+<span class="fc" id="L88">                r.setId(rs.getInt(&quot;id&quot;));</span>
+<span class="fc" id="L89">                return r;</span>
+            }
+<span class="fc" id="L91">            return null;</span>
+<span class="nc" id="L92">        } catch (SQLException | UsersException ex) {</span>
+<span class="nc" id="L93">            ex.printStackTrace();</span>
+<span class="nc" id="L94">            ExceptionLogger.log(LoggerEnum.REQUESTMAPPER, &quot;Error in getSingle Method: \n&quot; + ex.getMessage(), ex.getStackTrace());</span>
+<span class="nc" id="L95">            throw new RequestException(&quot;Error occoured while getting data from database&quot;);</span>
+        }
+    }
+
+    public void update(Request rqst) throws RequestException {
+<span class="fc" id="L100">        try (Connection con = dbc.open()) {</span>
+
+<span class="fc" id="L102">            String qry = &quot;UPDATE requests SET width = ?, length = ?, shedWidth = ?, shedLength = ?,&quot;</span>
+                    + &quot; roof = ?, angle = ?, note = ? WHERE id = ?;&quot;;
+
+<span class="fc" id="L105">            PreparedStatement ps = con.prepareStatement(qry);</span>
+<span class="fc" id="L106">            ps.setInt(1, rqst.getWidth());</span>
+<span class="fc" id="L107">            ps.setInt(2, rqst.getLength());</span>
+<span class="fc" id="L108">            ps.setInt(3, rqst.getShedWidth());</span>
+<span class="fc" id="L109">            ps.setInt(4, rqst.getShedLength());</span>
+<span class="fc" id="L110">            ps.setString(5, rqst.getRoof());</span>
+<span class="fc" id="L111">            ps.setInt(6, rqst.getAngle());</span>
+<span class="fc" id="L112">            ps.setString(7, rqst.getNote());</span>
+<span class="fc" id="L113">            ps.setInt(8, rqst.getId());</span>
+
+<span class="fc" id="L115">            ps.executeUpdate();</span>
+
+<span class="nc" id="L117">        } catch (SQLException ex) {</span>
+<span class="nc" id="L118">            ex.printStackTrace();</span>
+<span class="nc" id="L119">            ExceptionLogger.log(LoggerEnum.REQUESTMAPPER, &quot;Error in update Method: \n&quot; + ex.getMessage(), ex.getStackTrace());</span>
+<span class="nc" id="L120">            throw new RequestException(&quot;Error occoured while updating data in database&quot;);</span>
+<span class="fc" id="L121">        }</span>
+<span class="fc" id="L122">    }</span>
+
+    @Override
+    public void add(Request request) throws RequestException {
+<span class="fc" id="L126">        try (Connection con = dbc.open()) {</span>
+
+            try {
+<span class="fc" id="L129">                con.setAutoCommit(false);</span>
+<span class="fc bfc" id="L130" title="All 2 branches covered.">                if (request.getUser().getName() != null) {</span>
+<span class="fc" id="L131">                    request.getUser().setPassword(UserFacade.encryptPassword(request.getUser().getPassword()));</span>
+<span class="fc" id="L132">                    userMapper.add(request.getUser());</span>
+                }
+
+<span class="fc" id="L135">                String qry = &quot;INSERT INTO requests&quot;</span>
+                        + &quot;(width, length, shedWidth, shedLength, roof, angle, note, email) &quot;
+                        + &quot;VALUES (?,?,?,?,?,?,?,?);&quot;;
+<span class="fc" id="L138">                PreparedStatement ps = con.prepareStatement(qry);</span>
+<span class="fc" id="L139">                ps.setInt(1, request.getWidth());</span>
+<span class="fc" id="L140">                ps.setInt(2, request.getLength());</span>
+<span class="fc" id="L141">                ps.setInt(3, request.getShedWidth());</span>
+<span class="fc" id="L142">                ps.setInt(4, request.getShedLength());</span>
+<span class="fc" id="L143">                ps.setString(5, request.getRoof());</span>
+<span class="fc" id="L144">                ps.setInt(6, request.getAngle());</span>
+<span class="fc" id="L145">                ps.setString(7, request.getNote());</span>
+<span class="fc" id="L146">                ps.setString(8, request.getUser().getEmail());</span>
+<span class="fc" id="L147">                ps.executeUpdate();</span>
+<span class="nc" id="L148">            } catch (UsersException ex) {</span>
+<span class="nc" id="L149">                con.rollback();</span>
+<span class="nc" id="L150">                con.setAutoCommit(true);</span>
+
+<span class="nc" id="L152">                ExceptionLogger.log(LoggerEnum.REQUESTMAPPER, &quot;Error in addUser Method: \n&quot; + ex.getMessage(), ex.getStackTrace());</span>
+<span class="nc" id="L153">                throw new RequestException(&quot;Error occoured while adding user to database - Email already in use&quot;);</span>
+<span class="fc" id="L154">            }</span>
+<span class="fc" id="L155">            con.setAutoCommit(true);</span>
+<span class="nc" id="L156">        } catch (SQLException ex) {</span>
+<span class="nc" id="L157">            ex.printStackTrace();</span>
+<span class="nc" id="L158">            ExceptionLogger.log(LoggerEnum.REQUESTMAPPER, &quot;Error in add Method: \n&quot; + ex.getMessage(), ex.getStackTrace());</span>
+<span class="nc" id="L159">            throw new RequestException(&quot;Error occoured while adding request to database&quot;);</span>
+<span class="fc" id="L160">        }</span>
+<span class="fc" id="L161">    }</span>
+
+    public void remove(int id) throws RequestException {
+<span class="fc" id="L164">        try (Connection con = dbc.open()) {</span>
+<span class="fc" id="L165">            String qry = &quot;DELETE FROM requests WHERE id = ?;&quot;;</span>
+<span class="fc" id="L166">            PreparedStatement ps = con.prepareStatement(qry);</span>
+<span class="fc" id="L167">            ps.setInt(1, id);</span>
+<span class="fc" id="L168">            ps.executeUpdate();</span>
+
+<span class="nc" id="L170">        } catch (SQLException ex) {</span>
+<span class="nc" id="L171">            ex.printStackTrace();</span>
+<span class="nc" id="L172">            ExceptionLogger.log(LoggerEnum.REQUESTMAPPER, &quot;Error in remove Method: \n&quot; + ex.getMessage(), ex.getStackTrace());</span>
+<span class="nc" id="L173">            throw new RequestException(&quot;Error while removing request from database&quot;);</span>
+<span class="fc" id="L174">        }</span>
+<span class="fc" id="L175">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span></div></body></html>

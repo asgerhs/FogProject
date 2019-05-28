@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>RequestListCommand.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">FogProject</a> &gt; <a href="index.source.html" class="el_package">presentation.commands</a> &gt; <span class="el_source">RequestListCommand.java</span></div><h1>RequestListCommand.java</h1><pre class="source lang-java linenums">package presentation.commands;
+
+import data.exceptions.CommandException;
+import data.exceptions.OrderException;
+import data.exceptions.RequestException;
+import data.models.CommandTarget;
+import data.models.Order;
+import data.models.Request;
+import java.util.List;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import logic.facades.OrderFacade;
+import logic.facades.RequestFacade;
+
+/**
+ *
+ * @author Martin Frederiksen
+ */
+public class RequestListCommand implements Command {
+
+    private String target;
+    private RequestFacade rf;
+    private OrderFacade of;
+
+<span class="nc" id="L25">    public RequestListCommand(String target) {</span>
+<span class="nc" id="L26">        this.target = target;</span>
+<span class="nc" id="L27">        rf = new RequestFacade();</span>
+<span class="nc" id="L28">        of = new OrderFacade();</span>
+<span class="nc" id="L29">    }</span>
+
+    @Override
+    public CommandTarget execute(HttpServletRequest request) throws CommandException {
+<span class="nc" id="L33">        HttpSession session = request.getSession();</span>
+        List&lt;Request&gt; requests;
+<span class="nc bnc" id="L35" title="All 2 branches missed.">        if (request.getParameter(&quot;orderId&quot;) != null) {</span>
+            try {
+<span class="nc" id="L37">                Request r = rf.getSingle(Integer.parseInt(request.getParameter(&quot;orderId&quot;)));</span>
+<span class="nc" id="L38">                of.add(new Order(0, r));</span>
+                //rf.remove(Integer.parseInt(request.getParameter(&quot;orderId&quot;)));
+<span class="nc" id="L40">                requests = rf.getAll();</span>
+<span class="nc" id="L41">                session.setAttribute(&quot;requestList&quot;, requests);</span>
+<span class="nc" id="L42">            } catch (RequestException | OrderException ex) {</span>
+<span class="nc" id="L43">                ex.printStackTrace();</span>
+<span class="nc" id="L44">                throw new CommandException(ex.getMessage());</span>
+<span class="nc" id="L45">            }</span>
+<span class="nc bnc" id="L46" title="All 2 branches missed.">        } else if (request.getParameter(&quot;requestId&quot;) != null) {</span>
+            try {
+<span class="nc" id="L48">                rf.remove(Integer.parseInt(request.getParameter(&quot;requestId&quot;)));</span>
+<span class="nc" id="L49">                requests = rf.getAll();</span>
+<span class="nc" id="L50">                session.setAttribute(&quot;requestList&quot;, requests);</span>
+<span class="nc" id="L51">            } catch (RequestException ex) {</span>
+<span class="nc" id="L52">                ex.printStackTrace();</span>
+<span class="nc" id="L53">                throw new CommandException(ex.getMessage());</span>
+<span class="nc" id="L54">            }</span>
+        } else {
+            try {
+<span class="nc" id="L57">                requests = rf.getAll();</span>
+<span class="nc" id="L58">                session.setAttribute(&quot;requestList&quot;, requests);</span>
+<span class="nc" id="L59">            } catch (RequestException ex) {</span>
+<span class="nc" id="L60">                ex.printStackTrace();</span>
+<span class="nc" id="L61">                throw new CommandException(ex.getMessage());</span>
+<span class="nc" id="L62">            }</span>
+        }
+
+<span class="nc" id="L65">        return new CommandTarget(target, &quot;Request List Loaded Successfully&quot;);</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span></div></body></html>

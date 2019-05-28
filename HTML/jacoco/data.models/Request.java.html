@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Request.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">FogProject</a> &gt; <a href="index.source.html" class="el_package">data.models</a> &gt; <span class="el_source">Request.java</span></div><h1>Request.java</h1><pre class="source lang-java linenums">package data.models;
+
+/**
+ *
+ * @author Andreas Vikke
+ */
+public class Request {
+    private int id, width, length, shedWidth, shedLength, angle;
+    private String roof, note;
+    private User user;
+
+<span class="fc" id="L12">    public Request(int width, int length, int shedWidth, int shedLength, String roof, int angle, String note, User user) {</span>
+<span class="fc" id="L13">        this.width = width;</span>
+<span class="fc" id="L14">        this.length = length;</span>
+<span class="fc" id="L15">        this.shedWidth = shedWidth;</span>
+<span class="fc" id="L16">        this.shedLength = shedLength;</span>
+<span class="fc" id="L17">        this.roof = roof;</span>
+<span class="fc" id="L18">        this.angle = angle;</span>
+<span class="fc" id="L19">        this.note = note;</span>
+<span class="fc" id="L20">        this.user = user;</span>
+<span class="fc" id="L21">    }</span>
+
+    public int getId() {
+<span class="fc" id="L24">        return id;</span>
+    }
+
+    public void setId(int id) {
+<span class="fc" id="L28">        this.id = id;</span>
+<span class="fc" id="L29">    }</span>
+    
+    public int getWidth() {
+<span class="fc" id="L32">        return width;</span>
+    }
+
+    public int getLength() {
+<span class="fc" id="L36">        return length;</span>
+    }
+
+    public int getShedWidth() {
+<span class="fc" id="L40">        return shedWidth;</span>
+    }
+
+    public int getShedLength() {
+<span class="fc" id="L44">        return shedLength;</span>
+    }
+
+    public int getAngle() {
+<span class="fc" id="L48">        return angle;</span>
+    }
+
+    public String getRoof() {
+<span class="fc" id="L52">        return roof;</span>
+    }
+
+    public String getNote() {
+<span class="fc" id="L56">        return note;</span>
+    }
+
+    public User getUser() {
+<span class="fc" id="L60">        return user;</span>
+    }
+
+    public void setWidth(int width) {
+<span class="fc" id="L64">        this.width = width;</span>
+<span class="fc" id="L65">    }</span>
+
+    public void setLength(int length) {
+<span class="fc" id="L68">        this.length = length;</span>
+<span class="fc" id="L69">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span></div></body></html>

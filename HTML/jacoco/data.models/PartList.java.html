@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PartList.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">FogProject</a> &gt; <a href="index.source.html" class="el_package">data.models</a> &gt; <span class="el_source">PartList.java</span></div><h1>PartList.java</h1><pre class="source lang-java linenums">package data.models;
+
+import java.util.ArrayList;
+
+/**
+ *
+ * @author William Sehested Huusfeldt
+ */
+public class PartList {
+    private ArrayList&lt;Part&gt; wood;
+    private ArrayList&lt;Part&gt; misc;
+
+<span class="nc" id="L13">    public PartList() {</span>
+<span class="nc" id="L14">        wood = new ArrayList();</span>
+<span class="nc" id="L15">        misc = new ArrayList();</span>
+<span class="nc" id="L16">    }</span>
+
+    public ArrayList&lt;Part&gt; getWoodList() {
+<span class="nc" id="L19">        return wood;</span>
+    }
+    
+    public ArrayList&lt;Part&gt; getMiscList() {
+<span class="nc" id="L23">        return misc;</span>
+    }
+    
+    public void addWoodPart(Part part) {
+<span class="nc" id="L27">        wood.add(part);</span>
+<span class="nc" id="L28">    }</span>
+    
+    public void addMiscPart(Part part) {
+<span class="nc" id="L31">        misc.add(part);</span>
+<span class="nc" id="L32">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span></div></body></html>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CommandList.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">FogProject</a> &gt; <a href="index.source.html" class="el_package">presentation.commands</a> &gt; <span class="el_source">CommandList.java</span></div><h1>CommandList.java</h1><pre class="source lang-java linenums">package presentation.commands;
+
+import java.util.HashMap;
+import java.util.Map;
+
+/**
+ *
+ * @author Martin Frederiksen
+ */
+public class CommandList {
+<span class="nc" id="L11">    private static CommandList instance = null;</span>
+<span class="nc" id="L12">    private final Map&lt;String, Command&gt; commands = new HashMap();</span>
+    
+<span class="nc" id="L14">    private CommandList(){</span>
+<span class="nc" id="L15">        commands.put(&quot;showParts&quot;, new ShowPartsCommand(&quot;WEB-INF/showParts.jsp&quot;));</span>
+<span class="nc" id="L16">        commands.put(&quot;request&quot;, new RequestCommand(&quot;WEB-INF/request.jsp&quot;));</span>
+<span class="nc" id="L17">        commands.put(&quot;addRequest&quot;, new AddRequestCommand(&quot;&quot;));</span>
+<span class="nc" id="L18">        commands.put(&quot;requestList&quot;, new RequestListCommand(&quot;WEB-INF/requestList.jsp&quot;));</span>
+<span class="nc" id="L19">        commands.put(&quot;login&quot;, new LoginCommand(&quot;FrontController?command=request&quot;));</span>
+<span class="nc" id="L20">        commands.put(&quot;logout&quot;, new LogoutCommand(&quot;WEB-INF/index.jsp&quot;));</span>
+<span class="nc" id="L21">        commands.put(&quot;orders&quot;, new OrderCommand(&quot;WEB-INF/order.jsp&quot;));</span>
+<span class="nc" id="L22">        commands.put(&quot;showUsers&quot;, new ShowUsersCommand(&quot;WEB-INF/showUsers.jsp&quot;));</span>
+<span class="nc" id="L23">        commands.put(&quot;updateRole&quot;, new UpdateUserCommand(&quot;FrontController?command=showUsers&quot;));</span>
+<span class="nc" id="L24">        commands.put(&quot;register&quot;, new RegisterCommand(&quot;WEB-INF/register.jsp&quot;));</span>
+<span class="nc" id="L25">        commands.put(&quot;addUser&quot;, new AddUserCommand(&quot;FrontController?command=request&quot;));</span>
+<span class="nc" id="L26">    }</span>
+    
+    public static synchronized Command commandForm(String key){
+<span class="nc bnc" id="L29" title="All 2 branches missed.">        if(key == null) key = &quot;back&quot;;</span>
+<span class="nc bnc" id="L30" title="All 2 branches missed.">        if(instance == null) instance = new CommandList();</span>
+<span class="nc" id="L31">        return instance.commands.get(key);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span></div></body></html>
