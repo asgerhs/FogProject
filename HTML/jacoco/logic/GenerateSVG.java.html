@@ -10,97 +10,97 @@ public class GenerateSVG {
     private String sideViewSVG;
     private int height, width, shedHeight, shedWidth, offset, outhangFront, outhangBack, outhangSites, postSpace;
 
-<span class="nc" id="L13">    public GenerateSVG(int length, int width, int shedLength, int shedWidth, int outhangFront, int outhangBack, int outhangSites) {</span>
-<span class="nc" id="L14">        this.height = width / 10;</span>
-<span class="nc" id="L15">        this.width = length / 10;</span>
-<span class="nc" id="L16">        this.shedHeight = shedWidth / 10;</span>
-<span class="nc" id="L17">        this.shedWidth = shedLength / 10;</span>
-<span class="nc" id="L18">        this.offset = 100;</span>
-<span class="nc" id="L19">        this.outhangFront = outhangFront / 10;</span>
-<span class="nc" id="L20">        this.outhangBack = outhangBack / 10;</span>
-<span class="nc" id="L21">        this.outhangSites = outhangSites / 10;</span>
+<span class="fc" id="L13">    public GenerateSVG(int length, int width, int shedLength, int shedWidth, int outhangFront, int outhangBack, int outhangSites) {</span>
+<span class="fc" id="L14">        this.height = width / 10;</span>
+<span class="fc" id="L15">        this.width = length / 10;</span>
+<span class="fc" id="L16">        this.shedHeight = shedWidth / 10;</span>
+<span class="fc" id="L17">        this.shedWidth = shedLength / 10;</span>
+<span class="fc" id="L18">        this.offset = 100;</span>
+<span class="fc" id="L19">        this.outhangFront = outhangFront / 10;</span>
+<span class="fc" id="L20">        this.outhangBack = outhangBack / 10;</span>
+<span class="fc" id="L21">        this.outhangSites = outhangSites / 10;</span>
 
-<span class="nc" id="L23">        topViewSVG = &quot;&lt;svg height='&quot; + (this.height + offset * 2) + &quot;' width='&quot; + (this.width + offset) + &quot;'&gt;&quot;;</span>
-<span class="nc" id="L24">        topViewSVG += generateArrows();</span>
-<span class="nc" id="L25">        topViewSVG += generateRect(0, 0, this.height, this.width, false);</span>
+<span class="fc" id="L23">        topViewSVG = &quot;&lt;svg height='&quot; + (this.height + offset * 2) + &quot;' width='&quot; + (this.width + offset) + &quot;'&gt;&quot;;</span>
+<span class="fc" id="L24">        topViewSVG += generateArrows();</span>
+<span class="fc" id="L25">        topViewSVG += generateRect(0, 0, this.height, this.width, false);</span>
 
-<span class="nc" id="L27">        sideViewSVG = &quot;&lt;svg height='&quot; + (this.height) + &quot;' width='&quot; + (this.width + offset * 2) + &quot;'&gt;&quot;;</span>
-<span class="nc" id="L28">        sideViewSVG += generateArrows();</span>
-<span class="nc" id="L29">    }</span>
+<span class="fc" id="L27">        sideViewSVG = &quot;&lt;svg height='&quot; + (this.height) + &quot;' width='&quot; + (this.width + offset * 2) + &quot;'&gt;&quot;;</span>
+<span class="fc" id="L28">        sideViewSVG += generateArrows();</span>
+<span class="fc" id="L29">    }</span>
 
     public void generateRoof() {
-<span class="nc" id="L32">        sideViewSVG += generateLine(0, 0, width, 10, false);</span>
-<span class="nc" id="L33">        sideViewSVG += generateLine(0, 40, width, 50, false);</span>
-<span class="nc" id="L34">        sideViewSVG += generateLine(0, 0, 0, 40, false);</span>
-<span class="nc" id="L35">        sideViewSVG += generateLine(width, 10, width, 50, false);</span>
-<span class="nc" id="L36">    }</span>
+<span class="fc" id="L32">        sideViewSVG += generateLine(0, 0, width, 10, false);</span>
+<span class="fc" id="L33">        sideViewSVG += generateLine(0, 40, width, 50, false);</span>
+<span class="fc" id="L34">        sideViewSVG += generateLine(0, 0, 0, 40, false);</span>
+<span class="fc" id="L35">        sideViewSVG += generateLine(width, 10, width, 50, false);</span>
+<span class="fc" id="L36">    }</span>
 
     public void generateShed() {
-<span class="nc bnc" id="L39" title="All 2 branches missed.">        for (int i = shedWidth; i &gt;= 0; i -= 5) {</span>
-<span class="nc" id="L40">            sideViewSVG += generateRect(width - outhangBack - i, 50, 250, 5, false);</span>
+<span class="fc bfc" id="L39" title="All 2 branches covered.">        for (int i = shedWidth; i &gt;= 0; i -= 5) {</span>
+<span class="fc" id="L40">            sideViewSVG += generateRect(width - outhangBack - i, 50, 250, 5, false);</span>
         }
-<span class="nc" id="L42">    }</span>
+<span class="fc" id="L42">    }</span>
 
     public void generatePosts(int count, int postWidth) {
-<span class="nc" id="L45">        postSpace = (width - outhangFront - outhangBack - postWidth) / (count - 1);</span>
-<span class="nc bnc" id="L46" title="All 2 branches missed.">        for (int i = 0; i &lt; count; i++) {</span>
-<span class="nc" id="L47">            topViewSVG += generateRect(outhangFront + postSpace * i + postWidth, outhangSites, postWidth, postWidth, true);</span>
-<span class="nc" id="L48">            topViewSVG += generateRect(outhangFront + postSpace * i + postWidth, height - outhangSites - postWidth, postWidth, postWidth, true);</span>
-<span class="nc" id="L49">            sideViewSVG += generateRect(outhangFront + postSpace * i, 42 + 4 * i, 250, postWidth, false);</span>
+<span class="fc" id="L45">        postSpace = (width - outhangFront - outhangBack - postWidth) / (count - 1);</span>
+<span class="fc bfc" id="L46" title="All 2 branches covered.">        for (int i = 0; i &lt; count; i++) {</span>
+<span class="fc" id="L47">            topViewSVG += generateRect(outhangFront + postSpace * i + postWidth, outhangSites, postWidth, postWidth, true);</span>
+<span class="fc" id="L48">            topViewSVG += generateRect(outhangFront + postSpace * i + postWidth, height - outhangSites - postWidth, postWidth, postWidth, true);</span>
+<span class="fc" id="L49">            sideViewSVG += generateRect(outhangFront + postSpace * i, 42 + 4 * i, 250, postWidth, false);</span>
         }
-<span class="nc" id="L51">    }</span>
+<span class="fc" id="L51">    }</span>
 
     public void generateRafter(int count, int space, int rafterWidth) {
-<span class="nc" id="L54">        System.out.println(space);</span>
-<span class="nc bnc" id="L55" title="All 2 branches missed.">        for (int i = 0; i &lt; count; i++) {</span>
-<span class="nc" id="L56">            topViewSVG += generateRect(space * i, 0, height, rafterWidth, false);</span>
+<span class="fc" id="L54">        System.out.println(space);</span>
+<span class="fc bfc" id="L55" title="All 2 branches covered.">        for (int i = 0; i &lt; count; i++) {</span>
+<span class="fc" id="L56">            topViewSVG += generateRect(space * i, 0, height, rafterWidth, false);</span>
         }
-<span class="nc" id="L58">    }</span>
+<span class="fc" id="L58">    }</span>
 
     public void generateRem(int remWidth) {
         // Top Raft
-<span class="nc" id="L62">        topViewSVG += generateRect(0, outhangSites, remWidth, width, false);</span>
+<span class="fc" id="L62">        topViewSVG += generateRect(0, outhangSites, remWidth, width, false);</span>
         // Bottom Raft
-<span class="nc" id="L64">        topViewSVG += generateRect(0, height - outhangSites - remWidth, remWidth, width, false);</span>
-<span class="nc" id="L65">    }</span>
+<span class="fc" id="L64">        topViewSVG += generateRect(0, height - outhangSites - remWidth, remWidth, width, false);</span>
+<span class="fc" id="L65">    }</span>
 
     public void generateShedPosts(int postWidth) {
         // Top left post
-<span class="nc" id="L69">        topViewSVG += generateRect(width - shedWidth - outhangBack, outhangSites, postWidth, postWidth, true);</span>
+<span class="fc" id="L69">        topViewSVG += generateRect(width - shedWidth - outhangBack, outhangSites, postWidth, postWidth, true);</span>
 
         // Bottom left post
-<span class="nc" id="L72">        topViewSVG += generateRect(width - shedWidth - outhangBack, shedHeight - outhangSites - postWidth, postWidth, postWidth, true);</span>
+<span class="fc" id="L72">        topViewSVG += generateRect(width - shedWidth - outhangBack, shedHeight - outhangSites - postWidth, postWidth, postWidth, true);</span>
         // Bottom right post
-<span class="nc" id="L74">        topViewSVG += generateRect(width - outhangBack, shedHeight - outhangSites - postWidth, postWidth, postWidth, true);</span>
+<span class="fc" id="L74">        topViewSVG += generateRect(width - outhangBack, shedHeight - outhangSites - postWidth, postWidth, postWidth, true);</span>
 
         // Middle left post
-<span class="nc bnc" id="L77" title="All 2 branches missed.">        topViewSVG += generateRect(width - shedWidth - outhangBack, shedHeight / 2 - (shedHeight == height ? outhangSites : 0) - postWidth, postWidth, postWidth, true);</span>
+<span class="fc bfc" id="L77" title="All 2 branches covered.">        topViewSVG += generateRect(width - shedWidth - outhangBack, shedHeight / 2 - (shedHeight == height ? outhangSites : 0) - postWidth, postWidth, postWidth, true);</span>
         // Middle right post
-<span class="nc bnc" id="L79" title="All 2 branches missed.">        topViewSVG += generateRect(width - outhangBack, shedHeight / 2 - (shedHeight == height ? outhangSites : 0) - postWidth, postWidth, postWidth, true);</span>
-<span class="nc" id="L80">    }</span>
+<span class="fc bfc" id="L79" title="All 2 branches covered.">        topViewSVG += generateRect(width - outhangBack, shedHeight / 2 - (shedHeight == height ? outhangSites : 0) - postWidth, postWidth, postWidth, true);</span>
+<span class="fc" id="L80">    }</span>
 
     public void generateShedReglar(int postWidth) {
         // Outer Box
-<span class="nc" id="L84">        topViewSVG += generateRect(width - shedWidth - outhangBack, outhangSites, shedHeight - outhangSites * 2, shedWidth + postWidth, true);</span>
+<span class="fc" id="L84">        topViewSVG += generateRect(width - shedWidth - outhangBack, outhangSites, shedHeight - outhangSites * 2, shedWidth + postWidth, true);</span>
         // Inner Box
-<span class="nc" id="L86">        topViewSVG += generateRect(width - shedWidth - outhangBack + postWidth, outhangSites + postWidth, shedHeight - outhangSites * 2 - postWidth * 2, shedWidth - postWidth, true);</span>
-<span class="nc" id="L87">    }</span>
+<span class="fc" id="L86">        topViewSVG += generateRect(width - shedWidth - outhangBack + postWidth, outhangSites + postWidth, shedHeight - outhangSites * 2 - postWidth * 2, shedWidth - postWidth, true);</span>
+<span class="fc" id="L87">    }</span>
 
     public void generateBand(int rafterCount, int rafterSpace, int rafterWidth) {
-<span class="nc" id="L90">        int calcLine = 0;</span>
-<span class="nc bnc" id="L91" title="All 2 branches missed.">        if (shedWidth % rafterSpace == 0) {</span>
-<span class="nc" id="L92">            calcLine = shedWidth / rafterSpace;</span>
+<span class="fc" id="L90">        int calcLine = 0;</span>
+<span class="fc bfc" id="L91" title="All 2 branches covered.">        if (shedWidth % rafterSpace == 0) {</span>
+<span class="fc" id="L92">            calcLine = shedWidth / rafterSpace;</span>
         } else {
-<span class="nc" id="L94">            calcLine = shedWidth / rafterSpace + 1;</span>
+<span class="fc" id="L94">            calcLine = shedWidth / rafterSpace + 1;</span>
         }
-<span class="nc" id="L96">        int calcShedLine = (rafterCount - calcLine) - 1;</span>
+<span class="fc" id="L96">        int calcShedLine = (rafterCount - calcLine) - 1;</span>
 
-<span class="nc" id="L98">        topViewSVG += generateLine(rafterSpace, outhangSites + rafterWidth, calcShedLine * rafterSpace - rafterSpace + rafterWidth, height - outhangSites - rafterWidth, true);</span>
-<span class="nc" id="L99">        topViewSVG += generateLine(rafterSpace, height - outhangSites - rafterWidth, calcShedLine * rafterSpace - rafterSpace + rafterWidth, outhangSites + rafterWidth, true);</span>
-<span class="nc" id="L100">    }</span>
+<span class="fc" id="L98">        topViewSVG += generateLine(rafterSpace, outhangSites + rafterWidth, calcShedLine * rafterSpace - rafterSpace + rafterWidth, height - outhangSites - rafterWidth, true);</span>
+<span class="fc" id="L99">        topViewSVG += generateLine(rafterSpace, height - outhangSites - rafterWidth, calcShedLine * rafterSpace - rafterSpace + rafterWidth, outhangSites + rafterWidth, true);</span>
+<span class="fc" id="L100">    }</span>
 
     private String generateArrows() {
-<span class="nc" id="L103">        return &quot;&lt;defs&gt;\n&quot;</span>
+<span class="fc" id="L103">        return &quot;&lt;defs&gt;\n&quot;</span>
                 + &quot;            &lt;marker id=\&quot;beginArrow\&quot; \n&quot;
                 + &quot;                    markerWidth=\&quot;9\&quot; markerHeight=\&quot;4\&quot; \n&quot;
                 + &quot;                    refX=\&quot;2\&quot; refY=\&quot;2\&quot; \n&quot;
@@ -119,109 +119,109 @@ public class GenerateSVG {
     public void generateMeasurements(int rafterCount, int rafterSpace, int postCount) {
         // Top-View measurements
         // Width Line &amp; Text
-<span class="nc" id="L122">        topViewSVG += generateMeasLine(0 + offset, height + outhangSites + offset, width + offset, height + outhangSites + offset, true);</span>
-<span class="nc" id="L123">        topViewSVG += generateText(width / 2, height + 60, &quot;&quot; + width, true);</span>
+<span class="fc" id="L122">        topViewSVG += generateMeasLine(0 + offset, height + outhangSites + offset, width + offset, height + outhangSites + offset, true);</span>
+<span class="fc" id="L123">        topViewSVG += generateText(width / 2, height + 60, &quot;&quot; + width, true);</span>
 
         // Entire height Line &amp; Text
-<span class="nc" id="L126">        topViewSVG += generateMeasLine(outhangSites, offset, outhangSites, offset + height, true);</span>
-<span class="nc" id="L127">        topViewSVG += generateText(0, offset + (height / 2), &quot;&quot; + height, false);</span>
+<span class="fc" id="L126">        topViewSVG += generateMeasLine(outhangSites, offset, outhangSites, offset + height, true);</span>
+<span class="fc" id="L127">        topViewSVG += generateText(0, offset + (height / 2), &quot;&quot; + height, false);</span>
 
         // Height excluding outhang Line &amp; Text
-<span class="nc" id="L130">        topViewSVG += generateMeasLine(outhangSites * 2, offset + outhangSites, outhangSites * 2, offset + height - outhangSites, true);</span>
-<span class="nc" id="L131">        topViewSVG += generateText(outhangSites + 5, offset + (height / 2), &quot;&quot; + (height - outhangSites * 2), false);</span>
+<span class="fc" id="L130">        topViewSVG += generateMeasLine(outhangSites * 2, offset + outhangSites, outhangSites * 2, offset + height - outhangSites, true);</span>
+<span class="fc" id="L131">        topViewSVG += generateText(outhangSites + 5, offset + (height / 2), &quot;&quot; + (height - outhangSites * 2), false);</span>
 
-<span class="nc bnc" id="L133" title="All 2 branches missed.">        for (int i = 0; i &lt; rafterCount; i++) {</span>
-<span class="nc" id="L134">            topViewSVG += generateMeasLine(offset + rafterSpace * i, 50, offset + rafterSpace * i, 90, false);</span>
-<span class="nc bnc" id="L135" title="All 2 branches missed.">            if (i &lt; rafterCount - 1) {</span>
-<span class="nc" id="L136">                topViewSVG += generateMeasLine(offset + rafterSpace * i + 5, 50, offset + rafterSpace * i + rafterSpace - 5, 50, true);</span>
-<span class="nc" id="L137">                topViewSVG += generateText(rafterSpace * i + rafterSpace / 2 - 10, 45 - 100, &quot;&quot; + rafterSpace, true);</span>
+<span class="fc bfc" id="L133" title="All 2 branches covered.">        for (int i = 0; i &lt; rafterCount; i++) {</span>
+<span class="fc" id="L134">            topViewSVG += generateMeasLine(offset + rafterSpace * i, 50, offset + rafterSpace * i, 90, false);</span>
+<span class="fc bfc" id="L135" title="All 2 branches covered.">            if (i &lt; rafterCount - 1) {</span>
+<span class="fc" id="L136">                topViewSVG += generateMeasLine(offset + rafterSpace * i + 5, 50, offset + rafterSpace * i + rafterSpace - 5, 50, true);</span>
+<span class="fc" id="L137">                topViewSVG += generateText(rafterSpace * i + rafterSpace / 2 - 10, 45 - 100, &quot;&quot; + rafterSpace, true);</span>
             }
         }
 
         // Side-View Measurement
         // Front Outhang Lines &amp; Text
-<span class="nc" id="L143">        sideViewSVG += generateMeasLine(offset, 425, offset + outhangFront, 425, true);</span>
-<span class="nc" id="L144">        sideViewSVG += generateMeasLine(offset + outhangFront, 430, offset + outhangFront, 400, false);</span>
-<span class="nc" id="L145">        sideViewSVG += generateMeasLine(offset, 430, offset, offset + 45, false);</span>
-<span class="nc" id="L146">        sideViewSVG += generateText(outhangFront / 2 - 15, 340, &quot;&quot; + outhangFront, true);</span>
+<span class="fc" id="L143">        sideViewSVG += generateMeasLine(offset, 425, offset + outhangFront, 425, true);</span>
+<span class="fc" id="L144">        sideViewSVG += generateMeasLine(offset + outhangFront, 430, offset + outhangFront, 400, false);</span>
+<span class="fc" id="L145">        sideViewSVG += generateMeasLine(offset, 430, offset, offset + 45, false);</span>
+<span class="fc" id="L146">        sideViewSVG += generateText(outhangFront / 2 - 15, 340, &quot;&quot; + outhangFront, true);</span>
 
         // Front height Line &amp; Text
-<span class="nc" id="L149">        sideViewSVG += generateMeasLine(75, 105, 75, 390, true);</span>
-<span class="nc" id="L150">        sideViewSVG += generateText(40, 240, &quot;230&quot;, false);</span>
+<span class="fc" id="L149">        sideViewSVG += generateMeasLine(75, 105, 75, 390, true);</span>
+<span class="fc" id="L150">        sideViewSVG += generateText(40, 240, &quot;230&quot;, false);</span>
 
         // Back height Line &amp; Text
-<span class="nc" id="L153">        sideViewSVG += generateMeasLine(offset + width + 25, 115, offset + width + 25, 390, true);</span>
-<span class="nc" id="L154">        sideViewSVG += generateText(offset + width + 40, 250, &quot;210&quot;, false);</span>
+<span class="fc" id="L153">        sideViewSVG += generateMeasLine(offset + width + 25, 115, offset + width + 25, 390, true);</span>
+<span class="fc" id="L154">        sideViewSVG += generateText(offset + width + 40, 250, &quot;210&quot;, false);</span>
 
         // Back Outhang (with last post) Lines &amp; Text
-<span class="nc" id="L157">        sideViewSVG += generateMeasLine(offset + width - outhangBack - 10, 425, offset + width, 425, true);</span>
-<span class="nc" id="L158">        sideViewSVG += generateMeasLine(offset + width, 430, offset + width, 155, false);</span>
-<span class="nc" id="L159">        sideViewSVG += generateText(width + 10, 340, &quot;&quot; + (outhangBack + 10), true);</span>
+<span class="fc" id="L157">        sideViewSVG += generateMeasLine(offset + width - outhangBack - 10, 425, offset + width, 425, true);</span>
+<span class="fc" id="L158">        sideViewSVG += generateMeasLine(offset + width, 430, offset + width, 155, false);</span>
+<span class="fc" id="L159">        sideViewSVG += generateText(width + 10, 340, &quot;&quot; + (outhangBack + 10), true);</span>
 
-<span class="nc bnc" id="L161" title="All 6 branches missed.">        for (int i = 0; i &lt; postCount - (shedHeight &gt; 0 &amp;&amp; shedWidth &gt; 0 ? 2 : 1); i++) {</span>
-<span class="nc" id="L162">            sideViewSVG += generateMeasLine(offset + outhangFront + postSpace * i, 425, offset + outhangFront + postSpace * i + postSpace, 425, true);</span>
-<span class="nc" id="L163">            sideViewSVG += generateMeasLine(offset + outhangFront + postSpace * i + postSpace, 430, offset + outhangFront + postSpace * i + postSpace, 400, false);</span>
-<span class="nc" id="L164">            sideViewSVG += generateText(outhangFront + postSpace / 2 + postSpace * i, 340, &quot;&quot; + postSpace, true);</span>
+<span class="pc bpc" id="L161" title="1 of 6 branches missed.">        for (int i = 0; i &lt; postCount - (shedHeight &gt; 0 &amp;&amp; shedWidth &gt; 0 ? 2 : 1); i++) {</span>
+<span class="fc" id="L162">            sideViewSVG += generateMeasLine(offset + outhangFront + postSpace * i, 425, offset + outhangFront + postSpace * i + postSpace, 425, true);</span>
+<span class="fc" id="L163">            sideViewSVG += generateMeasLine(offset + outhangFront + postSpace * i + postSpace, 430, offset + outhangFront + postSpace * i + postSpace, 400, false);</span>
+<span class="fc" id="L164">            sideViewSVG += generateText(outhangFront + postSpace / 2 + postSpace * i, 340, &quot;&quot; + postSpace, true);</span>
         }
 
-<span class="nc bnc" id="L167" title="All 4 branches missed.">        if (shedHeight &gt; 0 &amp;&amp; shedWidth &gt; 0) {</span>
-<span class="nc" id="L168">            sideViewSVG += generateMeasLine(offset + width - outhangBack - 10, 425, offset + width - outhangBack - shedWidth, 425, true);</span>
-<span class="nc" id="L169">            sideViewSVG += generateMeasLine(offset + width - outhangBack - shedWidth, 430, offset + width - outhangBack - shedWidth, 405, false);</span>
-<span class="nc" id="L170">            sideViewSVG += generateText(width - outhangBack - shedWidth / 2, 340, &quot;&quot; + shedWidth, true);</span>
+<span class="pc bpc" id="L167" title="1 of 4 branches missed.">        if (shedHeight &gt; 0 &amp;&amp; shedWidth &gt; 0) {</span>
+<span class="fc" id="L168">            sideViewSVG += generateMeasLine(offset + width - outhangBack - 10, 425, offset + width - outhangBack - shedWidth, 425, true);</span>
+<span class="fc" id="L169">            sideViewSVG += generateMeasLine(offset + width - outhangBack - shedWidth, 430, offset + width - outhangBack - shedWidth, 405, false);</span>
+<span class="fc" id="L170">            sideViewSVG += generateText(width - outhangBack - shedWidth / 2, 340, &quot;&quot; + shedWidth, true);</span>
 
-<span class="nc" id="L172">            sideViewSVG += generateMeasLine(offset + width - outhangBack - 10, 430, offset + width - outhangBack - 10, 405, false);</span>
+<span class="fc" id="L172">            sideViewSVG += generateMeasLine(offset + width - outhangBack - 10, 430, offset + width - outhangBack - 10, 405, false);</span>
 
-<span class="nc" id="L174">            sideViewSVG += generateMeasLine(offset + outhangFront + postSpace, 425, offset + outhangFront + postSpace + postSpace - shedWidth + 10, 425, true);</span>
-<span class="nc" id="L175">            sideViewSVG += generateText(outhangFront + postSpace + (postSpace - shedWidth) / 2, 340, &quot;&quot; + (postSpace - shedWidth), true);</span>
+<span class="fc" id="L174">            sideViewSVG += generateMeasLine(offset + outhangFront + postSpace, 425, offset + outhangFront + postSpace + postSpace - shedWidth + 10, 425, true);</span>
+<span class="fc" id="L175">            sideViewSVG += generateText(outhangFront + postSpace + (postSpace - shedWidth) / 2, 340, &quot;&quot; + (postSpace - shedWidth), true);</span>
         }
-<span class="nc" id="L177">    }</span>
+<span class="fc" id="L177">    }</span>
 
     public void generateRoofWithAngle(int laths, int roofWidth) {
-<span class="nc" id="L180">        int remain = ((roofWidth - 380) / (laths - 2)) / 10;</span>
+<span class="fc" id="L180">        int remain = ((roofWidth - 380) / (laths - 2)) / 10;</span>
 
-<span class="nc" id="L182">        topViewSVG += generateRect(0, 0, 5, width, false);</span>
-<span class="nc" id="L183">        topViewSVG += generateRect(0, 35, 5, width, false);</span>
-<span class="nc" id="L184">        topViewSVG += generateRect(0, height / 2 - 5, 5, width, false);</span>
+<span class="fc" id="L182">        topViewSVG += generateRect(0, 0, 5, width, false);</span>
+<span class="fc" id="L183">        topViewSVG += generateRect(0, 35, 5, width, false);</span>
+<span class="fc" id="L184">        topViewSVG += generateRect(0, height / 2 - 5, 5, width, false);</span>
 
-<span class="nc bnc" id="L186" title="All 2 branches missed.">        for (int i = 1; i &lt; laths - 1; i++) {</span>
-<span class="nc" id="L187">            topViewSVG += generateRect(0, (35 + (i * remain)), 5, width, false);</span>
+<span class="fc bfc" id="L186" title="All 2 branches covered.">        for (int i = 1; i &lt; laths - 1; i++) {</span>
+<span class="fc" id="L187">            topViewSVG += generateRect(0, (35 + (i * remain)), 5, width, false);</span>
         }
 
-<span class="nc" id="L190">        topViewSVG += generateRect(0, height / 2 + 3, 5, width, false);</span>
-<span class="nc bnc" id="L191" title="All 2 branches missed.">        for (int i = 1; i &lt; laths - 1; i++) {</span>
-<span class="nc" id="L192">            topViewSVG += generateRect(0, ((height / 2 + 3) + i * remain), 5, width, false);</span>
+<span class="fc" id="L190">        topViewSVG += generateRect(0, height / 2 + 3, 5, width, false);</span>
+<span class="fc bfc" id="L191" title="All 2 branches covered.">        for (int i = 1; i &lt; laths - 1; i++) {</span>
+<span class="fc" id="L192">            topViewSVG += generateRect(0, ((height / 2 + 3) + i * remain), 5, width, false);</span>
         }
 
-<span class="nc" id="L195">        topViewSVG += generateRect(0, height - 5, 5, width, false);</span>
+<span class="fc" id="L195">        topViewSVG += generateRect(0, height - 5, 5, width, false);</span>
         
-<span class="nc bnc" id="L197" title="All 2 branches missed.">        for (int i = width; i &gt; 0; i -= 15) {</span>
-<span class="nc" id="L198">            sideViewSVG += generateRect(width - i, 10, 40, 5, false);</span>
+<span class="fc bfc" id="L197" title="All 2 branches covered.">        for (int i = width; i &gt; 0; i -= 15) {</span>
+<span class="fc" id="L198">            sideViewSVG += generateRect(width - i, 10, 40, 5, false);</span>
         }
         
-<span class="nc" id="L201">        sideViewSVG += generateRect(5, 0, 10, width - 5, true);</span>
-<span class="nc" id="L202">        sideViewSVG += generateRect(0, 0, 50, 5, true);</span>
-<span class="nc" id="L203">        sideViewSVG += generateRect(width, 0, 50, 5, true);</span>
-<span class="nc" id="L204">        sideViewSVG += generateRect(0, 45, 5, width, true);</span>
+<span class="fc" id="L201">        sideViewSVG += generateRect(5, 0, 10, width - 5, true);</span>
+<span class="fc" id="L202">        sideViewSVG += generateRect(0, 0, 50, 5, true);</span>
+<span class="fc" id="L203">        sideViewSVG += generateRect(width, 0, 50, 5, true);</span>
+<span class="fc" id="L204">        sideViewSVG += generateRect(0, 45, 5, width, true);</span>
         
         
-<span class="nc" id="L207">        System.out.println(remain);</span>
-<span class="nc" id="L208">        System.out.println(laths);</span>
-<span class="nc" id="L209">    }</span>
+<span class="fc" id="L207">        System.out.println(remain);</span>
+<span class="fc" id="L208">        System.out.println(laths);</span>
+<span class="fc" id="L209">    }</span>
 
     private String generateRect(int x, int y, int height, int width, boolean bold) {
-<span class="nc bnc" id="L212" title="All 2 branches missed.">        return &quot;&lt;rect class='&quot; + (bold ? &quot;svgBold&quot; : &quot;&quot;) + &quot;' x='&quot; + (x + offset) + &quot;' y='&quot; + (y + offset) + &quot;' height='&quot; + height + &quot;' width='&quot; + width + &quot;'/&gt;&quot;;</span>
+<span class="fc bfc" id="L212" title="All 2 branches covered.">        return &quot;&lt;rect class='&quot; + (bold ? &quot;svgBold&quot; : &quot;&quot;) + &quot;' x='&quot; + (x + offset) + &quot;' y='&quot; + (y + offset) + &quot;' height='&quot; + height + &quot;' width='&quot; + width + &quot;'/&gt;&quot;;</span>
     }
 
     private String generateLine(int x1, int y1, int x2, int y2, boolean dashed) {
-<span class="nc bnc" id="L216" title="All 2 branches missed.">        return &quot;&lt;line class='&quot; + (dashed ? &quot;svgDashed' stroke-dasharray='5,5'&quot; : &quot;svgThin'&quot;) + &quot; x1='&quot; + (x1 + offset) + &quot;' y1='&quot; + (y1 + offset) + &quot;' x2='&quot; + (x2 + offset) + &quot;' y2='&quot; + (y2 + offset) + &quot;'/&gt;&quot;;</span>
+<span class="fc bfc" id="L216" title="All 2 branches covered.">        return &quot;&lt;line class='&quot; + (dashed ? &quot;svgDashed' stroke-dasharray='5,5'&quot; : &quot;svgThin'&quot;) + &quot; x1='&quot; + (x1 + offset) + &quot;' y1='&quot; + (y1 + offset) + &quot;' x2='&quot; + (x2 + offset) + &quot;' y2='&quot; + (y2 + offset) + &quot;'/&gt;&quot;;</span>
     }
 
     private String generateMeasLine(int x1, int y1, int x2, int y2, boolean arrows) {
-<span class="nc bnc" id="L220" title="All 2 branches missed.">        return &quot;&lt;line class='&quot; + (arrows ? &quot;measure&quot; : &quot;&quot;) + &quot;' x1='&quot; + (x1) + &quot;' y1='&quot; + (y1) + &quot;' x2='&quot; + (x2) + &quot;' y2='&quot; + (y2) + &quot;'/&gt;&quot;;</span>
+<span class="fc bfc" id="L220" title="All 2 branches covered.">        return &quot;&lt;line class='&quot; + (arrows ? &quot;measure&quot; : &quot;&quot;) + &quot;' x1='&quot; + (x1) + &quot;' y1='&quot; + (y1) + &quot;' x2='&quot; + (x2) + &quot;' y2='&quot; + (y2) + &quot;'/&gt;&quot;;</span>
     }
 
     private String generateText(int x, int y, String text, boolean os) {
-<span class="nc bnc" id="L224" title="All 4 branches missed.">        return &quot;&lt;text x='&quot; + (x + (os ? offset : 0)) + &quot;' y='&quot; + (y + (os ? offset : 0)) + &quot;' fill='black'&gt;&quot; + text + &quot;&lt;/text&gt;&quot;;</span>
+<span class="fc bfc" id="L224" title="All 4 branches covered.">        return &quot;&lt;text x='&quot; + (x + (os ? offset : 0)) + &quot;' y='&quot; + (y + (os ? offset : 0)) + &quot;' fill='black'&gt;&quot; + text + &quot;&lt;/text&gt;&quot;;</span>
     }
 
     public String getTopViewSVG() {

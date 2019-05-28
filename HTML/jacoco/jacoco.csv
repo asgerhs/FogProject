@@ -5,9 +5,9 @@ FogProject,data.models,User,0,49,0,0,0,18,0,9,0,9
 FogProject,data.models,RoleEnum,0,34,0,0,0,4,0,1,0,1
 FogProject,data.models,LoggerEnum,64,0,0,0,2,0,1,0,1,0
 FogProject,data.models,Request,0,66,0,0,0,25,0,13,0,13
-FogProject,data.models,PartList,31,0,0,0,10,0,5,0,5,0
+FogProject,data.models,PartList,0,31,0,0,0,10,0,5,0,5
 FogProject,data.models,Category,29,0,0,0,6,0,4,0,4,0
-FogProject,data.models,Part,54,0,0,0,11,0,6,0,6,0
+FogProject,data.models,Part,30,24,0,0,2,9,2,4,2,4
 FogProject,data.models,CommandTarget,25,0,0,0,10,0,5,0,5,0
 FogProject,data.models,Material,32,39,0,0,1,14,1,7,1,7
 FogProject,presentation.commands,ShowPartsCommand,139,0,10,0,31,0,7,0,2,0
@@ -24,8 +24,8 @@ FogProject,presentation.commands,ShowUsersCommand,49,0,2,0,14,0,3,0,2,0
 FogProject,presentation.commands,UpdateUserCommand,59,0,2,0,14,0,3,0,2,0
 FogProject,data,DatabaseConnector,0,22,1,3,0,6,1,4,0,3
 FogProject,data,ExceptionLogger,104,0,2,0,14,0,4,0,3,0
-FogProject,data,DataSourceMySQL,84,0,0,0,24,0,2,0,2,0
-FogProject,logic.facades,MaterialFacade,12,23,0,0,3,6,1,4,1,4
+FogProject,data,DataSourceMySQL,3,81,0,0,2,22,0,2,0,2
+FogProject,logic.facades,MaterialFacade,0,35,0,0,0,9,0,5,0,5
 FogProject,logic.facades,UserFacade,30,57,0,0,9,14,2,8,2,8
 FogProject,logic.facades,RequestFacade,12,33,0,0,3,11,1,6,1,6
 FogProject,logic.facades,OrderFacade,12,28,0,0,3,8,1,5,1,5
@@ -33,10 +33,10 @@ FogProject,data.mappers,OrderMapper,84,174,0,6,16,41,0,8,0,5
 FogProject,data.mappers,MaterialMapper,84,215,0,6,16,56,0,8,0,5
 FogProject,data.mappers,RequestMapper,129,311,0,6,25,83,0,9,0,6
 FogProject,data.mappers,UserMapper,147,283,0,6,28,75,0,11,0,8
-FogProject,logic,AdvancedCalculator,1754,0,64,0,240,0,61,0,29,0
-FogProject,logic,AdvancedCalculator.MatSortHeighComparator,12,0,0,0,2,0,2,0,2,0
-FogProject,logic,GenerateSVG,2121,0,42,0,116,0,40,0,19,0
-FogProject,logic,AdvancedCalculator.MatSortLowComparator,12,0,0,0,2,0,2,0,2,0
+FogProject,logic,AdvancedCalculator,67,1687,12,52,9,231,15,46,3,26
+FogProject,logic,AdvancedCalculator.MatSortHeighComparator,0,12,0,0,0,2,0,2,0,2
+FogProject,logic,GenerateSVG,22,2099,2,40,5,111,5,35,3,16
+FogProject,logic,AdvancedCalculator.MatSortLowComparator,0,12,0,0,0,2,0,2,0,2
 FogProject,data.exceptions,RequestException,4,0,0,0,2,0,1,0,1,0
 FogProject,data.exceptions,MaterialException,4,0,0,0,2,0,1,0,1,0
 FogProject,data.exceptions,OrderException,4,0,0,0,2,0,1,0,1,0

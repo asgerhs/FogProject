@@ -10,9 +10,7 @@ import java.util.HashMap;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import logic.AdvancedCalculator;
-import logic.facades.MaterialFacade;
 import logic.facades.OrderFacade;
-import logic.facades.RequestFacade;
 
 /**
  *
@@ -24,51 +22,51 @@ public class ShowPartsCommand implements Command {
     private OrderFacade of;
     private AdvancedCalculator calc;
 
-<span class="nc" id="L27">    public ShowPartsCommand(String target) {</span>
-<span class="nc" id="L28">        this.target = target;</span>
+<span class="nc" id="L25">    public ShowPartsCommand(String target) {</span>
+<span class="nc" id="L26">        this.target = target;</span>
 
-<span class="nc" id="L30">        of = new OrderFacade();</span>
+<span class="nc" id="L28">        of = new OrderFacade();</span>
         
-<span class="nc" id="L32">    }</span>
+<span class="nc" id="L30">    }</span>
 
     @Override
     public CommandTarget execute(HttpServletRequest request) {
-<span class="nc" id="L36">        HttpSession session = request.getSession();</span>
+<span class="nc" id="L34">        HttpSession session = request.getSession();</span>
 
-<span class="nc" id="L38">        Enumeration&lt;String&gt; paramNames = request.getParameterNames();</span>
-<span class="nc" id="L39">        HashMap&lt;String, String&gt; params = new HashMap();</span>
-<span class="nc bnc" id="L40" title="All 2 branches missed.">        while (paramNames.hasMoreElements()) {</span>
-<span class="nc" id="L41">            String pName = paramNames.nextElement();</span>
-<span class="nc" id="L42">            params.put(pName, request.getParameter(pName));</span>
-<span class="nc" id="L43">        }</span>
+<span class="nc" id="L36">        Enumeration&lt;String&gt; paramNames = request.getParameterNames();</span>
+<span class="nc" id="L37">        HashMap&lt;String, String&gt; params = new HashMap();</span>
+<span class="nc bnc" id="L38" title="All 2 branches missed.">        while (paramNames.hasMoreElements()) {</span>
+<span class="nc" id="L39">            String pName = paramNames.nextElement();</span>
+<span class="nc" id="L40">            params.put(pName, request.getParameter(pName));</span>
+<span class="nc" id="L41">        }</span>
 
-<span class="nc bnc" id="L45" title="All 2 branches missed.">        if(request.getParameter(&quot;orderId&quot;) != null){</span>
+<span class="nc bnc" id="L43" title="All 2 branches missed.">        if(request.getParameter(&quot;orderId&quot;) != null){</span>
             try {
-<span class="nc" id="L47">                Order o = of.getSingle(Integer.parseInt(request.getParameter(&quot;orderId&quot;)));</span>
-<span class="nc" id="L48">                calc = new AdvancedCalculator(</span>
-<span class="nc" id="L49">                    o.getRequest().getLength() * 10,</span>
-<span class="nc" id="L50">                    o.getRequest().getWidth() * 10,</span>
-<span class="nc bnc" id="L51" title="All 4 branches missed.">                    (o.getRequest().getShedLength() &gt; 0 &amp;&amp; o.getRequest().getShedWidth() &gt; 0),</span>
-<span class="nc" id="L52">                    o.getRequest().getShedLength() * 10,</span>
-<span class="nc" id="L53">                    o.getRequest().getShedWidth() * 10,</span>
-<span class="nc bnc" id="L54" title="All 2 branches missed.">                    o.getRequest().getAngle() &gt; 0,</span>
-<span class="nc" id="L55">                    o.getRequest().getAngle());</span>
+<span class="nc" id="L45">                Order o = of.getSingle(Integer.parseInt(request.getParameter(&quot;orderId&quot;)));</span>
+<span class="nc" id="L46">                calc = new AdvancedCalculator(</span>
+<span class="nc" id="L47">                    o.getRequest().getLength() * 10,</span>
+<span class="nc" id="L48">                    o.getRequest().getWidth() * 10,</span>
+<span class="nc bnc" id="L49" title="All 4 branches missed.">                    (o.getRequest().getShedLength() &gt; 0 &amp;&amp; o.getRequest().getShedWidth() &gt; 0),</span>
+<span class="nc" id="L50">                    o.getRequest().getShedLength() * 10,</span>
+<span class="nc" id="L51">                    o.getRequest().getShedWidth() * 10,</span>
+<span class="nc bnc" id="L52" title="All 2 branches missed.">                    o.getRequest().getAngle() &gt; 0,</span>
+<span class="nc" id="L53">                    o.getRequest().getAngle());</span>
             
             
-<span class="nc" id="L58">            } catch (OrderException ex) {</span>
-<span class="nc" id="L59">                ex.printStackTrace();</span>
-<span class="nc" id="L60">            }</span>
+<span class="nc" id="L56">            } catch (OrderException ex) {</span>
+<span class="nc" id="L57">                ex.printStackTrace();</span>
+<span class="nc" id="L58">            }</span>
         }
 
-<span class="nc" id="L63">        ArrayList&lt;Part&gt; wood = calc.getParts().getWoodList();</span>
-<span class="nc" id="L64">        ArrayList&lt;Part&gt; misc = calc.getParts().getMiscList();</span>
+<span class="nc" id="L61">        ArrayList&lt;Part&gt; wood = calc.getParts().getWoodList();</span>
+<span class="nc" id="L62">        ArrayList&lt;Part&gt; misc = calc.getParts().getMiscList();</span>
 
-<span class="nc" id="L66">        session.setAttribute(&quot;woodParts&quot;, wood);</span>
-<span class="nc" id="L67">        session.setAttribute(&quot;miscParts&quot;, misc);</span>
-<span class="nc" id="L68">        session.setAttribute(&quot;topViewSVG&quot;, calc.getTopViewSVG().getTopViewSVG());</span>
-<span class="nc" id="L69">        session.setAttribute(&quot;sideViewSVG&quot;, calc.getTopViewSVG().getSideViewSVG());</span>
+<span class="nc" id="L64">        session.setAttribute(&quot;woodParts&quot;, wood);</span>
+<span class="nc" id="L65">        session.setAttribute(&quot;miscParts&quot;, misc);</span>
+<span class="nc" id="L66">        session.setAttribute(&quot;topViewSVG&quot;, calc.getTopViewSVG().getTopViewSVG());</span>
+<span class="nc" id="L67">        session.setAttribute(&quot;sideViewSVG&quot;, calc.getTopViewSVG().getSideViewSVG());</span>
 
-<span class="nc" id="L71">        return new CommandTarget(target, &quot;PartList Loaded Successfully&quot;);</span>
+<span class="nc" id="L69">        return new CommandTarget(target, &quot;PartList Loaded Successfully&quot;);</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span></div></body></html>

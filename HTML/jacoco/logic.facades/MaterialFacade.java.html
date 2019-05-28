@@ -16,9 +16,9 @@ import logic.interfaces.FacadeInterface;
 public class MaterialFacade implements FacadeInterface&lt;Material, String&gt;{
     MaterialMapper mm;
     
-<span class="nc" id="L19">    public MaterialFacade() {</span>
-<span class="nc" id="L20">        mm = new MaterialMapper(new DataSourceMySQL().getDataSource());</span>
-<span class="nc" id="L21">    }</span>
+<span class="fc" id="L19">    public MaterialFacade() {</span>
+<span class="fc" id="L20">        mm = new MaterialMapper(new DataSourceMySQL().getDataSource());</span>
+<span class="fc" id="L21">    }</span>
 <span class="fc" id="L22">    public MaterialFacade(DataSource ds) {</span>
 <span class="fc" id="L23">        mm = new MaterialMapper(ds);</span>
 <span class="fc" id="L24">    }</span>
