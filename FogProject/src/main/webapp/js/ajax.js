@@ -19,7 +19,7 @@ function ajax(formObj) {
             $("#errorBox").show();
             $("#successBox").hide();
         } else {
-            $("#successBox").prepend(request.getResponseHeader('message'));
+            $("#successBox").html(request.getResponseHeader('message'));
             $("#successBox").show();
             $("#errorBox").hide();
         }
