@@ -24,7 +24,7 @@ public class DatabaseConnector {
     /**
      * Creates a new connection to the DataSource if closed
      * @return new or current DataSource
-     * @throws SQLException 
+     * @throws SQLException SQLException
      */
     public Connection open() throws SQLException {
         if (connection == null || connection.isClosed()) {

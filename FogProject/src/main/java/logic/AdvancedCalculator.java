@@ -12,7 +12,7 @@ import logic.facades.MaterialFacade;
 
 /**
  *
- * @author William Sehested Huusfeldt & Martin Frederiksen & Andreas Vikke
+ * @author William Sehested Huusfeldt, Martin Frederiksen, Andreas Vikke
  */
 public class AdvancedCalculator {
 

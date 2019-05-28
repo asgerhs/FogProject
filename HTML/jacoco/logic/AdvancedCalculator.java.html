@@ -1,0 +1,408 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AdvancedCalculator.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">FogProject</a> &gt; <a href="index.source.html" class="el_package">logic</a> &gt; <span class="el_source">AdvancedCalculator.java</span></div><h1>AdvancedCalculator.java</h1><pre class="source lang-java linenums">package logic;
+
+import data.ExceptionLogger;
+import data.exceptions.MaterialException;
+import data.models.LoggerEnum;
+import data.models.Material;
+import data.models.Part;
+import data.models.PartList;
+import java.util.ArrayList;
+import java.util.Comparator;
+import logic.facades.MaterialFacade;
+
+/**
+ *
+ * @author William Sehested Huusfeldt &amp; Martin Frederiksen &amp; Andreas Vikke
+ */
+public class AdvancedCalculator {
+
+    private int length, width, posts, rafters, rafterSpace, shedLength, shedWidth, shedPostsWidth, shedPostsLength, shedReglar, shedCladdings, laths;
+    private boolean shed;
+    private boolean roof;
+    private PartList pl;
+    private GenerateSVG svg;
+    private ArrayList&lt;Material&gt; materials;
+    private MaterialFacade mf;
+    private double angle;
+
+<span class="fc" id="L28">    public AdvancedCalculator(int length, int width, boolean shed, int shedLength, int shedWidth, boolean roof, double angle) {</span>
+<span class="fc" id="L29">        this.length = length;</span>
+<span class="fc" id="L30">        this.width = width;</span>
+<span class="fc" id="L31">        this.shed = shed;</span>
+<span class="fc" id="L32">        this.shedLength = shedLength;</span>
+<span class="fc" id="L33">        this.shedWidth = shedWidth;</span>
+<span class="fc" id="L34">        this.roof = roof;</span>
+<span class="fc" id="L35">        this.angle = angle;</span>
+<span class="fc" id="L36">        pl = new PartList();</span>
+<span class="fc" id="L37">        svg = new GenerateSVG(length, width, shedLength, shedWidth, 1000, 200, 350);</span>
+<span class="fc" id="L38">        mf = new MaterialFacade();</span>
+
+        try {
+
+<span class="fc" id="L42">            calcBottomFasciasFB();</span>
+<span class="fc" id="L43">            calcBottomFasciasSide();</span>
+<span class="fc" id="L44">            calcTopFasciasFront();</span>
+<span class="fc" id="L45">            calcTopFasciasSide();</span>
+<span class="fc" id="L46">            calcPosts();</span>
+<span class="fc" id="L47">            calcRem();</span>
+<span class="fc" id="L48">            calcRafters();</span>
+<span class="fc" id="L49">            calcRem();</span>
+<span class="fc" id="L50">            calcWaterBoardFront();</span>
+<span class="fc" id="L51">            calcWaterBoardSide();</span>
+<span class="fc" id="L52">            calcRoofingSheets();</span>
+
+<span class="fc" id="L54">            calcRoofScrews();</span>
+<span class="fc" id="L55">            calcBand();</span>
+<span class="fc" id="L56">            calcBracketsRight();</span>
+<span class="fc" id="L57">            calcBracketsLeft();</span>
+<span class="fc" id="L58">            calcFasciasScrews();</span>
+
+<span class="fc" id="L60">            calcBoltsAndSquares();</span>
+
+<span class="fc bfc" id="L62" title="All 2 branches covered.">            if (roof) {</span>
+<span class="fc" id="L63">                calcLathsRoof();</span>
+<span class="fc" id="L64">                calcRoofBricks();</span>
+            }
+<span class="fc bfc" id="L66" title="All 2 branches covered.">            if (shed) {</span>
+<span class="fc" id="L67">                calcShedReglarWidth();</span>
+<span class="fc" id="L68">                calcShedCladding();</span>
+<span class="fc" id="L69">                calcShedMisc();</span>
+<span class="fc" id="L70">                svg.generateShed();</span>
+            }
+
+<span class="fc" id="L73">            calcScrewPackages();</span>
+<span class="fc" id="L74">            svg.generateMeasurements(rafters, rafterSpace, posts / 2);</span>
+<span class="fc bfc" id="L75" title="All 2 branches covered.">            if(!roof){</span>
+<span class="fc" id="L76">            svg.generateRoof();</span>
+            }
+<span class="nc" id="L78">        } catch (MaterialException ex) {</span>
+<span class="nc" id="L79">            ExceptionLogger.log(LoggerEnum.ADVANCECALCULATOR, &quot;Error in AdvanceCalculator Method: \n&quot; + ex.getMessage(), ex.getStackTrace());</span>
+<span class="fc" id="L80">        }</span>
+<span class="fc" id="L81">    }</span>
+
+    //Calculating the square of carport
+    private void calcPosts() throws MaterialException {
+<span class="fc" id="L85">        int p = 4;</span>
+<span class="fc bfc" id="L86" title="All 2 branches covered.">        p += (length % 5000 == 0) ? ((length / 5000) - 1) * 2 : ((length / 5000) - 1 + 1) * 2;</span>
+<span class="fc" id="L87">        posts = p;</span>
+
+<span class="fc" id="L89">        svg.generatePosts(p / 2, 10);</span>
+
+<span class="fc bfc" id="L91" title="All 2 branches covered.">        if (shed) {</span>
+<span class="fc" id="L92">            p += 2;</span>
+<span class="fc" id="L93">            p += calcShedPosts(true);</span>
+<span class="fc" id="L94">            p += calcShedPosts(false);</span>
+<span class="fc bfc" id="L95" title="All 2 branches covered.">            if (shedWidth != width) {</span>
+<span class="fc" id="L96">                p++;</span>
+            }
+<span class="fc" id="L98">            svg.generateShedPosts(10);</span>
+        }
+
+<span class="fc" id="L101">        materials = mf.getAllByCategory(7);</span>
+<span class="fc" id="L102">        pl.addWoodPart(new Part(materials.get(0), p, &quot;Stolper nedgraves 90 cm. i jord&quot;, materials.get(0).getPrice() * p));</span>
+<span class="fc" id="L103">    }</span>
+
+    private int calcShedPosts(boolean isWidth) throws MaterialException {
+<span class="fc" id="L106">        int widthOuthang = 350 * 2;</span>
+<span class="fc" id="L107">        int lengthOuthang = 0; //1000 + 300;</span>
+<span class="fc" id="L108">        materials = mf.getAllByCategory(4);</span>
+<span class="fc" id="L109">        materials.sort(new MatSortLowComparator());</span>
+
+<span class="fc" id="L111">        boolean done = false;</span>
+<span class="fc" id="L112">        int esp = 0;</span>
+
+<span class="fc bfc" id="L114" title="All 2 branches covered.">        while (!done) {</span>
+<span class="fc" id="L115">            boolean addPost = false;</span>
+<span class="fc bfc" id="L116" title="All 2 branches covered.">            for (Material m : materials) {</span>
+<span class="fc bfc" id="L117" title="All 2 branches covered.">                double sValue = (isWidth ? shedWidth - widthOuthang : shedLength - lengthOuthang) - 200;</span>
+<span class="fc" id="L118">                double sCheck = sValue / m.getLength();</span>
+<span class="pc bpc" id="L119" title="1 of 2 branches missed.">                if (sCheck &gt; esp + 1) {</span>
+<span class="nc" id="L120">                    addPost = true;</span>
+                } else {
+<span class="fc" id="L122">                    addPost = false;</span>
+                }
+<span class="fc" id="L124">            }</span>
+<span class="pc bpc" id="L125" title="1 of 2 branches missed.">            if (addPost) {</span>
+<span class="nc" id="L126">                esp++;</span>
+            } else {
+<span class="fc" id="L128">                done = true;</span>
+            }
+<span class="fc" id="L130">        }</span>
+<span class="fc bfc" id="L131" title="All 2 branches covered.">        if (isWidth) {</span>
+<span class="fc" id="L132">            shedPostsWidth = esp;</span>
+        } else {
+<span class="fc" id="L134">            shedPostsLength = esp;</span>
+        }
+
+<span class="fc" id="L137">        return esp * 2;</span>
+    }
+
+    private void calcShedReglarWidth() throws MaterialException {
+<span class="fc" id="L141">        int outhang = 350;</span>
+
+<span class="fc" id="L143">        int countWidth = (shedPostsWidth + 1) * 3 * 2;</span>
+<span class="fc" id="L144">        int countLength = (shedPostsLength + 1) * 2 * 2;</span>
+<span class="fc" id="L145">        shedReglar += countWidth;</span>
+<span class="fc" id="L146">        shedReglar += countLength;</span>
+
+<span class="fc" id="L148">        materials = mf.getAllByCategory(4);</span>
+<span class="fc" id="L149">        materials.sort(new MatSortLowComparator());</span>
+
+<span class="pc bpc" id="L151" title="1 of 2 branches missed.">        for (Material m : materials) {</span>
+<span class="fc" id="L152">            double sWidth = shedWidth - outhang * 2 - 200;</span>
+<span class="fc" id="L153">            double sCheck = sWidth / m.getLength();</span>
+<span class="pc bpc" id="L154" title="1 of 2 branches missed.">            if (sCheck &lt; shedPostsWidth + 1) {</span>
+<span class="fc" id="L155">                pl.addWoodPart(new Part(m, countWidth, &quot;Løsholter til skur gavle&quot;, m.getPrice() * countWidth));</span>
+<span class="fc" id="L156">                break;</span>
+            }
+<span class="nc" id="L158">        }</span>
+<span class="pc bpc" id="L159" title="1 of 2 branches missed.">        for (Material m : materials) {</span>
+<span class="fc" id="L160">            double sLegnth = shedLength - 200;</span>
+<span class="fc" id="L161">            double sCheck = sLegnth / m.getLength();</span>
+<span class="pc bpc" id="L162" title="1 of 2 branches missed.">            if (sCheck &lt; shedPostsLength + 1) {</span>
+<span class="fc" id="L163">                pl.addWoodPart(new Part(m, countLength, &quot;Løsholter til skur siderne&quot;, m.getPrice() * countLength));</span>
+<span class="fc" id="L164">                break;</span>
+            }
+<span class="nc" id="L166">        }</span>
+
+<span class="fc" id="L168">        svg.generateShedReglar(10);</span>
+<span class="fc" id="L169">    }</span>
+
+    private void calcShedCladding() throws MaterialException {
+<span class="fc" id="L172">        int widthOuthang = 350 * 2;</span>
+<span class="fc" id="L173">        materials = mf.getAllByCategory(8);</span>
+<span class="fc" id="L174">        materials.sort(new MatSortLowComparator());</span>
+
+<span class="fc" id="L176">        int shedCircumference = (shedWidth - widthOuthang) * 2 + shedLength * 2;</span>
+<span class="fc" id="L177">        shedCladdings = shedCircumference / (100 - 40) + 1;</span>
+<span class="fc" id="L178">        pl.addWoodPart(new Part(materials.get(0), shedCladdings, &quot;Til beklædning af skur. 1 på 2&quot;, materials.get(0).getPrice() * shedCladdings));</span>
+<span class="fc" id="L179">    }</span>
+
+    private void calcShedMisc() throws MaterialException {
+<span class="fc" id="L182">        materials = mf.getAllByCategory(16);</span>
+<span class="fc" id="L183">        materials.sort(new MatSortLowComparator());</span>
+<span class="fc" id="L184">        pl.addMiscPart(new Part(materials.get(0), 1, &quot;Til lås på dør i skur&quot;, materials.get(0).getPrice() * 1));</span>
+<span class="fc" id="L185">        pl.addMiscPart(new Part(materials.get(1), 2, &quot;Til skurdør&quot;, materials.get(1).getPrice() * 2));</span>
+<span class="fc" id="L186">        pl.addWoodPart(new Part(materials.get(2), 1, &quot;Til z på bagside af dør&quot;, materials.get(2).getPrice() * 1));</span>
+
+<span class="fc" id="L188">        materials = mf.getAllByCategory(13);</span>
+<span class="fc" id="L189">        materials.sort(new MatSortLowComparator());</span>
+<span class="fc" id="L190">        pl.addMiscPart(new Part(materials.get(0), shedReglar * 2, &quot;Til montering af løsholter i skur&quot;, materials.get(0).getPrice() * (shedReglar * 2)));</span>
+<span class="fc" id="L191">    }</span>
+
+    private void calcRem() throws MaterialException {
+<span class="fc" id="L194">        int frontOuthang = 1000;</span>
+<span class="fc" id="L195">        int backOuthang = 300;</span>
+
+        // Length without outhang
+<span class="fc" id="L198">        int calcLength = length - frontOuthang - backOuthang - 100;</span>
+        // Extra posts other then the 4 corners        
+<span class="fc" id="L200">        int extraPosts = ((posts - 4) / 2) + 1;</span>
+        // Distance between posts from start to mid.
+<span class="fc" id="L202">        int a = calcLength / extraPosts + 50;</span>
+
+<span class="fc" id="L204">        addParts(a, 6, extraPosts * 2, &quot;Remme i sider, sadles ned i stolper&quot;, new MatSortLowComparator());</span>
+
+<span class="fc" id="L206">        svg.generateRem(10);</span>
+<span class="fc" id="L207">    }</span>
+
+    //Calculating the roof of carport
+    private void calcRafters() throws MaterialException {
+<span class="fc" id="L211">        rafters = length / 500;</span>
+<span class="fc" id="L212">        rafterSpace = (length / 10) / (rafters - 1);</span>
+<span class="fc" id="L213">        addParts(width, 5, length / 500, &quot;Spær, monteres på rem&quot;, new MatSortHeighComparator());</span>
+<span class="fc" id="L214">        svg.generateRafter(rafters, rafterSpace, 10);</span>
+<span class="fc" id="L215">    }</span>
+
+    //need a good way to present this
+    private void calcTopFasciasFront() throws MaterialException {
+<span class="fc" id="L219">        addParts(width, 2, 1, &quot;oversternbrædder til forenden&quot;, new MatSortHeighComparator());</span>
+<span class="fc" id="L220">    }</span>
+
+    private void calcTopFasciasSide() throws MaterialException {
+<span class="fc" id="L223">        addParts(length, 2, 2, &quot;oversternbrædder til siderne&quot;, new MatSortHeighComparator());</span>
+<span class="fc" id="L224">    }</span>
+
+    private void calcBottomFasciasFB() throws MaterialException {
+<span class="fc" id="L227">        addParts(width, 1, 2, &quot;understernbrædder til for &amp; bag ende&quot;, new MatSortHeighComparator());</span>
+<span class="fc" id="L228">    }</span>
+
+    private void calcBottomFasciasSide() throws MaterialException {
+<span class="fc" id="L231">        addParts(length, 1, 2, &quot;understernbrædder til siderne&quot;, new MatSortHeighComparator());</span>
+<span class="fc" id="L232">    }</span>
+
+    private void calcWaterBoardFront() throws MaterialException {
+<span class="fc" id="L235">        addParts(width, 9, 1, &quot;vandbrædt på stern i forende&quot;, new MatSortHeighComparator());</span>
+<span class="fc" id="L236">    }</span>
+
+    private void calcWaterBoardSide() throws MaterialException {
+<span class="fc" id="L239">        addParts(length, 9, 2, &quot;vandbrædt på stern i sider&quot;, new MatSortHeighComparator());</span>
+<span class="fc" id="L240">    }</span>
+
+    private void calcRoofingSheets() throws MaterialException {
+<span class="fc bfc" id="L243" title="All 2 branches covered.">        int multiplier = (width % 1000 == 0) ? width / 1000 : (width / 1000) + 1;</span>
+<span class="fc" id="L244">        addParts(length, 10, multiplier, &quot;tagplader monteres på spær&quot;, new MatSortHeighComparator());</span>
+<span class="fc" id="L245">    }</span>
+
+    //Calculating the pieces of carport
+    private void calcBracketsRight() throws MaterialException {
+<span class="fc" id="L249">        materials = mf.getAllByCategory(13);</span>
+<span class="fc" id="L250">        materials.sort(new MatSortHeighComparator());</span>
+<span class="fc bfc" id="L251" title="All 2 branches covered.">        for (Material m : materials) {</span>
+<span class="fc bfc" id="L252" title="All 2 branches covered.">            if (m.getRef().charAt(m.getRef().length() - 1) == 'r') {</span>
+<span class="fc" id="L253">                pl.addMiscPart(new Part(m, rafters, &quot;Til montering af spær på rem&quot;, m.getPrice() * rafters));</span>
+            }
+<span class="fc" id="L255">        }</span>
+<span class="fc" id="L256">    }</span>
+
+    private void calcBracketsLeft() throws MaterialException {
+<span class="fc" id="L259">        materials = mf.getAllByCategory(13);</span>
+<span class="fc" id="L260">        materials.sort(new MatSortHeighComparator());</span>
+<span class="fc bfc" id="L261" title="All 2 branches covered.">        for (Material m : materials) {</span>
+<span class="fc bfc" id="L262" title="All 2 branches covered.">            if (m.getRef().charAt(m.getRef().length() - 1) == 'l') {</span>
+<span class="fc" id="L263">                pl.addMiscPart(new Part(m, rafters, &quot;Til montering af spær på rem&quot;, m.getPrice() * rafters));</span>
+            }
+<span class="fc" id="L265">        }</span>
+<span class="fc" id="L266">    }</span>
+
+    private void calcScrewPackages() throws MaterialException {
+        //needs a fix
+<span class="fc" id="L270">        materials = mf.getAllByCategory(11);</span>
+<span class="fc" id="L271">        int screws = 0;</span>
+        int packages;
+        //screws to brackets
+<span class="fc" id="L274">        screws += rafters * 2 * 9;</span>
+        //screws to band
+<span class="fc" id="L276">        screws += (rafters - 2) * 2 * 2;</span>
+        //extra screws
+<span class="fc" id="L278">        screws *= 1.1;</span>
+<span class="pc bpc" id="L279" title="1 of 2 branches missed.">        packages = (screws % 250 == 0) ? screws / 250 : (screws / 250) + 1;</span>
+<span class="fc" id="L280">        pl.addMiscPart(new Part(materials.get(2), packages, &quot;Til montering af universalbeslag + hulbånd&quot;, materials.get(2).getPrice() * packages));</span>
+
+<span class="fc bfc" id="L282" title="All 2 branches covered.">        if (shed) {</span>
+<span class="fc" id="L283">            int shedScrewCount = shedCladdings * 3 * 3;</span>
+<span class="fc" id="L284">            shedScrewCount *= 1.1;</span>
+<span class="fc" id="L285">            pl.addMiscPart(new Part(materials.get(3), shedScrewCount / materials.get(3).getAmount(), &quot;Til montering af yderste beklædning&quot;, materials.get(3).getPrice() * (shedScrewCount / materials.get(3).getAmount())));</span>
+<span class="fc" id="L286">            pl.addMiscPart(new Part(materials.get(4), shedScrewCount / materials.get(4).getAmount(), &quot;Til montering af inderste beklædning&quot;, materials.get(4).getPrice() * (shedScrewCount / materials.get(4).getAmount())));</span>
+        }
+<span class="fc" id="L288">    }</span>
+
+    //10% more?
+    private void calcRoofScrews() throws MaterialException {
+<span class="fc" id="L292">        materials = mf.getAllByCategory(11);</span>
+<span class="fc" id="L293">        int screws = (width * length * 12) / 1000000;</span>
+<span class="pc bpc" id="L294" title="1 of 2 branches missed.">        int packages = (screws % 200 == 0) ? screws / 200 : (screws / 200) + 1;</span>
+<span class="fc" id="L295">        pl.addMiscPart(new Part(materials.get(0), packages, &quot;Skruer til tagplader&quot;, materials.get(0).getPrice() * packages));</span>
+<span class="fc" id="L296">    }</span>
+
+    //10% more ?
+    private void calcBand() throws MaterialException {
+<span class="fc" id="L300">        materials = mf.getAllByCategory(12);</span>
+<span class="fc" id="L301">        double spaceBetweenRafters = (length - 4.5) / (rafters - 1);</span>
+<span class="fc" id="L302">        double fullSpace = length - (spaceBetweenRafters * 2) - 4.5;</span>
+<span class="fc" id="L303">        double bandLength = Math.sqrt(Math.pow(fullSpace, 2) + Math.pow(width, 2)) * 2;</span>
+<span class="pc bpc" id="L304" title="1 of 2 branches missed.">        int bandCount = (bandLength % 10000.0 == 0) ? (int) (bandLength / 10000.0) : (int) (bandLength / 10000.0 + 1.0);</span>
+<span class="fc" id="L305">        pl.addMiscPart(new Part(materials.get(0), bandCount, &quot;Til vindkryds på spær&quot;, materials.get(0).getPrice() * bandCount));</span>
+<span class="fc" id="L306">        svg.generateBand(rafters, rafterSpace, 10);</span>
+<span class="fc" id="L307">    }</span>
+
+    private void calcFasciasScrews() throws MaterialException {
+<span class="fc" id="L310">        materials = mf.getAllByCategory(11);</span>
+<span class="fc" id="L311">        int screws = 0;</span>
+        //bottomFascias with 2 screws for each meter
+<span class="fc" id="L313">        screws += (((length * 2) / 1000) + ((width * 2) / 1000)) * 2;</span>
+        //topFascias with 2 screws for each meter
+<span class="fc" id="L315">        screws += (((length * 2) / 1000) + (width / 1000)) * 2;</span>
+        //waterBoards with 2 screws for each meter
+<span class="fc" id="L317">        screws += (((length * 2) / 1000) + (width / 1000)) * 2;</span>
+        //10%
+<span class="fc" id="L319">        screws *= 1.1;</span>
+<span class="pc bpc" id="L320" title="1 of 2 branches missed.">        int packages = (screws % 200 == 0) ? screws / 200 : (screws / 200) + 1;</span>
+<span class="fc" id="L321">        pl.addMiscPart(new Part(materials.get(1), packages, &quot;Til montering af stern&amp;vandbrædt&quot;, materials.get(1).getPrice() * packages));</span>
+<span class="fc" id="L322">    }</span>
+
+    private void calcBoltsAndSquares() throws MaterialException {
+        //with arbitrary values we should see if rem is in more than one piece before calculating this
+<span class="fc" id="L326">        ArrayList&lt;Material&gt; boltType = mf.getAllByCategory(14);</span>
+<span class="fc" id="L327">        ArrayList&lt;Material&gt; squares = mf.getAllByCategory(15);</span>
+<span class="fc bfc" id="L328" title="All 2 branches covered.">        int bolts = (posts == 4) ? 4 * 2 : (posts - 4) * 4 + (4 * 2);</span>
+<span class="fc" id="L329">        pl.addMiscPart(new Part(boltType.get(0), bolts, &quot;Til montering af rem på stolper&quot;, boltType.get(0).getPrice() * bolts));</span>
+<span class="fc" id="L330">        pl.addMiscPart(new Part(squares.get(0), bolts, &quot;Til montering af rem på stolper&quot;, squares.get(0).getPrice() * bolts));</span>
+<span class="fc" id="L331">    }</span>
+
+    private void calcLathsRoof() throws MaterialException {
+<span class="fc" id="L334">        ArrayList&lt;Material&gt; lathType = mf.getAllByCategory(3);</span>
+<span class="fc" id="L335">        ArrayList&lt;Material&gt; lathHolder = mf.getAllByCategory(17);</span>
+<span class="fc" id="L336">        double angleRad = Math.toRadians(angle);</span>
+<span class="fc" id="L337">        double triangle = Math.toRadians(180);</span>
+<span class="fc" id="L338">        double roofWidth = (width * Math.sin(angle)) / Math.sin(triangle - (angle * 2));</span>
+<span class="pc bpc" id="L339" title="1 of 2 branches missed.">        laths = (int) (roofWidth - 380) % 307 == 0 ? (int) ((roofWidth - 380) / 307) + 2 : (int) ((roofWidth - 380) / 307) + 3;</span>
+<span class="fc" id="L340">        pl.addWoodPart(new Part(lathType.get(1), (int) laths * 2, &quot;Til montering på tag&quot;, lathType.get(1).getPrice() * ((int)laths * 2)));</span>
+<span class="fc" id="L341">        pl.addMiscPart(new Part(lathHolder.get(2), length/1000 + 1, &quot;monteres på toppen af spæret (til toplægte)&quot;, lathHolder.get(2).getPrice() * (length/1000 + 1)));</span>
+<span class="fc" id="L342">        svg.generateRoofWithAngle(laths, (int)roofWidth);</span>
+<span class="fc" id="L343">    }</span>
+
+    private void calcRoofBricks() throws MaterialException {
+<span class="fc" id="L346">        ArrayList&lt;Material&gt; bricks = mf.getAllByCategory(17);</span>
+<span class="fc" id="L347">        int sideBricks = length / 300;</span>
+<span class="fc" id="L348">        int topBricks = length / 333;</span>
+<span class="pc bpc" id="L349" title="1 of 2 branches missed.">        int brickPack = ((sideBricks * (laths - 1) * 2) % 300 == 0) ? (sideBricks * (laths - 1) * 2) / 300 : ((sideBricks * (laths - 1) * 2) / 300) + 1;</span>
+<span class="fc" id="L350">        pl.addMiscPart(new Part(bricks.get(0), brickPack, &quot;Monteres på taglægter af &quot; + (laths - 1) + &quot; rækker af &quot; + sideBricks + &quot; sten på hver side af taget&quot;, bricks.get(0).getPrice() * brickPack));</span>
+<span class="fc" id="L351">        pl.addMiscPart(new Part(bricks.get(1), topBricks, &quot;monteres på toplægte med medfølgende beslag se tagstens vejledning&quot;, bricks.get(1).getPrice() * topBricks));</span>
+<span class="fc" id="L352">        pl.addMiscPart(new Part(bricks.get(3), topBricks, &quot;Til montering af rygsten&quot;, bricks.get(3).getPrice() * topBricks));</span>
+<span class="fc" id="L353">        pl.addMiscPart(new Part(bricks.get(4), 2, &quot;til montering af tagsten, alle ydersten + hver anden fastgøres&quot;, bricks.get(4).getPrice() * 2));</span>
+<span class="fc" id="L354">    }</span>
+
+    public void addParts(int lengthWidth, int categoryId, int multiplier, String description, Comparator&lt;Material&gt; comparator) throws MaterialException {
+<span class="fc" id="L357">        materials = mf.getAllByCategory(categoryId);</span>
+<span class="fc" id="L358">        materials.sort(comparator);</span>
+<span class="fc" id="L359">        int rest = lengthWidth;</span>
+<span class="fc" id="L360">        int antal = 0;</span>
+<span class="fc bfc" id="L361" title="All 2 branches covered.">        for (Material m : materials) {</span>
+
+<span class="fc bfc" id="L363" title="All 2 branches covered.">            if (rest &gt;= m.getLength()) {</span>
+<span class="fc" id="L364">                antal += rest / m.getLength();</span>
+<span class="fc" id="L365">                rest -= m.getLength();</span>
+<span class="fc" id="L366">                pl.addWoodPart(new Part(m, antal * multiplier, description, m.getPrice() * (antal * multiplier)));</span>
+<span class="fc bfc" id="L367" title="All 2 branches covered.">            } else if (rest != 0) {</span>
+<span class="fc" id="L368">                pl.addWoodPart(new Part(m, 1 * multiplier, description, m.getPrice() * multiplier));</span>
+<span class="fc" id="L369">                return;</span>
+            }
+<span class="fc" id="L371">        }</span>
+<span class="fc" id="L372">    }</span>
+
+    public PartList getParts() {
+<span class="fc" id="L375">        return pl;</span>
+    }
+
+    public GenerateSVG getTopViewSVG() {
+<span class="nc" id="L379">        return svg;</span>
+    }
+    
+    public int getPosts() {
+<span class="nc" id="L383">        return posts;</span>
+    }
+
+    public int getRafters() {
+<span class="nc" id="L387">        return rafters;</span>
+    }
+
+
+<span class="fc" id="L391">    private class MatSortHeighComparator implements Comparator&lt;Material&gt; {</span>
+
+        @Override
+        public int compare(Material o1, Material o2) {
+<span class="fc" id="L395">            return o2.getLength() - o1.getLength();</span>
+        }
+    }
+
+<span class="fc" id="L399">    private class MatSortLowComparator implements Comparator&lt;Material&gt; {</span>
+
+        @Override
+        public int compare(Material o1, Material o2) {
+<span class="fc" id="L403">            return o1.getLength() - o2.getLength();</span>
+        }
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span></div></body></html>

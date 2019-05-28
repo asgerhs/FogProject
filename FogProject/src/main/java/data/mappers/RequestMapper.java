@@ -19,7 +19,7 @@ import logic.facades.UserFacade;
 
 /**
  *
- * @author William Sehested Huusfeldt & Martin Frederiksen
+ * @author William Sehested Huusfeldt, Martin Frederiksen
  */
 public class RequestMapper implements MapperInterface<Request, Integer> {
 
@@ -32,9 +32,9 @@ public class RequestMapper implements MapperInterface<Request, Integer> {
     }
 
     /**
-     *
+     * Gets All Request from the database
      * @return List of Request
-     * @throws RequestException
+     * @throws RequestException RequestException
      */
     @Override
     public List<Request> getAll() throws RequestException {
@@ -67,6 +67,12 @@ public class RequestMapper implements MapperInterface<Request, Integer> {
         }
     }
 
+    /**
+     * Gets a single Request by id form the database
+     * @param id specific id
+     * @return Single Request
+     * @throws RequestException RequestException
+     */
     @Override
     public Request getSingle(Integer id) throws RequestException {
         try (Connection con = dbc.open()) {
@@ -96,6 +102,11 @@ public class RequestMapper implements MapperInterface<Request, Integer> {
         }
     }
 
+    /**
+     * Updates request in the database
+     * @param rqst updated request
+     * @throws RequestException RequestException
+     */
     public void update(Request rqst) throws RequestException {
         try (Connection con = dbc.open()) {
 
@@ -121,6 +132,11 @@ public class RequestMapper implements MapperInterface<Request, Integer> {
         }
     }
 
+    /**
+     * Adds new request to the database
+     * @param request request to be added
+     * @throws RequestException RequestException
+     */
     @Override
     public void add(Request request) throws RequestException {
         try (Connection con = dbc.open()) {
@@ -160,6 +176,11 @@ public class RequestMapper implements MapperInterface<Request, Integer> {
         }
     }
 
+    /**
+     * Removes request form the database
+     * @param id id to be removed
+     * @throws RequestException RequestException
+     */
     public void remove(int id) throws RequestException {
         try (Connection con = dbc.open()) {
             String qry = "DELETE FROM requests WHERE id = ?;";

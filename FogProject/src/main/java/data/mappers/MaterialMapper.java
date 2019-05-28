@@ -17,7 +17,7 @@ import javax.sql.DataSource;
 
 /**
  *
- * @author Asger Hermind Sørensen & Martin Frederiksen
+ * @author Asger Hermind Sørensen, Martin Frederiksen
  */
 public class MaterialMapper implements MapperInterface<Material, String> {
 
@@ -30,7 +30,7 @@ public class MaterialMapper implements MapperInterface<Material, String> {
     /**
      * Returns all materials from the database
      * @return List of Materials
-     * @throws MaterialException
+     * @throws MaterialException MaterialException
      */
     @Override
     public List<Material> getAll() throws MaterialException {
@@ -59,7 +59,7 @@ public class MaterialMapper implements MapperInterface<Material, String> {
 
     /**
      * Returns specific material based on id from Database
-     * @param id, specific material id
+     * @param ref specific material ref
      * @return Single Material
      */
     @Override
@@ -90,9 +90,9 @@ public class MaterialMapper implements MapperInterface<Material, String> {
 
     /**
      * Returns List of all Materials in specific category from Database
-     * @param categoryId  specific id of category
+     * @param categoryId specific id of category
      * @return List of Materials
-     * @throws MaterialException 
+     * @throws MaterialException MaterialException
      */
     public ArrayList<Material> getAllByCategory(int categoryId)throws MaterialException {
         try (Connection con = dbc.open()) {
@@ -123,7 +123,7 @@ public class MaterialMapper implements MapperInterface<Material, String> {
     /**
      * Adds a new Material to the Database
      * @param material Material to be added
-     * @throws MaterialException 
+     * @throws MaterialException MaterialException
      */
     @Override
     public void add(Material material) throws MaterialException {

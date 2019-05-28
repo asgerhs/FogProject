@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AddRequestCommand.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">FogProject</a> &gt; <a href="index.source.html" class="el_package">presentation.commands</a> &gt; <span class="el_source">AddRequestCommand.java</span></div><h1>AddRequestCommand.java</h1><pre class="source lang-java linenums">package presentation.commands;
+
+import data.exceptions.CommandException;
+import data.exceptions.RequestException;
+import data.models.CommandTarget;
+import data.models.Request;
+import data.models.RoleEnum;
+import data.models.User;
+import javax.servlet.http.HttpServletRequest;
+import logic.facades.RequestFacade;
+
+/**
+ *
+ * @author Andreas Vikke
+ */
+public class AddRequestCommand implements Command {
+
+    private String target;
+    private RequestFacade rf;
+
+<span class="nc" id="L21">    public AddRequestCommand(String target) {</span>
+<span class="nc" id="L22">        this.target = target;</span>
+<span class="nc" id="L23">        rf = new RequestFacade();</span>
+<span class="nc" id="L24">    }</span>
+
+    @Override
+    public CommandTarget execute(HttpServletRequest request) throws CommandException {
+        try {
+<span class="nc bnc" id="L29" title="All 2 branches missed.">            boolean shed = request.getParameter(&quot;shed&quot;) == null ? false : true;</span>
+<span class="nc bnc" id="L30" title="All 2 branches missed.">            boolean angle = request.getParameter(&quot;angleCheck&quot;) == null ? false : true;</span>
+
+<span class="nc" id="L32">            Request re = new Request(</span>
+<span class="nc" id="L33">                    Integer.parseInt(request.getParameter(&quot;width&quot;)),</span>
+<span class="nc bnc" id="L34" title="All 2 branches missed.">                    Integer.parseInt(request.getParameter(&quot;length&quot;)),</span>
+<span class="nc bnc" id="L35" title="All 2 branches missed.">                    shed ? Integer.parseInt(request.getParameter(&quot;shedWidth&quot;)) : 0,</span>
+<span class="nc" id="L36">                    shed ? Integer.parseInt(request.getParameter(&quot;shedLength&quot;)) : 0,</span>
+<span class="nc bnc" id="L37" title="All 2 branches missed.">                    request.getParameter(&quot;roof&quot;),</span>
+<span class="nc" id="L38">                    angle ? Integer.parseInt(request.getParameter(&quot;angle&quot;)) : 0,</span>
+<span class="nc" id="L39">                    request.getParameter(&quot;note&quot;),</span>
+<span class="nc bnc" id="L40" title="All 2 branches missed.">                    request.getParameter(&quot;loggedin&quot;) != null</span>
+                            ? new User(
+<span class="nc" id="L42">                                    request.getParameter(&quot;email&quot;),</span>
+                                    null,
+                                    RoleEnum.CUSTOMER,
+                                    null,
+                                    null,
+                                    null,
+                                    null)
+                            : new User(
+<span class="nc" id="L50">                                    request.getParameter(&quot;email&quot;),</span>
+<span class="nc" id="L51">                                    request.getParameter(&quot;password&quot;),</span>
+                                    RoleEnum.CUSTOMER,
+<span class="nc" id="L53">                                    request.getParameter(&quot;name&quot;),</span>
+<span class="nc" id="L54">                                    request.getParameter(&quot;address&quot;),</span>
+<span class="nc" id="L55">                                    request.getParameter(&quot;zipCity&quot;),</span>
+<span class="nc" id="L56">                                    request.getParameter(&quot;phone&quot;)));</span>
+
+<span class="nc bnc" id="L58" title="All 2 branches missed.">            if (request.getParameter(&quot;requestId&quot;) != null) {</span>
+<span class="nc" id="L59">                re.setId(Integer.parseInt(request.getParameter(&quot;requestId&quot;)));</span>
+<span class="nc" id="L60">                rf.update(re);</span>
+<span class="nc" id="L61">                return new CommandTarget(target, &quot;Request updated successfully&quot;);</span>
+            }
+<span class="nc" id="L63">            rf.add(re);</span>
+<span class="nc" id="L64">            return new CommandTarget(target, &quot;Request send successfully&quot;);</span>
+<span class="nc" id="L65">        } catch (RequestException ex) {</span>
+<span class="nc" id="L66">            ex.printStackTrace();</span>
+<span class="nc" id="L67">            throw new CommandException(ex.getMessage());</span>
+        }
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span></div></body></html>
