@@ -4,10 +4,29 @@
 \BOOKMARK [1][-]{section*.4}{2.2. Virksomhedens krav}{chapter*.2}% 4
 \BOOKMARK [1][-]{section*.5}{2.3. Virksomhedens vision}{chapter*.2}% 5
 \BOOKMARK [0][-]{chapter*.6}{3. Sprog og programmer}{}% 6
-\BOOKMARK [0][-]{chapter*.7}{4. Baggrund}{}% 7
-\BOOKMARK [0][-]{chapter*.8}{5. Navigationsdiagram}{}% 8
+\BOOKMARK [0][-]{chapter*.7}{4. Dom\346ne model og ER diagram}{}% 7
+\BOOKMARK [0][-]{chapter*.8}{5. Navigations Diagrammer}{}% 8
 \BOOKMARK [0][-]{chapter*.9}{6. Sekvens diagrammer}{}% 9
-\BOOKMARK [0][-]{chapter*.10}{7. Struktur}{}% 10
-\BOOKMARK [0][-]{chapter*.11}{8. S\346rlige forhold}{}% 11
-\BOOKMARK [0][-]{chapter*.12}{9. Manglende implementer}{}% 12
-\BOOKMARK [0][-]{chapter*.13}{10. Links og referencer}{}% 13
+\BOOKMARK [1][-]{section*.10}{6.1. Bruger}{chapter*.9}% 10
+\BOOKMARK [1][-]{section*.11}{6.2. Admin}{chapter*.9}% 11
+\BOOKMARK [1][-]{section*.12}{6.2. Medarbejder}{chapter*.9}% 12
+\BOOKMARK [0][-]{chapter*.13}{7. S\346rlige forhold}{}% 13
+\BOOKMARK [1][-]{section*.14}{7.1. Sessioner}{chapter*.13}% 14
+\BOOKMARK [1][-]{section*.15}{7.2. H\345ndtering af exceptions}{chapter*.13}% 15
+\BOOKMARK [1][-]{section*.16}{7.3. Validering af brugerinput}{chapter*.13}% 16
+\BOOKMARK [1][-]{section*.17}{7.4. Sikkerhed ved login}{chapter*.13}% 17
+\BOOKMARK [1][-]{section*.18}{7.5. MySQL Brugertyper}{chapter*.13}% 18
+\BOOKMARK [0][-]{chapter*.19}{8. Udvalgte kodeeksempler}{}% 19
+\BOOKMARK [1][-]{section*.20}{8.1. Ajax Fil}{chapter*.19}% 20
+\BOOKMARK [1][-]{section*.21}{8.2. Mapper Interface}{chapter*.19}% 21
+\BOOKMARK [0][-]{chapter*.22}{9. Status p\345 implementation}{}% 22
+\BOOKMARK [0][-]{chapter*.23}{10. SCRUM}{}% 23
+\BOOKMARK [1][-]{section*.24}{10.1. Scrum Retrospective}{chapter*.23}% 24
+\BOOKMARK [1][-]{section*.26}{10.2. Scrum User Stories}{chapter*.23}% 25
+\BOOKMARK [0][-]{chapter*.31}{11. Test}{}% 26
+\BOOKMARK [0][-]{chapter*.32}{12. Process}{}% 27
+\BOOKMARK [1][-]{section*.33}{12.1. Arbejdsprocessen faktuelt}{chapter*.32}% 28
+\BOOKMARK [1][-]{section*.34}{12.2. Arbejdsprocessen reflekteret}{chapter*.32}% 29
+\BOOKMARK [0][-]{chapter*.35}{13. Bilag}{}% 30
+\BOOKMARK [1][-]{section*.36}{13.1. Sprint backlog}{chapter*.35}% 31
+\BOOKMARK [1][-]{section*.37}{13.2. SCRUM Meeting}{chapter*.35}% 32

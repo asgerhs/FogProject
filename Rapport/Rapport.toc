@@ -1,14 +1,33 @@
 \select@language {danish}
-\contentsline {chapter}{1. Indledning}{2}{chapter*.1}
-\contentsline {chapter}{2. Baggrund}{3}{chapter*.2}
-\contentsline {section}{2.1. Virksomheden}{3}{section*.3}
-\contentsline {section}{2.2. Virksomhedens krav}{3}{section*.4}
-\contentsline {section}{2.3. Virksomhedens vision}{3}{section*.5}
-\contentsline {chapter}{3. Sprog og programmer}{4}{chapter*.6}
-\contentsline {chapter}{4. Baggrund}{5}{chapter*.7}
-\contentsline {chapter}{5. Navigationsdiagram}{6}{chapter*.8}
-\contentsline {chapter}{6. Sekvens diagrammer}{7}{chapter*.9}
-\contentsline {chapter}{7. Struktur}{8}{chapter*.10}
-\contentsline {chapter}{8. S\IeC {\ae }rlige forhold}{9}{chapter*.11}
-\contentsline {chapter}{9. Manglende implementer}{10}{chapter*.12}
-\contentsline {chapter}{10. Links og referencer}{11}{chapter*.13}
+\contentsline {chapter}{1. Indledning}{3}{chapter*.1}
+\contentsline {chapter}{2. Baggrund}{4}{chapter*.2}
+\contentsline {section}{2.1. Virksomheden}{4}{section*.3}
+\contentsline {section}{2.2. Virksomhedens krav}{4}{section*.4}
+\contentsline {section}{2.3. Virksomhedens vision}{4}{section*.5}
+\contentsline {chapter}{3. Sprog og programmer}{5}{chapter*.6}
+\contentsline {chapter}{4. Dom\IeC {\ae }ne model og ER diagram}{6}{chapter*.7}
+\contentsline {chapter}{5. Navigations Diagrammer}{7}{chapter*.8}
+\contentsline {chapter}{6. Sekvens diagrammer}{15}{chapter*.9}
+\contentsline {section}{6.1. Bruger}{15}{section*.10}
+\contentsline {section}{6.2. Admin}{16}{section*.11}
+\contentsline {section}{6.2. Medarbejder}{17}{section*.12}
+\contentsline {chapter}{7. S\IeC {\ae }rlige forhold}{18}{chapter*.13}
+\contentsline {section}{7.1. Sessioner}{18}{section*.14}
+\contentsline {section}{7.2. H\IeC {\r a}ndtering af exceptions}{18}{section*.15}
+\contentsline {section}{7.3. Validering af brugerinput}{18}{section*.16}
+\contentsline {section}{7.4. Sikkerhed ved login}{19}{section*.17}
+\contentsline {section}{7.5. MySQL Brugertyper}{19}{section*.18}
+\contentsline {chapter}{8. Udvalgte kodeeksempler}{20}{chapter*.19}
+\contentsline {section}{8.1. Ajax Fil}{20}{section*.20}
+\contentsline {section}{8.2. Mapper Interface}{21}{section*.21}
+\contentsline {chapter}{9. Status p\IeC {\r a} implementation}{22}{chapter*.22}
+\contentsline {chapter}{10. SCRUM}{24}{chapter*.23}
+\contentsline {section}{10.1. Scrum Retrospective}{24}{section*.24}
+\contentsline {section}{10.2. Scrum User Stories}{25}{section*.26}
+\contentsline {chapter}{11. Test}{27}{chapter*.31}
+\contentsline {chapter}{12. Process}{29}{chapter*.32}
+\contentsline {section}{12.1. Arbejdsprocessen faktuelt}{29}{section*.33}
+\contentsline {section}{12.2. Arbejdsprocessen reflekteret}{31}{section*.34}
+\contentsline {chapter}{13. Bilag}{33}{chapter*.35}
+\contentsline {section}{13.1. Sprint backlog}{33}{section*.36}
+\contentsline {section}{13.2. SCRUM Meeting}{36}{section*.37}
