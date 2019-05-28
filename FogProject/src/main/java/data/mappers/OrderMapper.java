@@ -19,7 +19,7 @@ import javax.sql.DataSource;
 
 /**
  *
- * @author Asger Hermind Sørensen & Martin Frederiksen
+ * @author Asger Hermind Sørensen, Martin Frederiksen
  */
 public class OrderMapper implements MapperInterface<Order, Integer> {
 
@@ -34,7 +34,7 @@ public class OrderMapper implements MapperInterface<Order, Integer> {
     /**
      * Returns all materials from the database
      * @return List of Orders
-     * @throws OrderException 
+     * @throws OrderException OrderException
      */
     @Override
     public List<Order> getAll() throws OrderException {
@@ -58,9 +58,9 @@ public class OrderMapper implements MapperInterface<Order, Integer> {
 
     /**
      * Returns specific material based on id from Database
-     * @param id, specific order id
+     * @param id specific order id
      * @return Single Order
-     * @throws OrderException 
+     * @throws OrderException OrderException
      */
     @Override
     public Order getSingle(Integer id) throws OrderException {
@@ -84,8 +84,8 @@ public class OrderMapper implements MapperInterface<Order, Integer> {
 
     /**
      * Adds new order to Database
-     * @param order, Order to be added
-     * @throws OrderException 
+     * @param order Order to be added
+     * @throws OrderException OrderException
      */
     @Override
     public void add(Order order) throws OrderException {
@@ -106,10 +106,10 @@ public class OrderMapper implements MapperInterface<Order, Integer> {
     }
 
     /**
-     * Gets all 
-     * @param user
-     * @return
-     * @throws OrderException 
+     * Gets all orders by user from the database
+     * @param user Specific user
+     * @return List of Orders
+     * @throws OrderException OrderException
      */
     public List<Order> getAllByUser(User user) throws OrderException {
         try (Connection con = dbc.open()) {

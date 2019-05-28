@@ -1,0 +1,10 @@
+data
+data.exceptions
+data.interfaces
+data.mappers
+data.models
+logic
+logic.facades
+logic.interfaces
+presentation
+presentation.commands

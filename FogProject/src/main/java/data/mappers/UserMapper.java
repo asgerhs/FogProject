@@ -28,6 +28,11 @@ public class UserMapper implements MapperInterface<User, String> {
         dbc.setDataSource(ds);
     }
 
+    /**
+     * Gets all Users from the database
+     * @return List of User
+     * @throws UsersException UsersException
+     */
     @Override
     public List getAll() throws UsersException {
         try (Connection con = dbc.open()) {
@@ -53,6 +58,12 @@ public class UserMapper implements MapperInterface<User, String> {
         }
     }
 
+    /**
+     * Gets single user from the database
+     * @param email email of user
+     * @return Single User
+     * @throws UsersException UsersException
+     */
     @Override
     public User getSingle(String email) throws UsersException {
         try (Connection con = dbc.open()) {
@@ -78,6 +89,11 @@ public class UserMapper implements MapperInterface<User, String> {
         }
     }
 
+    /**
+     * Adds new user to the database
+     * @param user User to be added
+     * @throws UsersException UsersException
+     */
     @Override
     public void add(User user) throws UsersException {
         try (Connection con = dbc.open()) {
@@ -99,6 +115,13 @@ public class UserMapper implements MapperInterface<User, String> {
         }
     }
 
+    /**
+     * Validates user by email and password
+     * @param email Email of user
+     * @param password Password of user
+     * @return true/false
+     * @throws UsersException UsersException
+     */
     public boolean validateUser(String email, String password) throws UsersException {
         try (Connection con = dbc.open()) {
             String qry = "SELECT email FROM accounts WHERE (email = ?) AND password = ?;";
@@ -118,6 +141,13 @@ public class UserMapper implements MapperInterface<User, String> {
         }
     }
 
+    /**
+     * Changes password of specific user
+     * @param email Email of user
+     * @param password New password for user
+     * @return -1/0/1
+     * @throws UsersException UsersException
+     */
     public int changePassword(String email, String password) throws UsersException {
         try (Connection con = dbc.open()) {
             String qry = "UPDATE accounts SET password = ? WHERE email = ?;";
@@ -133,6 +163,13 @@ public class UserMapper implements MapperInterface<User, String> {
         }
     }
 
+    /**
+     * Changes role of specific user
+     * @param email Email of user
+     * @param role New role of user
+     * @return -1/0/1
+     * @throws UsersException UsersException
+     */
     public int changeUserRole(String email, RoleEnum role) throws UsersException {
         try (Connection con = dbc.open()) {
             String qry = "UPDATE accounts SET role = ? WHERE email = ?;";
@@ -147,6 +184,11 @@ public class UserMapper implements MapperInterface<User, String> {
         }
     }
 
+    /**
+     * Removes user from the database
+     * @param email Email of user
+     * @throws UsersException UsersException
+     */
     public void remove(String email) throws UsersException {
         try (Connection con = dbc.open()) {
             String qry = "DELETE FROM accounts WHERE email = ?;";
