@@ -395,8 +395,7 @@ function ajax(formObj) {
             window.location = request.getResponseHeader('redirect');
         }
         else if (request.getResponseHeader('error') !== null) {
-            $("#errorBox #message").html( 
-request.getResponseHeader('message'));
+            $("#errorBox #message").html(request.getResponseHeader('message'));
             $("#errorBox").show();
             $("#successBox").hide();
         } else {
