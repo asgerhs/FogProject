@@ -330,14 +330,7 @@ så JSP filerne kan tilgå dem og fremvise dem. \\\\
 
 \section*{7.2. Håndtering af exceptions}
 \addcontentsline{toc}{section}{7.2. Håndtering af exceptions}
-Session bliver brugt til at gemme data på tværs af flere side
-forespørgsler. De har en udløbstid som gør at en bruger ikke bruger
-for mange ressourcer over længere perioder. Til Fog projektet bliver
-der gemt data der er hentet fra databasen og skal fremvises på
-sitet. Når brugeren logger ind hentes brugeren f.eks. fra databasen og
-gemmes i sessionen. Sider som OrderList, PartList, UserList og
-RequestList henter lister af de tilsvarende data og gemmer i session
-så JSP filerne kan tilgå dem og fremvise dem. \\\\
+Projektet har en masse exception klasser der udbygger exception klassen. Dette gør at hvis programmet f.eks. fejler i en mapper klasse i data laget bliver der sendt en exception der tilhøre den mapper ned igennem lagene og ender i Front Controlleren som laver det om til en fejlbeskeds header som kan fremvises i en fejlbesked boks på front-enden. Alle klasser har en korresponderende exception klasse, så der i de genererede logs fra logger klassen kan ses hvilke exceptions der forekom. \\\\
 
 \section*{7.3. Validering af brugerinput}
 \addcontentsline{toc}{section}{7.3. Validering af brugerinput}
