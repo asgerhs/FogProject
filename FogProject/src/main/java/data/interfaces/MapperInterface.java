@@ -5,6 +5,8 @@ import java.util.List;
 /**
  *
  * @author Martin Frederiksen
+ * @param <T> Returned Object
+ * @param <S> Parameter Object
  */
 public interface MapperInterface <T, S> {
     List<T> getAll() throws Exception;

@@ -17,6 +17,7 @@
     int shedLength = 0;
     int shedWidth = 0;
     String note = "";
+    User userAc = new User("", "", RoleEnum.CUSTOMER, "", "", "", "");
     if ((Request) session.getAttribute("request") != null) {
         r = (Request) session.getAttribute("request");
         length = r.getLength();
@@ -25,6 +26,7 @@
         shedLength = r.getShedLength();
         shedWidth = r.getShedWidth();
         note = r.getNote();
+        userAc = r.getUser();
     }
     User user = (User) session.getAttribute("user");
 %>
@@ -92,23 +94,23 @@
     <% if (user == null || user.getRole() != RoleEnum.CUSTOMER) { %>
     <div class="form-group">
         <label>Name</label>
-        <input type="text" required="" class="form-control" name="name">
+        <input type="text" required="" class="form-control" name="name" value="<%=userAc.getName()%>">
     </div>
     <div class="form-group">
         <label>Address</label>
-        <input type="text" required="" class="form-control" name="address">
+        <input type="text" required="" class="form-control" name="address" value="<%=userAc.getAddress()%>">
     </div>
     <div class="form-group">
         <label>ZIP & City</label>
-        <input type="text" required="" class="form-control" name="zipCity">
+        <input type="text" required="" class="form-control" name="zipCity" value="<%=userAc.getZipCity()%>">
     </div>
     <div class="form-group">
         <label>Phone</label>
-        <input type="phone" required="" class="form-control" name="phone">
+        <input type="phone" required="" class="form-control" name="phone" value="<%=userAc.getPhone()%>">
     </div>
     <div class="form-group">
         <label>Email</label>
-        <input type="email" required="" class="form-control" name="email">
+        <input type="email" required="" class="form-control" name="email" value="<%=userAc.getEmail()%>">
     </div>
     <div class="form-group">
         <label>Password</label>
