@@ -5,7 +5,7 @@ import java.util.List;
 /**
  *
  * @author Martin Frederiksen
- * @param <T> Returned Object
+ * @param <T> Mapper Object
  * @param <S> Parameter Object
  */
 public interface MapperInterface <T, S> {
